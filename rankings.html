@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rankings — Paz's Power Rankings</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid #222;
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    width: 100%;
+  }
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: #e8c84a;
+    letter-spacing: 3px;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #555;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover, .nav-links a.active { color: #e8c84a; }
+
+  body {
+    background: #0a0a0a;
+    font-family: 'DM Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .page-content {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 40px 20px;
+  }
+
+  .card {
+    background: #111;
+    border: 1px solid #222;
+    width: 480px;
+    padding: 36px 32px;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 28px;
+    border-bottom: 2px solid #e8c84a;
+    padding-bottom: 16px;
+  }
+
+  .title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: #e8c84a;
+    letter-spacing: 3px;
+    line-height: 1;
+  }
+
+  .subtitle {
+    font-size: 10px;
+    color: #555;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  .col-labels {
+    display: grid;
+    grid-template-columns: 28px 1fr 60px;
+    padding: 0 4px 8px;
+    font-size: 9px;
+    color: #444;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .row {
+    display: grid;
+    grid-template-columns: 28px 1fr 60px;
+    align-items: center;
+    padding: 10px 4px;
+    border-bottom: 1px solid #1a1a1a;
+    transition: background 0.15s;
+    cursor: default;
+  }
+
+  .row:hover { background: #161616; }
+
+  .row.top3 { background: #141208; }
+  .row.top3:hover { background: #1a1810; }
+
+  .rank {
+    font-size: 11px;
+    color: #444;
+    font-weight: 500;
+  }
+
+  .row.top3 .rank { color: #e8c84a; }
+
+  .name {
+    font-size: 13px;
+    color: #ccc;
+    font-weight: 500;
+  }
+
+  .row.top3 .name { color: #f0f0f0; }
+
+  .score {
+    font-size: 14px;
+    color: #777;
+    text-align: right;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  .row.top3 .score { color: #e8c84a; }
+
+  .bar-wrap {
+    grid-column: 1 / -1;
+    height: 2px;
+    background: #1a1a1a;
+    margin-top: 6px;
+    position: relative;
+    display: none;
+  }
+
+  .medal {
+    font-size: 10px;
+    margin-left: 6px;
+    opacity: 0.6;
+  }
+
+  .footer {
+    margin-top: 20px;
+    font-size: 9px;
+    color: #333;
+    letter-spacing: 1px;
+    text-align: right;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">PPR</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="rankings.html" class="active">Rankings</a></li>
+  </ul>
+</nav>
+<div class="page-content">
+<div class="card">
+  <div class="header">
+    <div>
+      <div class="title">Paz's Power Rankings</div>
+      <div class="subtitle">Draft Night Rankings</div>
+    </div>
+  </div>
+
+  <div class="col-labels">
+    <span>#</span>
+    <span>Team</span>
+    <span style="text-align:right">Score</span>
+  </div>
+
+  <div class="row top3"><span class="rank">01</span><span class="name">Foopys <span class="medal">🥇</span> 🥄</span><span class="score">9.67</span></div>
+  <div class="row top3"><span class="rank">02</span><span class="name">Van Twists <span class="medal">🥈</span></span><span class="score">9.58</span></div>
+  <div class="row top3"><span class="rank">03</span><span class="name">Dark Magicians <span class="medal">🥉</span></span><span class="score">9.50</span></div>
+  <div class="row"><span class="rank">04</span><span class="name">Cripps Nipps</span><span class="score">9.42</span></div>
+  <div class="row"><span class="rank">05</span><span class="name">Phillipou</span><span class="score">9.25</span></div>
+  <div class="row"><span class="rank">06</span><span class="name">Flagdons</span><span class="score">9.17</span></div>
+  <div class="row"><span class="rank">07</span><span class="name">Nethers men 🥄 💍</span><span class="score">9.00</span></div>
+  <div class="row"><span class="rank">08</span><span class="name">Shavas</span><span class="score">8.92</span></div>
+  <div class="row"><span class="rank">09</span><span class="name">Better Holmes and Gardens</span><span class="score">8.67</span></div>
+  <div class="row"><span class="rank">10</span><span class="name">Izaks</span><span class="score">8.42</span></div>
+  <div class="row"><span class="rank">11</span><span class="name">Broncic 💍</span><span class="score">8.25</span></div>
+  <div class="row" style="border-bottom:none"><span class="rank">12</span><span class="name">DC & Tax Payers</span><span class="score">8.25</span></div>
+
+  <div class="footer">Paz's Power Rankings</div>
+</div>
+</div>
+</body>
+</html>
