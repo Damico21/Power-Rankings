@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 Best Moments — Paz's Power Rankings</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --gold: #e8c84a;
+    --bg: #0a0a0a;
+    --surface: #111;
+    --border: #222;
+    --text: #ccc;
+    --muted: #555;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    font-family: 'DM Mono', monospace;
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+
+  /* PAGE HEADER */
+  .page-header {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 60px 40px 40px;
+    border-bottom: 1px solid var(--border);
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .page-eyebrow {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .page-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 80px);
+    color: #fff;
+    letter-spacing: 4px;
+    line-height: 0.95;
+    margin-bottom: 16px;
+  }
+
+  .page-title span { color: var(--gold); }
+
+  .page-desc {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    line-height: 1.8;
+    max-width: 480px;
+  }
+
+  /* GALLERY SECTION */
+  .section {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 50px 40px 80px;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* PHOTO GRID */
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .photo-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+  }
+
+  .photo-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .photo-card img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(20%);
+    transition: filter 0.3s;
+  }
+
+  .photo-card:hover img {
+    filter: grayscale(0%);
+  }
+
+  .photo-caption {
+    padding: 14px 16px;
+  }
+
+  .photo-caption-title {
+    font-size: 12px;
+    color: var(--text);
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+
+  .photo-caption-date {
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* EMPTY STATE */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px;
+    text-align: center;
+    border: 1px dashed #222;
+    gap: 16px;
+  }
+
+  .empty-icon {
+    font-size: 48px;
+    opacity: 0.3;
+  }
+
+  .empty-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    color: #2a2a2a;
+    letter-spacing: 3px;
+  }
+
+  .empty-text {
+    font-size: 10px;
+    color: #2a2a2a;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.8;
+  }
+
+  /* HOW TO ADD NOTE */
+  .add-note {
+    margin-top: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    padding: 16px 20px;
+  }
+
+  .add-note-title {
+    font-size: 9px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .add-note-text {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    line-height: 1.8;
+  }
+
+  .add-note-code {
+    color: #888;
+    background: #1a1a1a;
+    padding: 2px 6px;
+    font-size: 10px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer span {
+    font-size: 9px;
+    color: #333;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    nav { padding: 16px 20px; }
+    .nav-links { gap: 16px; }
+    .page-header { padding: 40px 20px 30px; }
+    .section { padding: 30px 20px 60px; }
+    .photo-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">PPR</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="rankings.html">Rankings</a></li>
+    <li><a href="opening-round.html">Opening Round</a></li>
+    <li><a href="best-moments.html" class="active">2026 Best Moments</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <div class="page-eyebrow">Fantasy League · 2026</div>
+  <h1 class="page-title">2026<br><span>Best</span><br>Moments</h1>
+  <p class="page-desc">The memories that made the season. Good times, big plays, and moments worth keeping forever.</p>
+</div>
+
+<div class="section">
+  <div class="section-label">Photos & Memories</div>
+
+  <!-- EMPTY STATE — remove this block and add photo-cards below when you have photos -->
+  <div class="empty-state">
+    <div class="empty-icon">📸</div>
+    <div class="empty-title">No Moments Yet</div>
+    <div class="empty-text">
+      Photos will appear here as<br>the season unfolds.
+    </div>
+  </div>
+
+  <!--
+  =====================================================
+  HOW TO ADD PHOTOS:
+  Delete the empty-state block above, then add photo
+  cards inside .photo-grid like this example:
+
+  <div class="photo-grid">
+    <div class="photo-card">
+      <img src="your-photo.jpg" alt="Description">
+      <div class="photo-caption">
+        <div class="photo-caption-title">Caption goes here</div>
+        <div class="photo-caption-date">Week 1 · March 2026</div>
+      </div>
+    </div>
+  </div>
+  =====================================================
+  -->
+
+  <div class="add-note">
+    <div class="add-note-title">How to Add Photos</div>
+    <div class="add-note-text">
+      Upload your photo to the same folder as this file, then replace the empty state above with a
+      <span class="add-note-code">.photo-grid</span> block containing
+      <span class="add-note-code">.photo-card</span> entries.
+      Each card takes an <span class="add-note-code">img</span>, a title, and a date.
+    </div>
+  </div>
+</div>
+
+<footer>
+  <span>Paz's Power Rankings</span>
+  <span>© 2026</span>
+</footer>
+
+</body>
+</html>
