@@ -63,7 +63,6 @@
 
   .nav-links a:hover, .nav-links a.active { color: var(--gold); }
 
-  /* PAGE HEADER */
   .page-header {
     max-width: 860px;
     margin: 0 auto;
@@ -99,7 +98,6 @@
     max-width: 480px;
   }
 
-  /* GALLERY SECTION */
   .section {
     max-width: 860px;
     margin: 0 auto;
@@ -125,7 +123,6 @@
     background: var(--border);
   }
 
-  /* PHOTO GRID */
   .photo-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -176,69 +173,6 @@
     text-transform: uppercase;
   }
 
-  /* EMPTY STATE */
-  .empty-state {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 80px 20px;
-    text-align: center;
-    border: 1px dashed #222;
-    gap: 16px;
-  }
-
-  .empty-icon {
-    font-size: 48px;
-    opacity: 0.3;
-  }
-
-  .empty-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    color: #2a2a2a;
-    letter-spacing: 3px;
-  }
-
-  .empty-text {
-    font-size: 10px;
-    color: #2a2a2a;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    line-height: 1.8;
-  }
-
-  /* HOW TO ADD NOTE */
-  .add-note {
-    margin-top: 28px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--gold);
-    padding: 16px 20px;
-  }
-
-  .add-note-title {
-    font-size: 9px;
-    color: var(--gold);
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .add-note-text {
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 1px;
-    line-height: 1.8;
-  }
-
-  .add-note-code {
-    color: #888;
-    background: #1a1a1a;
-    padding: 2px 6px;
-    font-size: 10px;
-  }
-
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(18px); }
     to { opacity: 1; transform: translateY(0); }
@@ -259,7 +193,6 @@
     text-transform: uppercase;
   }
 
-  /* RESPONSIVE */
   @media (max-width: 600px) {
     nav { padding: 16px 20px; }
     .nav-links { gap: 16px; }
@@ -290,37 +223,26 @@
 <div class="section">
   <div class="section-label">Photos & Memories</div>
 
-  <<div class="photo-grid">
-  <div class="photo-card">
-    <img src="trade.png" alt="Trade">
-    <div class="photo-caption">
-      <div class="photo-caption-title">The Big Trade</div>
-      <div class="photo-caption-date">Opening Round · March 2026</div>
-    </div>
-  </div>
-  <div class="photo-card">
-    <img src="pool.jpg" alt="Pool day">
-    <div class="photo-caption">
-      <div class="photo-caption-title">Pool Day</div>
-      <div class="photo-caption-date">March 2026</div>
-    </div>
-  </div>
-</div>>
-  <div class="empty-state">
-    <div class="empty-icon">📸</div>
-    <div class="empty-title">No Moments Yet</div>
-    <div class="empty-text">
-      Photos will appear here as<br>the season unfolds.
-    </div>
-  </div>
-
-  <!--
-  =====================================================
-  HOW TO ADD PHOTOS:
-  Delete the empty-state block above, then add photo
-  cards inside .photo-grid like this example:
-
   <div class="photo-grid">
+
+    <div class="photo-card">
+      <img src="1st trade of the season (Fleece).png" alt="1st trade of the season">
+      <div class="photo-caption">
+        <div class="photo-caption-title">1st Trade of the Season (Fleece)</div>
+        <div class="photo-caption-date">Opening Round · March 2026</div>
+      </div>
+    </div>
+
+    <div class="photo-card">
+      <img src="Thats the wrong house!.jpg" alt="Thats the wrong house!">
+      <div class="photo-caption">
+        <div class="photo-caption-title">That's the Wrong House!</div>
+        <div class="photo-caption-date">March 2026</div>
+      </div>
+    </div>
+
+    <!-- TO ADD MORE PHOTOS: copy the block below, paste it here, and update the src, alt, title and date -->
+    <!--
     <div class="photo-card">
       <img src="your-photo.jpg" alt="Description">
       <div class="photo-caption">
@@ -328,18 +250,8 @@
         <div class="photo-caption-date">Week 1 · March 2026</div>
       </div>
     </div>
-  </div>
-  =====================================================
-  -->
+    -->
 
-  <div class="add-note">
-    <div class="add-note-title">How to Add Photos</div>
-    <div class="add-note-text">
-      Upload your photo to the same folder as this file, then replace the empty state above with a
-      <span class="add-note-code">.photo-grid</span> block containing
-      <span class="add-note-code">.photo-card</span> entries.
-      Each card takes an <span class="add-note-code">img</span>, a title, and a date.
-    </div>
   </div>
 </div>
 
