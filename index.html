@@ -1,372 +1,671 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Paz's Power Rankings</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Paz's Power Rankings — Ligma League</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1b2a3b;
+      --red: #8b1a1a;
+      --gold: #c8a951;
+      --cream: #e8dcc8;
+      --dark: #0d1117;
+      --mid: #141d27;
+    }
 
-  :root {
-    --gold: #e8c84a;
-    --bg: #0a0a0a;
-    --surface: #111;
-    --border: #222;
-    --text: #ccc;
-    --muted: #555;
-  }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
 
-  body {
-    background: var(--bg);
-    font-family: 'DM Mono', monospace;
-    color: var(--text);
-    min-height: 100vh;
-  }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  /* NAV */
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    background: rgba(10,10,10,0.95);
-    backdrop-filter: blur(8px);
-    z-index: 100;
-  }
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      background: rgba(13,17,23,0.92);
+      border-bottom: 2px solid var(--red);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      backdrop-filter: blur(12px);
+    }
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem;
+      color: var(--gold);
+      text-decoration: none;
+      letter-spacing: 3px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--cream);
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
 
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    color: var(--gold);
-    letter-spacing: 3px;
-    text-decoration: none;
-  }
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 50%, #0d1117 100%);
+    }
 
-  .nav-links {
-    display: flex;
-    gap: 32px;
-    list-style: none;
-  }
+    /* Texture grain overlay */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 1;
+    }
 
-  .nav-links a {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s;
-  }
+    /* Diagonal red accent bar */
+    .hero-accent {
+      position: absolute;
+      top: 0; right: 0;
+      width: 45%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 30%, rgba(139,26,26,0.12) 100%);
+      z-index: 1;
+    }
 
-  .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    /* Big background text */
+    .hero-bg-text {
+      position: absolute;
+      bottom: -2rem;
+      left: -1rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(8rem, 20vw, 18rem);
+      color: rgba(255,255,255,0.025);
+      letter-spacing: -0.02em;
+      pointer-events: none;
+      z-index: 1;
+      white-space: nowrap;
+      line-height: 1;
+    }
 
-  /* HERO */
-  .hero {
-    padding: 100px 40px 80px;
-    max-width: 860px;
-    margin: 0 auto;
-    animation: fadeUp 0.6s ease both;
-  }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 2.5rem;
+      gap: 3rem;
+    }
 
-  .hero-eyebrow {
-    font-size: 10px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 20px;
-  }
+    .hero-left { flex: 1; }
 
-  .hero-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(64px, 10vw, 110px);
-    color: #fff;
-    letter-spacing: 4px;
-    line-height: 0.95;
-    margin-bottom: 28px;
-  }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(139,26,26,0.3);
+      border: 1px solid rgba(139,26,26,0.6);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #f08080;
+      margin-bottom: 1.5rem;
+      animation: fadeSlideUp 0.6s ease both;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #f08080;
+      animation: pulse 1.5s infinite;
+    }
 
-  .hero-title span { color: var(--gold); }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
 
-  .hero-desc {
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 1px;
-    line-height: 1.8;
-    max-width: 480px;
-    margin-bottom: 40px;
-  }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      line-height: 0.92;
+      letter-spacing: 2px;
+      margin-bottom: 0.3rem;
+      animation: fadeSlideUp 0.6s 0.1s ease both;
+    }
+    .hero-title .line-gold { color: var(--gold); display: block; }
+    .hero-title .line-white { color: #fff; display: block; }
 
-  .btn {
-    display: inline-block;
-    padding: 14px 32px;
-    background: var(--gold);
-    color: #0a0a0a;
-    font-family: 'DM Mono', monospace;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-decoration: none;
-    transition: opacity 0.2s, transform 0.2s;
-  }
+    .hero-subtitle {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--cream);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 1.8rem;
+      opacity: 0.8;
+      animation: fadeSlideUp 0.6s 0.2s ease both;
+    }
 
-  .btn:hover { opacity: 0.85; transform: translateY(-1px); }
+    .hero-desc {
+      font-size: 1rem;
+      color: #8fa3b8;
+      line-height: 1.75;
+      max-width: 460px;
+      margin-bottom: 2.5rem;
+      animation: fadeSlideUp 0.6s 0.3s ease both;
+    }
 
-  .btn-ghost {
-    background: transparent;
-    color: var(--gold);
-    border: 1px solid var(--gold);
-    margin-left: 16px;
-  }
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fadeSlideUp 0.6s 0.4s ease both;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      padding: 0.85rem 2rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: #a52020; transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-block;
+      background: transparent;
+      color: var(--gold);
+      padding: 0.85rem 2rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 4px;
+      border: 1px solid var(--gold);
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-secondary:hover { background: rgba(200,169,81,0.1); transform: translateY(-2px); }
 
-  .btn-ghost:hover { background: rgba(232,200,74,0.07); }
+    /* ── LOGO ── */
+    .hero-logo-wrap {
+      flex-shrink: 0;
+      position: relative;
+      animation: fadeSlideUp 0.7s 0.2s ease both;
+    }
+    .logo-glow {
+      position: absolute;
+      inset: -20px;
+      background: radial-gradient(ellipse, rgba(139,26,26,0.35) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(20px);
+      z-index: 0;
+    }
+    .league-logo {
+      position: relative;
+      z-index: 1;
+      width: clamp(260px, 30vw, 400px);
+      height: auto;
+      /* Remove white background - mix-blend-mode to blend into dark bg */
+      mix-blend-mode: lighten;
+      filter: contrast(1.05) brightness(0.95);
+      display: block;
+    }
 
-  /* DIVIDER */
-  .divider {
-    width: 100%;
-    height: 1px;
-    background: var(--border);
-    max-width: 860px;
-    margin: 0 auto;
-  }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
-  /* ARCHIVE */
-  .section {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 60px 40px;
-    animation: fadeUp 0.6s 0.2s ease both;
-  }
+    /* Divider */
+    .divider {
+      height: 4px;
+      background: linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%);
+    }
 
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 28px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--navy);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      divide: white;
+    }
+    .stat-item {
+      padding: 2rem;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--gold);
+      line-height: 1;
+      display: block;
+    }
+    .stat-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #5a7a9a;
+      margin-top: 0.3rem;
+    }
 
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+    /* ── ARCHIVE ── */
+    #archive {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem;
+    }
 
-  .archive-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 12px;
-  }
+    .section-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: #fff;
+      letter-spacing: 1px;
+      margin-bottom: 2.5rem;
+    }
 
-  .archive-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    padding: 20px;
-    text-decoration: none;
-    display: block;
-    transition: border-color 0.2s, transform 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
+    .weeks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.2rem;
+    }
 
-  .archive-card:hover {
-    border-color: var(--gold);
-    transform: translateY(-2px);
-  }
+    .week-card {
+      background: var(--mid);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .week-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--gold);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .week-card:hover {
+      border-color: rgba(200,169,81,0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+    .week-card:hover::before { opacity: 1; }
 
-  .archive-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 3px; height: 100%;
-    background: var(--gold);
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
+    /* Live card */
+    .week-card.live {
+      border-color: rgba(139,26,26,0.4);
+      background: linear-gradient(135deg, #1a1212, var(--mid));
+    }
+    .week-card.live::before { background: var(--red); opacity: 1; }
 
-  .archive-card:hover::before { opacity: 1; }
+    /* Coming soon card */
+    .week-card.soon {
+      opacity: 0.5;
+      pointer-events: none;
+      cursor: default;
+    }
+    .week-card.soon::before { display: none; }
 
-  .archive-week {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    color: var(--gold);
-    letter-spacing: 2px;
-    line-height: 1;
-  }
+    .card-left {}
+    .card-round {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #5a7a9a;
+      margin-bottom: 0.3rem;
+    }
+    .card-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 0.4rem;
+    }
+    .card-leader {
+      font-size: 0.82rem;
+      color: #6a8aaa;
+    }
+    .card-leader strong { color: var(--gold); }
 
-  .archive-label {
-    font-size: 9px;
-    color: var(--muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-top: 4px;
-    margin-bottom: 12px;
-  }
+    .card-right { text-align: right; flex-shrink: 0; }
+    .card-badge {
+      display: inline-block;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .badge-live { background: rgba(139,26,26,0.3); color: #f08080; border: 1px solid rgba(139,26,26,0.5); }
+    .badge-done { background: rgba(200,169,81,0.15); color: var(--gold); border: 1px solid rgba(200,169,81,0.3); }
+    .badge-soon { background: rgba(255,255,255,0.05); color: #4a6a8a; border: 1px solid rgba(255,255,255,0.08); }
 
-  .archive-leader {
-    font-size: 11px;
-    color: var(--text);
-    letter-spacing: 0.5px;
-  }
+    .card-arrow {
+      font-size: 1.2rem;
+      color: var(--gold);
+      margin-top: 0.5rem;
+      transition: transform 0.2s;
+    }
+    .week-card:hover .card-arrow { transform: translateX(4px); }
 
-  .archive-leader span {
-    color: var(--muted);
-    font-size: 10px;
-  }
+    /* ── ABOUT ── */
+    .about-section {
+      background: var(--navy);
+      border-top: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .about-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-text .section-label { margin-bottom: 0.5rem; }
+    .about-text .section-title { margin-bottom: 1.2rem; }
+    .about-text p {
+      color: #7a9ab8;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+      font-size: 0.97rem;
+    }
+    .about-text p strong { color: var(--cream); }
 
-  /* current week badge */
-  .badge {
-    display: inline-block;
-    background: var(--gold);
-    color: #0a0a0a;
-    font-size: 8px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 2px 6px;
-    margin-left: 8px;
-    vertical-align: middle;
-  }
+    .about-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .fact-card {
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 1.3rem;
+    }
+    .fact-icon { font-size: 1.6rem; margin-bottom: 0.5rem; }
+    .fact-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.3rem;
+    }
+    .fact-desc { font-size: 0.82rem; color: #5a7a9a; line-height: 1.5; }
 
-  /* STATS BAR */
-  .stats-bar {
-    display: flex;
-    gap: 40px;
-    padding: 28px 40px;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    max-width: 860px;
-    margin: 0 auto;
-    animation: fadeUp 0.6s 0.1s ease both;
-  }
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #2a3a4a;
+      font-size: 0.8rem;
+      font-family: 'Oswald', sans-serif;
+      letter-spacing: 1px;
+    }
 
-  .stat { }
-
-  .stat-num {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 36px;
-    color: var(--gold);
-    letter-spacing: 2px;
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: 9px;
-    color: var(--muted);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(18px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 24px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 40px;
-  }
-
-  footer span {
-    font-size: 9px;
-    color: #333;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-</style>
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.75rem; }
+      .hero-inner { flex-direction: column-reverse; padding: 3rem 1.2rem 2rem; text-align: center; }
+      .hero-ctas { justify-content: center; }
+      .hero-desc { margin: 0 auto 2rem; }
+      .league-logo { width: 200px; }
+      .stats-inner { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+      .stat-item:last-child { border-bottom: none; }
+      #archive { padding: 3rem 1.2rem; }
+      .about-inner { grid-template-columns: 1fr; padding: 3rem 1.2rem; gap: 2rem; }
+      .hero-bg-text { font-size: 5rem; }
+    }
+  </style>
 </head>
 <body>
 
-<nav>
-  <a class="nav-logo" href="index.html">PPR</a>
-  <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
-    <li><a href="rankings.html">Rankings</a></li>
-    <li><a href="opening-round.html">Opening Round</a></li>
-    <li><a href="best-moments.html">2026 Best Moments</a></li>
-  </ul>
-</nav>
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html">PPR</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="rankings.html">Rankings</a></li>
+      <li><a href="opening-round.html">Opening Round</a></li>
+      <li><a href="round-1.html">Round 1</a></li>
+      <li><a href="best-moments.html">2026 Best Moments</a></li>
+    </ul>
+  </nav>
 
-<div class="hero">
-  <div class="hero-eyebrow">Fantasy League · Est. 2024</div>
-  <h1 class="hero-title">Paz's<br><span>Power</span><br>Rankings</h1>
-  <p class="hero-desc">Weekly power rankings for the league. Every week, a new reckoning. Check where your team stands — and prepare accordingly.</p>
-  <a href="rankings.html" class="btn">View Latest Rankings</a>
-  <a href="#archive" class="btn btn-ghost">Past Weeks</a>
-</div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-accent"></div>
+    <div class="hero-bg-text">LIGMA</div>
 
-<div class="divider"></div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-badge">AFL Fantasy · Est. 2024</div>
+        <h1 class="hero-title">
+          <span class="line-gold">Paz's</span>
+          <span class="line-white">Power</span>
+          <span class="line-white">Rankings</span>
+        </h1>
+        <p class="hero-subtitle">Ligma League</p>
+        <p class="hero-desc">
+          Welcome to the official power rankings of the <strong>Ligma League</strong> — 12 teams, 
+          zero mercy, and a whole lot of opinions. Every round, the rankings shift. 
+          Every week, someone's getting cooked. Where does your team stand?
+        </p>
+        <div class="hero-ctas">
+          <a href="opening-round.html" class="btn-primary">📋 Opening Round Rankings</a>
+          <a href="#archive" class="btn-secondary">All Rounds ↓</a>
+        </div>
+      </div>
 
-<div class="stats-bar">
-  <div class="stat">
-    <div class="stat-num">12</div>
-    <div class="stat-label">Teams</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">01</div>
-    <div class="stat-label">Weeks Played</div>
-  </div>
-  <div class="stat">
-    <div class="stat-num">9.67</div>
-    <div class="stat-label">Top Score</div>
-  </div>
-</div>
-
-<div class="section" id="archive">
-  <div class="section-label">Rankings Archive</div>
-  <div class="archive-grid">
-
-    <a href="rankings.html" class="archive-card">
-      <div class="archive-week">Draft Night</div>
-      <div class="archive-label">Week 0 · Draft Rankings</div>
-      <div class="archive-leader">🥇 Foopys <span>— 9.67</span></div>
-    </a>
-
-    <a href="opening-round.html" class="archive-card">
-      <div class="archive-week">Opening Round <span class="badge">Latest</span></div>
-      <div class="archive-label">Opening Round · Rankings</div>
-      <div class="archive-leader" style="color:#555;">Rankings coming soon</div>
-    </a>
-
-    <!-- Future weeks will go here -->
-    <div class="archive-card" style="opacity:0.3; pointer-events:none; cursor:default;">
-      <div class="archive-week">Week 1</div>
-      <div class="archive-label">Coming soon</div>
-      <div class="archive-leader" style="color:#333;">TBD</div>
+      <div class="hero-logo-wrap">
+        <div class="logo-glow"></div>
+        <img 
+          class="league-logo" 
+          src="1773058078187_image.png" 
+          alt="Ligma League — AFL Fantasy"
+        >
+      </div>
     </div>
+  </section>
 
-    <div class="archive-card" style="opacity:0.3; pointer-events:none; cursor:default;">
-      <div class="archive-week">Week 2</div>
-      <div class="archive-label">Coming soon</div>
-      <div class="archive-leader" style="color:#333;">TBD</div>
+  <div class="divider"></div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="stat-number">12</span>
+        <span class="stat-label">Teams</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">01</span>
+        <span class="stat-label">Rounds Complete</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">10.25</span>
+        <span class="stat-label">Top Score This Season</span>
+      </div>
     </div>
-
-    <div class="archive-card" style="opacity:0.3; pointer-events:none; cursor:default;">
-      <div class="archive-week">Week 3</div>
-      <div class="archive-label">Coming soon</div>
-      <div class="archive-leader" style="color:#333;">TBD</div>
-    </div>
-
   </div>
-</div>
 
-<footer>
-  <span>Paz's Power Rankings</span>
-  <span>© 2024</span>
-</footer>
+  <!-- ARCHIVE -->
+  <section id="archive">
+    <div class="section-label">Rankings Archive</div>
+    <div class="section-title">All Rounds</div>
+
+    <div class="weeks-grid">
+
+      <!-- Draft Night -->
+      <a class="week-card" href="rankings.html">
+        <div class="card-left">
+          <div class="card-round">Week 0</div>
+          <div class="card-title">Draft Night</div>
+          <div class="card-leader">🥇 Leader: <strong>Foopys — 9.67</strong></div>
+        </div>
+        <div class="card-right">
+          <div class="card-badge badge-done">Complete</div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <!-- Opening Round -->
+      <a class="week-card live" href="opening-round.html">
+        <div class="card-left">
+          <div class="card-round">Opening Round</div>
+          <div class="card-title">Opening Round</div>
+          <div class="card-leader">🥇 Leader: <strong>Dark Magicians — 10.25</strong></div>
+        </div>
+        <div class="card-right">
+          <div class="card-badge badge-live">● Live</div>
+          <div class="card-arrow">→</div>
+        </div>
+      </a>
+
+      <!-- Round 1 -->
+      <a class="week-card soon" href="round-1.html">
+        <div class="card-left">
+          <div class="card-round">Round 1</div>
+          <div class="card-title">Round 1</div>
+          <div class="card-leader">Rankings dropping soon...</div>
+        </div>
+        <div class="card-right">
+          <div class="card-badge badge-soon">Coming Soon</div>
+        </div>
+      </a>
+
+      <!-- Round 2 -->
+      <div class="week-card soon">
+        <div class="card-left">
+          <div class="card-round">Round 2</div>
+          <div class="card-title">Round 2</div>
+          <div class="card-leader">TBD</div>
+        </div>
+        <div class="card-right">
+          <div class="card-badge badge-soon">Coming Soon</div>
+        </div>
+      </div>
+
+      <!-- Round 3 -->
+      <div class="week-card soon">
+        <div class="card-left">
+          <div class="card-round">Round 3</div>
+          <div class="card-title">Round 3</div>
+          <div class="card-leader">TBD</div>
+        </div>
+        <div class="card-right">
+          <div class="card-badge badge-soon">Coming Soon</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about-section">
+    <div class="about-inner">
+      <div class="about-text">
+        <div class="section-label">The League</div>
+        <div class="section-title">What is the<br>Ligma League?</div>
+        <p>
+          The <strong>Ligma League</strong> is a 12-team AFL Fantasy competition where bragging rights 
+          are everything and no lead is ever safe. Founded in 2024, the league has quickly 
+          become a hotbed of trade controversy, trash talk, and the occasional miracle comeback.
+        </p>
+        <p>
+          Every week, Paz drops the official <strong>Power Rankings</strong> — an unbiased, 
+          ruthlessly honest assessment of where every team stands. If you're at the bottom, 
+          you earned it.
+        </p>
+      </div>
+
+      <div class="about-facts">
+        <div class="fact-card">
+          <div class="fact-icon">🏆</div>
+          <div class="fact-title">12 Teams</div>
+          <div class="fact-desc">One winner. Eleven ways to lose. No excuses.</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">📊</div>
+          <div class="fact-title">Weekly Rankings</div>
+          <div class="fact-desc">Updated every round. The truth hurts.</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">🔥</div>
+          <div class="fact-title">Est. 2024</div>
+          <div class="fact-desc">Fresh league. Long memories.</div>
+        </div>
+        <div class="fact-card">
+          <div class="fact-icon">🥄</div>
+          <div class="fact-title">The Wooden Spoon</div>
+          <div class="fact-desc">Last place gets immortalised. Not in a good way.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Paz's Power Rankings &copy; 2024 · Ligma League AFL Fantasy</footer>
 
 </body>
 </html>
