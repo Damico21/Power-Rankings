@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Round 1 — Paz's Power Rankings</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(0,0,0,0.8);
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    .nav-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #c8a951;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #c8a951; }
+
+    .page-header {
+      text-align: center;
+      padding: 3rem 1rem 1.5rem;
+      background: linear-gradient(180deg, #111 0%, #0a0a0a 100%);
+    }
+    .page-header .site-name {
+      font-size: 0.85rem;
+      color: #c8a951;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 1px;
+    }
+
+    .coming-soon {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 1rem;
+      text-align: center;
+      gap: 1.2rem;
+    }
+    .coming-soon .icon {
+      font-size: 4rem;
+    }
+    .coming-soon h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .coming-soon p {
+      color: #888;
+      font-size: 1rem;
+      max-width: 340px;
+      line-height: 1.6;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #444;
+      font-size: 0.8rem;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">PPR</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="rankings.html">Rankings</a></li>
+      <li><a href="opening-round.html">Opening Round</a></li>
+      <li><a href="round-1.html">Round 1</a></li>
+      <li><a href="best-moments.html">2026 Best Moments</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="site-name">Paz's Power Rankings</div>
+    <h1>Round 1 Rankings</h1>
+  </div>
+
+  <div class="coming-soon">
+    <div class="icon">🏈</div>
+    <h2>Rankings Coming Soon</h2>
+    <p>Round 1 rankings will be<br>posted after the round concludes.</p>
+  </div>
+
+  <footer>Paz's Power Rankings &copy; 2024</footer>
+
+</body>
+</html>

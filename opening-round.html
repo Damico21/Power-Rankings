@@ -1,162 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Opening Round — Paz's Power Rankings</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@400;500&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Opening Round — Paz's Power Rankings</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      min-height: 100vh;
+    }
 
-  nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 40px;
-    border-bottom: 1px solid #222;
-    position: sticky;
-    top: 0;
-    background: rgba(10,10,10,0.95);
-    backdrop-filter: blur(8px);
-    z-index: 100;
-    width: 100%;
-  }
-  .nav-logo {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 22px;
-    color: #e8c84a;
-    letter-spacing: 3px;
-    text-decoration: none;
-  }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #555;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover, .nav-links a.active { color: #e8c84a; }
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(0,0,0,0.8);
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+    .nav-logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #c8a951;
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #c8a951; }
 
-  body {
-    background: #0a0a0a;
-    font-family: 'DM Mono', monospace;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-  }
+    /* HEADER */
+    .page-header {
+      text-align: center;
+      padding: 3rem 1rem 1.5rem;
+      background: linear-gradient(180deg, #111 0%, #0a0a0a 100%);
+    }
+    .page-header .site-name {
+      font-size: 0.85rem;
+      color: #c8a951;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .page-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 1px;
+    }
 
-  .page-content {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 40px 20px;
-  }
+    /* TABLE SECTION */
+    .rankings-section {
+      max-width: 800px;
+      margin: 2rem auto 4rem;
+      padding: 0 1rem;
+    }
 
-  .card {
-    background: #111;
-    border: 1px solid #222;
-    width: 480px;
-    padding: 36px 32px;
-  }
+    .rankings-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #111;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.5);
+    }
 
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 28px;
-    border-bottom: 2px solid #e8c84a;
-    padding-bottom: 16px;
-  }
+    .rankings-table thead tr {
+      background: #1a1a1a;
+      border-bottom: 2px solid #c8a951;
+    }
+    .rankings-table thead th {
+      padding: 1rem 1.2rem;
+      text-align: left;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #c8a951;
+      font-weight: 700;
+    }
+    .rankings-table thead th:first-child { text-align: center; }
 
-  .title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
-    color: #e8c84a;
-    letter-spacing: 3px;
-    line-height: 1;
-  }
+    .rankings-table tbody tr {
+      border-bottom: 1px solid #1e1e1e;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .rankings-table tbody tr:hover { background: #1a1a1a; }
+    .rankings-table tbody tr:last-child { border-bottom: none; }
 
-  .subtitle {
-    font-size: 10px;
-    color: #555;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-top: 4px;
-  }
+    .rank-cell {
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #555;
+      width: 60px;
+    }
+    .rank-1 .rank-cell { color: #ffd700; }
+    .rank-2 .rank-cell { color: #c0c0c0; }
+    .rank-3 .rank-cell { color: #cd7f32; }
 
-  .coming-soon {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 60px 20px;
-    gap: 16px;
-    text-align: center;
-  }
+    .team-cell {
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .team-photo {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #333;
+      transition: border-color 0.2s;
+      cursor: pointer;
+    }
+    .rankings-table tbody tr:hover .team-photo { border-color: #c8a951; }
 
-  .coming-soon-icon {
-    font-size: 40px;
-    opacity: 0.4;
-  }
+    .team-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+    }
 
-  .coming-soon-title {
-    font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    color: #333;
-    letter-spacing: 3px;
-  }
+    /* Movement indicators */
+    .movement {
+      font-size: 0.75rem;
+      margin-left: 6px;
+      font-weight: 700;
+    }
+    .up { color: #4caf50; }
+    .down { color: #f44336; }
+    .same { color: #888; }
 
-  .coming-soon-text {
-    font-size: 10px;
-    color: #333;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    line-height: 1.8;
-  }
+    .score-cell {
+      padding: 1rem 1.5rem;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #c8a951;
+      text-align: right;
+      width: 100px;
+    }
 
-  .footer {
-    margin-top: 20px;
-    font-size: 9px;
-    color: #333;
-    letter-spacing: 1px;
-    text-align: right;
-    text-transform: uppercase;
-  }
-</style>
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #444;
+      font-size: 0.8rem;
+      border-top: 1px solid #1a1a1a;
+    }
+
+    /* LIGHTBOX */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+      z-index: 999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+      max-width: 90vw;
+      max-height: 80vh;
+      border-radius: 12px;
+      box-shadow: 0 0 60px rgba(200,169,81,0.3);
+    }
+    .lightbox-close {
+      color: #fff;
+      background: #333;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .nav-links { gap: 1rem; }
+      .page-header h1 { font-size: 1.4rem; }
+      .team-photo { width: 34px; height: 34px; }
+    }
+  </style>
 </head>
 <body>
-<nav>
-  <a class="nav-logo" href="index.html">PPR</a>
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="rankings.html">Rankings</a></li>
-    <li><a href="opening-round.html" class="active">Opening Round</a></li>
-    <li><a href="best-moments.html">2026 Best Moments</a></li>
-  </ul>
-</nav>
-<div class="page-content">
-<div class="card">
-  <div class="header">
-    <div>
-      <div class="title">Paz's Power Rankings</div>
-      <div class="subtitle">Opening Round Rankings</div>
-    </div>
+
+  <nav>
+    <a class="nav-logo" href="index.html">PPR</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="rankings.html">Rankings</a></li>
+      <li><a href="opening-round.html">Opening Round</a></li>
+      <li><a href="round-1.html">Round 1</a></li>
+      <li><a href="best-moments.html">2026 Best Moments</a></li>
+    </ul>
+  </nav>
+
+  <div class="page-header">
+    <div class="site-name">Paz's Power Rankings</div>
+    <h1>Opening Round Rankings</h1>
   </div>
 
-  <div class="coming-soon">
-    <div class="coming-soon-icon">🏈</div>
-    <div class="coming-soon-title">Rankings Coming Soon</div>
-    <div class="coming-soon-text">
-      Opening Round rankings will be<br>posted after the round concludes.
-    </div>
+  <div class="rankings-section">
+    <table class="rankings-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Team</th>
+          <th style="text-align:right;">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr class="rank-1" onclick="openPhoto('Dark Magicians.jpg', 'Dark Magicians')">
+          <td class="rank-cell">01</td>
+          <td class="team-cell">
+            <img class="team-photo" src="Dark Magicians.jpg" alt="Dark Magicians">
+            <span class="team-name">Dark Magicians 🥇 <span class="movement same">➡</span></span>
+          </td>
+          <td class="score-cell">10.25</td>
+        </tr>
+
+        <tr class="rank-2" onclick="openPhoto('Better Holmes and Gardens.jpg', 'Holmes and Gardens')">
+          <td class="rank-cell">02</td>
+          <td class="team-cell">
+            <img class="team-photo" src="Better Holmes and Gardens.jpg" alt="Holmes and Gardens">
+            <span class="team-name">Holmes and Gardens 🥈 <span class="movement up">▲6</span></span>
+          </td>
+          <td class="score-cell">9.92</td>
+        </tr>
+
+        <tr class="rank-3" onclick="openPhoto('Flagdons.jpg', 'Flagdons')">
+          <td class="rank-cell">03</td>
+          <td class="team-cell">
+            <img class="team-photo" src="Flagdons.jpg" alt="Flagdons">
+            <span class="team-name">Flagdons 🥉 <span class="movement up">▲2</span></span>
+          </td>
+          <td class="score-cell">9.67</td>
+        </tr>
+
+        <tr onclick="openPhoto('Foopys.jpg', 'Foopys')">
+          <td class="rank-cell">04</td>
+          <td class="team-cell">
+            <img class="team-photo" src="Foopys.jpg" alt="Foopys">
+            <span class="team-name">Foopys <span class="movement down">▼2</span></span>
+          </td>
+          <td class="score-cell">9.50</td>
+        </tr>
+
+        <tr onclick="openPhoto('DC & Tax Payers.jpg', 'DC & Tax Payers')">
+          <td class="rank-cell">05</td>
+          <td class="team-cell">
+            <img class="team-photo" src="DC & Tax Payers.jpg" alt="DC & Tax Payers">
+            <span class="team-name">DC &amp; Tax Payers <span class="movement up">▲7</span></span>
+          </td>
+          <td class="score-cell">9.50</td>
+        </tr>
+
+        <tr onclick="openPhoto('Van Twists.jpg', 'Van Twists')">
+          <td class="rank-cell">06</td>
+          <td class="team-cell">
+            <img class="team-photo" src="Van Twists.jpg" alt="Van Twists">
+            <span class="team-name">Van Twists <span class="movement down">▼3</span></span>
+          </td>
+          <td class="score-cell">9.42</td>
+        </tr>
+
+        <tr onclick="openPhoto('Broncic.jpg', 'Broncic')">
+          <td class="rank-cell">07</td>
+          <td class="team-cell">
+            <img class="team-photo" src="Broncic.jpg" alt="Broncic">
+            <span class="team-name">Broncic <span class="movement up">▲4</span></span>
+          </td>
+          <td class="score-cell">9.33</td>
+        </tr>
+
+        <tr onclick="openPhoto('Cripps Nipps.jpg', 'Cripps Nipps')">
+          <td class="rank-cell">08</td>
+          <td class="team-cell">
+            <img class="team-photo" src="Cripps Nipps.jpg" alt="Cripps Nipps">
+            <span class="team-name">Cripps Nipps <span class="movement down">▼4</span></span>
+          </td>
+          <td class="score-cell">8.92</td>
+        </tr>
+
+        <tr onclick="openPhoto('Shavas.jpg', 'Shavas')">
+          <td class="rank-cell">09</td>
+          <td class="team-cell">
+            <img class="team-photo" src="Shavas.jpg" alt="Shavas">
+            <span class="team-name">Shavas <span class="movement down">▼1</span></span>
+          </td>
+          <td class="score-cell">8.42</td>
+        </tr>
+
+        <tr onclick="openPhoto('Nethers men.jpg', 'Nethers men')">
+          <td class="rank-cell">10</td>
+          <td class="team-cell">
+            <img class="team-photo" src="Nethers men.jpg" alt="Nethers men">
+            <span class="team-name">Nethers men <span class="movement down">▼3</span></span>
+          </td>
+          <td class="score-cell">8.25</td>
+        </tr>
+
+        <tr onclick="openPhoto('Izaks.jpg', 'Izaks')">
+          <td class="rank-cell">11</td>
+          <td class="team-cell">
+            <img class="team-photo" src="Izaks.jpg" alt="Izaks">
+            <span class="team-name">Izaks <span class="movement down">▼1</span></span>
+          </td>
+          <td class="score-cell">8.08</td>
+        </tr>
+
+        <tr onclick="openPhoto('Phillipou.jpg', 'Phillipou')">
+          <td class="rank-cell">12</td>
+          <td class="team-cell">
+            <img class="team-photo" src="Phillipou.jpg" alt="Phillipou">
+            <span class="team-name">Phillipou <span class="movement down">▼2</span></span>
+          </td>
+          <td class="score-cell">7.92</td>
+        </tr>
+
+      </tbody>
+    </table>
   </div>
 
-  <div class="footer">Paz's Power Rankings</div>
-</div>
-</div>
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+    <button class="lightbox-close" onclick="closeLightbox()">✕ Close</button>
+  </div>
+
+  <footer>Paz's Power Rankings &copy; 2024</footer>
+
+  <script>
+    function openPhoto(src, name) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-img').alt = name;
+      document.getElementById('lightbox').classList.add('active');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('active');
+    }
+  </script>
+
 </body>
 </html>
