@@ -4,101 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Round 1 — Paz's Power Rankings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root { --navy:#1b2a3b; --red:#8b1a1a; --gold:#c8a951; --cream:#e8dcc8; --dark:#0d1117; --mid:#141d27; --border:rgba(255,255,255,0.06); }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; background:var(--dark); color:#fff; min-height:100vh; display:flex; flex-direction:column; overflow-x:hidden; }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #0a0a0a;
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+    nav { display:flex; justify-content:space-between; align-items:center; padding:1rem 2.5rem; background:rgba(13,17,23,0.95); border-bottom:2px solid var(--red); position:sticky; top:0; z-index:200; backdrop-filter:blur(12px); }
+    .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; color:var(--gold); text-decoration:none; letter-spacing:3px; }
+    .nav-links { display:flex; gap:2rem; list-style:none; }
+    .nav-links a { color:#aac; text-decoration:none; font-family:'Oswald',sans-serif; font-size:0.82rem; letter-spacing:1.5px; text-transform:uppercase; transition:color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color:var(--gold); }
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background: rgba(0,0,0,0.8);
-      border-bottom: 1px solid #222;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(10px);
-    }
-    .nav-logo {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #c8a951;
-      text-decoration: none;
-      letter-spacing: 1px;
-    }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      color: #ccc;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: #c8a951; }
+    .divider { height:3px; background:linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
 
-    .page-header {
-      text-align: center;
-      padding: 3rem 1rem 1.5rem;
-      background: linear-gradient(180deg, #111 0%, #0a0a0a 100%);
-    }
-    .page-header .site-name {
-      font-size: 0.85rem;
-      color: #c8a951;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
-    }
-    .page-header h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #fff;
-      letter-spacing: 1px;
-    }
+    .page-header { background:linear-gradient(180deg, #111827 0%, var(--dark) 100%); padding:3.5rem 2.5rem 2rem; text-align:center; border-bottom:1px solid var(--border); }
+    .page-header .eyebrow { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:0.5rem; }
+    .page-header h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.2rem,6vw,4rem); color:#fff; letter-spacing:2px; }
+    .page-header .subtitle { font-family:'Oswald',sans-serif; font-size:0.82rem; letter-spacing:2px; text-transform:uppercase; color:#4a6a8a; margin-top:0.4rem; }
 
-    .coming-soon {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 1rem;
-      text-align: center;
-      gap: 1.2rem;
+    .coming-soon-wrap {
+      flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding:5rem 2rem; text-align:center; gap:1.5rem;
     }
-    .coming-soon .icon {
-      font-size: 4rem;
-    }
-    .coming-soon h2 {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: #fff;
-    }
-    .coming-soon p {
-      color: #888;
-      font-size: 1rem;
-      max-width: 340px;
-      line-height: 1.6;
-    }
+    .cs-icon { font-size:4.5rem; line-height:1; }
+    .cs-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2rem,5vw,3rem); color:#fff; letter-spacing:2px; }
+    .cs-sub { font-family:'Oswald',sans-serif; font-size:0.85rem; letter-spacing:2px; text-transform:uppercase; color:#3a5a7a; }
+    .cs-desc { color:#4a6a8a; font-size:0.92rem; line-height:1.7; max-width:320px; }
+    .cs-back { display:inline-block; margin-top:0.5rem; color:var(--gold); font-family:'Oswald',sans-serif; font-size:0.82rem; letter-spacing:2px; text-transform:uppercase; text-decoration:none; border:1px solid rgba(200,169,81,0.3); border-radius:4px; padding:0.6rem 1.5rem; transition:background 0.2s; }
+    .cs-back:hover { background:rgba(200,169,81,0.08); }
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: #444;
-      font-size: 0.8rem;
-      border-top: 1px solid #1a1a1a;
-    }
+    footer { text-align:center; padding:2rem; color:#253545; font-size:0.78rem; font-family:'Oswald',sans-serif; letter-spacing:1px; border-top:1px solid var(--border); }
 
-    @media (max-width: 600px) {
-      .nav-links { gap: 1rem; }
+    @media (max-width:600px) {
+      nav { padding:1rem 1.2rem; }
+      .nav-links { gap:0.8rem; }
+      .nav-links a { font-size:0.7rem; }
     }
   </style>
 </head>
@@ -108,25 +49,30 @@
     <a class="nav-logo" href="index.html">PPR</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="rankings.html">Rankings</a></li>
+      <li><a href="rankings.html">Draft Night</a></li>
       <li><a href="opening-round.html">Opening Round</a></li>
-      <li><a href="round-1.html">Round 1</a></li>
+      <li><a href="round-1.html" class="active">Round 1</a></li>
       <li><a href="best-moments.html">2026 Best Moments</a></li>
     </ul>
   </nav>
 
+  <div class="divider"></div>
+
   <div class="page-header">
-    <div class="site-name">Paz's Power Rankings</div>
+    <div class="eyebrow">Round 1 · Power Rankings</div>
     <h1>Round 1 Rankings</h1>
+    <div class="subtitle">Paz's Power Rankings · Ligma League 2026</div>
   </div>
 
-  <div class="coming-soon">
-    <div class="icon">🏈</div>
-    <h2>Rankings Coming Soon</h2>
-    <p>Round 1 rankings will be<br>posted after the round concludes.</p>
+  <div class="coming-soon-wrap">
+    <div class="cs-icon">🏈</div>
+    <div class="cs-title">Rankings Coming Soon</div>
+    <div class="cs-sub">Check back after Round 1</div>
+    <p class="cs-desc">Round 1 power rankings will be posted once the round wraps up. Stay tuned — someone's about to get cooked.</p>
+    <a class="cs-back" href="opening-round.html">← View Opening Round</a>
   </div>
 
-  <footer>Paz's Power Rankings &copy; 2024</footer>
+  <footer>Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</footer>
 
 </body>
 </html>
