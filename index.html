@@ -82,12 +82,10 @@
     .btn-secondary { display: inline-block; background: transparent; color: var(--gold); padding: 0.85rem 2rem; font-family: 'Oswald', sans-serif; font-size: 0.88rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-radius: 4px; border: 1px solid var(--gold); transition: background 0.2s, transform 0.15s; }
     .btn-secondary:hover { background: rgba(200,169,81,0.1); transform: translateY(-2px); }
 
-    /* Logo */
     .hero-logo-wrap { flex-shrink: 0; position: relative; animation: fadeUp 0.7s 0.1s ease both; }
     .logo-glow { position: absolute; inset: -30px; background: radial-gradient(ellipse, rgba(139,26,26,0.3) 0%, transparent 70%); filter: blur(25px); z-index: 0; pointer-events: none; }
     .league-logo { position: relative; z-index: 1; width: clamp(240px, 28vw, 380px); height: auto; mix-blend-mode: lighten; display: block; }
 
-    /* ── DIVIDER ── */
     .divider { height: 3px; background: linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
 
     /* ── STATS BAR ── */
@@ -98,19 +96,88 @@
     .stat-number { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--gold); line-height: 1; display: block; }
     .stat-label { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: #4a6a8a; margin-top: 0.3rem; display: block; }
 
+    /* ── VOTE SECTION ── */
+    #vote { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .vote-outer { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
+    .vote-header { margin-bottom: 2.5rem; }
+    .vote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+    .poll-card { background: var(--mid); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+
+    .poll-card-top { padding: 1.4rem 1.6rem 1.2rem; border-bottom: 1px solid var(--border); position: relative; }
+    .poll-card-top::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; }
+    .poll-card.spoon .poll-card-top::after { background: #7ecfff; }
+    .poll-card.champ .poll-card-top::after { background: var(--gold); }
+
+    .poll-card-icon { font-size: 1.8rem; line-height: 1; margin-bottom: 0.4rem; }
+    .poll-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; line-height: 1; }
+    .poll-card.spoon .poll-card-title { color: #7ecfff; }
+    .poll-card.champ .poll-card-title { color: var(--gold); }
+    .poll-card-sub { font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #4a6a8a; margin-top: 0.2rem; }
+
+    .live-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: 'Oswald', sans-serif; font-size: 0.65rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: #4caf50; margin-top: 0.6rem;
+    }
+    .live-pill-dot { width: 6px; height: 6px; border-radius: 50%; background: #4caf50; animation: pulse 1.5s infinite; display: inline-block; }
+
+    .poll-body { padding: 0.4rem 0; }
+
+    .team-row {
+      display: flex; align-items: center; gap: 0.7rem;
+      padding: 0.6rem 1.4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      position: relative; transition: background 0.15s;
+    }
+    .team-row:last-child { border-bottom: none; }
+    .team-row:hover { background: rgba(255,255,255,0.025); }
+
+    .team-row-bar { position: absolute; left: 0; top: 0; bottom: 0; opacity: 0.07; transition: width 0.5s ease; pointer-events: none; }
+    .poll-card.spoon .team-row-bar { background: #7ecfff; }
+    .poll-card.champ .team-row-bar { background: var(--gold); }
+
+    .team-num { font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem; color: #2a4a6a; width: 18px; flex-shrink: 0; text-align: right; }
+    .team-name { flex: 1; font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--cream); }
+
+    /* ── ODOMETER ── */
+    .odo { display: flex; gap: 1px; flex-shrink: 0; margin-right: 0.4rem; }
+    .odo-digit {
+      background: #0a0f16; border: 1px solid rgba(255,255,255,0.08); border-radius: 3px;
+      width: 15px; height: 21px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem;
+      color: #2a3a4a; transition: color 0.15s, background 0.15s; overflow: hidden;
+    }
+    .odo-digit.lit { color: #e8e8e8; }
+    .poll-card.spoon .odo-digit.lit { color: #7ecfff; background: rgba(126,207,255,0.07); border-color: rgba(126,207,255,0.2); }
+    .poll-card.champ .odo-digit.lit { color: var(--gold); background: rgba(200,169,81,0.07); border-color: rgba(200,169,81,0.2); }
+    @keyframes digitPop { 0%{transform:translateY(-60%);opacity:0} 100%{transform:translateY(0);opacity:1} }
+    .odo-digit.pop { animation: digitPop 0.18s ease; }
+
+    /* ── VOTE BUTTON ── */
+    .vote-btn {
+      background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #4a6a8a;
+      font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 4px; cursor: pointer; flex-shrink: 0; transition: all 0.15s; white-space: nowrap;
+    }
+    .poll-card.spoon .vote-btn:hover { color: #7ecfff; border-color: #7ecfff; background: rgba(126,207,255,0.1); }
+    .poll-card.champ .vote-btn:hover { color: var(--gold); border-color: var(--gold); background: rgba(200,169,81,0.1); }
+
+    .poll-footer { padding: 0.9rem 1.4rem; border-top: 1px solid var(--border); }
+    .poll-total { font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: #2a4a6a; }
+
+    /* skeleton loader */
+    .skeleton { background: linear-gradient(90deg,#141d27 25%,#1e2d3d 50%,#141d27 75%); background-size:200% 100%; animation:shimmer 1.2s infinite; border-radius:3px; height:14px; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
     /* ── ARCHIVE ── */
     #archive { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
     .section-label { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 0.4rem; }
     .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); color: #fff; letter-spacing: 1px; margin-bottom: 2.5rem; }
-
     .weeks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
-    .week-card {
-      background: var(--mid); border: 1px solid var(--border); border-radius: 10px;
-      padding: 1.5rem; text-decoration: none;
-      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
-      position: relative; overflow: hidden;
-    }
+    .week-card { background: var(--mid); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 1rem; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
     .week-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); opacity: 0; transition: opacity 0.2s; }
     .week-card:hover { border-color: rgba(200,169,81,0.3); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
     .week-card:hover::before { opacity: 1; }
@@ -141,14 +208,12 @@
     .fact-title { font-family: 'Oswald', sans-serif; font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
     .fact-desc { font-size: 0.8rem; color: #4a6a8a; line-height: 1.5; }
 
-    /* ── FOOTER ── */
     footer { text-align: center; padding: 2rem; color: #253545; font-size: 0.78rem; font-family: 'Oswald', sans-serif; letter-spacing: 1px; border-top: 1px solid var(--border); }
 
-    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       nav { padding: 1rem 1.2rem; }
       .nav-links { gap: 0.8rem; }
-      .nav-links a { font-size: 0.72rem; letter-spacing: 1px; }
+      .nav-links a { font-size: 0.72rem; }
       .hero-inner { flex-direction: column-reverse; padding: 3rem 1.2rem 2rem; text-align: center; }
       .hero-ctas { justify-content: center; }
       .hero-desc { margin: 0 auto 2rem; }
@@ -159,6 +224,9 @@
       #archive { padding: 3rem 1.2rem; }
       .about-inner { grid-template-columns: 1fr; padding: 3rem 1.2rem; gap: 2rem; }
       .hero-bg-text { font-size: 5rem; }
+      .vote-outer { padding: 3rem 1.2rem; }
+      .vote-grid { grid-template-columns: 1fr; }
+      .odo-digit { width: 13px; height: 19px; font-size: 0.78rem; }
     }
   </style>
 </head>
@@ -194,7 +262,7 @@
         </p>
         <div class="hero-ctas">
           <a href="opening-round.html" class="btn-primary">📋 Opening Round Rankings</a>
-          <a href="#archive" class="btn-secondary">All Rounds ↓</a>
+          <a href="#vote" class="btn-secondary">🗳 Cast Your Vote ↓</a>
         </div>
       </div>
       <div class="hero-logo-wrap">
@@ -208,26 +276,63 @@
 
   <div class="stats-bar">
     <div class="stats-inner">
-      <div class="stat-item">
-        <span class="stat-number">12</span>
-        <span class="stat-label">Teams</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">01</span>
-        <span class="stat-label">Rounds Complete</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-number">10.25</span>
-        <span class="stat-label">Top Score This Season</span>
-      </div>
+      <div class="stat-item"><span class="stat-number">12</span><span class="stat-label">Teams</span></div>
+      <div class="stat-item"><span class="stat-number">01</span><span class="stat-label">Rounds Complete</span></div>
+      <div class="stat-item"><span class="stat-number">10.25</span><span class="stat-label">Top Score This Season</span></div>
     </div>
   </div>
+
+  <!-- ═══════════ VOTE SECTION ═══════════ -->
+  <section id="vote">
+    <div class="vote-outer">
+      <div class="vote-header">
+        <div class="section-label">Community Poll</div>
+        <div class="section-title">Cast Your Vote</div>
+      </div>
+      <div class="vote-grid">
+
+        <div class="poll-card spoon">
+          <div class="poll-card-top">
+            <div class="poll-card-icon">🥄</div>
+            <div class="poll-card-title">Wooden Spoon</div>
+            <div class="poll-card-sub">Who finishes last place?</div>
+            <div class="live-pill"><span class="live-pill-dot"></span>Live · Updates in real time</div>
+          </div>
+          <div class="poll-body" id="rows-spoon">
+            <div style="padding:1.5rem 1.4rem">
+              <div class="skeleton" style="width:80%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:60%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:72%"></div>
+            </div>
+          </div>
+          <div class="poll-footer"><span class="poll-total" id="total-spoon">Loading…</span></div>
+        </div>
+
+        <div class="poll-card champ">
+          <div class="poll-card-top">
+            <div class="poll-card-icon">🏆</div>
+            <div class="poll-card-title">Championship</div>
+            <div class="poll-card-sub">Who wins the Ligma League?</div>
+            <div class="live-pill"><span class="live-pill-dot"></span>Live · Updates in real time</div>
+          </div>
+          <div class="poll-body" id="rows-champ">
+            <div style="padding:1.5rem 1.4rem">
+              <div class="skeleton" style="width:80%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:60%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:72%"></div>
+            </div>
+          </div>
+          <div class="poll-footer"><span class="poll-total" id="total-champ">Loading…</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
 
   <section id="archive">
     <div class="section-label">Rankings Archive</div>
     <div class="section-title">All Rounds</div>
     <div class="weeks-grid">
-
       <a class="week-card" href="rankings.html">
         <div class="card-left">
           <div class="card-round">Week 0</div>
@@ -239,7 +344,6 @@
           <span class="card-arrow">→</span>
         </div>
       </a>
-
       <a class="week-card live" href="opening-round.html">
         <div class="card-left">
           <div class="card-round">Opening Round</div>
@@ -251,36 +355,22 @@
           <span class="card-arrow">→</span>
         </div>
       </a>
-
       <a class="week-card soon" href="round-1.html">
         <div class="card-left">
           <div class="card-round">Round 1</div>
           <div class="card-title">Round 1</div>
           <div class="card-leader">Rankings dropping soon...</div>
         </div>
-        <div class="card-right">
-          <div class="card-badge badge-soon">Coming Soon</div>
-        </div>
+        <div class="card-right"><div class="card-badge badge-soon">Coming Soon</div></div>
       </a>
-
       <div class="week-card soon">
-        <div class="card-left">
-          <div class="card-round">Round 2</div>
-          <div class="card-title">Round 2</div>
-          <div class="card-leader">TBD</div>
-        </div>
+        <div class="card-left"><div class="card-round">Round 2</div><div class="card-title">Round 2</div><div class="card-leader">TBD</div></div>
         <div class="card-right"><div class="card-badge badge-soon">Coming Soon</div></div>
       </div>
-
       <div class="week-card soon">
-        <div class="card-left">
-          <div class="card-round">Round 3</div>
-          <div class="card-title">Round 3</div>
-          <div class="card-leader">TBD</div>
-        </div>
+        <div class="card-left"><div class="card-round">Round 3</div><div class="card-title">Round 3</div><div class="card-leader">TBD</div></div>
         <div class="card-right"><div class="card-badge badge-soon">Coming Soon</div></div>
       </div>
-
     </div>
   </section>
 
@@ -302,6 +392,154 @@
   </section>
 
   <footer>Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</footer>
+
+  <!-- ═══════════ FIREBASE VOTING ═══════════ -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, doc, onSnapshot, runTransaction, setDoc, getDoc }
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD_vPHSuGEOST39l-aMuy7rhw4dUGb2qvc",
+      authDomain: "ligma-league.firebaseapp.com",
+      projectId: "ligma-league",
+      storageBucket: "ligma-league.firebasestorage.app",
+      messagingSenderId: "869683799608",
+      appId: "1:869683799608:web:26e62dc39dd627f86e68cd"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
+
+    const TEAMS = [
+      "Foopys", "Van Twists", "Dark Magicians", "Cripps Nipps",
+      "Phillipou", "Flagdons", "Nethers men", "Shavas",
+      "Better Holmes and Gardens", "Izaks", "Broncic", "DC & Tax Payers"
+    ];
+    const MAX = 999999;
+
+    // Initialise docs if they don't exist yet
+    async function ensureDoc(poll) {
+      const ref = doc(db, "votes", poll);
+      const snap = await getDoc(ref);
+      if (!snap.exists()) {
+        const init = {};
+        TEAMS.forEach(t => init[t] = 0);
+        await setDoc(ref, init);
+      }
+    }
+    await ensureDoc("spoon");
+    await ensureDoc("champ");
+
+    // Build 6-digit odometer HTML
+    function odoHTML(count) {
+      const clamped = Math.min(count, MAX);
+      const s = String(clamped).padStart(6, '0');
+      const litFrom = 6 - String(clamped).length;
+      return Array.from(s).map((d, i) =>
+        `<div class="odo-digit${i >= litFrom ? ' lit' : ''}" data-v="${d}">${d}</div>`
+      ).join('');
+    }
+
+    // Full render of a poll
+    function renderPoll(poll, data) {
+      const container = document.getElementById(`rows-${poll}`);
+      const totalEl   = document.getElementById(`total-${poll}`);
+      const vals  = TEAMS.map(t => data[t] ?? 0);
+      const maxV  = Math.max(...vals, 1);
+      const total = vals.reduce((a, b) => a + b, 0);
+
+      container.innerHTML = TEAMS.map((team, i) => {
+        const count = data[team] ?? 0;
+        const pct   = (count / maxV) * 100;
+        return `
+          <div class="team-row">
+            <div class="team-row-bar" style="width:${pct}%"></div>
+            <span class="team-num">${i + 1}</span>
+            <span class="team-name">${team}</span>
+            <div class="odo" id="odo-${poll}-${i}">${odoHTML(count)}</div>
+            <button class="vote-btn" data-poll="${poll}" data-team="${team}" data-idx="${i}">Vote</button>
+          </div>`;
+      }).join('');
+
+      // attach click handlers
+      container.querySelectorAll('.vote-btn').forEach(btn => {
+        btn.addEventListener('click', () => castVote(btn.dataset.poll, btn.dataset.team, +btn.dataset.idx));
+      });
+
+      if (totalEl) totalEl.textContent = total.toLocaleString() + ' vote' + (total !== 1 ? 's' : '');
+    }
+
+    // Patch-update changed odo digits + bars (no full re-render)
+    function patchPoll(poll, data) {
+      const vals  = TEAMS.map(t => data[t] ?? 0);
+      const maxV  = Math.max(...vals, 1);
+      const total = vals.reduce((a, b) => a + b, 0);
+
+      TEAMS.forEach((team, i) => {
+        const count  = data[team] ?? 0;
+        const odoEl  = document.getElementById(`odo-${poll}-${i}`);
+        if (odoEl) {
+          const newStr  = String(Math.min(count, MAX)).padStart(6, '0');
+          const litFrom = 6 - String(Math.min(count, MAX)).length;
+          odoEl.querySelectorAll('.odo-digit').forEach((el, j) => {
+            const newVal = newStr[j];
+            if (el.dataset.v !== newVal) {
+              el.dataset.v = newVal;
+              el.textContent = newVal;
+              el.classList.toggle('lit', j >= litFrom);
+              el.classList.remove('pop');
+              void el.offsetWidth;
+              el.classList.add('pop');
+            }
+          });
+        }
+        // update bar
+        const rows = document.querySelectorAll(`#rows-${poll} .team-row`);
+        if (rows[i]) {
+          const bar = rows[i].querySelector('.team-row-bar');
+          if (bar) bar.style.width = ((count / maxV) * 100) + '%';
+        }
+      });
+
+      const totalEl = document.getElementById(`total-${poll}`);
+      if (totalEl) totalEl.textContent = total.toLocaleString() + ' vote' + (total !== 1 ? 's' : '');
+    }
+
+    // Real-time listeners
+    const prevData = { spoon: null, champ: null };
+
+    function listenPoll(poll) {
+      onSnapshot(doc(db, "votes", poll), snap => {
+        if (!snap.exists()) return;
+        const data = snap.data();
+        if (!prevData[poll]) {
+          renderPoll(poll, data);   // first load
+        } else {
+          patchPoll(poll, data);    // live update
+        }
+        prevData[poll] = { ...data };
+      });
+    }
+
+    listenPoll("spoon");
+    listenPoll("champ");
+
+    // Atomic vote increment
+    async function castVote(poll, team) {
+      const ref = doc(db, "votes", poll);
+      try {
+        await runTransaction(db, async tx => {
+          const snap = await tx.get(ref);
+          const curr = snap.exists() ? (snap.data()[team] ?? 0) : 0;
+          if (curr >= MAX) return;
+          tx.update(ref, { [team]: curr + 1 });
+        });
+      } catch(e) {
+        console.error("Vote failed:", e);
+      }
+    }
+  </script>
 
 </body>
 </html>
