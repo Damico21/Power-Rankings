@@ -2,240 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Round 2 Rankings — Paz's Power Rankings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    /* ── Reset & Base ── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy:#1b2a3b; --red:#8b1a1a; --gold:#c8a951; --cream:#e8dcc8; --dark:#0d1117; --mid:#141d27; --text-muted:#6a8aaa; --border:rgba(255,255,255,0.06); }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--dark); color:#fff; min-height:100vh; overflow-x:hidden; }
 
-    :root {
-      --bg:        #0d0f14;
-      --surface:   #161921;
-      --surface2:  #1e2230;
-      --border:    #2a2f3d;
-      --accent:    #00e5a0;
-      --accent2:   #f5c842;
-      --text:      #e8ecf4;
-      --muted:     #7a8299;
-      --up:        #00e5a0;
-      --down:      #ff5c5c;
-      --neutral:   #7a8299;
-      --radius:    12px;
-    }
+    /* ── NAV ── */
+    nav { display:flex; justify-content:space-between; align-items:center; padding:1rem 2.5rem; background:rgba(13,17,23,0.95); border-bottom:2px solid var(--red); position:sticky; top:0; z-index:200; backdrop-filter:blur(12px); }
+    .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; color:var(--gold); text-decoration:none; letter-spacing:3px; }
+    .nav-links { display:flex; gap:2rem; list-style:none; }
+    .nav-links a { color:#aac; text-decoration:none; font-family:'Oswald',sans-serif; font-size:0.82rem; letter-spacing:1.5px; text-transform:uppercase; transition:color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color:var(--gold); }
 
-    body {
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+    .divider { height:3px; background:linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
 
-    a { color: inherit; text-decoration: none; }
+    /* ── PAGE HEADER ── */
+    .page-header { background:linear-gradient(180deg, #111827 0%, var(--dark) 100%); padding:3.5rem 2.5rem 2rem; text-align:center; border-bottom:1px solid var(--border); }
+    .page-header .eyebrow { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:0.5rem; }
+    .page-header h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.2rem,6vw,4rem); color:#fff; letter-spacing:2px; }
+    .page-header .subtitle { font-family:'Oswald',sans-serif; font-size:0.82rem; letter-spacing:2px; text-transform:uppercase; color:#4a6a8a; margin-top:0.4rem; }
 
-    /* ── Nav ── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(13,15,20,.92);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center; gap: 0; padding: 0 1.5rem;
-    }
-    .nav-brand {
-      font-weight: 800; font-size: 1.1rem;
-      color: var(--accent); padding: 1rem 1.25rem 1rem 0;
-      border-right: 1px solid var(--border); margin-right: .5rem;
-      letter-spacing: .5px;
-    }
-    nav ul { list-style: none; display: flex; gap: .1rem; flex-wrap: wrap; }
-    nav ul li a {
-      display: block; padding: .9rem .85rem;
-      font-size: .82rem; font-weight: 500; color: var(--muted);
-      transition: color .2s;
-    }
-    nav ul li a:hover,
-    nav ul li a.active { color: var(--text); }
-    nav ul li a.active { border-bottom: 2px solid var(--accent); }
+    /* ── MAIN WRAP ── */
+    .main-wrap { max-width:860px; margin:0 auto; padding:2.5rem 1.5rem 5rem; }
 
-    /* ── Hero ── */
-    .hero {
-      text-align: center; padding: 3.5rem 1.5rem 2.5rem;
-      background: linear-gradient(160deg, #111624 0%, #0d0f14 60%);
-      border-bottom: 1px solid var(--border);
-      position: relative; overflow: hidden;
-    }
-    .hero::before {
-      content: '🏈';
-      position: absolute; top: -20px; right: 8%; font-size: 9rem; opacity: .04;
-    }
-    .hero-eyebrow {
-      font-size: .72rem; font-weight: 700; letter-spacing: 2.5px;
-      text-transform: uppercase; color: var(--accent); margin-bottom: .75rem;
-    }
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 900; letter-spacing: -.5px; line-height: 1.1;
-    }
-    .hero-sub {
-      margin-top: .6rem; font-size: .9rem; color: var(--muted);
-    }
+    .section-label { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:0.4rem; }
+    .section-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(1.6rem,4vw,2.4rem); color:#fff; letter-spacing:1px; margin-bottom:1.5rem; }
 
-    /* ── Main layout ── */
-    main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+    /* ── WAGERS CARD ── */
+    .wagers-card { background:var(--mid); border:1px solid var(--border); border-radius:12px; overflow:hidden; box-shadow:0 4px 30px rgba(0,0,0,0.5); margin-bottom:3rem; }
 
-    /* ── Section headings ── */
-    .section-header {
-      display: flex; align-items: center; gap: .75rem;
-      margin-bottom: 1.5rem; padding-bottom: .75rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .section-header h2 {
-      font-size: 1.35rem; font-weight: 800;
-    }
-    .section-badge {
-      font-size: .68rem; font-weight: 700; letter-spacing: 1.5px;
-      text-transform: uppercase; color: var(--muted);
-      background: var(--surface2); border: 1px solid var(--border);
-      padding: .2rem .6rem; border-radius: 20px; margin-left: auto;
-    }
+    .wagers-header { padding:1.2rem 1.6rem 1.1rem; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; background:linear-gradient(90deg,#1a1320,var(--mid)); }
+    .wagers-header h2 { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:2px; color:var(--gold); }
+    .wagers-header .edition-badge { font-family:'Oswald',sans-serif; font-size:0.68rem; letter-spacing:2px; text-transform:uppercase; color:#4a6a8a; background:rgba(255,255,255,0.04); border:1px solid var(--border); padding:0.25rem 0.7rem; border-radius:20px; }
 
-    /* ── Rankings table ── */
-    .rankings-wrap {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius); overflow: hidden;
-      margin-bottom: 3rem;
-    }
-    .coming-soon-overlay {
-      padding: 3.5rem 2rem;
-      text-align: center;
-    }
-    .coming-soon-overlay .cs-icon { font-size: 3rem; margin-bottom: .75rem; }
-    .coming-soon-overlay h3 {
-      font-size: 1.3rem; font-weight: 800; color: var(--text); margin-bottom: .5rem;
-    }
-    .coming-soon-overlay p { color: var(--muted); font-size: .88rem; line-height: 1.6; }
-    .cs-pill {
-      display: inline-block; margin-top: 1rem;
-      background: var(--surface2); border: 1px solid var(--border);
-      color: var(--accent); font-size: .75rem; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      padding: .4rem 1rem; border-radius: 20px;
-    }
+    .wagers-intro { padding:1.1rem 1.6rem; border-bottom:1px solid var(--border); font-size:0.9rem; color:#6a8aaa; line-height:1.7; }
 
-    /* ── Wagers section ── */
-    .wagers-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius); overflow: hidden;
-      margin-bottom: 3rem;
-    }
-    .wagers-header {
-      padding: 1.4rem 1.75rem;
-      border-bottom: 1px solid var(--border);
-      background: linear-gradient(90deg, #1a1e2a, var(--surface));
-      display: flex; align-items: center; gap: .75rem;
-    }
-    .wagers-header .icon { font-size: 1.5rem; }
-    .wagers-header h2 { font-size: 1.2rem; font-weight: 800; }
-    .wagers-header .edition {
-      margin-left: auto; font-size: .72rem; font-weight: 700;
-      letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted);
-    }
+    .match-list { padding:0; }
+    .match-item { padding:1.2rem 1.6rem; border-bottom:1px solid var(--border); transition:background 0.15s; }
+    .match-item:last-child { border-bottom:none; }
+    .match-item:hover { background:rgba(255,255,255,0.02); }
 
-    .wagers-intro {
-      padding: 1.25rem 1.75rem;
-      border-bottom: 1px solid var(--border);
-      font-size: .88rem; color: var(--muted); line-height: 1.65;
-    }
+    .match-top { display:flex; align-items:center; gap:0.7rem; flex-wrap:wrap; margin-bottom:0.4rem; }
+    .match-result { font-family:'Oswald',sans-serif; font-size:1rem; font-weight:600; color:#fff; flex:1; min-width:0; }
+    .match-score { font-family:'Bebas Neue',sans-serif; font-size:1rem; letter-spacing:1px; color:var(--gold); white-space:nowrap; }
+    .margin-pill { font-family:'Oswald',sans-serif; font-size:0.68rem; font-weight:600; background:rgba(255,255,255,0.05); border:1px solid var(--border); color:#6a8aaa; padding:0.12rem 0.5rem; border-radius:20px; vertical-align:middle; margin-left:0.3rem; }
 
-    /* Match picks */
-    .match-list { padding: .5rem 0; }
-    .match-item {
-      padding: 1.25rem 1.75rem;
-      border-bottom: 1px solid var(--border);
-      transition: background .15s;
-    }
-    .match-item:last-child { border-bottom: none; }
-    .match-item:hover { background: var(--surface2); }
+    .tag { font-family:'Oswald',sans-serif; font-size:0.65rem; font-weight:600; letter-spacing:1.2px; text-transform:uppercase; padding:0.2rem 0.6rem; border-radius:20px; white-space:nowrap; }
+    .tag-lock  { background:rgba(200,169,81,0.12); color:var(--gold);  border:1px solid rgba(200,169,81,0.3); }
+    .tag-motw  { background:rgba(139,26,26,0.2);   color:#f08080;      border:1px solid rgba(139,26,26,0.4); }
+    .tag-slide { background:rgba(239,68,68,0.1);   color:#ef4444;      border:1px solid rgba(239,68,68,0.25); }
 
-    .match-top {
-      display: flex; align-items: center; gap: .75rem;
-      flex-wrap: wrap; margin-bottom: .5rem;
-    }
-    .match-result {
-      font-size: 1rem; font-weight: 800; color: var(--text);
-      flex: 1; min-width: 0;
-    }
-    .match-score {
-      font-size: .82rem; font-weight: 700;
-      color: var(--accent2); white-space: nowrap;
-    }
-    .tag {
-      font-size: .65rem; font-weight: 700; letter-spacing: 1.2px;
-      text-transform: uppercase; padding: .22rem .65rem; border-radius: 20px;
-      white-space: nowrap;
-    }
-    .tag-lock   { background: rgba(0,229,160,.12); color: var(--accent); border: 1px solid rgba(0,229,160,.25); }
-    .tag-motw   { background: rgba(245,200,66,.12); color: var(--accent2); border: 1px solid rgba(245,200,66,.25); }
-    .tag-slide  { background: rgba(255,92,92,.12);  color: #ff5c5c;       border: 1px solid rgba(255,92,92,.25); }
+    .match-comment { font-size:0.85rem; color:#5a7a9a; line-height:1.65; }
+    .match-comment strong { color:var(--cream); }
 
-    .match-comment {
-      font-size: .84rem; color: var(--muted); line-height: 1.6;
-    }
-    .match-comment strong { color: var(--text); font-weight: 700; }
+    .takeaways { background:rgba(0,0,0,0.2); border-top:1px solid var(--border); padding:1.2rem 1.6rem; }
+    .takeaways h3 { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; color:var(--red); margin-bottom:0.75rem; }
+    .takeaways ul { list-style:none; display:flex; flex-direction:column; gap:0.45rem; }
+    .takeaways ul li { font-size:0.86rem; color:#5a7a9a; padding-left:1.2rem; position:relative; line-height:1.55; }
+    .takeaways ul li::before { content:'▸'; position:absolute; left:0; color:var(--gold); }
 
-    /* Margin pill inside result */
-    .margin-pill {
-      display: inline-block; font-size: .72rem; font-weight: 700;
-      background: var(--surface2); border: 1px solid var(--border);
-      color: var(--muted); padding: .15rem .55rem; border-radius: 20px;
-      vertical-align: middle; margin-left: .4rem;
-    }
+    .sign-off { padding:1rem 1.6rem 1.2rem; border-top:1px solid var(--border); font-size:0.86rem; color:#5a7a9a; line-height:1.7; }
+    .sign-off strong { color:var(--cream); }
 
-    /* Takeaways */
-    .takeaways {
-      padding: 1.25rem 1.75rem;
-      border-top: 1px solid var(--border);
-      background: var(--surface2);
-    }
-    .takeaways h3 { font-size: .95rem; font-weight: 800; margin-bottom: .75rem; }
-    .takeaways ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
-    .takeaways ul li {
-      font-size: .84rem; color: var(--muted); padding-left: 1.2rem; position: relative;
-      line-height: 1.5;
-    }
-    .takeaways ul li::before { content: '›'; position: absolute; left: 0; color: var(--accent); font-weight: 800; }
+    /* ── RANKINGS COMING SOON ── */
+    .coming-soon-card { background:var(--mid); border:1px solid var(--border); border-radius:12px; padding:3rem 2rem; text-align:center; box-shadow:0 4px 30px rgba(0,0,0,0.5); }
+    .coming-soon-card .cs-icon { font-size:2.8rem; margin-bottom:0.75rem; }
+    .coming-soon-card h3 { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:2px; color:#fff; margin-bottom:0.5rem; }
+    .coming-soon-card p { font-size:0.88rem; color:#4a6a8a; line-height:1.6; }
+    .cs-badge { display:inline-block; margin-top:1rem; font-family:'Oswald',sans-serif; font-size:0.68rem; letter-spacing:2px; text-transform:uppercase; background:rgba(139,26,26,0.2); color:#f08080; border:1px solid rgba(139,26,26,0.4); padding:0.3rem 0.9rem; border-radius:20px; }
 
-    .sign-off {
-      padding: 1rem 1.75rem 1.25rem;
-      font-size: .84rem; color: var(--muted); font-style: italic;
-      border-top: 1px solid var(--border);
-    }
-    .sign-off strong { color: var(--text); font-style: normal; }
+    footer { text-align:center; padding:2rem; color:#253545; font-size:0.78rem; font-family:'Oswald',sans-serif; letter-spacing:1px; border-top:1px solid var(--border); }
 
-    /* ── Footer ── */
-    footer {
-      text-align: center; padding: 1.5rem;
-      font-size: .75rem; color: var(--muted);
-      border-top: 1px solid var(--border);
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 540px) {
-      .match-top { gap: .5rem; }
-      .wagers-header { flex-wrap: wrap; gap: .5rem; }
-      .wagers-header .edition { margin-left: 0; }
+    @media (max-width:600px) {
+      nav { padding:1rem 1.2rem; }
+      .nav-links { gap:0.8rem; }
+      .nav-links a { font-size:0.7rem; }
+      .page-header { padding:2.5rem 1.2rem 1.5rem; }
+      .main-wrap { padding:1.5rem 1rem 4rem; }
+      .wagers-header { flex-wrap:wrap; gap:0.5rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav>
-    <div class="nav-brand">PPR</div>
-    <ul>
+    <a class="nav-logo" href="index.html">PPR</a>
+    <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="rankings.html">Rankings</a></li>
+      <li><a href="rankings.html">Draft Night</a></li>
       <li><a href="opening-round.html">Opening Round</a></li>
       <li><a href="round-1.html">Round 1</a></li>
       <li><a href="round-2.html" class="active">Round 2</a></li>
@@ -243,126 +101,84 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="hero-eyebrow">Paz's Power Rankings</div>
+  <div class="divider"></div>
+
+  <div class="page-header">
+    <div class="eyebrow">Round 2 · Power Rankings</div>
     <h1>Round 2 Rankings</h1>
-    <div class="hero-sub">Power Rankings · Round 2</div>
+    <div class="subtitle">Paz's Power Rankings · Ligma League 2026</div>
   </div>
 
-  <main>
+  <div class="main-wrap">
 
-    <!-- WAGERS (top of page) -->
-    <div class="section-header">
-      <h2>💸 Will's Weekly Wagers</h2>
-      <span class="section-badge">Round 2 Edition</span>
-    </div>
+    <div class="section-label">Will's Weekly Wagers · Round 2</div>
+    <div class="section-title">💸 Will's Weekly Wagers</div>
 
     <div class="wagers-card">
       <div class="wagers-header">
-        <span class="icon">💸</span>
-        <h2>Will's Weekly Wagers</h2>
-        <span class="edition">Round 2 Edition</span>
+        <h2>💸 Will's Weekly Wagers</h2>
+        <span class="edition-badge">Round 2 Edition</span>
       </div>
 
       <div class="wagers-intro">
-        Welcome back, punters. Round 2 is here and the early pecking order is already getting shaken up.
-        After a barnstorming opening round, the field has a clearer picture of who's legit — and who got lucky.
-        This week we've got a landslide, a squeaker, and a match of the round for the ages. Let's get into it.
+        Welcome back, punters. Round 2 is here and the early pecking order is already getting shaken up. After a barnstorming opening round, the field has a clearer picture of who's legit — and who got lucky. This week we've got a landslide, a squeaker, and a match of the round for the ages. Let's get into it.
       </div>
 
       <div class="match-list">
 
-        <!-- Match 1 – Lock of the Week -->
         <div class="match-item">
           <div class="match-top">
-            <div class="match-result">
-              Dark Magicians def. Phillipou
-              <span class="margin-pill">+132</span>
-            </div>
-            <div class="match-score">1,057 – 925</div>
+            <span class="match-result">Dark Magicians def. Phillipou <span class="margin-pill">+132</span></span>
+            <span class="match-score">1,057 – 925</span>
             <span class="tag tag-lock">🔒 Lock of the Week</span>
           </div>
-          <div class="match-comment">
-            No surprises here. <strong>The Dark Magicians</strong> are operating at a different level right now — clinical, dominant, and utterly ruthless. Phillipou showed up but there was simply no stopping Osei's mob. A 132-point thumping that sends a crystal-clear message to the rest of the competition.
-          </div>
+          <div class="match-comment">No surprises here. <strong>The Dark Magicians</strong> are operating at a different level right now — clinical, dominant, and utterly ruthless. Phillipou showed up but there was simply no stopping Osei's mob. A 132-point thumping that sends a crystal-clear message to the rest of the competition.</div>
         </div>
 
-        <!-- Match 2 -->
         <div class="match-item">
           <div class="match-top">
-            <div class="match-result">
-              VANTWISTFC def. 30/09/2023ers
-              <span class="margin-pill">+57</span>
-            </div>
-            <div class="match-score">1,144 – 1,087</div>
+            <span class="match-result">VANTWISTFC def. 30/09/2023ers <span class="margin-pill">+57</span></span>
+            <span class="match-score">1,144 – 1,087</span>
           </div>
-          <div class="match-comment">
-            <strong>The Van Twists bounce back.</strong> After a week where they couldn't get anything going, Tim's outfit reminded everyone exactly why they're top-tier. A 57-point win over Rupe's crew is no fluke — the Van Twists look hungry and they're not done making a statement.
-          </div>
+          <div class="match-comment"><strong>The Van Twists bounce back.</strong> After a week where they couldn't get anything going, Tim's outfit reminded everyone exactly why they're top-tier. A 57-point win over Rupe's crew is no fluke — the Van Twists look hungry and they're not done making a statement.</div>
         </div>
 
-        <!-- Match 3 – Landslide -->
         <div class="match-item">
           <div class="match-top">
-            <div class="match-result">
-              foopy is lyfe def. Cripps Nipps
-              <span class="margin-pill">+350</span>
-            </div>
-            <div class="match-score">1,023 – 673</div>
+            <span class="match-result">foopy is lyfe def. Cripps Nipps <span class="margin-pill">+350</span></span>
+            <span class="match-score">1,023 – 673</span>
             <span class="tag tag-slide">💥 Landslide</span>
           </div>
-          <div class="match-comment">
-            <strong>Absolute annihilation.</strong> Miller's Foopys put on a masterclass and Cripps Nipps simply had no answer. A 350-point margin is the kind of scoreline that haunts you in your sleep. Hayden will be hoping the selectors don't look too hard at the tape this week.
-          </div>
+          <div class="match-comment"><strong>Absolute annihilation.</strong> Miller's Foopys put on a masterclass and Cripps Nipps simply had no answer. A 350-point margin is the kind of scoreline that haunts you in your sleep. Hayden will be hoping the selectors don't look too hard at the tape this week.</div>
         </div>
 
-        <!-- Match 4 -->
         <div class="match-item">
           <div class="match-top">
-            <div class="match-result">
-              IZaks def. Nethers Men
-              <span class="margin-pill">+106</span>
-            </div>
-            <div class="match-score">1,020 – 914</div>
+            <span class="match-result">IZaks def. Nethers Men <span class="margin-pill">+106</span></span>
+            <span class="match-score">1,020 – 914</span>
           </div>
-          <div class="match-comment">
-            <strong>The IZaks notch their first win of the year</strong> and it's a comfortable one. Zak's side found their rhythm against Max's outfit, putting together a disciplined performance top to bottom. A confidence-boosting result that could be the catalyst for a run up the table.
-          </div>
+          <div class="match-comment"><strong>The IZaks notch their first win of the year</strong> and it's a comfortable one. Zak's side found their rhythm against Max's outfit, putting together a disciplined performance top to bottom. A confidence-boosting result that could be the catalyst for a run up the table.</div>
         </div>
 
-        <!-- Match 5 -->
         <div class="match-item">
           <div class="match-top">
-            <div class="match-result">
-              FlagDons2026 def. Broncic
-              <span class="margin-pill">+126</span>
-            </div>
-            <div class="match-score">1,064 – 938</div>
+            <span class="match-result">FlagDons2026 def. Broncic <span class="margin-pill">+20</span></span>
+            <span class="match-score">1,064 – 938</span>
           </div>
-          <div class="match-comment">
-            <strong>The FlagDons win by 20</strong> in what looked on paper like a close tussle. Rick's side made it look comfortable in the end, though William's Broncic made them work for every point. A scrappy, hard-nosed contest — exactly the kind of game that defines a season.
-          </div>
+          <div class="match-comment"><strong>The FlagDons edge it by 20</strong> in a contest that was tighter than it looked. Rick's side ground it out, though William's Broncic made them work for every point. A scrappy, hard-nosed result — exactly the kind of game that defines a season.</div>
         </div>
 
-        <!-- Match 6 – Match of the Round -->
         <div class="match-item">
           <div class="match-top">
-            <div class="match-result">
-              Holmes and Gardens def. Shava Girthi
-              <span class="margin-pill">+8</span>
-            </div>
-            <div class="match-score">1,158 – 1,150</div>
+            <span class="match-result">Holmes and Gardens def. Shava Girthi <span class="margin-pill">+8</span></span>
+            <span class="match-score">1,158 – 1,150</span>
             <span class="tag tag-motw">⭐ Match of the Round</span>
           </div>
-          <div class="match-comment">
-            <strong>Eight points. EIGHT.</strong> Matthew's Holmes and Gardens cling on in the most nerve-shredding finish of the round. Patrick pushed the top-ranked side to the very brink and will rue the one that got away. This one had everything — momentum swings, late drama, and a result that could have gone either way. Footy.
-          </div>
+          <div class="match-comment"><strong>Eight points. EIGHT.</strong> Matthew's Holmes and Gardens cling on in the most nerve-shredding finish of the round. Patrick pushed the top-ranked side to the very brink and will rue the one that got away. This one had everything — momentum swings, late drama, and a result that could have gone either way. Footy.</div>
         </div>
 
       </div>
 
-      <!-- Takeaways -->
       <div class="takeaways">
         <h3>💥 Takeaways</h3>
         <ul>
@@ -381,29 +197,19 @@
       </div>
     </div>
 
-    <!-- POWER RANKINGS (coming soon) -->
-    <div class="section-header">
-      <h2>⚡ Round 2 Power Rankings</h2>
-      <span class="section-badge">Round 2</span>
+    <div class="section-label">Power Rankings · Round 2</div>
+    <div class="section-title">⚡ Round 2 Power Rankings</div>
+
+    <div class="coming-soon-card">
+      <div class="cs-icon">📊</div>
+      <h3>Rankings Dropping Soon</h3>
+      <p>Paz is crunching the numbers after a chaotic Round 2.<br>Check back shortly — the updated power rankings are on their way.</p>
+      <span class="cs-badge">Coming Soon</span>
     </div>
 
-    <div class="rankings-wrap">
-      <div class="coming-soon-overlay">
-        <div class="cs-icon">📊</div>
-        <h3>Rankings Dropping Soon</h3>
-        <p>
-          Paz is crunching the numbers after a chaotic Round 2.<br>
-          Check back shortly — the updated power rankings are on their way.
-        </p>
-        <span class="cs-pill">Coming Soon</span>
-      </div>
-    </div>
+  </div>
 
-  </main>
-
-  <footer>
-    Paz's Power Rankings © 2026 · Ligma League AFL Fantasy
-  </footer>
+  <footer>Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</footer>
 
 </body>
 </html>
