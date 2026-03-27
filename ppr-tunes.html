@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PPR Tunes — Paz's Power Rankings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg:        #0a0e0a;
+      --surface:   #111711;
+      --card:      #161e16;
+      --border:    #1f2e1f;
+      --green:     #1db954;
+      --green-dim: #155e30;
+      --green-glow:#1db95433;
+      --gold:      #f5c842;
+      --text:      #e8f0e8;
+      --muted:     #6b7f6b;
+      --label-bg:  #0d1a0d;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,14,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      color: var(--green);
+      text-decoration: none;
+      letter-spacing: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--green); }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 300px;
+      background: radial-gradient(ellipse, var(--green-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--green-glow);
+      border: 1px solid var(--green-dim);
+      border-radius: 999px;
+      padding: 0.3rem 1rem;
+      font-size: 0.75rem;
+      font-family: 'Space Mono', monospace;
+      color: var(--green);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+
+    .spotify-dot {
+      width: 8px; height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      letter-spacing: 4px;
+      line-height: 0.95;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+
+    .hero h1 span { color: var(--green); }
+
+    .hero-sub {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      max-width: 420px;
+      margin: 0 auto 0.4rem;
+    }
+
+    .hero-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--green-dim);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ── SECTION DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 2rem;
+      margin: 2.5rem 0 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .divider-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 3px;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .divider-label .round-num {
+      color: var(--green);
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border), transparent);
+    }
+
+    .divider-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    /* ── GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 0 1.5rem;
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (min-width: 640px) {
+      .grid { grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0 2rem; }
+    }
+
+    /* ── TUNE CARD ── */
+    .tune-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+      margin-bottom: 1rem;
+      transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .tune-card:hover {
+      border-color: var(--green-dim);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(29,185,84,0.08);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* stagger delays */
+    .tune-card:nth-child(1) { animation-delay: 0.05s; }
+    .tune-card:nth-child(2) { animation-delay: 0.1s;  }
+    .tune-card:nth-child(3) { animation-delay: 0.15s; }
+    .tune-card:nth-child(4) { animation-delay: 0.2s;  }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .round-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--label-bg);
+      border: 1px solid var(--green-dim);
+      border-radius: 6px;
+      padding: 0.2rem 0.6rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .spotify-icon {
+      width: 14px; height: 14px;
+      fill: var(--green);
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.05rem;
+      letter-spacing: 1.5px;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    .card-subtitle {
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.15rem;
+    }
+
+    .embed-wrap {
+      border-radius: 10px;
+      overflow: hidden;
+      background: #000;
+      line-height: 0;
+    }
+
+    .embed-wrap iframe {
+      display: block;
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    /* ── FEATURED (full width) ── */
+    .tune-card.featured {
+      grid-column: 1 / -1;
+      border-color: var(--green-dim);
+      background: linear-gradient(135deg, #111d11 0%, var(--card) 60%);
+      box-shadow: 0 0 0 1px var(--green-dim), inset 0 0 40px rgba(29,185,84,0.04);
+    }
+
+    .tune-card.featured .card-title { font-size: 1.3rem; }
+
+    .tune-card.featured .round-tag {
+      background: var(--green);
+      color: #000;
+      border-color: var(--green);
+      font-weight: 700;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-family: 'Space Mono', monospace;
+      letter-spacing: 0.5px;
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    footer a { color: var(--green); text-decoration: none; }
+
+    /* ── MOBILE NAV ── */
+    @media (max-width: 600px) {
+      .nav-links { gap: 1rem; }
+      .nav-links a { font-size: 0.72rem; }
+      .hero { padding: 3.5rem 1.2rem 2rem; }
+      .grid { padding: 0 1rem; }
+    }
+
+    @media (max-width: 400px) {
+      .nav-links li:not(:last-child):not(:first-child) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html">PPR</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="rankings.html">Draft Night</a></li>
+      <li><a href="opening-round.html">Opening Round</a></li>
+      <li><a href="round-1.html">Round 1</a></li>
+      <li><a href="round-2.html">Round 2</a></li>
+      <li><a href="ppr-tunes.html" class="active">🎵 Tunes</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">
+      <span class="spotify-dot"></span>
+      Now Playing · Ligma League
+    </div>
+    <h1>PPR <span>Tunes</span></h1>
+    <p class="hero-sub">The official soundtrack of Paz's Power Rankings — one banger per round, hand-picked to match the vibe.</p>
+    <p class="hero-meta">Ligma League · AFL Fantasy · Est. 2024</p>
+  </section>
+
+  <!-- ── SEASON OPENER ── -->
+  <div class="divider" style="max-width:860px;margin-left:auto;margin-right:auto;">
+    <span class="divider-label">Season <span class="round-num">Openers</span></span>
+    <span class="divider-line"></span>
+    <span class="divider-badge">2026 Season</span>
+  </div>
+
+  <div class="grid">
+
+    <!-- DRAFT NIGHT — featured -->
+    <div class="tune-card featured">
+      <div class="card-header">
+        <span class="round-tag">
+          <svg class="spotify-icon" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Draft Night
+        </span>
+      </div>
+      <div>
+        <div class="card-title">Draft Night Anthem</div>
+        <div class="card-subtitle">The song that set the tone for the entire season</div>
+      </div>
+      <div class="embed-wrap">
+        <iframe src="https://open.spotify.com/embed/track/1B241LRKmK6qDDTZfUajmm?utm_source=generator" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <!-- OPENING ROUND -->
+    <div class="tune-card featured">
+      <div class="card-header">
+        <span class="round-tag">
+          <svg class="spotify-icon" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Opening Round
+        </span>
+      </div>
+      <div>
+        <div class="card-title">Opening Round Anthem</div>
+        <div class="card-subtitle">The league is officially underway — let it rip</div>
+      </div>
+      <div class="embed-wrap">
+        <iframe src="https://open.spotify.com/embed/track/3qaSqrrevBrb84xl5JlptU?utm_source=generator" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── ROUNDS ── -->
+  <div class="divider" style="max-width:860px;margin-left:auto;margin-right:auto;">
+    <span class="divider-label">The <span class="round-num">Rounds</span></span>
+    <span class="divider-line"></span>
+    <span class="divider-badge">Week by week</span>
+  </div>
+
+  <div class="grid">
+
+    <!-- ROUND 1 -->
+    <div class="tune-card">
+      <div class="card-header">
+        <span class="round-tag">
+          <svg class="spotify-icon" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Round 1
+        </span>
+      </div>
+      <div>
+        <div class="card-title">Round 1 Banger</div>
+        <div class="card-subtitle">First week on the board — who's cooking?</div>
+      </div>
+      <div class="embed-wrap">
+        <iframe src="https://open.spotify.com/embed/track/0pBMFlAy7mQeUMQKaN4y8x?utm_source=generator" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <!-- ROUND 2 -->
+    <div class="tune-card">
+      <div class="card-header">
+        <span class="round-tag">
+          <svg class="spotify-icon" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Round 2
+        </span>
+      </div>
+      <div>
+        <div class="card-title">Round 2 Banger</div>
+        <div class="card-subtitle">Week 2 — the vibes are immaculate</div>
+      </div>
+      <div class="embed-wrap">
+        <iframe src="https://open.spotify.com/embed/track/5hfpYZ8eQ5BXTAuKPKMKT4?utm_source=generator" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <!-- ROUND 3 PLACEHOLDER -->
+    <div class="tune-card" style="opacity:0.5; pointer-events:none;">
+      <div class="card-header">
+        <span class="round-tag" style="border-color:#2a3a2a; color:var(--muted);">Round 3</span>
+      </div>
+      <div>
+        <div class="card-title" style="color:var(--muted);">Coming Soon</div>
+        <div class="card-subtitle">Track dropping after Round 3 rankings</div>
+      </div>
+      <div class="embed-wrap" style="height:152px; background:var(--surface); border-radius:10px; display:flex; align-items:center; justify-content:center;">
+        <span style="font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">⏳ Not yet</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Paz's Power Rankings © 2026 · <a href="index.html">Ligma League</a> AFL Fantasy</p>
+    <p style="margin-top:0.5rem; color:#2a3a2a;">🎵 PPR Tunes · The official soundtrack</p>
+  </footer>
+
+</body>
+</html>
