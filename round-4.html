@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Round 4 — Coming Soon · Paz's Power Rankings</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #f5c518;
+      --card: #1a1a2e;
+      --text: #e8e8f0;
+      --muted: #888;
+      --border: rgba(255,255,255,0.08);
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0a0a1a;
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+    nav {
+      background: #0d0d0d;
+      border-bottom: 2px solid var(--gold);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: 0 1.5rem;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-logo {
+      font-size: 1.3rem;
+      font-weight: 900;
+      color: var(--gold);
+      text-decoration: none;
+      padding: 1rem 1.5rem 1rem 0;
+      letter-spacing: 1px;
+      white-space: nowrap;
+      border-right: 1px solid var(--border);
+      margin-right: 0.5rem;
+    }
+    nav ul { list-style: none; display: flex; flex-wrap: wrap; }
+    nav ul li a {
+      display: block;
+      color: #ccc;
+      text-decoration: none;
+      padding: 1rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: color 0.2s;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+    }
+    nav ul li a:hover { color: #fff; }
+    nav ul li a.active { color: var(--gold); border-bottom: 3px solid var(--gold); }
+    nav ul li a.coming-soon { color: var(--muted); font-style: italic; }
+
+    .coming-soon-hero {
+      min-height: calc(100vh - 60px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #0d0d0d 100%);
+    }
+    .cs-icon {
+      font-size: 5rem;
+      margin-bottom: 1.5rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(0.96); }
+    }
+    .cs-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    .cs-title {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .cs-sub {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 420px;
+      margin: 0 auto 2rem;
+    }
+    .cs-badge {
+      display: inline-block;
+      background: rgba(245,197,24,0.12);
+      border: 1px solid rgba(245,197,24,0.3);
+      color: var(--gold);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 0.5rem 1.25rem;
+      border-radius: 20px;
+      margin-bottom: 2.5rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .back-link:hover { background: rgba(245,197,24,0.1); }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="https://damico21.github.io/Power-Rankings/index.html" class="nav-logo">PPR</a>
+    <ul>
+      <li><a href="https://damico21.github.io/Power-Rankings/index.html">Home</a></li>
+      <li><a href="https://damico21.github.io/Power-Rankings/rankings.html">Draft Night</a></li>
+      <li><a href="https://damico21.github.io/Power-Rankings/opening-round.html">Opening Round</a></li>
+      <li><a href="https://damico21.github.io/Power-Rankings/round-2.html">Round 2</a></li>
+      <li><a href="https://damico21.github.io/Power-Rankings/round-3.html">Round 3</a></li>
+      <li><a href="https://damico21.github.io/Power-Rankings/round-4.html" class="active coming-soon">Round 4 · Soon</a></li>
+      <li><a href="https://damico21.github.io/Power-Rankings/best-moments.html">📸 2026 Moments</a></li>
+      <li><a href="https://damico21.github.io/Power-Rankings/ppr-tunes.html">🎵 PPR Tunes</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="coming-soon-hero">
+  <div class="cs-icon">⏳</div>
+  <div class="cs-label">Round 4 · Power Rankings</div>
+  <h1 class="cs-title">Rankings Coming Soon</h1>
+  <p class="cs-sub">Round 4 is still being played out. Check back after the round wraps for the full Power Rankings update.</p>
+  <div class="cs-badge">⚡ Dropping after Round 4</div>
+  <a href="https://damico21.github.io/Power-Rankings/round-3.html" class="back-link">← View Round 3 Rankings</a>
+</div>
+
+<footer>Paz's Power Rankings © 2026 · Ligma League AFL Fantasy</footer>
+
+</body>
+</html>
