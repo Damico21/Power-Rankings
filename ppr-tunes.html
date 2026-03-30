@@ -2,316 +2,232 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PPR Tunes — Paz's Power Rankings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --gold: #f5c518;
-      --dark: #0d0d0d;
-      --card: #1a1a2e;
-      --accent: #e94560;
-      --green: #00c896;
-      --red: #ff4757;
-      --text: #e8e8f0;
-      --muted: #888;
-      --border: rgba(255,255,255,0.08);
-      --spotify: #1DB954;
+      --navy:#1b2a3b; --red:#8b1a1a; --gold:#c8a951; --cream:#e8dcc8;
+      --dark:#0d1117; --mid:#141d27; --text-muted:#6a8aaa; --border:rgba(255,255,255,0.06);
+      --spotify:#1DB954;
     }
-
-    body {
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      background: #0a0a1a;
-      color: var(--text);
-      min-height: 100vh;
-      line-height: 1.6;
-    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'Inter',sans-serif; background:var(--dark); color:#fff; min-height:100vh; overflow-x:hidden; }
 
     /* NAV */
     nav {
-      background: #0d0d0d;
-      border-bottom: 2px solid var(--gold);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 0 1.5rem;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:0 2.5rem; background:rgba(13,17,23,0.97);
+      border-bottom:2px solid var(--red); position:sticky; top:0; z-index:200;
+      backdrop-filter:blur(12px); height:58px;
     }
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
+    .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; color:var(--gold); text-decoration:none; letter-spacing:3px; flex-shrink:0; }
+    .nav-links { display:flex; gap:0; list-style:none; overflow-x:auto; }
+    .nav-links a {
+      color:#7a9ab5; text-decoration:none; font-family:'Oswald',sans-serif;
+      font-size:0.8rem; letter-spacing:1.5px; text-transform:uppercase;
+      padding:0 1rem; height:58px; display:flex; align-items:center;
+      border-bottom:2px solid transparent; transition:color 0.2s,border-color 0.2s; white-space:nowrap;
     }
-    .nav-logo {
-      font-size: 1.3rem;
-      font-weight: 900;
-      color: var(--gold);
-      text-decoration: none;
-      padding: 1rem 1.5rem 1rem 0;
-      letter-spacing: 1px;
-      white-space: nowrap;
-      border-right: 1px solid var(--border);
-      margin-right: 0.5rem;
-    }
-    nav ul { list-style: none; display: flex; flex-wrap: wrap; }
-    nav ul li a {
-      display: block;
-      color: #ccc;
-      text-decoration: none;
-      padding: 1rem 0.85rem;
-      font-size: 0.82rem;
-      font-weight: 600;
-      transition: color 0.2s;
-      white-space: nowrap;
-      border-bottom: 3px solid transparent;
-    }
-    nav ul li a:hover { color: #fff; }
-    nav ul li a.active { color: var(--gold); border-bottom: 3px solid var(--gold); }
-    nav ul li a.coming-soon { color: var(--muted); font-style: italic; }
+    .nav-links a:hover { color:#fff; }
+    .nav-links a.active { color:var(--gold); border-bottom-color:var(--gold); }
+    .nav-links a.soon { opacity:0.5; font-style:italic; }
 
-    /* HERO */
-    .hero {
-      background: linear-gradient(135deg, #0a0a1a 0%, #0d0d2e 50%, #0a0a1a 100%);
-      border-bottom: 1px solid var(--border);
-      padding: 3rem 1.5rem 2.5rem;
-      text-align: center;
+    /* DIVIDER */
+    .divider { height:3px; background:linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
+
+    /* PAGE HEADER */
+    .page-header {
+      background:linear-gradient(180deg, #111827 0%, var(--dark) 100%);
+      padding:3.5rem 2.5rem 2.5rem; text-align:center;
+      border-bottom:1px solid var(--border); position:relative; overflow:hidden;
     }
-    .hero-label {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--spotify);
-      font-weight: 700;
-      margin-bottom: 0.75rem;
+    .page-header::before {
+      content:''; position:absolute; inset:0;
+      background:radial-gradient(ellipse at 50% -20%, rgba(29,185,84,0.06) 0%, transparent 65%);
+      pointer-events:none;
     }
-    .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 900;
-      color: #fff;
-      margin-bottom: 0.5rem;
-    }
-    .hero-sub { color: var(--muted); font-size: 0.95rem; }
-    .hero-desc {
-      color: #aaa;
-      font-size: 0.92rem;
-      max-width: 520px;
-      margin: 0.75rem auto 0;
-    }
+    .page-header .eyebrow { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:3px; text-transform:uppercase; color:var(--spotify); margin-bottom:0.5rem; }
+    .page-header h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.4rem,6vw,4rem); color:#fff; letter-spacing:2px; margin-bottom:0.3rem; }
+    .page-header .subtitle { font-family:'Oswald',sans-serif; font-size:0.82rem; letter-spacing:2px; text-transform:uppercase; color:#4a6a8a; }
+    .page-header .desc { font-size:0.88rem; color:var(--text-muted); max-width:480px; margin:0.75rem auto 0; line-height:1.6; }
 
     /* MAIN */
-    .container { max-width: 700px; margin: 0 auto; padding: 2.5rem 1.5rem; }
+    .main { max-width:680px; margin:0 auto; padding:3rem 1.5rem 5rem; }
 
-    /* SECTION LABEL */
-    .section-label {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      color: var(--gold);
-      font-weight: 800;
-      margin-bottom: 0.5rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .section-sub {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
+    .section-label { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:0.3rem; }
+    .section-sub { font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); margin-bottom:1.4rem; }
 
     /* TUNE CARD */
     .tune-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      margin-bottom: 1.5rem;
+      background:var(--mid); border:1px solid var(--border);
+      border-radius:12px; overflow:hidden; margin-bottom:1.2rem;
+      box-shadow:0 2px 20px rgba(0,0,0,0.3);
     }
     .tune-header {
-      padding: 1.1rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      border-bottom: 1px solid var(--border);
+      padding:1rem 1.4rem; display:flex; align-items:center; gap:1rem;
+      border-bottom:1px solid var(--border); background:#0f1620;
     }
     .round-badge {
-      background: var(--gold);
-      color: #000;
-      font-size: 0.65rem;
-      font-weight: 900;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
-      flex-shrink: 0;
+      font-family:'Oswald',sans-serif; font-size:0.65rem; font-weight:600;
+      letter-spacing:1.5px; text-transform:uppercase;
+      background:var(--gold); color:#000;
+      padding:0.22rem 0.65rem; border-radius:4px; flex-shrink:0; white-space:nowrap;
     }
-    .round-badge.spotify-badge {
-      background: var(--spotify);
-      color: #fff;
-    }
-    .tune-title { font-weight: 800; color: #fff; font-size: 0.95rem; }
-    .tune-desc { font-size: 0.8rem; color: var(--muted); }
-
-    .tune-embed { padding: 0; }
-    .tune-embed iframe { display: block; }
-
+    .round-badge.live { background:var(--spotify); color:#fff; }
+    .round-badge.muted { background:rgba(255,255,255,0.06); color:var(--text-muted); }
+    .tune-title { font-family:'Oswald',sans-serif; font-size:0.95rem; font-weight:600; color:#fff; letter-spacing:0.5px; }
+    .tune-desc { font-size:0.78rem; color:var(--text-muted); margin-top:0.15rem; }
+    .tune-embed iframe { display:block; }
     .tune-coming {
-      padding: 2rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      color: var(--muted);
-      font-size: 0.88rem;
+      padding:1.8rem 1.4rem; display:flex; align-items:center; gap:0.9rem;
+      color:var(--text-muted); font-family:'Oswald',sans-serif;
+      font-size:0.78rem; letter-spacing:1px; text-transform:uppercase;
     }
-    .coming-icon {
-      font-size: 1.5rem;
-      flex-shrink: 0;
-    }
+    .tune-coming .icon { font-size:1.4rem; flex-shrink:0; }
 
-    .group-spacer { margin-top: 2.5rem; }
+    .group-gap { margin-top:2.5rem; }
 
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      color: var(--muted);
-      font-size: 0.78rem;
-      border-top: 1px solid var(--border);
-    }
+    footer { text-align:center; padding:2rem; color:#253545; font-size:0.78rem; font-family:'Oswald',sans-serif; letter-spacing:1px; border-top:1px solid var(--border); }
+    footer a { color:var(--gold); text-decoration:none; }
 
-    @media (max-width: 600px) {
-      nav ul li a { padding: 0.75rem 0.5rem; font-size: 0.72rem; }
+    @media (max-width:640px) {
+      nav { padding:0 1rem; }
+      .nav-links a { font-size:0.72rem; padding:0 0.6rem; letter-spacing:1px; }
+      .page-header { padding:2.5rem 1.2rem 1.8rem; }
+      .main { padding:2rem 1rem 4rem; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <div class="nav-inner">
-    <a href="https://damico21.github.io/Power-Rankings/index.html" class="nav-logo">PPR</a>
-    <ul>
-      <li><a href="https://damico21.github.io/Power-Rankings/index.html">Home</a></li>
-      <li><a href="https://damico21.github.io/Power-Rankings/rankings.html">Draft Night</a></li>
-      <li><a href="https://damico21.github.io/Power-Rankings/opening-round.html">Opening Round</a></li>
-      <li><a href="https://damico21.github.io/Power-Rankings/round-2.html">Round 2</a></li>
-      <li><a href="https://damico21.github.io/Power-Rankings/round-3.html">Round 3</a></li>
-      <li><a href="https://damico21.github.io/Power-Rankings/round-4.html" class="coming-soon">Round 4 ·&nbsp;Soon</a></li>
-      <li><a href="https://damico21.github.io/Power-Rankings/best-moments.html">📸 2026 Moments</a></li>
-      <li><a href="https://damico21.github.io/Power-Rankings/ppr-tunes.html" class="active">🎵 PPR Tunes</a></li>
+  <nav>
+    <a class="nav-logo" href="index.html">PPR</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="rankings.html">Draft Night</a></li>
+      <li><a href="opening-round.html">Opening Round</a></li>
+      <li><a href="round-2.html">Round 2</a></li>
+      <li><a href="round-3.html">Round 3</a></li>
+      <li><a href="round-4.html" class="soon">Round 4 · Soon</a></li>
+      <li><a href="best-moments.html">📸 2026 Moments</a></li>
+      <li><a href="ppr-tunes.html" class="active">🎵 PPR Tunes</a></li>
     </ul>
+  </nav>
+
+  <div class="divider"></div>
+
+  <div class="page-header">
+    <div class="eyebrow">Now Playing · Ligma League</div>
+    <h1>PPR Tunes</h1>
+    <div class="subtitle">Ligma League · AFL Fantasy · Est. 2024</div>
+    <p class="desc">The official soundtrack of Paz's Power Rankings — one banger per round, hand-picked to match the vibe.</p>
   </div>
-</nav>
 
-<div class="hero">
-  <div class="hero-label">Now Playing · Ligma League</div>
-  <h1>PPR Tunes</h1>
-  <div class="hero-sub">Ligma League · AFL Fantasy · Est. 2024</div>
-  <div class="hero-desc">The official soundtrack of Paz's Power Rankings — one banger per round, hand-picked to match the vibe.</div>
-</div>
+  <div class="main">
 
-<div class="container">
+    <!-- SEASON OPENERS -->
+    <div class="section-label">Season Openers</div>
+    <div class="section-sub">2026 Season</div>
 
-  <!-- SEASON OPENERS -->
-  <div class="section-label">Season Openers</div>
-  <div class="section-sub">2026 Season</div>
-
-  <!-- Draft Night -->
-  <div class="tune-card">
-    <div class="tune-header">
-      <div class="round-badge">Draft Night</div>
-      <div>
-        <div class="tune-title">Draft Night Anthem</div>
-        <div class="tune-desc">The song that set the tone for the entire season</div>
+    <!-- Draft Night -->
+    <div class="tune-card">
+      <div class="tune-header">
+        <div class="round-badge">Draft Night</div>
+        <div>
+          <div class="tune-title">Draft Night Anthem</div>
+          <div class="tune-desc">The song that set the tone for the entire season</div>
+        </div>
+      </div>
+      <div class="tune-embed">
+        <iframe style="border-radius:0" src="https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
     </div>
-    <div class="tune-embed">
-      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
-  </div>
 
-  <!-- Opening Round -->
-  <div class="tune-card">
-    <div class="tune-header">
-      <div class="round-badge">Opening Round</div>
-      <div>
-        <div class="tune-title">Opening Round Anthem</div>
-        <div class="tune-desc">The league is officially underway — let it rip</div>
+    <!-- Opening Round -->
+    <div class="tune-card">
+      <div class="tune-header">
+        <div class="round-badge">Opening Round</div>
+        <div>
+          <div class="tune-title">Opening Round Anthem</div>
+          <div class="tune-desc">The league is officially underway — let it rip</div>
+        </div>
+      </div>
+      <div class="tune-embed">
+        <iframe style="border-radius:0" src="https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
     </div>
-    <div class="tune-embed">
-      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+    <!-- THE ROUNDS -->
+    <div class="group-gap">
+      <div class="section-label">The Rounds</div>
+      <div class="section-sub">Week by week</div>
     </div>
-  </div>
 
-  <!-- THE ROUNDS -->
-  <div class="group-spacer">
-    <div class="section-label">The Rounds</div>
-    <div class="section-sub">Week by week</div>
-  </div>
-
-  <!-- Round 1 -->
-  <div class="tune-card">
-    <div class="tune-header">
-      <div class="round-badge">Round 1</div>
-      <div>
-        <div class="tune-title">Round 1 Banger</div>
-        <div class="tune-desc">First week on the board — who's cooking?</div>
+    <!-- Round 1 -->
+    <div class="tune-card">
+      <div class="tune-header">
+        <div class="round-badge">Round 1</div>
+        <div>
+          <div class="tune-title">Round 1 Banger</div>
+          <div class="tune-desc">First week on the board — who's cooking?</div>
+        </div>
+      </div>
+      <div class="tune-embed">
+        <iframe style="border-radius:0" src="https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
     </div>
-    <div class="tune-embed">
-      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
-  </div>
 
-  <!-- Round 2 -->
-  <div class="tune-card">
-    <div class="tune-header">
-      <div class="round-badge">Round 2</div>
-      <div>
-        <div class="tune-title">Round 2 Banger</div>
-        <div class="tune-desc">Week 2 — the vibes are immaculate</div>
+    <!-- Round 2 -->
+    <div class="tune-card">
+      <div class="tune-header">
+        <div class="round-badge">Round 2</div>
+        <div>
+          <div class="tune-title">Round 2 Banger</div>
+          <div class="tune-desc">Week 2 — the vibes are immaculate</div>
+        </div>
+      </div>
+      <div class="tune-embed">
+        <iframe style="border-radius:0" src="https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
     </div>
-    <div class="tune-embed">
-      <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/4uLU6hMCjMI75M1A2tKUQC?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
-  </div>
 
-  <!-- Round 3 - NEW -->
-  <div class="tune-card">
-    <div class="tune-header">
-      <div class="round-badge spotify-badge">Round 3</div>
-      <div>
-        <div class="tune-title">Round 3 Banger</div>
-        <div class="tune-desc">Week 3 — Holmes &amp; Gardens at the top, the league is shaking 🌿</div>
+    <!-- Round 3 -->
+    <div class="tune-card">
+      <div class="tune-header">
+        <div class="round-badge live">Round 3</div>
+        <div>
+          <div class="tune-title">Round 3 Banger</div>
+          <div class="tune-desc">Week 3 — Holmes &amp; Gardens at the top, the league is shaking 🌿</div>
+        </div>
+      </div>
+      <div class="tune-embed">
+        <iframe data-testid="embed-iframe" style="border-radius:0" src="https://open.spotify.com/embed/track/1LepWHpwtahzEQL0vNjpEt?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
     </div>
-    <div class="tune-embed">
-      <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1LepWHpwtahzEQL0vNjpEt?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </div>
-  </div>
 
-  <!-- Round 4 coming soon -->
-  <div class="tune-card">
-    <div class="tune-header">
-      <div class="round-badge" style="background: rgba(255,255,255,0.08); color: var(--muted);">Round 4</div>
-      <div>
-        <div class="tune-title" style="color: var(--muted);">Coming Soon</div>
-        <div class="tune-desc">Track dropping after Round 4 rankings</div>
+    <!-- Round 4 coming soon -->
+    <div class="tune-card">
+      <div class="tune-header">
+        <div class="round-badge muted">Round 4</div>
+        <div>
+          <div class="tune-title" style="color:var(--text-muted);">Coming Soon</div>
+          <div class="tune-desc">Track dropping after Round 4 rankings</div>
+        </div>
+      </div>
+      <div class="tune-coming">
+        <span class="icon">⏳</span>
+        <span>Not yet — check back after Round 4 wraps up.</span>
       </div>
     </div>
-    <div class="tune-coming">
-      <span class="coming-icon">⏳</span>
-      <span>Not yet — check back after Round 4 wraps up.</span>
-    </div>
+
   </div>
 
-</div>
-
-<footer>
-  Paz's Power Rankings © 2026 · <a href="https://damico21.github.io/Power-Rankings/index.html" style="color: var(--gold); text-decoration:none;">Ligma League</a> AFL Fantasy<br/>
-  🎵 PPR Tunes · The official soundtrack
-</footer>
+  <footer>
+    Paz's Power Rankings &copy; 2026 · <a href="index.html">Ligma League</a> AFL Fantasy<br>
+    <span style="color:#1a2a3a;margin-top:0.3rem;display:block;">🎵 PPR Tunes · The official soundtrack</span>
+  </footer>
 
 </body>
 </html>
