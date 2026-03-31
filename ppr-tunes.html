@@ -4,38 +4,36 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>PPR Tunes — Paz's Power Rankings</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
+      --navy:#1b2a3b; --red:#8b1a1a; --gold:#c8a951; --cream:#e8dcc8;
+      --dark:#0d1117; --mid:#141d27; --text-muted:#6a8aaa;
+      --border:rgba(255,255,255,0.06); --green:#22c55e; --red-move:#ef4444;
+      /* tunes-specific */
       --bg:        #0a0e0a;
       --surface:   #111711;
       --card:      #161e16;
-      --border:    #1f2e1f;
-      --green:     #1db954;
+      --border-g:  #1f2e1f;
+      --green-sp:  #1db954;
       --green-dim: #155e30;
       --green-glow:#1db95433;
-      --gold:      #f5c842;
       --text:      #e8f0e8;
-      --muted:     #6b7f6b;
+      --muted-g:   #6b7f6b;
       --label-bg:  #0d1a0d;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* ── NOISE TEXTURE OVERLAY ── */
     body::before {
       content: '';
       position: fixed;
@@ -46,47 +44,27 @@
       opacity: 0.4;
     }
 
-    /* ── NAV ── */
+    /* ── NAV (matches round-3 format) ── */
     nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(10,14,10,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 2rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 56px;
+      display:flex; justify-content:space-between; align-items:center;
+      padding:0 2.5rem; background:rgba(13,17,23,0.97);
+      border-bottom:2px solid var(--red); position:sticky; top:0; z-index:200;
+      backdrop-filter:blur(12px); height:58px;
     }
-
-    .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
-      color: var(--green);
-      text-decoration: none;
-      letter-spacing: 2px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
-
+    .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; color:var(--gold); text-decoration:none; letter-spacing:3px; flex-shrink:0; }
+    .nav-links { display:flex; gap:0; list-style:none; overflow-x:auto; }
     .nav-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.82rem;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      transition: color 0.2s;
+      color:#7a9ab5; text-decoration:none; font-family:'Oswald',sans-serif;
+      font-size:0.8rem; letter-spacing:1.5px; text-transform:uppercase;
+      padding:0 1rem; height:58px; display:flex; align-items:center;
+      border-bottom:2px solid transparent; transition:color 0.2s,border-color 0.2s; white-space:nowrap;
     }
+    .nav-links a:hover { color:#fff; }
+    .nav-links a.active { color:var(--gold); border-bottom-color:var(--gold); }
+    .nav-links a.soon { opacity:0.5; font-style:italic; }
 
-    .nav-links a:hover,
-    .nav-links a.active { color: var(--green); }
+    /* ── TOP DIVIDER ── */
+    .top-divider { height:3px; background:linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
 
     /* ── HERO ── */
     .hero {
@@ -96,7 +74,6 @@
       padding: 5rem 2rem 3rem;
       overflow: hidden;
     }
-
     .hero::before {
       content: '';
       position: absolute;
@@ -106,7 +83,6 @@
       background: radial-gradient(ellipse, var(--green-glow) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .hero-eyebrow {
       display: inline-flex;
       align-items: center;
@@ -117,24 +93,21 @@
       padding: 0.3rem 1rem;
       font-size: 0.75rem;
       font-family: 'Space Mono', monospace;
-      color: var(--green);
+      color: var(--green-sp);
       letter-spacing: 1px;
       text-transform: uppercase;
       margin-bottom: 1.2rem;
     }
-
     .spotify-dot {
       width: 8px; height: 8px;
-      background: var(--green);
+      background: var(--green-sp);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
-
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.5; transform: scale(0.7); }
     }
-
     .hero h1 {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(3.5rem, 10vw, 7rem);
@@ -143,18 +116,13 @@
       color: var(--text);
       margin-bottom: 0.6rem;
     }
-
-    .hero h1 span { color: var(--green); }
-
+    .hero h1 span { color: var(--green-sp); }
     .hero-sub {
-      color: var(--muted);
+      color: var(--muted-g);
       font-size: 0.95rem;
-      font-weight: 400;
-      letter-spacing: 0.3px;
       max-width: 420px;
       margin: 0 auto 0.4rem;
     }
-
     .hero-meta {
       font-family: 'Space Mono', monospace;
       font-size: 0.7rem;
@@ -162,6 +130,89 @@
       letter-spacing: 1px;
       text-transform: uppercase;
     }
+
+    /* ── PLAYLIST BLOCK ── */
+    .playlist-wrap {
+      max-width: 860px;
+      margin: 0 auto 0;
+      padding: 0 2rem 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .playlist-label {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .playlist-label-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 3px;
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .playlist-label-text span { color: var(--green-sp); }
+    .playlist-label-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, var(--border-g), transparent);
+    }
+    .playlist-label-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted-g);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+    .playlist-card {
+      background: var(--card);
+      border: 1px solid var(--green-dim);
+      border-radius: 16px;
+      padding: 1.2rem;
+      box-shadow: 0 0 0 1px var(--green-dim), inset 0 0 40px rgba(29,185,84,0.04);
+    }
+    .playlist-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .playlist-card-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 1.5px;
+      color: var(--text);
+    }
+    .playlist-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--green-sp);
+      color: #000;
+      border-radius: 6px;
+      padding: 0.2rem 0.6rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    .playlist-sub {
+      font-size: 0.78rem;
+      color: var(--muted-g);
+    }
+    .embed-wrap {
+      border-radius: 10px;
+      overflow: hidden;
+      background: #000;
+      line-height: 0;
+      margin-top: 0.8rem;
+    }
+    .embed-wrap iframe { display: block; width: 100%; border-radius: 10px; }
 
     /* ── SECTION DIVIDER ── */
     .divider {
@@ -173,7 +224,6 @@
       position: relative;
       z-index: 1;
     }
-
     .divider-label {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.6rem;
@@ -181,21 +231,16 @@
       color: var(--text);
       white-space: nowrap;
     }
-
-    .divider-label .round-num {
-      color: var(--green);
-    }
-
+    .divider-label .round-num { color: var(--green-sp); }
     .divider-line {
       flex: 1;
       height: 1px;
-      background: linear-gradient(to right, var(--border), transparent);
+      background: linear-gradient(to right, var(--border-g), transparent);
     }
-
     .divider-badge {
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
-      color: var(--muted);
+      color: var(--muted-g);
       text-transform: uppercase;
       letter-spacing: 1px;
       white-space: nowrap;
@@ -212,7 +257,6 @@
       position: relative;
       z-index: 1;
     }
-
     @media (min-width: 640px) {
       .grid { grid-template-columns: 1fr 1fr; gap: 1rem; padding: 0 2rem; }
     }
@@ -220,7 +264,7 @@
     /* ── TUNE CARD ── */
     .tune-card {
       background: var(--card);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-g);
       border-radius: 16px;
       padding: 1.2rem;
       display: flex;
@@ -228,32 +272,17 @@
       gap: 0.9rem;
       margin-bottom: 1rem;
       transition: border-color 0.25s, transform 0.2s, box-shadow 0.25s;
-      animation: fadeUp 0.5s ease both;
     }
-
     .tune-card:hover {
       border-color: var(--green-dim);
       transform: translateY(-2px);
       box-shadow: 0 8px 32px rgba(29,185,84,0.08);
     }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    /* stagger delays */
-    .tune-card:nth-child(1) { animation-delay: 0.05s; }
-    .tune-card:nth-child(2) { animation-delay: 0.1s;  }
-    .tune-card:nth-child(3) { animation-delay: 0.15s; }
-    .tune-card:nth-child(4) { animation-delay: 0.2s;  }
-
     .card-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-
     .round-tag {
       display: inline-flex;
       align-items: center;
@@ -264,17 +293,15 @@
       padding: 0.2rem 0.6rem;
       font-family: 'Space Mono', monospace;
       font-size: 0.65rem;
-      color: var(--green);
+      color: var(--green-sp);
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-
     .spotify-icon {
       width: 14px; height: 14px;
-      fill: var(--green);
+      fill: var(--green-sp);
       flex-shrink: 0;
     }
-
     .card-title {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.05rem;
@@ -282,24 +309,10 @@
       color: var(--text);
       line-height: 1.1;
     }
-
     .card-subtitle {
       font-size: 0.75rem;
-      color: var(--muted);
+      color: var(--muted-g);
       margin-top: 0.15rem;
-    }
-
-    .embed-wrap {
-      border-radius: 10px;
-      overflow: hidden;
-      background: #000;
-      line-height: 0;
-    }
-
-    .embed-wrap iframe {
-      display: block;
-      width: 100%;
-      border-radius: 10px;
     }
 
     /* ── FEATURED (full width) ── */
@@ -309,13 +322,11 @@
       background: linear-gradient(135deg, #111d11 0%, var(--card) 60%);
       box-shadow: 0 0 0 1px var(--green-dim), inset 0 0 40px rgba(29,185,84,0.04);
     }
-
     .tune-card.featured .card-title { font-size: 1.3rem; }
-
     .tune-card.featured .round-tag {
-      background: var(--green);
+      background: var(--green-sp);
       color: #000;
-      border-color: var(--green);
+      border-color: var(--green-sp);
       font-weight: 700;
     }
 
@@ -323,45 +334,46 @@
     footer {
       text-align: center;
       padding: 3rem 2rem;
-      color: var(--muted);
+      color: var(--muted-g);
       font-size: 0.78rem;
       font-family: 'Space Mono', monospace;
       letter-spacing: 0.5px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--border-g);
       margin-top: 4rem;
       position: relative;
       z-index: 1;
     }
+    footer a { color: var(--green-sp); text-decoration: none; }
 
-    footer a { color: var(--green); text-decoration: none; }
-
-    /* ── MOBILE NAV ── */
-    @media (max-width: 600px) {
-      .nav-links { gap: 1rem; }
-      .nav-links a { font-size: 0.72rem; }
+    /* ── MOBILE ── */
+    @media (max-width: 640px) {
+      nav { padding: 0 1rem; }
+      .nav-links a { font-size: 0.72rem; padding: 0 0.6rem; letter-spacing: 1px; }
       .hero { padding: 3.5rem 1.2rem 2rem; }
       .grid { padding: 0 1rem; }
-    }
-
-    @media (max-width: 400px) {
-      .nav-links li:not(:last-child):not(:first-child) { display: none; }
+      .playlist-wrap { padding: 0 1rem 2rem; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- NAV (round-3 format) -->
   <nav>
     <a class="nav-logo" href="index.html">PPR</a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="rankings.html">Draft Night</a></li>
       <li><a href="opening-round.html">Opening Round</a></li>
-      <li><a href="round-1.html">Round 1</a></li>
       <li><a href="round-2.html">Round 2</a></li>
-      <li><a href="ppr-tunes.html" class="active">🎵 Tunes</a></li>
+      <li><a href="round-3.html">Round 3</a></li>
+      <li><a href="round-4.html" class="soon">Round 4 · Soon</a></li>
+      <li><a href="best-moments.html">📸 2026 Moments</a></li>
+      <li><a href="ppr-tunes.html" class="active">🎵 PPR Tunes</a></li>
+      <li><a href="snakes-and-ladders.html">🐍 Snakes &amp; Ladders</a></li>
     </ul>
   </nav>
+
+  <div class="top-divider"></div>
 
   <!-- HERO -->
   <section class="hero">
@@ -374,7 +386,31 @@
     <p class="hero-meta">Ligma League · AFL Fantasy · Est. 2024</p>
   </section>
 
-  <!-- ── SEASON OPENER ── -->
+  <!-- ── PPR PLAYLIST ── -->
+  <div class="playlist-wrap">
+    <div class="playlist-label">
+      <span class="playlist-label-text">The <span>PPR Playlist</span></span>
+      <span class="playlist-label-line"></span>
+      <span class="playlist-label-badge">Full Season · 2026</span>
+    </div>
+    <div class="playlist-card">
+      <div class="playlist-card-header">
+        <div>
+          <div class="playlist-card-title">PPR Season Playlist</div>
+          <div class="playlist-sub" style="margin-top:0.2rem;">Every round, every banger — all in one place</div>
+        </div>
+        <span class="playlist-tag">
+          <svg style="width:12px;height:12px;fill:#000;flex-shrink:0;" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Full Playlist
+        </span>
+      </div>
+      <div class="embed-wrap">
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/playlist/00DVwwu3wmH6GCVXC4peoQ?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SEASON OPENERS ── -->
   <div class="divider" style="max-width:860px;margin-left:auto;margin-right:auto;">
     <span class="divider-label">Season <span class="round-num">Openers</span></span>
     <span class="divider-line"></span>
@@ -383,7 +419,7 @@
 
   <div class="grid">
 
-    <!-- DRAFT NIGHT — featured -->
+    <!-- DRAFT NIGHT -->
     <div class="tune-card featured">
       <div class="card-header">
         <span class="round-tag">
@@ -462,17 +498,20 @@
       </div>
     </div>
 
-    <!-- ROUND 3 PLACEHOLDER -->
-    <div class="tune-card" style="opacity:0.5; pointer-events:none;">
+    <!-- ROUND 3 -->
+    <div class="tune-card">
       <div class="card-header">
-        <span class="round-tag" style="border-color:#2a3a2a; color:var(--muted);">Round 3</span>
+        <span class="round-tag">
+          <svg class="spotify-icon" viewBox="0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+          Round 3
+        </span>
       </div>
       <div>
-        <div class="card-title" style="color:var(--muted);">Coming Soon</div>
-        <div class="card-subtitle">Track dropping after Round 3 rankings</div>
+        <div class="card-title">Round 3 Banger</div>
+        <div class="card-subtitle">Week 3 — Holmes &amp; Gardens on top, vibes are unmatched</div>
       </div>
-      <div class="embed-wrap" style="height:152px; background:var(--surface); border-radius:10px; display:flex; align-items:center; justify-content:center;">
-        <span style="font-family:'Space Mono',monospace; font-size:0.7rem; color:var(--muted); letter-spacing:1px; text-transform:uppercase;">⏳ Not yet</span>
+      <div class="embed-wrap">
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/1LepWHpwtahzEQL0vNjpEt?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
     </div>
 
