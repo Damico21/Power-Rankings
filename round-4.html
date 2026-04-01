@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Round 4 — Coming Soon · Paz's Power Rankings</title>
+  <title>Round 4 — Paz's Power Rankings</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -29,41 +29,146 @@
     }
     .nav-links a:hover { color:#fff; }
     .nav-links a.active { color:var(--gold); border-bottom-color:var(--gold); }
-    .nav-links a.soon { opacity:0.5; font-style:italic; }
     .divider { height:3px; background:linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
 
-    .coming-soon-wrap {
-      min-height:calc(100vh - 61px);
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      text-align:center; padding:3rem 2rem;
-      background:radial-gradient(ellipse at center, rgba(200,169,81,0.05) 0%, transparent 70%);
+    /* PAGE HEADER */
+    .page-header {
+      text-align:center; padding:4rem 2rem 2.5rem;
+      background:radial-gradient(ellipse at center, rgba(200,169,81,0.06) 0%, transparent 70%);
     }
-    .cs-icon { font-size:5rem; margin-bottom:1.5rem; animation:pulse 2s ease-in-out infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.7;transform:scale(0.96)} }
-    .cs-eyebrow { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:0.75rem; }
-    .cs-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,7vw,5rem); letter-spacing:3px; color:#fff; margin-bottom:0.5rem; line-height:1; }
-    .cs-sub { font-family:'Oswald',sans-serif; font-size:0.88rem; letter-spacing:1px; color:var(--text-muted); max-width:400px; margin:0 auto 2rem; line-height:1.7; }
-    .cs-badge {
-      display:inline-block;
-      background:rgba(200,169,81,0.1); border:1px solid rgba(200,169,81,0.3);
-      color:var(--gold); font-family:'Oswald',sans-serif; font-size:0.75rem;
-      letter-spacing:2px; text-transform:uppercase;
-      padding:0.4rem 1.1rem; border-radius:100px; margin-bottom:2.5rem;
+    .page-eyebrow {
+      font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:3px;
+      text-transform:uppercase; color:var(--red); margin-bottom:0.75rem;
     }
-    .back-link {
-      display:inline-flex; align-items:center; gap:0.5rem;
-      color:var(--gold); text-decoration:none;
-      font-family:'Oswald',sans-serif; font-size:0.85rem; letter-spacing:1.5px; text-transform:uppercase;
-      border:1px solid rgba(200,169,81,0.3); border-radius:8px; padding:0.7rem 1.4rem;
-      transition:background 0.2s, border-color 0.2s;
+    .page-title {
+      font-family:'Bebas Neue',sans-serif; font-size:clamp(2.8rem,8vw,5.5rem);
+      letter-spacing:4px; color:#fff; line-height:1; margin-bottom:0.5rem;
     }
-    .back-link:hover { background:rgba(200,169,81,0.08); border-color:var(--gold); }
+    .page-sub {
+      font-family:'Oswald',sans-serif; font-size:0.85rem; letter-spacing:1px;
+      color:var(--text-muted); margin-top:0.5rem;
+    }
 
-    footer { text-align:center; padding:2rem; color:#253545; font-size:0.78rem; font-family:'Oswald',sans-serif; letter-spacing:1px; border-top:1px solid var(--border); }
+    /* MAIN LAYOUT */
+    .main-wrap { max-width:900px; margin:0 auto; padding:2rem 1.5rem 5rem; }
+
+    /* WAGERS SECTION */
+    .wagers-header {
+      display:flex; align-items:center; gap:1rem; margin-bottom:2rem;
+      padding-bottom:1rem; border-bottom:1px solid var(--border);
+    }
+    .wagers-icon { font-size:1.6rem; }
+    .wagers-title-block {}
+    .wagers-title {
+      font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:2px; color:var(--gold);
+    }
+    .wagers-sub {
+      font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:2px;
+      text-transform:uppercase; color:var(--text-muted);
+    }
+
+    .wagers-intro {
+      background:rgba(255,255,255,0.03); border:1px solid var(--border);
+      border-left:3px solid var(--red); border-radius:8px;
+      padding:1.4rem 1.6rem; margin-bottom:2rem;
+      font-size:0.95rem; line-height:1.8; color:#ccd6e0;
+    }
+
+    /* MATCH CARDS */
+    .match-card {
+      background:var(--mid); border:1px solid var(--border); border-radius:12px;
+      padding:1.6rem 1.8rem; margin-bottom:1.25rem;
+      transition:border-color 0.2s;
+    }
+    .match-card:hover { border-color:rgba(200,169,81,0.2); }
+    .match-card.lock {
+      border-color:rgba(200,169,81,0.35);
+      background:linear-gradient(135deg, rgba(200,169,81,0.06) 0%, var(--mid) 60%);
+    }
+    .match-card.match-of-round {
+      border-color:rgba(139,26,26,0.45);
+      background:linear-gradient(135deg, rgba(139,26,26,0.07) 0%, var(--mid) 60%);
+    }
+    .match-card.landslide {
+      border-color:rgba(100,160,220,0.25);
+    }
+
+    .match-badge {
+      display:inline-flex; align-items:center; gap:0.35rem;
+      font-family:'Oswald',sans-serif; font-size:0.68rem; letter-spacing:2px;
+      text-transform:uppercase; padding:0.28rem 0.75rem; border-radius:100px;
+      margin-bottom:0.9rem;
+    }
+    .badge-lock { background:rgba(200,169,81,0.15); color:var(--gold); border:1px solid rgba(200,169,81,0.3); }
+    .badge-motr { background:rgba(139,26,26,0.2); color:#e05555; border:1px solid rgba(139,26,26,0.35); }
+    .badge-landslide { background:rgba(100,160,220,0.1); color:#7ab0d4; border:1px solid rgba(100,160,220,0.2); }
+
+    .match-scoreline {
+      display:flex; align-items:center; gap:0.75rem; margin-bottom:0.9rem; flex-wrap:wrap;
+    }
+    .match-team {
+      font-family:'Oswald',sans-serif; font-size:1rem; font-weight:600;
+      letter-spacing:0.5px; color:#fff;
+    }
+    .match-team.winner { color:var(--gold); }
+    .match-score {
+      font-family:'Bebas Neue',sans-serif; font-size:1.35rem; letter-spacing:1px;
+    }
+    .match-score.winner { color:var(--gold); }
+    .match-score.loser { color:var(--text-muted); }
+    .match-vs {
+      font-family:'Oswald',sans-serif; font-size:0.7rem; letter-spacing:2px;
+      text-transform:uppercase; color:var(--text-muted); padding:0 0.2rem;
+    }
+    .match-margin {
+      font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:1px;
+      color:#4a7a55; background:rgba(74,122,85,0.15); border:1px solid rgba(74,122,85,0.25);
+      padding:0.2rem 0.55rem; border-radius:100px;
+    }
+
+    .match-body {
+      font-size:0.92rem; line-height:1.8; color:#b0c4d4;
+    }
+    .match-body strong { color:#fff; }
+
+    /* TAKEAWAYS */
+    .takeaways-block {
+      background:var(--mid); border:1px solid var(--border); border-radius:12px;
+      padding:1.8rem; margin-top:2rem;
+    }
+    .takeaways-heading {
+      font-family:'Bebas Neue',sans-serif; font-size:1.4rem; letter-spacing:2px;
+      color:var(--gold); margin-bottom:1.2rem; display:flex; align-items:center; gap:0.5rem;
+    }
+    .takeaways-list { list-style:none; display:flex; flex-direction:column; gap:0.65rem; }
+    .takeaways-list li {
+      display:flex; align-items:flex-start; gap:0.75rem;
+      font-size:0.9rem; line-height:1.6; color:#b0c4d4;
+    }
+    .takeaways-list li::before {
+      content:'—'; color:var(--red); flex-shrink:0; margin-top:0.05rem;
+      font-family:'Oswald',sans-serif;
+    }
+    .takeaways-list li strong { color:#fff; }
+
+    .sign-off {
+      margin-top:1.8rem; padding-top:1.4rem; border-top:1px solid var(--border);
+      font-size:0.9rem; line-height:1.8; color:#8a9ab0;
+      font-style:italic;
+    }
+    .sign-off strong { color:var(--gold); font-style:normal; font-size:1rem; }
+
+    footer {
+      text-align:center; padding:2rem; color:#253545;
+      font-size:0.78rem; font-family:'Oswald',sans-serif; letter-spacing:1px;
+      border-top:1px solid var(--border);
+    }
 
     @media (max-width:640px) {
       nav { padding:0 1rem; }
       .nav-links a { font-size:0.72rem; padding:0 0.6rem; }
+      .match-card { padding:1.2rem 1.2rem; }
+      .main-wrap { padding:1.5rem 1rem 4rem; }
     }
   </style>
 </head>
@@ -77,20 +182,145 @@
       <li><a href="opening-round.html">Opening Round</a></li>
       <li><a href="round-2.html">Round 2</a></li>
       <li><a href="round-3.html">Round 3</a></li>
-      <li><a href="round-4.html" class="active soon">Round 4 · Soon</a></li>
+      <li><a href="round-4.html" class="active">Round 4</a></li>
       <li><a href="best-moments.html">📸 2026 Moments</a></li>
       <li><a href="ppr-tunes.html">🎵 PPR Tunes</a></li>
+      <li><a href="snakes-ladders.html">🐍 Snakes &amp; Ladders</a></li>
     </ul>
   </nav>
   <div class="divider"></div>
 
-  <div class="coming-soon-wrap">
-    <div class="cs-icon">⏳</div>
-    <div class="cs-eyebrow">Round 4 · Power Rankings</div>
-    <h1 class="cs-title">Rankings Coming Soon</h1>
-    <p class="cs-sub">Round 4 is still being played out. Check back after the round wraps for the full Power Rankings update.</p>
-    <div class="cs-badge">⚡ Dropping after Round 4</div>
-    <a href="round-3.html" class="back-link">← View Round 3 Rankings</a>
+  <div class="page-header">
+    <div class="page-eyebrow">Round 4 · Ligma League 2026</div>
+    <h1 class="page-title">Will's Weekly Wagers</h1>
+    <div class="page-sub">Round 4 Edition · Predictions &amp; Takes</div>
+  </div>
+
+  <div class="main-wrap">
+
+    <div class="wagers-header">
+      <div class="wagers-icon">💸</div>
+      <div class="wagers-title-block">
+        <div class="wagers-title">Will's Weekly Wagers</div>
+        <div class="wagers-sub">Round 4 Edition</div>
+      </div>
+    </div>
+
+    <div class="wagers-intro">
+      Four rounds in and the Ligma League is starting to separate the contenders from the pretenders. The early season excuses are gone — no more "still finding my feet," no more "settling in." By now you are what your record says you are. This week's card has a statement win, a rough night for someone who really needed a result, and a Lock of the Week so obvious I'm almost embarrassed to write it. Almost.
+    </div>
+
+    <!-- BRONCIC vs IZAKS -->
+    <div class="match-card">
+      <div class="match-scoreline">
+        <span class="match-team winner">Broncic</span>
+        <span class="match-score winner">~1,150</span>
+        <span class="match-vs">def.</span>
+        <span class="match-team">IZaks</span>
+        <span class="match-score loser">~960</span>
+        <span class="match-margin">+190</span>
+      </div>
+      <div class="match-body">
+        <strong>Broncic scraps their way to another one.</strong> William's mob have made an art form of winning the games they're supposed to. The IZaks came in sitting 10th for a reason, and Broncic had far too much hunger to let this one slip. Nothing flashy — just two points in the bag and a quiet nod to the table. Quietly building. Quietly dangerous.
+      </div>
+    </div>
+
+    <!-- PHILLIPOU vs CRIPPS NIPPS -->
+    <div class="match-card">
+      <div class="match-scoreline">
+        <span class="match-team winner">Phillipou Cumming</span>
+        <span class="match-score winner">~940</span>
+        <span class="match-vs">def.</span>
+        <span class="match-team">Cripps Nipps</span>
+        <span class="match-score loser">~930</span>
+        <span class="match-margin">+10</span>
+      </div>
+      <div class="match-body">
+        <strong>Phillipou Cumming are not going away.</strong> Cam's team are accumulating wins like frequent flyer points right now and another one gets banked here — though don't expect it to be pretty. Cripps Nipps will make them work for every single point. Flashes of quality, but never quite enough to get over the line when it matters most. Story of their season so far.
+      </div>
+    </div>
+
+    <!-- 30/09/23ERS vs NETHERS MEN -->
+    <div class="match-card landslide">
+      <div class="match-badge badge-landslide">💥 Landslide</div>
+      <div class="match-scoreline">
+        <span class="match-team winner">30/09/2023ers</span>
+        <span class="match-score winner">~870</span>
+        <span class="match-vs">def.</span>
+        <span class="match-team">Nethers Men</span>
+        <span class="match-score loser">~715</span>
+        <span class="match-margin">+155</span>
+      </div>
+      <div class="match-body">
+        <strong>The 30/09/23ers win a comfortable one and keep the pressure on.</strong> Rupe's side have too much firepower for a Nethers Men outfit that has been underwhelming through the opening rounds. Max's crew will be searching for answers after this one — a gap that wide is hard to explain away. Back to the drawing board for Nethers.
+      </div>
+    </div>
+
+    <!-- FLAGDONS vs DARK MAGICIANS -->
+    <div class="match-card">
+      <div class="match-scoreline">
+        <span class="match-team winner">FlagDons</span>
+        <span class="match-score winner">~1,095</span>
+        <span class="match-vs">def.</span>
+        <span class="match-team">Dark Magicians</span>
+        <span class="match-score loser">~985</span>
+        <span class="match-margin">+110</span>
+      </div>
+      <div class="match-body">
+        <strong>Rick's FlagDons put on a show.</strong> A commanding win over the Dark Magicians is the kind of performance that earns serious respect around the competition. The Magicians — once looking ominous — have quietly slipped to 11th, and this week did absolutely nothing to reverse that trend. FlagDons are locked in, firing, and absolutely must-watch right now.
+      </div>
+    </div>
+
+    <!-- LOCK OF THE WEEK: SHAVA vs VANTWISTS -->
+    <div class="match-card lock">
+      <div class="match-badge badge-lock">🔒 Lock of the Week</div>
+      <div class="match-scoreline">
+        <span class="match-team winner">Shava Girthi</span>
+        <span class="match-score winner">~1,200</span>
+        <span class="match-vs">def.</span>
+        <span class="match-team">VANTWISTFC</span>
+        <span class="match-score loser">~1,075</span>
+        <span class="match-margin">+125</span>
+      </div>
+      <div class="match-body">
+        <strong>Patrick's Shava Girthis deliver when it counts most.</strong> This is the Lock of the Week and it's not going to be close. Van Twists are sitting 12th for a reason, and Shava Girthi have far too much class to let this one slip away. This competition has been crying out for a banker — here it is. Lock incoming. Bank it.
+      </div>
+    </div>
+
+    <!-- MATCH OF THE ROUND: HOLMES vs FOOPYS -->
+    <div class="match-card match-of-round">
+      <div class="match-badge badge-motr">⭐ Match of the Round</div>
+      <div class="match-scoreline">
+        <span class="match-team winner">Holmes &amp; Gardens</span>
+        <span class="match-score winner">~1,160</span>
+        <span class="match-vs">def.</span>
+        <span class="match-team">Foopy is Lyfe</span>
+        <span class="match-score loser">~1,080</span>
+        <span class="match-margin">+80</span>
+      </div>
+      <div class="match-body">
+        <strong>Holmes and Gardens keep rolling.</strong> Matthew's mob are putting up numbers that are genuinely frightening right now. Four rounds at the top and no signs of slowing down — this is the match everyone's watching, and Holmes and Gardens are the benchmark this competition is being measured against. Foopys will push, they always do. But that top spot isn't going anywhere. Everyone else is just chasing.
+      </div>
+    </div>
+
+    <!-- TAKEAWAYS -->
+    <div class="takeaways-block">
+      <div class="takeaways-heading">💥 Takeaways</div>
+      <ul class="takeaways-list">
+        <li><strong>Holmes and Gardens</strong> are on another level. Someone stop them.</li>
+        <li><strong>FlagDons are flying.</strong> Dominant wins don't happen by accident.</li>
+        <li><strong>Broncic</strong> keep finding ways to win. The quiet assassin of the Ligma League strikes again.</li>
+        <li><strong>Van Twists</strong> in real trouble — 12th and losing games they need to win.</li>
+        <li><strong>Dark Magicians</strong> looking ordinary. The early-season fear factor is well and truly gone.</li>
+        <li><strong>30/09/23ers</strong> doing the business against the bottom end — dangerous side when they need to be.</li>
+        <li><strong>Cripps Nipps</strong> showing fight but still can't close. Fourth round, same story.</li>
+      </ul>
+      <div class="sign-off">
+        Four rounds down and the table is taking shape. Buckle up.<br><br>
+        <strong>Will 🧢</strong>
+      </div>
+    </div>
+
   </div>
 
   <footer>Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</footer>
