@@ -74,6 +74,46 @@
       font-size:0.95rem; line-height:1.8; color:#ccd6e0;
     }
 
+    /* SPONSOR BLOCK */
+    .sponsor-block {
+      border-radius:14px; overflow:hidden; margin-bottom:2rem;
+      border:1px solid rgba(200,169,81,0.25);
+      background:linear-gradient(135deg, #0f1a10 0%, #111d12 50%, #0d1117 100%);
+    }
+    .sponsor-inner {
+      display:flex; align-items:center; gap:0; flex-wrap:wrap;
+    }
+    .sponsor-img {
+      width:260px; flex-shrink:0; display:block;
+      object-fit:cover; max-height:200px;
+    }
+    .sponsor-text {
+      flex:1; padding:1.6rem 1.8rem; min-width:240px;
+    }
+    .sponsor-eyebrow {
+      font-family:'Oswald',sans-serif; font-size:0.65rem; letter-spacing:3px;
+      text-transform:uppercase; color:#5a9a5a; margin-bottom:0.5rem;
+    }
+    .sponsor-heading {
+      font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:2px;
+      color:#7ecf7e; line-height:1.1; margin-bottom:0.8rem;
+    }
+    .sponsor-heading span { color:var(--gold); }
+    .sponsor-body {
+      font-size:0.88rem; line-height:1.75; color:#9abf9a;
+    }
+    .sponsor-body strong { color:#c8e8c8; }
+    .sponsor-badge {
+      display:inline-block; margin-top:0.9rem;
+      background:rgba(100,200,100,0.12); border:1px solid rgba(100,200,100,0.3);
+      color:#7ecf7e; font-family:'Oswald',sans-serif; font-size:0.65rem;
+      letter-spacing:2px; text-transform:uppercase;
+      padding:0.3rem 0.8rem; border-radius:100px;
+    }
+    @media (max-width:600px) {
+      .sponsor-img { width:100%; max-height:180px; }
+    }
+
     /* MATCH CARDS */
     .match-card {
       background:var(--mid); border:1px solid var(--border); border-radius:12px;
@@ -203,6 +243,23 @@
       <div class="wagers-title-block">
         <div class="wagers-title">Will's Weekly Wagers</div>
         <div class="wagers-sub">Round 4 Edition</div>
+      </div>
+    </div>
+
+    <!-- SPONSOR BLOCK -->
+    <div class="sponsor-block">
+      <div class="sponsor-inner">
+        <img class="sponsor-img" src="Snakes_and_ladders.jpg" alt="Scoonz & Jaco's Snakes & Ladders" />
+        <div class="sponsor-text">
+          <div class="sponsor-eyebrow">🤝 Official Partnership · Round 4</div>
+          <div class="sponsor-heading">Bailed Out By<br><span>Scoonz &amp; Jaco's</span><br>Snakes &amp; Ladders</div>
+          <div class="sponsor-body">
+            Let's address the elephant in the room. Will's Weekly Wagers was, at various points this season, on the brink of editorial receivership. The picks were shaky. The confidence was shakier. But in a move that shocked absolutely nobody who knows these two, <strong>Scoonz and Jaco's Snakes &amp; Ladders</strong> have swooped in as the official presenting partner of this column — pulling it from the ashes and demanding higher standards, wilder takes, and at least one lock per week that actually lands.
+            <br><br>
+            The Ligma League's premier risers-and-fallers segment is now officially part of the Weekly Wagers family. Welcome to the partnership. Let's not blow it.
+            <div class="sponsor-badge">🐍 Presented by Snakes &amp; Ladders</div>
+          </div>
+        </div>
       </div>
     </div>
 
