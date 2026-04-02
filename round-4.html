@@ -20,7 +20,8 @@
       backdrop-filter:blur(12px); height:58px;
     }
     .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; color:var(--gold); text-decoration:none; letter-spacing:3px; flex-shrink:0; }
-    .nav-links { display:flex; gap:0; list-style:none; overflow-x:auto; }
+    .nav-links { display:flex; gap:0; list-style:none; }
+    .nav-links > li { position:relative; }
     .nav-links a {
       color:#7a9ab5; text-decoration:none; font-family:'Oswald',sans-serif;
       font-size:0.8rem; letter-spacing:1.5px; text-transform:uppercase;
@@ -29,7 +30,48 @@
     }
     .nav-links a:hover { color:#fff; }
     .nav-links a.active { color:var(--gold); border-bottom-color:var(--gold); }
+
+    /* DROPDOWN */
+    .nav-dropdown-btn {
+      color:#7a9ab5; background:none; border:none; cursor:pointer;
+      font-family:'Oswald',sans-serif; font-size:0.8rem; letter-spacing:1.5px;
+      text-transform:uppercase; padding:0 1rem; height:58px;
+      display:flex; align-items:center; gap:0.35rem;
+      border-bottom:2px solid transparent; transition:color 0.2s,border-color 0.2s;
+      white-space:nowrap;
+    }
+    .nav-dropdown-btn:hover, .nav-dropdown-btn.open { color:#fff; }
+    .nav-dropdown-btn.active-parent { color:var(--gold); border-bottom-color:var(--gold); }
+    .nav-dropdown-btn .chevron {
+      font-size:0.6rem; transition:transform 0.2s; display:inline-block;
+    }
+    .nav-dropdown-btn.open .chevron { transform:rotate(180deg); }
+
+    .nav-dropdown-menu {
+      display:none; position:absolute; top:58px; left:0;
+      background:rgba(13,17,23,0.98); border:1px solid var(--border);
+      border-top:2px solid var(--gold); border-radius:0 0 10px 10px;
+      min-width:160px; z-index:300; backdrop-filter:blur(12px);
+      box-shadow:0 12px 30px rgba(0,0,0,0.5);
+      padding:0.4rem 0;
+    }
+    .nav-dropdown-menu.open { display:block; }
+    .nav-dropdown-menu a {
+      height:auto; padding:0.65rem 1.2rem; display:block;
+      border-bottom:none; font-size:0.78rem; color:#7a9ab5;
+    }
+    .nav-dropdown-menu a:hover { color:#fff; background:rgba(255,255,255,0.04); }
+    .nav-dropdown-menu a.active { color:var(--gold); }
+    .nav-dropdown-menu .dropdown-divider {
+      height:1px; background:var(--border); margin:0.3rem 0;
+    }
+
     .divider { height:3px; background:linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
+
+    @media (max-width:640px) {
+      nav { padding:0 1rem; }
+      .nav-links a, .nav-dropdown-btn { font-size:0.72rem; padding:0 0.6rem; }
+    }
 
     /* PAGE HEADER */
     .page-header {
@@ -220,9 +262,18 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="rankings.html">Draft Night</a></li>
       <li><a href="opening-round.html">Opening Round</a></li>
-      <li><a href="round-2.html">Round 2</a></li>
-      <li><a href="round-3.html">Round 3</a></li>
-      <li><a href="round-4.html" class="active">Round 4</a></li>
+      <li>
+        <button class="nav-dropdown-btn active-parent" id="roundsBtn" onclick="toggleDropdown()" aria-expanded="false">
+          Rounds <span class="chevron">▼</span>
+        </button>
+        <div class="nav-dropdown-menu" id="roundsMenu">
+          <a href="opening-round.html">Opening Round</a>
+          <div class="dropdown-divider"></div>
+          <a href="round-2.html">Round 2</a>
+          <a href="round-3.html">Round 3</a>
+          <a href="round-4.html" class="active">Round 4</a>
+        </div>
+      </li>
       <li><a href="best-moments.html">📸 2026 Moments</a></li>
       <li><a href="ppr-tunes.html">🎵 PPR Tunes</a></li>
       <li><a href="snakes-ladders.html">🐍 Snakes &amp; Ladders</a></li>
@@ -382,5 +433,25 @@
 
   <footer>Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</footer>
 
+  <script>
+    function toggleDropdown() {
+      const btn = document.getElementById('roundsBtn');
+      const menu = document.getElementById('roundsMenu');
+      const isOpen = menu.classList.contains('open');
+      menu.classList.toggle('open', !isOpen);
+      btn.classList.toggle('open', !isOpen);
+      btn.setAttribute('aria-expanded', !isOpen);
+    }
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      const btn = document.getElementById('roundsBtn');
+      const menu = document.getElementById('roundsMenu');
+      if (!btn.contains(e.target) && !menu.contains(e.target)) {
+        menu.classList.remove('open');
+        btn.classList.remove('open');
+        btn.setAttribute('aria-expanded', false);
+      }
+    });
+  </script>
 </body>
 </html>
