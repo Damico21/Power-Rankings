@@ -33,6 +33,43 @@
       color:var(--text-muted); margin-top:0.5rem;
     }
 
+    /* WEEKLY WRAP */
+    .weekly-wrap {
+      margin-bottom: 2.5rem;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--mid);
+      position: relative;
+    }
+    .weekly-wrap-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      padding: 0.65rem 1rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+    }
+    .wrap-dot {
+      width: 4px; height: 4px;
+      background: var(--red);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .weekly-wrap-img {
+      width: 100%;
+      display: block;
+      max-height: 540px;
+      object-fit: cover;
+      object-position: center top;
+    }
+
     /* MAIN LAYOUT */
     .main-wrap { max-width:900px; margin:0 auto; padding:2rem 1.5rem 5rem; }
 
@@ -335,6 +372,16 @@
   </div>
 
   <div class="main-wrap">
+
+    <!-- WEEKLY WRAP -->
+    <div class="weekly-wrap">
+      <div class="weekly-wrap-label">
+        <span class="wrap-dot"></span>
+        Weekly Wrap · Round 4
+        <span class="wrap-dot"></span>
+      </div>
+      <img class="weekly-wrap-img" src="weekly_wrap.jpg" alt="AFL Weekly Wrap-Up: The Finest &amp; Fiercest" />
+    </div>
 
     <!-- RANKINGS TABLE -->
     <div class="rankings-header">
