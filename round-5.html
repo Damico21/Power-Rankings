@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Round 5 — Coming Soon · Paz's Power Rankings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#1b2a3b; --red:#8b1a1a; --gold:#c8a951; --cream:#e8dcc8;
+      --dark:#0d1117; --mid:#141d27; --text-muted:#6a8aaa; --border:rgba(255,255,255,0.06);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; background:var(--dark); color:#fff; min-height:100vh; display:flex; flex-direction:column; }
+
+    .divider { height:3px; background:linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
+
+    /* COMING SOON HERO */
+    .soon-wrap {
+      flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+      text-align:center; padding:5rem 2rem;
+      background:radial-gradient(ellipse at center, rgba(200,169,81,0.05) 0%, transparent 65%);
+      position:relative; overflow:hidden;
+    }
+
+    /* Animated pulse ring */
+    .soon-wrap::before {
+      content:'';
+      position:absolute;
+      width:400px; height:400px;
+      border:1px solid rgba(200,169,81,0.08);
+      border-radius:50%;
+      top:50%; left:50%; transform:translate(-50%,-50%);
+      animation:pulse 3s ease-in-out infinite;
+    }
+    .soon-wrap::after {
+      content:'';
+      position:absolute;
+      width:600px; height:600px;
+      border:1px solid rgba(200,169,81,0.04);
+      border-radius:50%;
+      top:50%; left:50%; transform:translate(-50%,-50%);
+      animation:pulse 3s ease-in-out infinite 0.8s;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity:0.5; transform:translate(-50%,-50%) scale(1); }
+      50%       { opacity:1;   transform:translate(-50%,-50%) scale(1.05); }
+    }
+
+    .soon-icon {
+      font-size:4rem; margin-bottom:1.5rem; position:relative; z-index:1;
+      animation:float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform:translateY(0); }
+      50%       { transform:translateY(-10px); }
+    }
+
+    .soon-eyebrow {
+      font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:3px;
+      text-transform:uppercase; color:var(--red); margin-bottom:0.75rem;
+      position:relative; z-index:1;
+    }
+
+    .soon-title {
+      font-family:'Bebas Neue',sans-serif; font-size:clamp(3.5rem,10vw,7rem);
+      letter-spacing:5px; color:#fff; line-height:1; margin-bottom:0.5rem;
+      position:relative; z-index:1;
+    }
+
+    .soon-subtitle {
+      font-family:'Bebas Neue',sans-serif; font-size:clamp(1.5rem,4vw,2.5rem);
+      letter-spacing:4px; color:var(--gold); margin-bottom:1.5rem;
+      position:relative; z-index:1;
+    }
+
+    .soon-desc {
+      font-family:'Oswald',sans-serif; font-size:0.9rem; letter-spacing:1px;
+      color:var(--text-muted); max-width:440px; line-height:1.8;
+      margin-bottom:2.5rem; position:relative; z-index:1;
+    }
+
+    .soon-badge {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:2px;
+      text-transform:uppercase;
+      background:rgba(200,169,81,0.1); border:1px solid rgba(200,169,81,0.25);
+      color:var(--gold); padding:0.5rem 1.2rem; border-radius:100px;
+      margin-bottom:2.5rem; position:relative; z-index:1;
+    }
+
+    .soon-dot {
+      width:6px; height:6px; background:var(--gold); border-radius:50%;
+      animation:blink 1.4s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity:1; } 50% { opacity:0.2; }
+    }
+
+    .soon-link {
+      font-family:'Oswald',sans-serif; font-size:0.82rem; letter-spacing:2px;
+      text-transform:uppercase; color:var(--text-muted); text-decoration:none;
+      border:1px solid var(--border); padding:0.65rem 1.5rem; border-radius:8px;
+      transition:color 0.2s, border-color 0.2s; position:relative; z-index:1;
+    }
+    .soon-link:hover { color:#fff; border-color:rgba(255,255,255,0.2); }
+
+    footer {
+      text-align:center; padding:2rem; color:#253545;
+      font-size:0.78rem; font-family:'Oswald',sans-serif; letter-spacing:1px;
+      border-top:1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BODY: Coming Soon -->
+  <div class="soon-wrap">
+    <div class="soon-icon">⏳</div>
+    <div class="soon-eyebrow">Round 5 · Ligma League 2026</div>
+    <h1 class="soon-title">Round 5</h1>
+    <div class="soon-subtitle">Power Rankings</div>
+    <p class="soon-desc">
+      Round 5 is still being played out. Check back after the round wraps for the full Power Rankings update, Will's Weekly Wagers, and all the chaos that comes with it.
+    </p>
+    <div class="soon-badge">
+      <span class="soon-dot"></span>
+      ⚡ Dropping after Round 5
+    </div>
+    <a class="soon-link" href="round-4.html">← View Round 4 Rankings</a>
+  </div>
+
+  <footer>Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</footer>
+
+  <script src="nav.js"></script>
+</body>
+</html>

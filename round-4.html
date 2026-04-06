@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Round 4 — Paz's Power Rankings</title>
+  <title>Round 4 Rankings — Paz's Power Rankings</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -13,65 +13,7 @@
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:'Inter',sans-serif; background:var(--dark); color:#fff; min-height:100vh; }
 
-    nav {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:0 2.5rem; background:rgba(13,17,23,0.97);
-      border-bottom:2px solid var(--red); position:sticky; top:0; z-index:200;
-      backdrop-filter:blur(12px); height:58px;
-    }
-    .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; color:var(--gold); text-decoration:none; letter-spacing:3px; flex-shrink:0; }
-    .nav-links { display:flex; gap:0; list-style:none; }
-    .nav-links > li { position:relative; }
-    .nav-links a {
-      color:#7a9ab5; text-decoration:none; font-family:'Oswald',sans-serif;
-      font-size:0.8rem; letter-spacing:1.5px; text-transform:uppercase;
-      padding:0 1rem; height:58px; display:flex; align-items:center;
-      border-bottom:2px solid transparent; transition:color 0.2s,border-color 0.2s; white-space:nowrap;
-    }
-    .nav-links a:hover { color:#fff; }
-    .nav-links a.active { color:var(--gold); border-bottom-color:var(--gold); }
-
-    /* DROPDOWN */
-    .nav-dropdown-btn {
-      color:#7a9ab5; background:none; border:none; cursor:pointer;
-      font-family:'Oswald',sans-serif; font-size:0.8rem; letter-spacing:1.5px;
-      text-transform:uppercase; padding:0 1rem; height:58px;
-      display:flex; align-items:center; gap:0.35rem;
-      border-bottom:2px solid transparent; transition:color 0.2s,border-color 0.2s;
-      white-space:nowrap;
-    }
-    .nav-dropdown-btn:hover, .nav-dropdown-btn.open { color:#fff; }
-    .nav-dropdown-btn.active-parent { color:var(--gold); border-bottom-color:var(--gold); }
-    .nav-dropdown-btn .chevron {
-      font-size:0.6rem; transition:transform 0.2s; display:inline-block;
-    }
-    .nav-dropdown-btn.open .chevron { transform:rotate(180deg); }
-
-    .nav-dropdown-menu {
-      display:none; position:absolute; top:58px; left:0;
-      background:rgba(13,17,23,0.98); border:1px solid var(--border);
-      border-top:2px solid var(--gold); border-radius:0 0 10px 10px;
-      min-width:160px; z-index:300; backdrop-filter:blur(12px);
-      box-shadow:0 12px 30px rgba(0,0,0,0.5);
-      padding:0.4rem 0;
-    }
-    .nav-dropdown-menu.open { display:block; }
-    .nav-dropdown-menu a {
-      height:auto; padding:0.65rem 1.2rem; display:block;
-      border-bottom:none; font-size:0.78rem; color:#7a9ab5;
-    }
-    .nav-dropdown-menu a:hover { color:#fff; background:rgba(255,255,255,0.04); }
-    .nav-dropdown-menu a.active { color:var(--gold); }
-    .nav-dropdown-menu .dropdown-divider {
-      height:1px; background:var(--border); margin:0.3rem 0;
-    }
-
     .divider { height:3px; background:linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
-
-    @media (max-width:640px) {
-      nav { padding:0 1rem; }
-      .nav-links a, .nav-dropdown-btn { font-size:0.72rem; padding:0 0.6rem; }
-    }
 
     /* PAGE HEADER */
     .page-header {
@@ -94,13 +36,136 @@
     /* MAIN LAYOUT */
     .main-wrap { max-width:900px; margin:0 auto; padding:2rem 1.5rem 5rem; }
 
+    /* RANKINGS TABLE */
+    .rankings-header {
+      display:flex; align-items:center; gap:1rem; margin-bottom:2rem;
+      padding-bottom:1rem; border-bottom:1px solid var(--border);
+    }
+    .rankings-icon { font-size:1.6rem; }
+    .rankings-title {
+      font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:2px; color:var(--gold);
+    }
+    .rankings-sub {
+      font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:2px;
+      text-transform:uppercase; color:var(--text-muted);
+    }
+    .rankings-updated {
+      margin-left:auto; font-family:'Oswald',sans-serif; font-size:0.68rem;
+      letter-spacing:2px; text-transform:uppercase;
+      color:#4a7a55; background:rgba(74,122,85,0.15); border:1px solid rgba(74,122,85,0.25);
+      padding:0.3rem 0.8rem; border-radius:100px;
+    }
+
+    .rankings-table {
+      width:100%; border-collapse:collapse; margin-bottom:2.5rem;
+    }
+    .rankings-table thead tr {
+      border-bottom:2px solid var(--gold);
+    }
+    .rankings-table th {
+      font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:2px;
+      text-transform:uppercase; color:var(--text-muted);
+      padding:0.75rem 1rem; text-align:left; font-weight:500;
+    }
+    .rankings-table th.center { text-align:center; }
+    .rankings-table th.right  { text-align:right; }
+
+    .rankings-table tbody tr {
+      border-bottom:1px solid var(--border);
+      transition:background 0.15s;
+    }
+    .rankings-table tbody tr:hover { background:rgba(255,255,255,0.025); }
+
+    /* Top 3 highlights */
+    .rankings-table tbody tr:nth-child(1) { background:rgba(200,169,81,0.06); }
+    .rankings-table tbody tr:nth-child(2) { background:rgba(200,169,81,0.03); }
+    .rankings-table tbody tr:nth-child(3) { background:rgba(200,169,81,0.015); }
+
+    .rankings-table td {
+      padding:0.9rem 1rem; font-size:0.92rem; color:#b0c4d4;
+    }
+
+    /* Rank cell */
+    .rank-cell {
+      font-family:'Bebas Neue',sans-serif; font-size:1.5rem;
+      color:var(--gold); text-align:center; width:52px;
+    }
+    .rank-cell.lower { color:var(--text-muted); }
+
+    /* Movement cell */
+    .move-cell { text-align:center; width:56px; }
+    .move-up   { color:#4caf70; font-size:0.8rem; font-family:'Oswald',sans-serif; letter-spacing:1px; }
+    .move-down { color:#c05050; font-size:0.8rem; font-family:'Oswald',sans-serif; letter-spacing:1px; }
+    .move-same { color:var(--text-muted); font-size:0.8rem; font-family:'Oswald',sans-serif; }
+
+    /* Team cell */
+    .team-cell {
+      display:flex; align-items:center; gap:0.9rem;
+    }
+    .team-avatar {
+      width:38px; height:38px; border-radius:50%; object-fit:cover;
+      border:2px solid var(--border); flex-shrink:0;
+      background:var(--mid);
+    }
+    .team-name {
+      font-family:'Oswald',sans-serif; font-size:0.95rem; font-weight:600;
+      letter-spacing:0.5px; color:#fff;
+    }
+    .team-name-1st { color:var(--gold); }
+
+    /* Score cell */
+    .score-cell {
+      font-family:'Bebas Neue',sans-serif; font-size:1.3rem;
+      color:var(--gold); text-align:right;
+    }
+
+    /* Secret link on #1 */
+    .vault-link {
+      font-family:'Oswald',sans-serif; font-size:0.6rem; letter-spacing:1px;
+      color:var(--red); text-decoration:none; opacity:0.5;
+      border:1px solid rgba(139,26,26,0.3); padding:0.15rem 0.4rem;
+      border-radius:4px; margin-left:0.5rem; vertical-align:middle;
+      transition:opacity 0.2s;
+    }
+    .vault-link:hover { opacity:1; }
+
+    /* Engagement ring icon */
+    .ring-icon {
+      display:inline-flex; align-items:center; justify-content:center;
+      margin-left:0.5rem; font-size:1rem; cursor:pointer;
+      text-decoration:none; vertical-align:middle;
+      position:relative;
+    }
+    .ring-icon .ring-tooltip {
+      display:none; position:absolute; bottom:130%; left:50%; transform:translateX(-50%);
+      background:rgba(13,17,23,0.97); border:1px solid rgba(200,169,81,0.4);
+      color:var(--gold); font-family:'Oswald',sans-serif; font-size:0.68rem;
+      letter-spacing:1px; text-transform:uppercase;
+      padding:0.4rem 0.75rem; border-radius:6px; white-space:nowrap;
+      pointer-events:none; z-index:100;
+      box-shadow:0 4px 16px rgba(0,0,0,0.5);
+    }
+    .ring-icon .ring-tooltip::after {
+      content:''; position:absolute; top:100%; left:50%; transform:translateX(-50%);
+      border:5px solid transparent; border-top-color:rgba(200,169,81,0.4);
+    }
+    .ring-icon:hover .ring-tooltip { display:block; }
+
     /* WAGERS SECTION */
+    .section-divider {
+      display:flex; align-items:center; gap:1rem; margin:2.5rem 0 1.5rem;
+    }
+    .section-divider-line { flex:1; height:1px; background:var(--border); }
+    .section-divider-label {
+      font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:3px;
+      color:var(--text-muted); white-space:nowrap;
+    }
+
     .wagers-header {
       display:flex; align-items:center; gap:1rem; margin-bottom:2rem;
       padding-bottom:1rem; border-bottom:1px solid var(--border);
     }
     .wagers-icon { font-size:1.6rem; }
-    .wagers-title-block {}
     .wagers-title {
       font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:2px; color:var(--gold);
     }
@@ -122,16 +187,9 @@
       border:1px solid rgba(200,169,81,0.25);
       background:linear-gradient(135deg, #0f1a10 0%, #111d12 50%, #0d1117 100%);
     }
-    .sponsor-inner {
-      display:flex; align-items:center; gap:0; flex-wrap:wrap;
-    }
-    .sponsor-img {
-      width:260px; flex-shrink:0; display:block;
-      object-fit:cover; max-height:200px;
-    }
-    .sponsor-text {
-      flex:1; padding:1.6rem 1.8rem; min-width:240px;
-    }
+    .sponsor-inner { display:flex; align-items:center; gap:0; flex-wrap:wrap; }
+    .sponsor-img { width:260px; flex-shrink:0; display:block; object-fit:cover; max-height:200px; }
+    .sponsor-text { flex:1; padding:1.6rem 1.8rem; min-width:240px; }
     .sponsor-eyebrow {
       font-family:'Oswald',sans-serif; font-size:0.65rem; letter-spacing:3px;
       text-transform:uppercase; color:#5a9a5a; margin-bottom:0.5rem;
@@ -141,9 +199,7 @@
       color:#7ecf7e; line-height:1.1; margin-bottom:0.8rem;
     }
     .sponsor-heading span { color:var(--gold); }
-    .sponsor-body {
-      font-size:0.88rem; line-height:1.75; color:#9abf9a;
-    }
+    .sponsor-body { font-size:0.88rem; line-height:1.75; color:#9abf9a; }
     .sponsor-body strong { color:#c8e8c8; }
     .sponsor-badge {
       display:inline-block; margin-top:0.9rem;
@@ -152,15 +208,12 @@
       letter-spacing:2px; text-transform:uppercase;
       padding:0.3rem 0.8rem; border-radius:100px;
     }
-    @media (max-width:600px) {
-      .sponsor-img { width:100%; max-height:180px; }
-    }
+    @media (max-width:600px) { .sponsor-img { width:100%; max-height:180px; } }
 
     /* MATCH CARDS */
     .match-card {
       background:var(--mid); border:1px solid var(--border); border-radius:12px;
-      padding:1.6rem 1.8rem; margin-bottom:1.25rem;
-      transition:border-color 0.2s;
+      padding:1.6rem 1.8rem; margin-bottom:1.25rem; transition:border-color 0.2s;
     }
     .match-card:hover { border-color:rgba(200,169,81,0.2); }
     .match-card.lock {
@@ -171,9 +224,7 @@
       border-color:rgba(139,26,26,0.45);
       background:linear-gradient(135deg, rgba(139,26,26,0.07) 0%, var(--mid) 60%);
     }
-    .match-card.landslide {
-      border-color:rgba(100,160,220,0.25);
-    }
+    .match-card.landslide { border-color:rgba(100,160,220,0.25); }
 
     .match-badge {
       display:inline-flex; align-items:center; gap:0.35rem;
@@ -181,36 +232,25 @@
       text-transform:uppercase; padding:0.28rem 0.75rem; border-radius:100px;
       margin-bottom:0.9rem;
     }
-    .badge-lock { background:rgba(200,169,81,0.15); color:var(--gold); border:1px solid rgba(200,169,81,0.3); }
-    .badge-motr { background:rgba(139,26,26,0.2); color:#e05555; border:1px solid rgba(139,26,26,0.35); }
+    .badge-lock  { background:rgba(200,169,81,0.15); color:var(--gold); border:1px solid rgba(200,169,81,0.3); }
+    .badge-motr  { background:rgba(139,26,26,0.2); color:#e05555; border:1px solid rgba(139,26,26,0.35); }
     .badge-landslide { background:rgba(100,160,220,0.1); color:#7ab0d4; border:1px solid rgba(100,160,220,0.2); }
 
     .match-scoreline {
       display:flex; align-items:center; gap:0.75rem; margin-bottom:0.9rem; flex-wrap:wrap;
     }
-    .match-team {
-      font-family:'Oswald',sans-serif; font-size:1rem; font-weight:600;
-      letter-spacing:0.5px; color:#fff;
-    }
+    .match-team { font-family:'Oswald',sans-serif; font-size:1rem; font-weight:600; letter-spacing:0.5px; color:#fff; }
     .match-team.winner { color:var(--gold); }
-    .match-score {
-      font-family:'Bebas Neue',sans-serif; font-size:1.35rem; letter-spacing:1px;
-    }
+    .match-score { font-family:'Bebas Neue',sans-serif; font-size:1.35rem; letter-spacing:1px; }
     .match-score.winner { color:var(--gold); }
-    .match-score.loser { color:var(--text-muted); }
-    .match-vs {
-      font-family:'Oswald',sans-serif; font-size:0.7rem; letter-spacing:2px;
-      text-transform:uppercase; color:var(--text-muted); padding:0 0.2rem;
-    }
+    .match-score.loser  { color:var(--text-muted); }
+    .match-vs { font-family:'Oswald',sans-serif; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); padding:0 0.2rem; }
     .match-margin {
       font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:1px;
       color:#4a7a55; background:rgba(74,122,85,0.15); border:1px solid rgba(74,122,85,0.25);
       padding:0.2rem 0.55rem; border-radius:100px;
     }
-
-    .match-body {
-      font-size:0.92rem; line-height:1.8; color:#b0c4d4;
-    }
+    .match-body { font-size:0.92rem; line-height:1.8; color:#b0c4d4; }
     .match-body strong { color:#fff; }
 
     /* TAKEAWAYS */
@@ -227,18 +267,48 @@
       display:flex; align-items:flex-start; gap:0.75rem;
       font-size:0.9rem; line-height:1.6; color:#b0c4d4;
     }
-    .takeaways-list li::before {
-      content:'—'; color:var(--red); flex-shrink:0; margin-top:0.05rem;
-      font-family:'Oswald',sans-serif;
-    }
+    .takeaways-list li::before { content:'—'; color:var(--red); flex-shrink:0; margin-top:0.05rem; font-family:'Oswald',sans-serif; }
     .takeaways-list li strong { color:#fff; }
 
     .sign-off {
       margin-top:1.8rem; padding-top:1.4rem; border-top:1px solid var(--border);
-      font-size:0.9rem; line-height:1.8; color:#8a9ab0;
-      font-style:italic;
+      font-size:0.9rem; line-height:1.8; color:#8a9ab0; font-style:italic;
     }
     .sign-off strong { color:var(--gold); font-style:normal; font-size:1rem; }
+
+    /* VAULT MODAL */
+    .vault-overlay {
+      display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85);
+      z-index:500; align-items:center; justify-content:center; backdrop-filter:blur(6px);
+    }
+    .vault-overlay.open { display:flex; }
+    .vault-modal {
+      background:var(--mid); border:1px solid rgba(200,169,81,0.3);
+      border-radius:16px; padding:2.5rem; max-width:380px; width:90%;
+      text-align:center; position:relative;
+    }
+    .vault-icon { font-size:2.5rem; margin-bottom:1rem; }
+    .vault-title { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:2px; color:var(--gold); margin-bottom:0.5rem; }
+    .vault-sub { font-family:'Oswald',sans-serif; font-size:0.78rem; letter-spacing:1px; text-transform:uppercase; color:var(--text-muted); margin-bottom:1.5rem; }
+    .vault-input {
+      width:100%; background:var(--dark); border:1px solid rgba(200,169,81,0.3);
+      border-radius:8px; padding:0.75rem 1rem; color:#fff;
+      font-family:'Oswald',sans-serif; font-size:1rem; letter-spacing:2px;
+      text-align:center; outline:none; margin-bottom:1rem;
+    }
+    .vault-input:focus { border-color:var(--gold); }
+    .vault-btn {
+      width:100%; background:var(--red); border:none; border-radius:8px;
+      padding:0.75rem; color:#fff; font-family:'Oswald',sans-serif;
+      font-size:0.85rem; letter-spacing:2px; text-transform:uppercase;
+      cursor:pointer; transition:background 0.2s;
+    }
+    .vault-btn:hover { background:#a02020; }
+    .vault-error { color:#e05555; font-size:0.8rem; margin-top:0.75rem; display:none; font-family:'Oswald',sans-serif; letter-spacing:1px; }
+    .vault-close {
+      position:absolute; top:1rem; right:1rem; background:none; border:none;
+      color:var(--text-muted); font-size:1.2rem; cursor:pointer;
+    }
 
     footer {
       text-align:center; padding:2rem; color:#253545;
@@ -247,26 +317,225 @@
     }
 
     @media (max-width:640px) {
-      nav { padding:0 1rem; }
-      .nav-links a { font-size:0.72rem; padding:0 0.6rem; }
       .match-card { padding:1.2rem 1.2rem; }
       .main-wrap { padding:1.5rem 1rem 4rem; }
+      .rankings-table th, .rankings-table td { padding:0.7rem 0.6rem; }
+      .team-avatar { width:30px; height:30px; }
+      .score-cell { font-size:1.1rem; }
     }
   </style>
 </head>
 <body>
 
+  <!-- PAGE HEADER -->
   <div class="page-header">
     <div class="page-eyebrow">Round 4 · Ligma League 2026</div>
-    <h1 class="page-title">Will's Weekly Wagers</h1>
-    <div class="page-sub">Round 4 Edition · Predictions &amp; Takes</div>
+    <h1 class="page-title">⚡ Round 4 Rankings</h1>
+    <div class="page-sub">Paz's Power Rankings · Ligma League 2026</div>
   </div>
 
   <div class="main-wrap">
 
+    <!-- RANKINGS TABLE -->
+    <div class="rankings-header">
+      <div class="rankings-icon">📊</div>
+      <div>
+        <div class="rankings-title">Power Rankings</div>
+        <div class="rankings-sub">Round 4 · Updated</div>
+      </div>
+      <div class="rankings-updated">Rankings Updated</div>
+    </div>
+
+    <table class="rankings-table">
+      <thead>
+        <tr>
+          <th class="center">#</th>
+          <th class="center">±</th>
+          <th>Team</th>
+          <th class="right">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- 1. Holmes & Gardens -->
+        <tr>
+          <td class="rank-cell">1</td>
+          <td class="move-cell"><span class="move-same">— 0</span></td>
+          <td>
+            <div class="team-cell">
+              <img class="team-avatar" src="Holmes &amp; Gardens.jpg" alt="Holmes and Gardens" />
+              <span class="team-name team-name-1st">
+                Holmes and Gardens
+                <a href="#vault" class="vault-link" onclick="openVault(event)" title="Unlock the Champion's Vault">🔐</a>
+              </span>
+            </div>
+          </td>
+          <td class="score-cell">10.31</td>
+        </tr>
+
+        <!-- 2. DC & Tax Payers -->
+        <tr>
+          <td class="rank-cell">2</td>
+          <td class="move-cell"><span class="move-up">↑ 1</span></td>
+          <td>
+            <div class="team-cell">
+              <img class="team-avatar" src="DC &amp; the Tax Payers.jpg" alt="DC & Tax Payers" />
+              <span class="team-name">DC &amp; Tax Payers</span>
+            </div>
+          </td>
+          <td class="score-cell">9.88</td>
+        </tr>
+
+        <!-- 3. Flagdons -->
+        <tr>
+          <td class="rank-cell">3</td>
+          <td class="move-cell"><span class="move-up">↑ 1</span></td>
+          <td>
+            <div class="team-cell">
+              <img class="team-avatar" src="Flagdons.jpg" alt="Flagdons" />
+              <span class="team-name">
+                Flagdons
+                <a class="ring-icon" href="best-moments.html" title="Congratulations on your engagement">
+                  💍
+                  <span class="ring-tooltip">Congratulations on your engagement!</span>
+                </a>
+              </span>
+            </div>
+          </td>
+          <td class="score-cell">9.44</td>
+        </tr>
+
+        <!-- 4. Dark Magicians -->
+        <tr>
+          <td class="rank-cell lower">4</td>
+          <td class="move-cell"><span class="move-up">↑ 2</span></td>
+          <td>
+            <div class="team-cell">
+              <img class="team-avatar" src="Dark Magicians.jpg" alt="Dark Magicians" />
+              <span class="team-name">Dark Magicians</span>
+            </div>
+          </td>
+          <td class="score-cell">9.25</td>
+        </tr>
+
+        <!-- 5. Izaks -->
+        <tr>
+          <td class="rank-cell lower">5</td>
+          <td class="move-cell"><span class="move-up">↑ 4</span></td>
+          <td>
+            <div class="team-cell">
+              <img class="team-avatar" src="the Izaks.jpg" alt="Izaks" />
+              <span class="team-name">Izaks</span>
+            </div>
+          </td>
+          <td class="score-cell">9.25</td>
+        </tr>
+
+        <!-- 6. Phillipou Cummings -->
+        <tr>
+          <td class="rank-cell lower">6</td>
+          <td class="move-cell"><span class="move-down">↓ 1</span></td>
+          <td>
+            <div class="team-cell">
+              <img class="team-avatar" src="Phillipou Cummings.jpg" alt="Phillipou" />
+              <span class="team-name">Phillipou</span>
+            </div>
+          </td>
+          <td class="score-cell">9.00</td>
+        </tr>
+
+        <!-- 7. Foopys -->
+        <tr>
+          <td class="rank-cell lower">7</td>
+          <td class="move-cell"><span class="move-down">↓ 3</span></td>
+          <td>
+            <div class="team-cell">
+              <img class="team-avatar" src="Foopys.jpg" alt="Foopys" />
+              <span class="team-name">Foopys</span>
+            </div>
+          </td>
+          <td class="score-cell">8.94</td>
+        </tr>
+
+        <!-- 8. VanTwists -->
+        <tr>
+          <td class="rank-cell lower">8</td>
+          <td class="move-cell"><span class="move-up">↑ 4</span></td>
+          <td>
+            <div class="team-cell">
+              <img class="team-avatar" src="VanTwists.jpg" alt="VanTwists" />
+              <span class="team-name">Van Twists</span>
+            </div>
+          </td>
+          <td class="score-cell">8.89</td>
+        </tr>
+
+        <!-- 9. Broncic -->
+        <tr>
+          <td class="rank-cell lower">9</td>
+          <td class="move-cell"><span class="move-same">— 0</span></td>
+          <td>
+            <div class="team-cell">
+              <img class="team-avatar" src="Broncic.jpg" alt="Broncic" />
+              <span class="team-name">Broncic</span>
+            </div>
+          </td>
+          <td class="score-cell">8.88</td>
+        </tr>
+
+        <!-- 10. Shavas -->
+        <tr>
+          <td class="rank-cell lower">10</td>
+          <td class="move-cell"><span class="move-same">— 0</span></td>
+          <td>
+            <div class="team-cell">
+              <img class="team-avatar" src="Shava Girthis.jpg" alt="Shavas" />
+              <span class="team-name">Shavas</span>
+            </div>
+          </td>
+          <td class="score-cell">8.39</td>
+        </tr>
+
+        <!-- 11. Nethers men -->
+        <tr>
+          <td class="rank-cell lower">11</td>
+          <td class="move-cell"><span class="move-same">— 0</span></td>
+          <td>
+            <div class="team-cell">
+              <img class="team-avatar" src="Nethers Men.jpg" alt="Nethers men" />
+              <span class="team-name">Nethers men</span>
+            </div>
+          </td>
+          <td class="score-cell">8.38</td>
+        </tr>
+
+        <!-- 12. Cripps Nipps -->
+        <tr>
+          <td class="rank-cell lower">12</td>
+          <td class="move-cell"><span class="move-down">↓ 1</span></td>
+          <td>
+            <div class="team-cell">
+              <img class="team-avatar" src="Cripps Nipps.jpg" alt="Cripps Nipps" />
+              <span class="team-name">Cripps Nipps</span>
+            </div>
+          </td>
+          <td class="score-cell">7.88</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <!-- SECTION DIVIDER -->
+    <div class="section-divider">
+      <div class="section-divider-line"></div>
+      <div class="section-divider-label">💸 Will's Weekly Wagers · Round 4</div>
+      <div class="section-divider-line"></div>
+    </div>
+
+    <!-- WAGERS HEADER -->
     <div class="wagers-header">
       <div class="wagers-icon">💸</div>
-      <div class="wagers-title-block">
+      <div>
         <div class="wagers-title">Will's Weekly Wagers</div>
         <div class="wagers-sub">Round 4 Edition</div>
       </div>
@@ -275,7 +544,7 @@
     <!-- SPONSOR BLOCK -->
     <div class="sponsor-block">
       <div class="sponsor-inner">
-        <img class="sponsor-img" src="Snakes_and_ladders.jpg" alt="Scoonz & Jaco's Snakes & Ladders" />
+        <img class="sponsor-img" src="Snakes_and_ladders.jpg" alt="Scoonz &amp; Jaco's Snakes &amp; Ladders" />
         <div class="sponsor-text">
           <div class="sponsor-eyebrow">🤝 Official Partnership · Round 4</div>
           <div class="sponsor-heading">Bailed Out By<br><span>Scoonz &amp; Jaco's</span><br>Snakes &amp; Ladders</div>
@@ -323,11 +592,11 @@
       </div>
     </div>
 
-    <!-- 30/09/23ERS vs NETHERS MEN -->
+    <!-- 30/09/23ERS vs NETHERS MEN (Landslide) -->
     <div class="match-card landslide">
       <div class="match-badge badge-landslide">💥 Landslide</div>
       <div class="match-scoreline">
-        <span class="match-team winner">30/09/2023ers</span>
+        <span class="match-team winner">Dark Magicians</span>
         <span class="match-score winner">~870</span>
         <span class="match-vs">def.</span>
         <span class="match-team">Nethers Men</span>
@@ -335,22 +604,22 @@
         <span class="match-margin">+155</span>
       </div>
       <div class="match-body">
-        <strong>The 30/09/23ers win a comfortable one and keep the pressure on.</strong> Rupe's side have too much firepower for a Nethers Men outfit that has been underwhelming through the opening rounds. Max's crew will be searching for answers after this one — a gap that wide is hard to explain away. Back to the drawing board for Nethers.
+        <strong>Dark Magicians win a comfortable one and keep the pressure on.</strong> Osei's side have too much firepower for a Nethers Men outfit that has been underwhelming through the opening rounds. Max's crew will be searching for answers after this one — a gap that wide is hard to explain away. Back to the drawing board for Nethers.
       </div>
     </div>
 
-    <!-- FLAGDONS vs DARK MAGICIANS -->
+    <!-- FLAGDONS vs DC -->
     <div class="match-card">
       <div class="match-scoreline">
         <span class="match-team winner">FlagDons</span>
         <span class="match-score winner">~1,095</span>
         <span class="match-vs">def.</span>
-        <span class="match-team">Dark Magicians</span>
+        <span class="match-team">DC &amp; Tax Payers</span>
         <span class="match-score loser">~985</span>
         <span class="match-margin">+110</span>
       </div>
       <div class="match-body">
-        <strong>Rick's FlagDons put on a show.</strong> A commanding win over the Dark Magicians is the kind of performance that earns serious respect around the competition. The Magicians — once looking ominous — have quietly slipped to 11th, and this week did absolutely nothing to reverse that trend. FlagDons are locked in, firing, and absolutely must-watch right now.
+        <strong>Rick's FlagDons put on a show.</strong> A commanding win over DC &amp; Tax Payers is the kind of performance that earns serious respect around the competition. FlagDons are locked in, firing, and absolutely must-watch right now. DC drop a spot but remain firmly in the top three conversation.
       </div>
     </div>
 
@@ -361,12 +630,12 @@
         <span class="match-team winner">Shava Girthi</span>
         <span class="match-score winner">~1,200</span>
         <span class="match-vs">def.</span>
-        <span class="match-team">VANTWISTFC</span>
+        <span class="match-team">Van Twists</span>
         <span class="match-score loser">~1,075</span>
         <span class="match-margin">+125</span>
       </div>
       <div class="match-body">
-        <strong>Patrick's Shava Girthis deliver when it counts most.</strong> This is the Lock of the Week and it's not going to be close. Van Twists are sitting 12th for a reason, and Shava Girthi have far too much class to let this one slip away. This competition has been crying out for a banker — here it is. Lock incoming. Bank it.
+        <strong>Patrick's Shava Girthis deliver when it counts most.</strong> This is the Lock of the Week and it's not going to be close. Van Twists are sitting deep for a reason, and Shava Girthi have far too much class to let this one slip away. This competition has been crying out for a banker — here it is. Lock incoming. Bank it.
       </div>
     </div>
 
@@ -377,7 +646,7 @@
         <span class="match-team winner">Holmes &amp; Gardens</span>
         <span class="match-score winner">~1,160</span>
         <span class="match-vs">def.</span>
-        <span class="match-team">Foopy is Lyfe</span>
+        <span class="match-team">Foopys</span>
         <span class="match-score loser">~1,080</span>
         <span class="match-margin">+80</span>
       </div>
@@ -391,11 +660,11 @@
       <div class="takeaways-heading">💥 Takeaways</div>
       <ul class="takeaways-list">
         <li><strong>Holmes and Gardens</strong> are on another level. Someone stop them.</li>
-        <li><strong>FlagDons are flying.</strong> Dominant wins don't happen by accident.</li>
+        <li><strong>FlagDons are flying</strong> — and now celebrating off the field too. Congratulations! 💍</li>
         <li><strong>Broncic</strong> keep finding ways to win. The quiet assassin of the Ligma League strikes again.</li>
-        <li><strong>Van Twists</strong> in real trouble — 12th and losing games they need to win.</li>
-        <li><strong>Dark Magicians</strong> looking ordinary. The early-season fear factor is well and truly gone.</li>
-        <li><strong>30/09/23ers</strong> doing the business against the bottom end — dangerous side when they need to be.</li>
+        <li><strong>Van Twists</strong> in real trouble — losing games they need to win.</li>
+        <li><strong>Dark Magicians</strong> bouncing back — that landslide win puts them right back in the conversation.</li>
+        <li><strong>Izaks</strong> surging — four spots up the table. Watch this space.</li>
         <li><strong>Cripps Nipps</strong> showing fight but still can't close. Fourth round, same story.</li>
       </ul>
       <div class="sign-off">
@@ -406,26 +675,46 @@
 
   </div>
 
+  <!-- VAULT MODAL -->
+  <div class="vault-overlay" id="vaultOverlay" onclick="closeVaultOutside(event)">
+    <div class="vault-modal">
+      <button class="vault-close" onclick="closeVault()">✕</button>
+      <div class="vault-icon">🔐</div>
+      <div class="vault-title">Restricted Access</div>
+      <div class="vault-sub">This vault is locked. Champions only.</div>
+      <input class="vault-input" id="vaultInput" type="password" placeholder="Enter password" />
+      <button class="vault-btn" onclick="checkVault()">Unlock the Vault 🏆</button>
+      <div class="vault-error" id="vaultError">❌ Wrong password. Not even close, mate.</div>
+    </div>
+  </div>
+
   <footer>Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</footer>
 
   <script>
-    function toggleDropdown() {
-      const btn = document.getElementById('roundsBtn');
-      const menu = document.getElementById('roundsMenu');
-      const isOpen = menu.classList.contains('open');
-      menu.classList.toggle('open', !isOpen);
-      btn.classList.toggle('open', !isOpen);
-      btn.setAttribute('aria-expanded', !isOpen);
+    function openVault(e) {
+      if (e) e.preventDefault();
+      document.getElementById('vaultOverlay').classList.add('open');
+      setTimeout(() => document.getElementById('vaultInput').focus(), 100);
     }
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function(e) {
-      const btn = document.getElementById('roundsBtn');
-      const menu = document.getElementById('roundsMenu');
-      if (!btn.contains(e.target) && !menu.contains(e.target)) {
-        menu.classList.remove('open');
-        btn.classList.remove('open');
-        btn.setAttribute('aria-expanded', false);
+    function closeVault() {
+      document.getElementById('vaultOverlay').classList.remove('open');
+      document.getElementById('vaultInput').value = '';
+      document.getElementById('vaultError').style.display = 'none';
+    }
+    function closeVaultOutside(e) {
+      if (e.target === document.getElementById('vaultOverlay')) closeVault();
+    }
+    function checkVault() {
+      const pw = document.getElementById('vaultInput').value.trim().toLowerCase();
+      if (pw === 'holmes' || pw === 'holmes and gardens' || pw === 'champions') {
+        window.location.href = 'holmes-gardens-secret.html';
+      } else {
+        document.getElementById('vaultError').style.display = 'block';
       }
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeVault();
+      if (e.key === 'Enter' && document.getElementById('vaultOverlay').classList.contains('open')) checkVault();
     });
   </script>
   <script src="nav.js"></script>

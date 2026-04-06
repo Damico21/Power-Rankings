@@ -17,8 +17,8 @@ const PPR_NAV = {
     { label: 'Round 2',  href: 'round-2.html' },
     { label: 'Round 3',  href: 'round-3.html' },
     { label: 'Round 4',  href: 'round-4.html' },
-    // { label: 'Round 5',  href: 'round-5.html' },   ← uncomment when ready
-    // { label: 'Round 6',  href: 'round-6.html' },
+    { label: 'Round 5',  href: 'round-5.html' },
+    // { label: 'Round 6',  href: 'round-6.html' },   ← uncomment when ready
   ],
 
   // ── STATIC NAV ITEMS (before and after the dropdown) ────────────────────
