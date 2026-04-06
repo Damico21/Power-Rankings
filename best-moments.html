@@ -432,7 +432,7 @@
     </div>
 
     <!-- One of Our Own Gets Engaged -->
-    <div class="moment-card" onclick="openLightbox('1_of_our_own_gets_engaged.jpg')">
+    <div class="moment-card" id="engagement" onclick="openLightbox('1_of_our_own_gets_engaged.jpg')">
       <div class="img-wrap">
         <img src="1_of_our_own_gets_engaged.jpg" alt="One of Our Own Gets Engaged" loading="lazy" />
       </div>
@@ -483,6 +483,19 @@
     }
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Auto-open lightbox if arriving via #engagement hash (from ring icon on rankings)
+    window.addEventListener('load', function() {
+      if (window.location.hash === '#engagement') {
+        const card = document.getElementById('engagement');
+        if (card) {
+          setTimeout(function() {
+            card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            openLightbox('1_of_our_own_gets_engaged.jpg');
+          }, 400);
+        }
+      }
     });
   </script>
 
