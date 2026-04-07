@@ -233,11 +233,25 @@
     #cumulative { background: var(--dark); border-top: 1px solid var(--border); }
     .cum-outer { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem 3.5rem; }
     .cum-note { font-size: 0.82rem; color: #3a5a7a; margin-bottom: 2rem; line-height: 1.6; font-family: 'Inter', sans-serif; }
-    .cum-scroll { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
-    .cum-table { width: 100%; border-collapse: collapse; font-family: 'Oswald', sans-serif; min-width: 760px; }
+    .cum-scroll { overflow-x: scroll; border-radius: 12px; border: 1px solid var(--border); -webkit-overflow-scrolling: touch; }
+    .cum-scroll::-webkit-scrollbar { height: 6px; }
+    .cum-scroll::-webkit-scrollbar-track { background: #080d13; border-radius: 3px; }
+    .cum-scroll::-webkit-scrollbar-thumb { background: rgba(200,169,81,0.35); border-radius: 3px; }
+    .cum-scroll::-webkit-scrollbar-thumb:hover { background: rgba(200,169,81,0.6); }
+    .cum-table { width: 100%; border-collapse: collapse; font-family: 'Oswald', sans-serif; min-width: 1800px; }
     .cum-table thead tr { background: #080d13; }
     .cum-table thead th { padding: 0.9rem 0.85rem; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: #2a4a6a; text-align: center; border-bottom: 1px solid rgba(200,169,81,0.2); white-space: nowrap; }
     .cum-table thead th.th-left { text-align: left; padding-left: 1.2rem; }
+    /* Sticky first two columns (rank + team name) */
+    .cum-table th:nth-child(1), .cum-table td:nth-child(1) { position: sticky; left: 0; z-index: 2; background: #080d13; }
+    .cum-table th:nth-child(2), .cum-table td:nth-child(2) { position: sticky; left: 2.8rem; z-index: 2; background: #080d13; min-width: 150px; border-right: 1px solid rgba(200,169,81,0.15); }
+    .cum-table tbody tr:hover th:nth-child(1),
+    .cum-table tbody tr:hover td:nth-child(1),
+    .cum-table tbody tr:hover td:nth-child(2) { background: #0f1820; }
+    /* Sticky last three columns (total, avg, trend) */
+    .cum-table th:nth-last-child(1), .cum-table td:nth-last-child(1) { position: sticky; right: 0; z-index: 2; background: #080d13; border-left: 1px solid rgba(200,169,81,0.15); }
+    .cum-table th:nth-last-child(2), .cum-table td:nth-last-child(2) { position: sticky; right: 100px; z-index: 2; background: #080d13; }
+    .cum-table th:nth-last-child(3), .cum-table td:nth-last-child(3) { position: sticky; right: 165px; z-index: 2; background: #080d13; border-left: 1px solid rgba(200,169,81,0.15); }
     .cum-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.035); transition: background 0.12s; }
     .cum-table tbody tr:last-child { border-bottom: none; }
     .cum-table tbody tr:hover { background: rgba(255,255,255,0.02); }
@@ -338,9 +352,10 @@
       <div class="section-label">Season Overview</div>
       <div class="section-title">Cumulative Power Rankings</div>
       <p class="cum-note">
-        Total PPR score across all 6 rounds — Draft Night through Round 4.
+        Total PPR score across all rounds — Draft Night through Round 19. Scroll right to see upcoming rounds.
         The <span style="color:var(--gold)">best score each round is highlighted in gold.</span>
-        Trend snake (right column) shows trajectory across the last 5 rounds — green segments rising, red falling.
+        Trend snake shows trajectory across the last 5 scored rounds — green rising, red falling.
+        Average is calculated from scored rounds only.
       </p>
       <div class="cum-scroll">
         <table class="cum-table">
@@ -354,6 +369,21 @@
               <th>Round 2</th>
               <th>Round 3</th>
               <th>Round 4</th>
+              <th>Round 5</th>
+              <th>Round 6</th>
+              <th>Round 7</th>
+              <th>Round 8</th>
+              <th>Round 9</th>
+              <th>Round 10</th>
+              <th>Round 11</th>
+              <th>Round 12</th>
+              <th>Round 13</th>
+              <th>Round 14</th>
+              <th>Round 15</th>
+              <th>Round 16</th>
+              <th>Round 17</th>
+              <th>Round 18</th>
+              <th>Round 19</th>
               <th>Total</th>
               <th>Avg</th>
               <th>Trend</th>
@@ -386,21 +416,21 @@
   <script>
   (function(){
 
-    /* ── PPR scores: [DraftNight, OpeningRd, R1, R2, R3, R4] ── */
-    /* null = round not yet rated                                  */
+    /* ── PPR scores: [DraftNight, OpeningRd, R1, R2, R3, R4, R5…R19] ── */
+    /* null = round not yet rated                                          */
     const PPR = {
-      'Foopys':              [9.67,  9.50,  10.17, 10.13, 9.44,  8.94],
-      'Dark Magicians':      [7.08,  10.25, 10.58, 9.25,  9.25,  9.25],
-      'Holmes and Gardens':  [8.50,  9.92,  10.33, 9.75,  10.31, 10.31],
-      'DC & Tax Payers':     [7.58,  9.50,  10.00, 10.25, 9.50,  9.88],
-      'Phillipou':           [7.17,  7.92,  8.17,  8.50,  9.38,  9.00],
-      'Flagdons':            [8.33,  9.67,  9.75,  9.38,  10.06, 9.44],
-      'Van Twists':          [8.83,  9.42,  9.67,  8.13,  7.38,  8.89],
-      'Cripps Nipps':        [7.92,  8.92,  7.92,  7.13,  7.43,  7.88],
-      'Broncic':             [8.25,  9.33,  8.42,  8.38,  9.25,  8.88],
-      'Izaks':               [7.75,  8.08,  8.25,  7.63,  8.75,  9.25],
-      'Nethers men':         [7.42,  8.25,  7.75,  7.88,  8.50,  8.38],
-      'Shavas':              [7.33,  8.42,  8.33,  8.25,  9.06,  8.39],
+      'Foopys':              [9.67,  9.50,  10.17, 10.13, 9.44,  8.94,  null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Dark Magicians':      [7.08,  10.25, 10.58, 9.25,  9.25,  9.25,  null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Holmes and Gardens':  [8.50,  9.92,  10.33, 9.75,  10.31, 10.31, null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'DC & Tax Payers':     [7.58,  9.50,  10.00, 10.25, 9.50,  9.88,  null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Phillipou':           [7.17,  7.92,  8.17,  8.50,  9.38,  9.00,  null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Flagdons':            [8.33,  9.67,  9.75,  9.38,  10.06, 9.44,  null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Van Twists':          [8.83,  9.42,  9.67,  8.13,  7.38,  8.89,  null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Cripps Nipps':        [7.92,  8.92,  7.92,  7.13,  7.43,  7.88,  null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Broncic':             [8.25,  9.33,  8.42,  8.38,  9.25,  8.88,  null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Izaks':               [7.75,  8.08,  8.25,  7.63,  8.75,  9.25,  null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Nethers men':         [7.42,  8.25,  7.75,  7.88,  8.50,  8.38,  null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Shavas':              [7.33,  8.42,  8.33,  8.25,  9.06,  8.39,  null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
     };
 
     /* ── H2H match results ── */
@@ -441,20 +471,21 @@
        CUMULATIVE TABLE
     ════════════════════════════════════════ */
     (function buildCumulative(){
-      /* per-round best score for gold highlight */
-      const numRounds = 6;
+      /* 21 columns: Draft Night + Opening Rd + R1-R19 */
+      const numRounds = 21;
+      /* per-round best score for gold highlight (only among played scores) */
       const roundBest = Array.from({length: numRounds}, (_, ri) => {
         const vals = TEAMS.map(t => PPR[t][ri]).filter(v => v !== null);
         return vals.length ? Math.max(...vals) : null;
       });
 
-      /* build row data */
+      /* build row data — avg only from played rounds */
       const rows = TEAMS.map(team => {
         const scores = PPR[team];
         const played = scores.filter(v => v !== null);
         const total  = played.reduce((a,b) => a+b, 0);
-        const avg    = played.length ? total / played.length : 0;
-        return { team, scores, total, avg };
+        const avg    = played.length ? total / played.length : null;
+        return { team, scores, total, avg, playedCount: played.length };
       }).sort((a, b) => b.total - a.total);
 
       const tbody = document.getElementById('cumBody');
@@ -465,16 +496,18 @@
         else if (rank === 2) posClass += ' p2';
         else if (rank === 3) posClass += ' p3';
 
-        /* score cells */
+        /* score cells — all 21 columns */
         const scoreCells = row.scores.map((s, ri) => {
           if (s === null) return `<td class="cum-score">—</td>`;
           const isBest = roundBest[ri] !== null && s === roundBest[ri];
           return `<td class="cum-score played${isBest ? ' best' : ''}">${s.toFixed(2)}</td>`;
         }).join('');
 
-        /* trend snake: last 5 rounds = indices 1-5 (Opening Rd → R4) */
-        const trendScores = row.scores.slice(1).filter(v => v !== null);
+        /* trend snake: last 5 *played* scores (skip nulls), from index 1 onward */
+        const trendScores = row.scores.slice(1).filter(v => v !== null).slice(-5);
         const snake = buildSnakeSVG(trendScores);
+
+        const avgDisplay = row.avg !== null ? row.avg.toFixed(2) : '—';
 
         const tr = document.createElement('tr');
         tr.innerHTML =
@@ -482,7 +515,7 @@
           `<td class="td-left"><span class="cum-name">${row.team}</span></td>` +
           scoreCells +
           `<td class="cum-total">${row.total.toFixed(2)}</td>` +
-          `<td class="cum-avg">${row.avg.toFixed(2)}</td>` +
+          `<td class="cum-avg">${avgDisplay}</td>` +
           `<td class="cum-snake">${snake}</td>`;
         tbody.appendChild(tr);
       });
