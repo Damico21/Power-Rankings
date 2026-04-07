@@ -2,1132 +2,553 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Paz's Power Rankings — Ligma League</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --dark: #0d0d0d;
-      --mid: #1a1a1a;
-      --navy: #111827;
-      --red: #e63946;
-      --gold: #f4c542;
-      --text: #f0f0f0;
-      --muted: #888;
-      --win: #22c55e;
-      --loss: #ef4444;
+      --navy: #1b2a3b;
+      --red: #8b1a1a;
+      --gold: #c8a951;
+      --cream: #e8dcc8;
+      --dark: #0d1117;
+      --mid: #141d27;
+      --text-muted: #6a8aaa;
+      --border: rgba(255,255,255,0.06);
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: #fff; min-height: 100vh; overflow-x: hidden; }
 
-    body {
-      background: var(--dark);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-    }
-
-    /* NAV */
+    /* ── NAV ── */
     nav {
-      background: var(--mid);
-      border-bottom: 3px solid var(--red);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 0 1.5rem;
-    }
-    .nav-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      gap: 0;
-    }
-    .nav-brand {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      color: var(--gold);
-      text-decoration: none;
-      padding: 1rem 1.5rem 1rem 0;
-      border-right: 1px solid #333;
-      margin-right: 0.5rem;
-      letter-spacing: 1px;
-    }
-    nav a {
-      color: var(--text);
-      text-decoration: none;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.5px;
-      padding: 1.1rem 0.85rem;
-      display: inline-block;
-      transition: color 0.2s;
-      white-space: nowrap;
-    }
-    nav a:hover { color: var(--gold); }
-    nav a.active {
-      color: var(--gold);
-      border-bottom: 3px solid var(--gold);
-      margin-bottom: -3px;
-    }
-    .nav-links { display: flex; flex-wrap: wrap; }
-
-    /* HERO */
-    .hero {
-      background: linear-gradient(160deg, #1a0a0a 0%, #0d0d0d 50%, #0a0f1a 100%);
-      padding: 5rem 1.5rem 4rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(230,57,70,0.12) 0%, transparent 70%);
-    }
-    .hero-eyebrow {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 4px;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-    .hero h1 {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(3rem, 8vw, 6rem);
-      letter-spacing: 3px;
-      line-height: 1;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-    .hero h1 span { color: var(--red); }
-    .hero-sub {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1rem;
-      color: var(--muted);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 2.5rem;
-    }
-    .hero-logo {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--red);
-      box-shadow: 0 0 40px rgba(230,57,70,0.3);
-      display: block;
-      margin: 0 auto 2.5rem;
-    }
-    .hero-stats {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-    }
-    .hero-stat { text-align: center; }
-    .hero-stat-val {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.5rem;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .hero-stat-label {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 2px;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-top: 0.25rem;
-    }
-    .hero-ctas {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-top: 2.5rem;
-      flex-wrap: wrap;
-    }
-    .btn-primary {
-      background: var(--red);
-      color: #fff;
-      padding: 0.75rem 2rem;
-      border-radius: 4px;
-      text-decoration: none;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      transition: background 0.2s, transform 0.15s;
-    }
-    .btn-primary:hover { background: #c0303b; transform: translateY(-1px); }
-    .btn-ghost {
-      border: 1px solid #444;
-      color: var(--text);
-      padding: 0.75rem 2rem;
-      border-radius: 4px;
-      text-decoration: none;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.9rem;
-      letter-spacing: 1px;
-      transition: border-color 0.2s, transform 0.15s;
-    }
-    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-1px); }
-
-    /* SECTION */
-    .section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 3rem 1.5rem;
-    }
-    .section-header {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      border-bottom: 2px solid #222;
-      padding-bottom: 0.75rem;
-    }
-    .section-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.8rem;
-      letter-spacing: 2px;
-      color: var(--text);
-    }
-    .section-badge {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 2px;
-      color: var(--red);
-      text-transform: uppercase;
-      background: rgba(230,57,70,0.1);
-      border: 1px solid rgba(230,57,70,0.3);
-      padding: 0.2rem 0.6rem;
-      border-radius: 3px;
-    }
-
-    /* SEASON LEADERBOARD */
-    .leaderboard-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.88rem;
-    }
-    .leaderboard-table thead tr {
-      background: #111;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2.5rem;
+      background: rgba(13,17,23,0.95);
       border-bottom: 2px solid var(--red);
+      position: sticky; top: 0; z-index: 200;
+      backdrop-filter: blur(12px);
     }
-    .leaderboard-table th {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--muted);
-      padding: 0.75rem 0.75rem;
-      text-align: left;
-    }
-    .leaderboard-table th.center { text-align: center; }
-    .leaderboard-table td {
-      padding: 0.7rem 0.75rem;
-      border-bottom: 1px solid #1e1e1e;
-      vertical-align: middle;
-    }
-    .leaderboard-table tbody tr {
-      transition: background 0.15s;
-    }
-    .leaderboard-table tbody tr:hover { background: #1a1a1a; }
-    .leaderboard-table tbody tr.top-3 { background: rgba(244,197,66,0.04); }
+    .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: var(--gold); text-decoration: none; letter-spacing: 3px; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: #aac; text-decoration: none; font-family: 'Oswald', sans-serif; font-size: 0.82rem; letter-spacing: 1.5px; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
 
-    .lb-rank {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.2rem;
-      color: var(--muted);
-      width: 2.5rem;
-      text-align: center;
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 92vh;
+      display: flex; align-items: center; overflow: hidden;
+      background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 60%, #0d1117 100%);
     }
-    .lb-rank.gold { color: var(--gold); }
-    .lb-rank.silver { color: #b0b8c1; }
-    .lb-rank.bronze { color: #cd7f32; }
+    .hero-grain {
+      position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: 0.35;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+    }
+    .hero-bg-text {
+      position: absolute; bottom: -1rem; left: -1rem;
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(7rem, 18vw, 16rem);
+      color: rgba(255,255,255,0.022); pointer-events: none; z-index: 1;
+      white-space: nowrap; line-height: 1; letter-spacing: -0.02em;
+    }
+    .hero-inner {
+      position: relative; z-index: 2;
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; max-width: 1200px; margin: 0 auto;
+      padding: 4rem 2.5rem; gap: 3rem;
+    }
+    .hero-left { flex: 1; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(139,26,26,0.25); border: 1px solid rgba(139,26,26,0.5);
+      border-radius: 100px; padding: 0.35rem 1rem;
+      font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 2px;
+      text-transform: uppercase; color: #f08080; margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #f08080; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
-    .lb-team {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text);
-    }
-    .lb-record {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.85rem;
-      color: var(--muted);
-      text-align: center;
-    }
-    .lb-pts {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.05rem;
-      color: var(--gold);
-      text-align: center;
-    }
-    .lb-pf {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.82rem;
-      color: var(--muted);
-      text-align: center;
-    }
+    .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 7rem); line-height: 0.92; letter-spacing: 2px; margin-bottom: 0.4rem; animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-title .gold { color: var(--gold); display: block; }
+    .hero-title .white { color: #fff; display: block; }
+    .hero-subtitle { font-family: 'Oswald', sans-serif; font-size: clamp(1rem, 2.5vw, 1.35rem); color: var(--cream); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 1.8rem; opacity: 0.75; animation: fadeUp 0.6s 0.15s ease both; }
+    .hero-desc { font-size: 0.97rem; color: #7a9ab5; line-height: 1.8; max-width: 460px; margin-bottom: 2.5rem; animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-desc strong { color: var(--cream); }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.25s ease both; }
 
-    /* FORM DOTS */
-    .form-dots {
-      display: flex;
-      gap: 4px;
-      align-items: center;
-    }
-    .form-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      display: inline-block;
-      flex-shrink: 0;
-    }
-    .form-dot.w { background: var(--win); }
-    .form-dot.l { background: var(--loss); }
-    .form-dot.empty { background: #2a2a2a; }
+    .btn-primary { display: inline-block; background: var(--red); color: #fff; padding: 0.85rem 2rem; font-family: 'Oswald', sans-serif; font-size: 0.88rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: background 0.2s, transform 0.15s; }
+    .btn-primary:hover { background: #a52020; transform: translateY(-2px); }
+    .btn-secondary { display: inline-block; background: transparent; color: var(--gold); padding: 0.85rem 2rem; font-family: 'Oswald', sans-serif; font-size: 0.88rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-radius: 4px; border: 1px solid var(--gold); transition: background 0.2s, transform 0.15s; }
+    .btn-secondary:hover { background: rgba(200,169,81,0.1); transform: translateY(-2px); }
 
-    /* SPARKLINE */
-    .sparkline-cell { text-align: center; }
-    .sparkline-cell svg { display: inline-block; vertical-align: middle; }
+    .hero-logo-wrap { flex-shrink: 0; position: relative; animation: fadeUp 0.7s 0.1s ease both; }
+    .logo-glow { position: absolute; inset: -30px; background: radial-gradient(ellipse, rgba(139,26,26,0.3) 0%, transparent 70%); filter: blur(25px); z-index: 0; pointer-events: none; }
+    .league-logo { position: relative; z-index: 1; width: clamp(240px, 28vw, 380px); height: auto; mix-blend-mode: lighten; display: block; }
 
-    /* TREND ARROW */
-    .trend {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.8rem;
-      text-align: center;
-      font-weight: 600;
-    }
-    .trend.up { color: var(--win); }
-    .trend.down { color: var(--loss); }
-    .trend.flat { color: var(--muted); }
+    .divider { height: 3px; background: linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
 
-    /* H2H GRID */
-    .h2h-wrapper {
-      overflow-x: auto;
-      border-radius: 6px;
-      border: 1px solid #222;
-    }
-    .h2h-table {
-      border-collapse: collapse;
-      font-size: 0.75rem;
-      min-width: 700px;
-      width: 100%;
-    }
-    .h2h-table th, .h2h-table td {
-      border: 1px solid #1e1e1e;
-      padding: 0.4rem 0.35rem;
-      text-align: center;
-      white-space: nowrap;
-    }
-    .h2h-table thead th {
-      background: #111;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.5px;
-      color: var(--muted);
-    }
-    .h2h-table tbody th {
-      background: #111;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.72rem;
-      color: var(--text);
-      text-align: left;
-      padding: 0.4rem 0.7rem;
-      font-weight: 500;
-    }
-    .h2h-win {
-      background: rgba(34,197,94,0.18);
-      color: var(--win);
-      font-family: 'Oswald', sans-serif;
-      font-weight: 600;
-      font-size: 0.72rem;
-    }
-    .h2h-loss {
-      background: rgba(239,68,68,0.15);
-      color: var(--loss);
-      font-family: 'Oswald', sans-serif;
-      font-weight: 600;
-      font-size: 0.72rem;
-    }
-    .h2h-self {
-      background: #1a1a1a;
-      color: #333;
-    }
-    .h2h-none {
-      background: transparent;
-      color: #333;
-      font-size: 0.65rem;
-    }
+    /* ── STATS BAR ── */
+    .stats-bar { background: var(--navy); border-bottom: 1px solid var(--border); }
+    .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); }
+    .stat-item { padding: 2rem; text-align: center; border-right: 1px solid rgba(255,255,255,0.07); }
+    .stat-item:last-child { border-right: none; }
+    .stat-number { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--gold); line-height: 1; display: block; }
+    .stat-label { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: #4a6a8a; margin-top: 0.3rem; display: block; }
 
-    /* H2H SUMMARY */
-    .h2h-record-cell {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.72rem;
-      background: #0e0e0e;
-      border-left: 2px solid #222 !important;
-    }
-    .h2h-record-cell span.w { color: var(--win); }
-    .h2h-record-cell span.l { color: var(--loss); }
+    /* ── VOTE SECTION ── */
+    #vote { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .vote-outer { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
+    .vote-header { margin-bottom: 2.5rem; }
+    .vote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 
-    /* FILTER BAR */
-    .filter-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-    .filter-label {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 1px;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
-    .filter-select {
-      background: #1a1a1a;
-      border: 1px solid #333;
-      color: var(--text);
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.85rem;
-      padding: 0.45rem 0.75rem;
-      border-radius: 4px;
-      cursor: pointer;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    .filter-select:focus { border-color: var(--gold); }
-    .filter-reset {
-      background: none;
-      border: 1px solid #333;
-      color: var(--muted);
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 0.5px;
-      padding: 0.45rem 0.75rem;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .filter-reset:hover { border-color: var(--red); color: var(--red); }
+    .poll-card { background: var(--mid); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
 
-    /* RANKINGS ARCHIVE */
-    .archive-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-    .archive-card {
-      background: var(--mid);
-      border: 1px solid #222;
-      border-radius: 6px;
-      padding: 1.25rem;
-      text-decoration: none;
-      color: var(--text);
-      transition: border-color 0.2s, transform 0.15s;
-      position: relative;
-      overflow: hidden;
-    }
-    .archive-card:hover { border-color: var(--red); transform: translateY(-2px); }
-    .archive-card.latest { border-color: var(--gold); }
-    .archive-card .ac-label {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 2px;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-bottom: 0.25rem;
-    }
-    .archive-card .ac-round {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
-      letter-spacing: 1px;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-    .archive-card .ac-top {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.82rem;
-      color: var(--gold);
-      margin-bottom: 0.25rem;
-    }
-    .archive-card .ac-status {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-    .archive-card.coming { opacity: 0.45; pointer-events: none; }
-    .latest-badge {
-      position: absolute;
-      top: 0.5rem;
-      right: 0.5rem;
-      background: var(--gold);
-      color: #000;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.6rem;
-      letter-spacing: 1px;
-      padding: 0.15rem 0.4rem;
-      border-radius: 2px;
-      font-weight: 700;
-    }
+    .poll-card-top { padding: 1.4rem 1.6rem 1.2rem; border-bottom: 1px solid var(--border); position: relative; }
+    .poll-card-top::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; }
+    .poll-card.spoon .poll-card-top::after { background: #7ecfff; }
+    .poll-card.champ .poll-card-top::after { background: var(--gold); }
 
-    /* VOTE */
-    .vote-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-    @media (max-width: 600px) { .vote-grid { grid-template-columns: 1fr; } }
-    .vote-card {
-      background: var(--mid);
-      border: 1px solid #222;
-      border-radius: 8px;
-      padding: 1.5rem;
-    }
-    .vote-card-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.3rem;
-      letter-spacing: 2px;
-      margin-bottom: 0.25rem;
-    }
-    .vote-card-sub {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 1.5px;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-bottom: 1.25rem;
-    }
-    .vote-options { display: flex; flex-direction: column; gap: 0.5rem; }
-    .vote-option {
-      background: #111;
-      border: 1px solid #2a2a2a;
-      border-radius: 5px;
-      padding: 0.65rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      cursor: pointer;
-      transition: border-color 0.15s;
-    }
-    .vote-option:hover { border-color: var(--red); }
-    .vote-option.selected { border-color: var(--gold); background: rgba(244,197,66,0.06); }
-    .vote-option-name {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.88rem;
-    }
-    .vote-bar-wrap {
-      flex: 1;
-      margin: 0 0.75rem;
-      height: 6px;
-      background: #222;
-      border-radius: 3px;
-      overflow: hidden;
-    }
-    .vote-bar {
-      height: 100%;
-      background: var(--red);
-      border-radius: 3px;
-      transition: width 0.6s ease;
-    }
-    .vote-pct {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.9rem;
-      color: var(--muted);
-      width: 2.5rem;
-      text-align: right;
-    }
-    .vote-live-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 1.5px;
-      color: var(--win);
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-    }
-    .live-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--win);
-      animation: pulse 1.4s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.4; transform: scale(0.7); }
-    }
+    .poll-card-icon { font-size: 1.8rem; line-height: 1; margin-bottom: 0.4rem; }
+    .poll-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; line-height: 1; }
+    .poll-card.spoon .poll-card-title { color: #7ecfff; }
+    .poll-card.champ .poll-card-title { color: var(--gold); }
+    .poll-card-sub { font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #4a6a8a; margin-top: 0.2rem; }
 
-    /* ABOUT */
-    .about-section {
-      background: var(--mid);
-      border-top: 1px solid #1e1e1e;
-      padding: 4rem 1.5rem;
+    .live-pill {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-family: 'Oswald', sans-serif; font-size: 0.65rem;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: #4caf50; margin-top: 0.6rem;
     }
-    .about-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .about-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .about-card {
-      background: #111;
-      border: 1px solid #1e1e1e;
-      border-radius: 6px;
-      padding: 1.25rem;
-    }
-    .about-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
-    .about-card-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-bottom: 0.35rem;
-    }
-    .about-card-text {
-      font-size: 0.8rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
+    .live-pill-dot { width: 6px; height: 6px; border-radius: 50%; background: #4caf50; animation: pulse 1.5s infinite; display: inline-block; }
 
-    /* FOOTER */
-    footer {
-      background: #080808;
-      border-top: 1px solid #1a1a1a;
-      padding: 1.25rem 1.5rem;
-      text-align: center;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 1px;
-      color: #444;
-    }
+    .poll-body { padding: 0.4rem 0; }
 
-    /* RESPONSIVE */
-    @media (max-width: 700px) {
-      .leaderboard-table th:nth-child(5),
-      .leaderboard-table td:nth-child(5),
-      .leaderboard-table th:nth-child(6),
-      .leaderboard-table td:nth-child(6) { display: none; }
-      nav a { font-size: 0.75rem; padding: 1rem 0.55rem; }
+    .team-row {
+      display: flex; align-items: center; gap: 0.7rem;
+      padding: 0.6rem 1.4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      position: relative; transition: background 0.15s;
     }
+    .team-row:last-child { border-bottom: none; }
+    .team-row:hover { background: rgba(255,255,255,0.025); }
 
-    /* highlighted leaderboard row */
-    .leaderboard-table tbody tr.highlight-row {
-      background: rgba(244,197,66,0.06) !important;
+    .team-row-bar { position: absolute; left: 0; top: 0; bottom: 0; opacity: 0.07; transition: width 0.5s ease; pointer-events: none; }
+    .poll-card.spoon .team-row-bar { background: #7ecfff; }
+    .poll-card.champ .team-row-bar { background: var(--gold); }
+
+    .team-num { font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem; color: #2a4a6a; width: 18px; flex-shrink: 0; text-align: right; }
+    .team-name { flex: 1; font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--cream); }
+
+    /* ── ODOMETER ── */
+    .odo { display: flex; gap: 1px; flex-shrink: 0; margin-right: 0.4rem; }
+    .odo-digit {
+      background: #0a0f16; border: 1px solid rgba(255,255,255,0.08); border-radius: 3px;
+      width: 15px; height: 21px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem;
+      color: #2a3a4a; transition: color 0.15s, background 0.15s; overflow: hidden;
+    }
+    .odo-digit.lit { color: #e8e8e8; }
+    .poll-card.spoon .odo-digit.lit { color: #7ecfff; background: rgba(126,207,255,0.07); border-color: rgba(126,207,255,0.2); }
+    .poll-card.champ .odo-digit.lit { color: var(--gold); background: rgba(200,169,81,0.07); border-color: rgba(200,169,81,0.2); }
+    @keyframes digitPop { 0%{transform:translateY(-60%);opacity:0} 100%{transform:translateY(0);opacity:1} }
+    .odo-digit.pop { animation: digitPop 0.18s ease; }
+
+    /* ── VOTE BUTTON ── */
+    .vote-btn {
+      background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #4a6a8a;
+      font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 4px; cursor: pointer; flex-shrink: 0; transition: all 0.15s; white-space: nowrap;
+    }
+    .poll-card.spoon .vote-btn:hover { color: #7ecfff; border-color: #7ecfff; background: rgba(126,207,255,0.1); }
+    .poll-card.champ .vote-btn:hover { color: var(--gold); border-color: var(--gold); background: rgba(200,169,81,0.1); }
+
+    .poll-footer { padding: 0.9rem 1.4rem; border-top: 1px solid var(--border); }
+    .poll-total { font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: #2a4a6a; }
+
+    /* skeleton loader */
+    .skeleton { background: linear-gradient(90deg,#141d27 25%,#1e2d3d 50%,#141d27 75%); background-size:200% 100%; animation:shimmer 1.2s infinite; border-radius:3px; height:14px; }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    /* ── ARCHIVE ── */
+    #archive { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
+    .section-label { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 0.4rem; }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); color: #fff; letter-spacing: 1px; margin-bottom: 2.5rem; }
+    .weeks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
+    .week-card { background: var(--mid); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 1rem; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
+    .week-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); opacity: 0; transition: opacity 0.2s; }
+    .week-card:hover { border-color: rgba(200,169,81,0.3); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
+    .week-card:hover::before { opacity: 1; }
+    .week-card.live { border-color: rgba(139,26,26,0.4); background: linear-gradient(135deg, #1a1212, var(--mid)); }
+    .week-card.live::before { background: var(--red); opacity: 1; }
+    .week-card.soon { opacity: 0.45; pointer-events: none; }
+    .week-card.soon::before { display: none; }
+    .card-round { font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: #4a6a8a; margin-bottom: 0.3rem; }
+    .card-title { font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 0.4rem; }
+    .card-leader { font-size: 0.8rem; color: #5a7a9a; }
+    .card-leader strong { color: var(--gold); }
+    .card-right { text-align: right; flex-shrink: 0; }
+    .card-badge { display: inline-block; padding: 0.28rem 0.7rem; border-radius: 100px; font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+    .badge-live { background: rgba(139,26,26,0.3); color: #f08080; border: 1px solid rgba(139,26,26,0.5); }
+    .badge-done { background: rgba(200,169,81,0.12); color: var(--gold); border: 1px solid rgba(200,169,81,0.3); }
+    .badge-soon { background: rgba(255,255,255,0.04); color: #3a5a7a; border: 1px solid rgba(255,255,255,0.07); }
+    .card-arrow { font-size: 1.1rem; color: var(--gold); margin-top: 0.5rem; display: block; transition: transform 0.2s; }
+    .week-card:hover .card-arrow { transform: translateX(4px); }
+
+    /* ── ABOUT ── */
+    .about-section { background: var(--navy); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .about-inner { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-text p { color: #6a8aaa; line-height: 1.85; margin-bottom: 1rem; font-size: 0.95rem; }
+    .about-text p strong { color: var(--cream); }
+    .about-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .fact-card { background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: 10px; padding: 1.3rem; }
+    .fact-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .fact-title { font-family: 'Oswald', sans-serif; font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+    .fact-desc { font-size: 0.8rem; color: #4a6a8a; line-height: 1.5; }
+
+    footer { text-align: center; padding: 2rem; color: #253545; font-size: 0.78rem; font-family: 'Oswald', sans-serif; letter-spacing: 1px; border-top: 1px solid var(--border); }
+
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.2rem; }
+      .nav-links { gap: 0.8rem; }
+      .nav-links a { font-size: 0.72rem; }
+      .hero-inner { flex-direction: column-reverse; padding: 3rem 1.2rem 2rem; text-align: center; }
+      .hero-ctas { justify-content: center; }
+      .hero-desc { margin: 0 auto 2rem; }
+      .league-logo { width: 190px; }
+      .stats-inner { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+      .stat-item:last-child { border-bottom: none; }
+      #archive { padding: 3rem 1.2rem; }
+      .about-inner { grid-template-columns: 1fr; padding: 3rem 1.2rem; gap: 2rem; }
+      .hero-bg-text { font-size: 5rem; }
+      .vote-outer { padding: 3rem 1.2rem; }
+      .vote-grid { grid-template-columns: 1fr; }
+      .odo-digit { width: 13px; height: 19px; font-size: 0.78rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-inner">
-    <a href="index.html" class="nav-brand">PPR</a>
-    <div class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="rankings.html">Draft Night</a>
-      <a href="opening-round.html">Opening Round</a>
-      <a href="round-1.html">Round 1</a>
-      <a href="round-2.html">Round 2</a>
-      <a href="round-3.html">Round 3</a>
-      <a href="round-4.html">Round 4</a>
-      <a href="best-moments.html">📸 2026 Moments</a>
-      <a href="ppr-tunes.html">🎵 PPR Tunes</a>
-      <a href="snakes-and-ladders.html">🐍 Snakes &amp; Ladders</a>
-    </div>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <p class="hero-eyebrow">AFL Fantasy · Est. 2024</p>
-  <img src="ligma-logo.jpg" alt="Ligma League AFL Fantasy" class="hero-logo" />
-  <h1>Paz's <span>Power</span> Rankings</h1>
-  <p class="hero-sub">Ligma League</p>
-  <p style="font-family:'Inter',sans-serif;font-size:0.88rem;color:var(--muted);max-width:520px;margin:0 auto 2rem;line-height:1.6;">
-    Welcome to the official power rankings of the <strong style="color:var(--text);">Ligma League</strong> — 12 teams, zero mercy, and a whole lot of opinions. Every round, the rankings shift. Every week, someone's getting cooked.
-  </p>
-  <div class="hero-stats">
-    <div class="hero-stat"><div class="hero-stat-val">12</div><div class="hero-stat-label">Teams</div></div>
-    <div class="hero-stat"><div class="hero-stat-val">04</div><div class="hero-stat-label">Rounds Complete</div></div>
-    <div class="hero-stat"><div class="hero-stat-val">10.31</div><div class="hero-stat-label">Top Score This Season</div></div>
-  </div>
-  <div class="hero-ctas">
-    <a href="round-3.html" class="btn-primary">📋 Latest Rankings</a>
-    <a href="#vote" class="btn-ghost">🗳 Cast Your Vote</a>
-  </div>
-</section>
-
-<!-- SEASON LEADERBOARD -->
-<div class="section">
-  <div class="section-header">
-    <span class="section-title">📊 Season Leaderboard</span>
-    <span class="section-badge">Through Round 4</span>
-  </div>
-
-  <div class="filter-bar">
-    <span class="filter-label">Filter by team</span>
-    <select class="filter-select" id="teamFilter" onchange="filterLeaderboard()">
-      <option value="">All Teams</option>
-      <option>Broncic</option>
-      <option>Cripps Nipps</option>
-      <option>Dark Magicians</option>
-      <option>DC &amp; Tax Payers</option>
-      <option>Flagdons</option>
-      <option>Foopys</option>
-      <option>Holmes and Gardens</option>
-      <option>Izaks</option>
-      <option>Nethers Men</option>
-      <option>Phillipou</option>
-      <option>Shavas</option>
-      <option>Van Twists</option>
-    </select>
-    <button class="filter-reset" onclick="resetFilter()">✕ Reset</button>
-  </div>
-
-  <div style="overflow-x:auto;">
-  <table class="leaderboard-table" id="leaderboardTable">
-    <thead>
-      <tr>
-        <th class="center">#</th>
-        <th>Team</th>
-        <th class="center">W–L</th>
-        <th class="center">Pts</th>
-        <th class="center">Points For</th>
-        <th class="center">Form</th>
-        <th class="center">Trend</th>
-        <th class="center">Score History</th>
-      </tr>
-    </thead>
-    <tbody id="leaderboardBody">
-    </tbody>
-  </table>
-  </div>
-  <p style="font-family:'Oswald',sans-serif;font-size:0.7rem;letter-spacing:1px;color:#444;margin-top:0.75rem;text-align:right;">
-    Pts = 2 per win, 0 per loss · PPR scores are editorial ratings (out of 12) · Form shows last 4 results oldest→newest
-  </p>
-</div>
-
-<!-- H2H TABLE -->
-<div class="section" style="padding-top:0;">
-  <div class="section-header">
-    <span class="section-title">⚔️ Head-to-Head Results</span>
-    <span class="section-badge">All Rounds</span>
-  </div>
-  <p style="font-family:'Inter',sans-serif;font-size:0.83rem;color:var(--muted);margin-bottom:1.25rem;">
-    Read row vs column. <span style="color:var(--win);font-weight:600;">Green = win</span>, <span style="color:var(--loss);font-weight:600;">Red = loss</span>. Numbers show margins.
-  </p>
-  <div class="h2h-wrapper">
-    <table class="h2h-table" id="h2hTable">
-    </table>
-  </div>
-</div>
-
-<!-- RANKINGS ARCHIVE -->
-<div class="section" style="padding-top:0;" id="archive">
-  <div class="section-header">
-    <span class="section-title">🗂 Rankings Archive</span>
-    <span class="section-badge">All Rounds</span>
-  </div>
-  <div class="archive-grid">
-    <a href="rankings.html" class="archive-card">
-      <div class="ac-label">Week 0</div>
-      <div class="ac-round">Draft Night</div>
-      <div class="ac-top">🥇 Foopys — 9.67</div>
-      <div class="ac-status">Complete →</div>
-    </a>
-    <a href="opening-round.html" class="archive-card">
-      <div class="ac-label">Pre-Season</div>
-      <div class="ac-round">Opening Round</div>
-      <div class="ac-top">🥇 Dark Magicians — 10.25</div>
-      <div class="ac-status">Complete →</div>
-    </a>
-    <a href="round-1.html" class="archive-card">
-      <div class="ac-label">Round 1</div>
-      <div class="ac-round">Round 1</div>
-      <div class="ac-top">🥇 Dark Magicians — 10.58</div>
-      <div class="ac-status">Complete →</div>
-    </a>
-    <a href="round-2.html" class="archive-card">
-      <div class="ac-label">Round 2</div>
-      <div class="ac-round">Round 2</div>
-      <div class="ac-top">🥇 DC &amp; Tax Payers — 10.25</div>
-      <div class="ac-status">Complete →</div>
-    </a>
-    <a href="round-3.html" class="archive-card">
-      <div class="ac-label">Round 3</div>
-      <div class="ac-round">Round 3</div>
-      <div class="ac-top">🥇 Holmes and Gardens — 10.31</div>
-      <div class="ac-status">Complete →</div>
-    </a>
-    <a href="round-4.html" class="archive-card latest">
-      <div class="latest-badge">LATEST</div>
-      <div class="ac-label">Round 4</div>
-      <div class="ac-round">Round 4</div>
-      <div class="ac-top">🥇 Holmes and Gardens</div>
-      <div class="ac-status">● Live →</div>
-    </a>
-    <a href="round-5.html" class="archive-card coming">
-      <div class="ac-label">Round 5</div>
-      <div class="ac-round">Round 5</div>
-      <div class="ac-top" style="color:var(--muted);">Rankings dropping soon...</div>
-      <div class="ac-status">Coming Soon</div>
-    </a>
-  </div>
-</div>
-
-<!-- VOTE -->
-<div class="section" id="vote" style="padding-top:0;">
-  <div class="section-header">
-    <span class="section-title">🗳 Community Poll</span>
-    <span class="section-badge">Cast Your Vote</span>
-  </div>
-  <div class="vote-grid">
-    <div class="vote-card">
-      <div class="vote-live-badge"><span class="live-dot"></span> Live · Updates in real time</div>
-      <div class="vote-card-title">🥄 Wooden Spoon</div>
-      <div class="vote-card-sub">Who finishes last place?</div>
-      <div class="vote-options" id="spoonOptions">
-        <div style="font-family:'Oswald',sans-serif;font-size:0.8rem;color:var(--muted);">Loading…</div>
+  <section class="hero">
+    <div class="hero-grain"></div>
+    <div class="hero-bg-text">LIGMA</div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-badge"><span class="hero-badge-dot"></span>AFL Fantasy · Est. 2024</div>
+        <h1 class="hero-title">
+          <span class="gold">Paz's</span>
+          <span class="white">Power</span>
+          <span class="white">Rankings</span>
+        </h1>
+        <p class="hero-subtitle">Ligma League</p>
+        <p class="hero-desc">
+          Welcome to the official power rankings of the <strong>Ligma League</strong> — 12 teams,
+          zero mercy, and a whole lot of opinions. Every round, the rankings shift.
+          Every week, someone's getting cooked. Where does your team stand?
+        </p>
+        <div class="hero-ctas">
+          <a href="opening-round.html" class="btn-primary">📋 Opening Round Rankings</a>
+          <a href="#vote" class="btn-secondary">🗳 Cast Your Vote ↓</a>
+        </div>
+      </div>
+      <div class="hero-logo-wrap">
+        <div class="logo-glow"></div>
+        <img class="league-logo" src="ligma-logo.jpg" alt="Ligma League AFL Fantasy">
       </div>
     </div>
-    <div class="vote-card">
-      <div class="vote-live-badge"><span class="live-dot"></span> Live · Updates in real time</div>
-      <div class="vote-card-title">🏆 Championship</div>
-      <div class="vote-card-sub">Who wins the Ligma League?</div>
-      <div class="vote-options" id="champOptions">
-        <div style="font-family:'Oswald',sans-serif;font-size:0.8rem;color:var(--muted);">Loading…</div>
+  </section>
+
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item"><span class="stat-number">12</span><span class="stat-label">Teams</span></div>
+      <div class="stat-item"><span class="stat-number">03</span><span class="stat-label">Rounds Complete</span></div>
+      <div class="stat-item"><span class="stat-number">10.31</span><span class="stat-label">Top Score This Season</span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ VOTE SECTION ═══════════ -->
+  <section id="vote">
+    <div class="vote-outer">
+      <div class="vote-header">
+        <div class="section-label">Community Poll</div>
+        <div class="section-title">Cast Your Vote</div>
+      </div>
+      <div class="vote-grid">
+
+        <div class="poll-card spoon">
+          <div class="poll-card-top">
+            <div class="poll-card-icon">🥄</div>
+            <div class="poll-card-title">Wooden Spoon</div>
+            <div class="poll-card-sub">Who finishes last place?</div>
+            <div class="live-pill"><span class="live-pill-dot"></span>Live · Updates in real time</div>
+          </div>
+          <div class="poll-body" id="rows-spoon">
+            <div style="padding:1.5rem 1.4rem">
+              <div class="skeleton" style="width:80%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:60%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:72%"></div>
+            </div>
+          </div>
+          <div class="poll-footer"><span class="poll-total" id="total-spoon">Loading…</span></div>
+        </div>
+
+        <div class="poll-card champ">
+          <div class="poll-card-top">
+            <div class="poll-card-icon">🏆</div>
+            <div class="poll-card-title">Championship</div>
+            <div class="poll-card-sub">Who wins the Ligma League?</div>
+            <div class="live-pill"><span class="live-pill-dot"></span>Live · Updates in real time</div>
+          </div>
+          <div class="poll-body" id="rows-champ">
+            <div style="padding:1.5rem 1.4rem">
+              <div class="skeleton" style="width:80%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:60%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:72%"></div>
+            </div>
+          </div>
+          <div class="poll-footer"><span class="poll-total" id="total-champ">Loading…</span></div>
+        </div>
+
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- ABOUT -->
-<section class="about-section">
-  <div class="about-inner">
-    <div class="section-header">
-      <span class="section-title">What is the Ligma League?</span>
+  <section id="archive">
+    <div class="section-label">Rankings Archive</div>
+    <div class="section-title">All Rounds</div>
+    <div class="weeks-grid">
+      <a class="week-card" href="rankings.html">
+        <div class="card-left">
+          <div class="card-round">Week 0</div>
+          <div class="card-title">Draft Night</div>
+          <div class="card-leader">🥇 <strong>Foopys — 9.67</strong></div>
+        </div>
+        <div class="card-right">
+          <div class="card-badge badge-done">Complete</div>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+      <a class="week-card" href="opening-round.html">
+        <div class="card-left">
+          <div class="card-round">Opening Round</div>
+          <div class="card-title">Opening Round</div>
+          <div class="card-leader">🥇 <strong>Dark Magicians — 10.25</strong></div>
+        </div>
+        <div class="card-right">
+          <div class="card-badge badge-done">Complete</div>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+      <a class="week-card" href="round-1.html">
+        <div class="card-left">
+          <div class="card-round">Round 1</div>
+          <div class="card-title">Round 1</div>
+          <div class="card-leader">🥇 <strong>Dark Magicians — 10.58</strong></div>
+        </div>
+        <div class="card-right">
+          <div class="card-badge badge-done">Complete</div>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+      <a class="week-card" href="round-2.html">
+        <div class="card-left">
+          <div class="card-round">Round 2</div>
+          <div class="card-title">Round 2</div>
+          <div class="card-leader">🥇 <strong>DC &amp; Tax Payers — 10.25</strong></div>
+        </div>
+        <div class="card-right">
+          <div class="card-badge badge-done">Complete</div>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+      <a class="week-card live" href="round-3.html">
+        <div class="card-left">
+          <div class="card-round">Round 3</div>
+          <div class="card-title">Round 3</div>
+          <div class="card-leader">🥇 <strong>Holmes and Gardens — 10.31</strong></div>
+        </div>
+        <div class="card-right">
+          <div class="card-badge badge-live">● Latest</div>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+      <a class="week-card soon" href="round-4.html">
+        <div class="card-left"><div class="card-round">Round 4</div><div class="card-title">Round 4</div><div class="card-leader">Rankings dropping soon...</div></div>
+        <div class="card-right"><div class="card-badge badge-soon">Coming Soon</div></div>
+      </a>
     </div>
-    <p style="color:var(--muted);font-size:0.9rem;line-height:1.7;max-width:680px;">
-      The <strong style="color:var(--text);">Ligma League</strong> is a 12-team AFL Fantasy competition where bragging rights are everything and no lead is ever safe. Founded in 2024, the league has quickly become a hotbed of trade controversy, trash talk, and the occasional miracle comeback. Every week, Paz drops the official <strong style="color:var(--text);">Power Rankings</strong> — an unbiased, ruthlessly honest assessment of where every team stands.
-    </p>
-    <div class="about-grid">
-      <div class="about-card"><div class="about-icon">🏆</div><div class="about-card-title">12 Teams</div><div class="about-card-text">One winner. Eleven ways to lose. No excuses.</div></div>
-      <div class="about-card"><div class="about-icon">📊</div><div class="about-card-title">Weekly Rankings</div><div class="about-card-text">Updated every round. The truth hurts.</div></div>
-      <div class="about-card"><div class="about-icon">🔥</div><div class="about-card-title">Est. 2024</div><div class="about-card-text">Fresh league. Long memories.</div></div>
-      <div class="about-card"><div class="about-icon">🥄</div><div class="about-card-title">Wooden Spoon</div><div class="about-card-text">Last place gets immortalised. Not in a good way.</div></div>
+  </section>
+
+  <section class="about-section">
+    <div class="about-inner">
+      <div class="about-text">
+        <div class="section-label">The League</div>
+        <div class="section-title">What is the<br>Ligma League?</div>
+        <p>The <strong>Ligma League</strong> is a 12-team AFL Fantasy competition where bragging rights are everything and no lead is ever safe. Founded in 2024, the league has quickly become a hotbed of trade controversy, trash talk, and the occasional miracle comeback.</p>
+        <p>Every week, Paz drops the official <strong>Power Rankings</strong> — an unbiased, ruthlessly honest assessment of where every team stands. If you're at the bottom, you earned it.</p>
+      </div>
+      <div class="about-facts">
+        <div class="fact-card"><div class="fact-icon">🏆</div><div class="fact-title">12 Teams</div><div class="fact-desc">One winner. Eleven ways to lose. No excuses.</div></div>
+        <div class="fact-card"><div class="fact-icon">📊</div><div class="fact-title">Weekly Rankings</div><div class="fact-desc">Updated every round. The truth hurts.</div></div>
+        <div class="fact-card"><div class="fact-icon">🔥</div><div class="fact-title">Est. 2024</div><div class="fact-desc">Fresh league. Long memories.</div></div>
+        <div class="fact-card"><div class="fact-icon">🥄</div><div class="fact-title">Wooden Spoon</div><div class="fact-desc">Last place gets immortalised. Not in a good way.</div></div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<footer>Paz's Power Rankings © 2026 · Ligma League AFL Fantasy</footer>
+  <footer>Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</footer>
 
-<script>
-// ─── DATA ────────────────────────────────────────────────────────────────────
-// PPR scores per round (editorial rating out of 12)
-const pprScores = {
-  'Broncic':           [8.42, 8.38, 9.25, null],
-  'Cripps Nipps':      [7.92, 7.13, 7.43, null],
-  'Dark Magicians':    [10.58, 9.25, 9.25, null],
-  'DC & Tax Payers':   [10.00, 10.25, 9.50, null],
-  'Flagdons':          [9.75, 9.38, 10.06, null],
-  'Foopys':            [10.17, 10.13, 9.44, null],
-  'Holmes and Gardens':[10.33, 9.75, 10.31, null],
-  'Izaks':             [8.25, 7.63, 8.75, null],
-  'Nethers Men':       [7.75, 7.88, 8.50, null],
-  'Phillipou':         [8.17, 8.50, 9.38, null],
-  'Shavas':            [8.33, 8.25, 9.06, null],
-  'Van Twists':        [9.67, 8.13, 7.38, null],
-};
+  <!-- ═══════════ FIREBASE VOTING ═══════════ -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, doc, onSnapshot, runTransaction, setDoc, getDoc }
+      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// Actual H2H match results per round: [winner, loser, winnerScore, loserScore]
-// R1: from image 1
-// R2: from image 2
-// R3: from image 3
-// R4: from image 4
-const matchResults = [
-  // Round 1
-  { round: 1, winner: 'Cripps Nipps',      loser: 'Broncic',           ws: 1202, ls: 1109 },
-  { round: 1, winner: 'Phillipou',          loser: 'Van Twists',        ws: 1056, ls: 1048 },
-  { round: 1, winner: 'Dark Magicians',     loser: 'Foopys',            ws: 1196, ls: 1180 },
-  { round: 1, winner: 'DC & Tax Payers',    loser: 'Izaks',             ws: 1247, ls: 1119 },
-  { round: 1, winner: 'Holmes and Gardens', loser: 'Nethers Men',       ws: 1347, ls: 918  },
-  { round: 1, winner: 'Flagdons',           loser: 'Shavas',            ws: 1064, ls: 1055 },
-  // Round 2
-  { round: 2, winner: 'Broncic',            loser: 'Flagdons',          ws: 1226, ls: 1000 },
-  { round: 2, winner: 'Phillipou',          loser: 'Dark Magicians',    ws: 1155, ls: 1126 },
-  { round: 2, winner: 'DC & Tax Payers',    loser: 'Van Twists',        ws: 1158, ls: 1143 },
-  { round: 2, winner: 'Foopys',             loser: 'Cripps Nipps',      ws: 1066, ls: 585  },
-  { round: 2, winner: 'Nethers Men',        loser: 'Izaks',             ws: 870,  ls: 854  },
-  { round: 2, winner: 'Shavas',             loser: 'Holmes and Gardens',ws: 1101, ls: 1013 },
-  // Round 3
-  { round: 3, winner: 'Broncic',            loser: 'Holmes and Gardens',ws: 1123, ls: 941  },
-  { round: 3, winner: 'Phillipou',          loser: 'DC & Tax Payers',   ws: 920,  ls: 916  },
-  { round: 3, winner: 'Cripps Nipps',       loser: 'Dark Magicians',    ws: 847,  ls: 697  },
-  { round: 3, winner: 'Nethers Men',        loser: 'Van Twists',        ws: 1072, ls: 964  },
-  { round: 3, winner: 'Flagdons',           loser: 'Foopys',            ws: 1177, ls: 1054 },
-  { round: 3, winner: 'Izaks',              loser: 'Shavas',            ws: 1147, ls: 1116 },
-  // Round 4
-  { round: 4, winner: 'Izaks',              loser: 'Broncic',           ws: 1139, ls: 1061 },
-  { round: 4, winner: 'Cripps Nipps',       loser: 'Phillipou',         ws: 1072, ls: 717  },
-  { round: 4, winner: 'DC & Tax Payers',    loser: 'Nethers Men',       ws: 1157, ls: 1053 },
-  { round: 4, winner: 'Dark Magicians',     loser: 'Flagdons',          ws: 1113, ls: 1004 },
-  { round: 4, winner: 'Van Twists',         loser: 'Shavas',            ws: 1221, ls: 1100 },
-  { round: 4, winner: 'Holmes and Gardens', loser: 'Foopys',            ws: 1290, ls: 1095 },
-];
+    const firebaseConfig = {
+      apiKey: "AIzaSyD_vPHSuGEOST39l-aMuy7rhw4dUGb2qvc",
+      authDomain: "ligma-league.firebaseapp.com",
+      projectId: "ligma-league",
+      storageBucket: "ligma-league.firebasestorage.app",
+      messagingSenderId: "869683799608",
+      appId: "1:869683799608:web:26e62dc39dd627f86e68cd"
+    };
 
-const TEAMS = Object.keys(pprScores).sort();
-const ROUNDS_PLAYED = 4;
-const MAX_FORM = 5; // rolling window
+    const app = initializeApp(firebaseConfig);
+    const db  = getFirestore(app);
 
-// ─── DERIVED DATA ─────────────────────────────────────────────────────────────
-function buildTeamStats() {
-  const stats = {};
-  TEAMS.forEach(t => {
-    stats[t] = { wins: 0, losses: 0, pointsFor: 0, pointsAgainst: 0, results: [], scores: pprScores[t] };
-  });
+    const TEAMS = [
+      "Foopys", "Van Twists", "Dark Magicians", "Cripps Nipps",
+      "Phillipou", "Flagdons", "Nethers men", "Shavas",
+      "Better Holmes and Gardens", "Izaks", "Broncic", "DC & Tax Payers"
+    ];
+    const MAX = 999999;
 
-  matchResults.forEach(m => {
-    stats[m.winner].wins++;
-    stats[m.winner].pointsFor += m.ws;
-    stats[m.winner].pointsAgainst += m.ls;
-    stats[m.winner].results.push({ round: m.round, result: 'W', opp: m.loser, margin: m.ws - m.ls });
-
-    stats[m.loser].losses++;
-    stats[m.loser].pointsFor += m.ls;
-    stats[m.loser].pointsAgainst += m.ws;
-    stats[m.loser].results.push({ round: m.round, result: 'L', opp: m.winner, margin: -(m.ws - m.ls) });
-  });
-
-  // sort results by round
-  TEAMS.forEach(t => stats[t].results.sort((a,b) => a.round - b.round));
-  return stats;
-}
-
-function getForm(results) {
-  // last MAX_FORM results
-  const recent = results.slice(-MAX_FORM);
-  return recent.map(r => r.result);
-}
-
-function getLastPPRRank(scores) {
-  // Find last non-null score rank — we compute this after sorting
-  return null; // computed after
-}
-
-// ─── BUILD LEADERBOARD ───────────────────────────────────────────────────────
-function buildLeaderboard() {
-  const stats = buildTeamStats();
-
-  // Sort: by wins desc, then points for desc
-  const sorted = TEAMS.slice().sort((a,b) => {
-    const sDiff = stats[b].wins - stats[a].wins;
-    if (sDiff !== 0) return sDiff;
-    return stats[b].pointsFor - stats[a].pointsFor;
-  });
-
-  // Compute PPR rank change (latest vs previous round)
-  // Round 3 PPR scores (index 2) vs Round 4 (index 3 = null, so use round 3 vs round 2)
-  const lastScores = TEAMS.map(t => ({ t, s: pprScores[t][2] })).sort((a,b) => b.s - a.s);
-  const prevScores = TEAMS.map(t => ({ t, s: pprScores[t][1] })).sort((a,b) => b.s - a.s);
-  const lastRank = {}; lastScores.forEach((x,i) => lastRank[x.t] = i+1);
-  const prevRank = {}; prevScores.forEach((x,i) => prevRank[x.t] = i+1);
-
-  const tbody = document.getElementById('leaderboardBody');
-  tbody.innerHTML = '';
-
-  sorted.forEach((team, idx) => {
-    const rank = idx + 1;
-    const s = stats[team];
-    const form = getForm(s.results);
-    const ptsTotal = s.wins * 2;
-    const rankChange = prevRank[team] - lastRank[team]; // positive = moved up
-
-    // Build form dots (pad to MAX_FORM)
-    let formHTML = '<div class="form-dots">';
-    const padded = Array(MAX_FORM).fill(null);
-    form.forEach((r, i) => padded[MAX_FORM - form.length + i] = r);
-    padded.forEach(r => {
-      if (r === null) formHTML += `<span class="form-dot empty" title="Not played"></span>`;
-      else if (r === 'W') formHTML += `<span class="form-dot w" title="Win"></span>`;
-      else formHTML += `<span class="form-dot l" title="Loss"></span>`;
-    });
-    formHTML += '</div>';
-
-    // Trend
-    let trendHTML = '';
-    if (rankChange > 0) trendHTML = `<span class="trend up">↑${rankChange}</span>`;
-    else if (rankChange < 0) trendHTML = `<span class="trend down">↓${Math.abs(rankChange)}</span>`;
-    else trendHTML = `<span class="trend flat">—</span>`;
-
-    // Sparkline
-    const scores = s.scores.filter(x => x !== null);
-    const sparkHTML = buildSparkline(scores);
-
-    // Rank medal
-    let rankClass = 'lb-rank';
-    if (rank === 1) rankClass += ' gold';
-    else if (rank === 2) rankClass += ' silver';
-    else if (rank === 3) rankClass += ' bronze';
-
-    const tr = document.createElement('tr');
-    if (rank <= 3) tr.classList.add('top-3');
-    tr.dataset.team = team;
-    tr.innerHTML = `
-      <td class="${rankClass}">${rank}</td>
-      <td class="lb-team">${team}</td>
-      <td class="lb-record">${s.wins}–${s.losses}</td>
-      <td class="lb-pts">${ptsTotal}</td>
-      <td class="lb-pf">${s.pointsFor.toLocaleString()}</td>
-      <td>${formHTML}</td>
-      <td>${trendHTML}</td>
-      <td class="sparkline-cell">${sparkHTML}</td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-function buildSparkline(scores) {
-  if (!scores.length) return '—';
-  const W = 80, H = 28, PAD = 4;
-  const min = Math.min(...scores) - 0.2;
-  const max = Math.max(...scores) + 0.2;
-  const pts = scores.map((s, i) => {
-    const x = PAD + (i / Math.max(scores.length - 1, 1)) * (W - PAD * 2);
-    const y = H - PAD - ((s - min) / (max - min)) * (H - PAD * 2);
-    return `${x},${y}`;
-  });
-  const latest = scores[scores.length - 1];
-  const prev = scores[scores.length - 2];
-  const color = prev === undefined ? '#f4c542' : latest >= prev ? '#22c55e' : '#ef4444';
-
-  const lastPt = pts[pts.length - 1].split(',');
-  return `<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
-    <polyline points="${pts.join(' ')}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
-    <circle cx="${lastPt[0]}" cy="${lastPt[1]}" r="3" fill="${color}" />
-  </svg>`;
-}
-
-// ─── BUILD H2H TABLE ─────────────────────────────────────────────────────────
-function buildH2H() {
-  const stats = buildTeamStats();
-  const table = document.getElementById('h2hTable');
-
-  // Build lookup: h2h[winner][loser] = {margin, round}
-  const h2h = {};
-  TEAMS.forEach(t => { h2h[t] = {}; });
-  matchResults.forEach(m => {
-    if (!h2h[m.winner][m.loser]) h2h[m.winner][m.loser] = [];
-    h2h[m.winner][m.loser].push(m.ws - m.ls);
-  });
-
-  // Sort teams by current leaderboard position (wins)
-  const sorted = TEAMS.slice().sort((a,b) => {
-    const diff = stats[b].wins - stats[a].wins;
-    if (diff !== 0) return diff;
-    return stats[b].pointsFor - stats[a].pointsFor;
-  });
-
-  // Short names for header
-  const short = t => t.replace(' and ', ' & ').replace('DC & Tax Payers', 'DC').replace('Dark Magicians', 'Mag').replace('Holmes and Gardens', 'H&G').replace('Cripps Nipps','CNipps').replace('Nethers Men','Nethers').replace('Van Twists','VanTwi').replace('Phillipou','Philli').replace('Flagdons','Flags').replace('Foopys','Foops').replace('Shavas','Shavas').replace('Broncic','Bronc').replace('Izaks','Izaks');
-
-  let html = '<thead><tr><th style="text-align:left;min-width:110px;">Team</th>';
-  sorted.forEach(t => html += `<th title="${t}">${short(t)}</th>`);
-  html += '<th style="border-left:2px solid #222;">W–L</th></tr></thead><tbody>';
-
-  sorted.forEach(rowTeam => {
-    const rs = stats[rowTeam];
-    html += `<tr><th>${rowTeam}</th>`;
-    sorted.forEach(colTeam => {
-      if (rowTeam === colTeam) {
-        html += `<td class="h2h-self">—</td>`;
-      } else {
-        const wins = h2h[rowTeam][colTeam] || [];
-        const losses = h2h[colTeam][rowTeam] || [];
-        if (!wins.length && !losses.length) {
-          html += `<td class="h2h-none">·</td>`;
-        } else if (wins.length) {
-          html += `<td class="h2h-win" title="Won by ${wins[0]}">W+${wins[0]}</td>`;
-        } else {
-          html += `<td class="h2h-loss" title="Lost by ${losses[0]}">L-${losses[0]}</td>`;
-        }
+    // Initialise docs if they don't exist yet
+    async function ensureDoc(poll) {
+      const ref = doc(db, "votes", poll);
+      const snap = await getDoc(ref);
+      if (!snap.exists()) {
+        const init = {};
+        TEAMS.forEach(t => init[t] = 0);
+        await setDoc(ref, init);
       }
-    });
-    html += `<td class="h2h-record-cell"><span class="w">${rs.wins}W</span>–<span class="l">${rs.losses}L</span></td>`;
-    html += '</tr>';
-  });
+    }
+    await ensureDoc("spoon");
+    await ensureDoc("champ");
 
-  html += '</tbody>';
-  table.innerHTML = html;
-}
+    // Build 6-digit odometer HTML
+    function odoHTML(count) {
+      const clamped = Math.min(count, MAX);
+      const s = String(clamped).padStart(6, '0');
+      const litFrom = 6 - String(clamped).length;
+      return Array.from(s).map((d, i) =>
+        `<div class="odo-digit${i >= litFrom ? ' lit' : ''}" data-v="${d}">${d}</div>`
+      ).join('');
+    }
 
-// ─── FILTER ───────────────────────────────────────────────────────────────────
-function filterLeaderboard() {
-  const val = document.getElementById('teamFilter').value;
-  document.querySelectorAll('#leaderboardBody tr').forEach(tr => {
-    tr.style.display = (!val || tr.dataset.team === val) ? '' : 'none';
-  });
-}
+    // Full render of a poll
+    function renderPoll(poll, data) {
+      const container = document.getElementById(`rows-${poll}`);
+      const totalEl   = document.getElementById(`total-${poll}`);
+      const vals  = TEAMS.map(t => data[t] ?? 0);
+      const maxV  = Math.max(...vals, 1);
+      const total = vals.reduce((a, b) => a + b, 0);
 
-function resetFilter() {
-  document.getElementById('teamFilter').value = '';
-  filterLeaderboard();
-}
+      container.innerHTML = TEAMS.map((team, i) => {
+        const count = data[team] ?? 0;
+        const pct   = (count / maxV) * 100;
+        return `
+          <div class="team-row">
+            <div class="team-row-bar" style="width:${pct}%"></div>
+            <span class="team-num">${i + 1}</span>
+            <span class="team-name">${team}</span>
+            <div class="odo" id="odo-${poll}-${i}">${odoHTML(count)}</div>
+            <button class="vote-btn" data-poll="${poll}" data-team="${team}" data-idx="${i}">Vote</button>
+          </div>`;
+      }).join('');
 
-// ─── VOTES ───────────────────────────────────────────────────────────────────
-const voteTeams = ['Holmes and Gardens','DC & Tax Payers','Phillipou','Flagdons','Broncic','Foopys','Dark Magicians'];
-const spoonTeams = ['Van Twists','Cripps Nipps','Nethers Men','Izaks','Shavas','Broncic'];
+      // attach click handlers
+      container.querySelectorAll('.vote-btn').forEach(btn => {
+        btn.addEventListener('click', () => castVote(btn.dataset.poll, btn.dataset.team, +btn.dataset.idx));
+      });
 
-function seedVotes(key, teams) {
-  if (!localStorage.getItem(key)) {
-    const obj = {};
-    teams.forEach((t,i) => obj[t] = Math.floor(Math.random() * 40) + (teams.length - i) * 5);
-    localStorage.setItem(key, JSON.stringify(obj));
-  }
-  return JSON.parse(localStorage.getItem(key));
-}
+      if (totalEl) totalEl.textContent = total.toLocaleString() + ' vote' + (total !== 1 ? 's' : '');
+    }
 
-function renderVotes(containerId, key, teams) {
-  const votes = seedVotes(key, teams);
-  const voted = localStorage.getItem(key + '_voted');
-  const total = Object.values(votes).reduce((a,b) => a+b, 0);
-  const sorted = teams.slice().sort((a,b) => votes[b] - votes[a]);
-  const el = document.getElementById(containerId);
-  el.innerHTML = '';
-  sorted.forEach(team => {
-    const pct = total > 0 ? Math.round((votes[team] / total) * 100) : 0;
-    const div = document.createElement('div');
-    div.className = 'vote-option' + (voted === team ? ' selected' : '');
-    div.innerHTML = `
-      <span class="vote-option-name">${team}</span>
-      <div class="vote-bar-wrap"><div class="vote-bar" style="width:${pct}%;background:${containerId==='spoonOptions'?'var(--red)':'var(--gold)'}"></div></div>
-      <span class="vote-pct">${pct}%</span>
-    `;
-    div.addEventListener('click', () => {
-      if (voted) return;
-      votes[team] = (votes[team] || 0) + 1;
-      localStorage.setItem(key, JSON.stringify(votes));
-      localStorage.setItem(key + '_voted', team);
-      renderVotes(containerId, key, teams);
-    });
-    el.appendChild(div);
-  });
-}
+    // Patch-update changed odo digits + bars (no full re-render)
+    function patchPoll(poll, data) {
+      const vals  = TEAMS.map(t => data[t] ?? 0);
+      const maxV  = Math.max(...vals, 1);
+      const total = vals.reduce((a, b) => a + b, 0);
 
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  buildLeaderboard();
-  buildH2H();
-  renderVotes('spoonOptions', 'ligma_spoon_2026', spoonTeams);
-  renderVotes('champOptions', 'ligma_champ_2026', voteTeams);
-});
-</script>
+      TEAMS.forEach((team, i) => {
+        const count  = data[team] ?? 0;
+        const odoEl  = document.getElementById(`odo-${poll}-${i}`);
+        if (odoEl) {
+          const newStr  = String(Math.min(count, MAX)).padStart(6, '0');
+          const litFrom = 6 - String(Math.min(count, MAX)).length;
+          odoEl.querySelectorAll('.odo-digit').forEach((el, j) => {
+            const newVal = newStr[j];
+            if (el.dataset.v !== newVal) {
+              el.dataset.v = newVal;
+              el.textContent = newVal;
+              el.classList.toggle('lit', j >= litFrom);
+              el.classList.remove('pop');
+              void el.offsetWidth;
+              el.classList.add('pop');
+            }
+          });
+        }
+        // update bar
+        const rows = document.querySelectorAll(`#rows-${poll} .team-row`);
+        if (rows[i]) {
+          const bar = rows[i].querySelector('.team-row-bar');
+          if (bar) bar.style.width = ((count / maxV) * 100) + '%';
+        }
+      });
+
+      const totalEl = document.getElementById(`total-${poll}`);
+      if (totalEl) totalEl.textContent = total.toLocaleString() + ' vote' + (total !== 1 ? 's' : '');
+    }
+
+    // Real-time listeners
+    const prevData = { spoon: null, champ: null };
+
+    function listenPoll(poll) {
+      onSnapshot(doc(db, "votes", poll), snap => {
+        if (!snap.exists()) return;
+        const data = snap.data();
+        if (!prevData[poll]) {
+          renderPoll(poll, data);   // first load
+        } else {
+          patchPoll(poll, data);    // live update
+        }
+        prevData[poll] = { ...data };
+      });
+    }
+
+    listenPoll("spoon");
+    listenPoll("champ");
+
+    // Atomic vote increment
+    async function castVote(poll, team) {
+      const ref = doc(db, "votes", poll);
+      try {
+        await runTransaction(db, async tx => {
+          const snap = await tx.get(ref);
+          const curr = snap.exists() ? (snap.data()[team] ?? 0) : 0;
+          if (curr >= MAX) return;
+          tx.update(ref, { [team]: curr + 1 });
+        });
+      } catch(e) {
+        console.error("Vote failed:", e);
+      }
+    }
+  </script>
+
+  <script src="nav.js"></script>
 </body>
 </html>
