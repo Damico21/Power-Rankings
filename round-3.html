@@ -2,553 +2,322 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Round 3 Rankings — Paz's Power Rankings</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <style>
-    :root {
-      --navy:#1b2a3b; --red:#8b1a1a; --gold:#c8a951; --cream:#e8dcc8;
-      --dark:#0d1117; --mid:#141d27; --text-muted:#6a8aaa;
-      --border:rgba(255,255,255,0.06); --green:#22c55e; --red-move:#ef4444;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html { scroll-behavior:smooth; }
-    body { font-family:'Inter',sans-serif; background:var(--dark); color:#fff; min-height:100vh; overflow-x:hidden; }
-
-    /* NAV */
-    nav {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:0 2.5rem; background:rgba(13,17,23,0.97);
-      border-bottom:2px solid var(--red); position:sticky; top:0; z-index:200;
-      backdrop-filter:blur(12px); height:58px;
-    }
-    .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; color:var(--gold); text-decoration:none; letter-spacing:3px; flex-shrink:0; }
-    .nav-links { display:flex; gap:0; list-style:none; overflow-x:auto; }
-    .nav-links a {
-      color:#7a9ab5; text-decoration:none; font-family:'Oswald',sans-serif;
-      font-size:0.8rem; letter-spacing:1.5px; text-transform:uppercase;
-      padding:0 1rem; height:58px; display:flex; align-items:center;
-      border-bottom:2px solid transparent; transition:color 0.2s,border-color 0.2s; white-space:nowrap;
-    }
-    .nav-links a:hover { color:#fff; }
-    .nav-links a.active { color:var(--gold); border-bottom-color:var(--gold); }
-    .nav-links a.soon { opacity:0.5; font-style:italic; }
-
-    /* DIVIDER */
-    .divider { height:3px; background:linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
-
-    /* PAGE HEADER */
-    .page-header {
-      background:linear-gradient(180deg, #111827 0%, var(--dark) 100%);
-      padding:3.5rem 2.5rem 2.5rem; text-align:center;
-      border-bottom:1px solid var(--border); position:relative; overflow:hidden;
-    }
-    .page-header::before {
-      content:''; position:absolute; inset:0;
-      background:radial-gradient(ellipse at 50% -20%, rgba(200,169,81,0.08) 0%, transparent 65%);
-      pointer-events:none;
-    }
-    .page-header .eyebrow { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:0.5rem; }
-    .page-header h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.4rem,6vw,4rem); color:#fff; letter-spacing:2px; margin-bottom:0.3rem; }
-    .page-header .subtitle { font-family:'Oswald',sans-serif; font-size:0.82rem; letter-spacing:2px; text-transform:uppercase; color:#4a6a8a; }
-
-    /* MAIN */
-    .main { max-width:820px; margin:0 auto; padding:3rem 1.5rem 5rem; }
-
-    .section-label { font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:0.4rem; }
-    .section-title {
-      font-family:'Bebas Neue',sans-serif; font-size:clamp(1.8rem,4vw,2.6rem);
-      color:#fff; letter-spacing:1px; margin-bottom:1.5rem;
-      display:flex; align-items:center; gap:0.75rem;
-    }
-    .section-title .badge {
-      font-family:'Oswald',sans-serif; font-size:0.7rem; letter-spacing:1.5px;
-      text-transform:uppercase; color:#000; background:var(--gold);
-      padding:0.25rem 0.65rem; border-radius:4px;
-    }
-
-    /* RANKINGS TABLE */
-    .rankings-table {
-      width:100%; border-collapse:collapse; background:var(--mid);
-      border-radius:12px; overflow:hidden; box-shadow:0 4px 40px rgba(0,0,0,0.5); margin-bottom:3rem;
-    }
-    .rankings-table thead tr { background:#0f1620; border-bottom:2px solid rgba(200,169,81,0.25); }
-    .rankings-table thead th {
-      padding:0.9rem 1.2rem; text-align:left;
-      font-family:'Oswald',sans-serif; font-size:0.67rem; letter-spacing:2.5px;
-      text-transform:uppercase; color:var(--gold); font-weight:600;
-    }
-    .rankings-table thead th:first-child { text-align:center; width:60px; }
-    .rankings-table thead th:nth-child(2) { width:56px; text-align:center; }
-    .rankings-table thead th:last-child { text-align:right; }
-
-    .rankings-table tbody tr { border-bottom:1px solid var(--border); transition:background 0.15s; cursor:pointer; }
-    .rankings-table tbody tr:hover { background:rgba(200,169,81,0.04); }
-    .rankings-table tbody tr:last-child { border-bottom:none; }
-    .rankings-table tbody tr.r1 { background:rgba(200,169,81,0.06); }
-    .rankings-table tbody tr.r2 { background:rgba(192,192,192,0.025); }
-    .rankings-table tbody tr.r3 { background:rgba(205,127,50,0.025); }
-    .rankings-table tbody tr.r1:hover { background:rgba(200,169,81,0.1); }
-
-    .rank-cell { text-align:center; padding:0.9rem 0.5rem; }
-    .rank-badge {
-      display:inline-flex; align-items:center; justify-content:center;
-      width:34px; height:34px; border-radius:50%;
-      font-family:'Bebas Neue',sans-serif; font-size:1rem;
-      background:rgba(255,255,255,0.05); color:#4a6a8a;
-    }
-    .r1 .rank-badge { background:linear-gradient(135deg,#c8a951,#a07830); color:#000; }
-    .r2 .rank-badge { background:linear-gradient(135deg,#d0d0d0,#9ca3af); color:#000; }
-    .r3 .rank-badge { background:linear-gradient(135deg,#cd7f32,#a0522d); color:#fff; }
-
-    .move-cell { text-align:center; padding:0.9rem 0.4rem; }
-    .mv {
-      display:inline-flex; align-items:center; justify-content:center;
-      font-family:'Oswald',sans-serif; font-size:0.7rem; font-weight:600;
-      padding:0.18rem 0.45rem; border-radius:20px; white-space:nowrap;
-    }
-    .mv-up   { color:var(--green);      background:rgba(34,197,94,0.12); }
-    .mv-down { color:var(--red-move);   background:rgba(239,68,68,0.1); }
-    .mv-same { color:var(--text-muted); background:rgba(106,138,170,0.1); }
-
-    .team-cell { padding:0.75rem 1.2rem; }
-    .team-inner { display:flex; align-items:center; gap:1rem; }
-    .team-photo {
-      width:44px; height:44px; border-radius:50%; object-fit:cover; flex-shrink:0;
-      border:2px solid rgba(255,255,255,0.08); transition:border-color 0.2s;
-    }
-    .rankings-table tbody tr:hover .team-photo { border-color:var(--gold); }
-    .team-name {
-      font-family:'Oswald',sans-serif; font-size:1rem; font-weight:500;
-      color:#fff; letter-spacing:0.5px; display:flex; align-items:center; gap:0.5rem;
-    }
-    .medal-link {
-      display:inline-flex; align-items:center; justify-content:center;
-      width:22px; height:22px; border-radius:50%;
-      background:linear-gradient(135deg,#c8a951,#a07830);
-      color:#000; font-size:0.6rem; font-weight:900; text-decoration:none; flex-shrink:0;
-      box-shadow:0 0 0 0 rgba(200,169,81,0.5);
-      animation:medalGlow 2.8s ease-in-out infinite; transition:transform 0.18s;
-    }
-    .medal-link:hover { transform:scale(1.3); }
-    @keyframes medalGlow {
-      0%,100% { box-shadow:0 0 0 0 rgba(200,169,81,0.5); }
-      50%      { box-shadow:0 0 0 6px rgba(200,169,81,0); }
-    }
-
-    .score-cell { padding:0.9rem 1.5rem; font-family:'Bebas Neue',sans-serif; font-size:1.4rem; color:var(--gold); text-align:right; letter-spacing:1px; }
-    .r2 .score-cell { color:#c0c0c0; }
-    .r3 .score-cell { color:#cd7f32; }
-    .rankings-table tbody tr:not(.r1):not(.r2):not(.r3) .score-cell { color:var(--text-muted); font-size:1.2rem; }
-
-    /* WAGERS */
-    .wagers-wrap { background:var(--mid); border:1px solid var(--border); border-radius:14px; overflow:hidden; box-shadow:0 4px 40px rgba(0,0,0,0.4); }
-    .wagers-head {
-      padding:1.2rem 1.6rem 1.1rem; border-bottom:1px solid var(--border);
-      display:flex; align-items:center; justify-content:space-between; background:#0f1620;
-    }
-    .wagers-head h2 { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:2px; color:var(--gold); display:flex; align-items:center; gap:0.5rem; }
-    .wagers-badge { font-family:'Oswald',sans-serif; font-size:0.68rem; letter-spacing:1.5px; text-transform:uppercase; color:#000; background:var(--gold); padding:0.22rem 0.65rem; border-radius:4px; }
-    .wagers-body { padding:1.8rem 1.6rem; }
-    .wagers-intro { font-size:0.95rem; color:#8aaccc; line-height:1.75; margin-bottom:1.8rem; border-left:3px solid var(--red); padding-left:1rem; }
-
-    .match-grid { display:flex; flex-direction:column; gap:0.9rem; margin-bottom:1.8rem; }
-    .match-item {
-      background:rgba(255,255,255,0.03); border:1px solid var(--border);
-      border-radius:10px; padding:1.1rem 1.3rem; position:relative; overflow:hidden;
-    }
-    .match-item::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; }
-    .match-item.lock::before      { background:var(--gold); }
-    .match-item.landslide::before { background:var(--red-move); }
-    .match-item.motw::before      { background:#7c3aed; }
-    .match-item:not(.lock):not(.landslide):not(.motw)::before { background:#2a4a6a; }
-
-    .match-top { display:flex; align-items:flex-start; justify-content:space-between; gap:0.5rem; margin-bottom:0.5rem; flex-wrap:wrap; }
-    .match-result { font-family:'Oswald',sans-serif; font-size:0.98rem; font-weight:600; color:#fff; letter-spacing:0.5px; }
-    .match-score { font-family:'Bebas Neue',sans-serif; font-size:0.9rem; color:var(--gold); letter-spacing:1px; white-space:nowrap; }
-    .match-tag {
-      display:inline-flex; align-items:center;
-      font-family:'Oswald',sans-serif; font-size:0.62rem; font-weight:600;
-      letter-spacing:1.5px; text-transform:uppercase;
-      padding:0.18rem 0.55rem; border-radius:20px; margin-bottom:0.5rem;
-    }
-    .tag-lock      { background:rgba(200,169,81,0.15); color:var(--gold); }
-    .tag-landslide { background:rgba(239,68,68,0.15); color:#ef4444; }
-    .tag-motw      { background:rgba(124,58,237,0.15); color:#a78bfa; }
-    .match-blurb { font-size:0.88rem; color:#7a9ab5; line-height:1.7; }
-    .match-blurb strong { color:#dde; }
-
-    .takeaways { background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:10px; padding:1.3rem 1.4rem; margin-bottom:1.5rem; }
-    .takeaways h3 { font-family:'Bebas Neue',sans-serif; font-size:1.2rem; letter-spacing:1px; color:#fff; margin-bottom:0.8rem; }
-    .takeaways ul { list-style:none; padding:0; }
-    .takeaways li {
-      padding:0.45rem 0; border-bottom:1px solid rgba(255,255,255,0.04);
-      font-size:0.88rem; color:#7a9ab5; line-height:1.6;
-      display:flex; align-items:flex-start; gap:0.6rem;
-    }
-    .takeaways li:last-child { border-bottom:none; }
-    .takeaways li::before { content:'•'; color:var(--gold); flex-shrink:0; font-weight:900; }
-
-    .wager-sig { font-size:0.9rem; color:#5a7a9a; margin-top:1.2rem; line-height:1.7; }
-    .wager-sig strong { color:var(--cream); }
-
-    /* PASSWORD MODAL */
-    .modal-overlay {
-      display:none; position:fixed; inset:0;
-      background:rgba(0,0,0,0.88); z-index:1000;
-      align-items:center; justify-content:center;
-    }
-    .modal-overlay.open { display:flex; }
-    .modal-box {
-      background:var(--mid); border:2px solid var(--gold);
-      border-radius:14px; padding:2.5rem 2rem; max-width:400px; width:90%;
-      text-align:center; box-shadow:0 0 60px rgba(200,169,81,0.15);
-    }
-    .modal-icon { font-size:3rem; margin-bottom:0.8rem; }
-    .modal-box h3 { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:2px; color:var(--gold); margin-bottom:0.3rem; }
-    .modal-box .modal-sub { font-family:'Oswald',sans-serif; font-size:0.78rem; letter-spacing:1.5px; text-transform:uppercase; color:var(--text-muted); margin-bottom:1.8rem; }
-    .modal-box input[type="password"] {
-      width:100%; padding:0.85rem 1.1rem;
-      background:#0a0f16; border:2px solid rgba(255,255,255,0.1);
-      border-radius:8px; color:#fff; font-size:1rem;
-      font-family:'Oswald',sans-serif; letter-spacing:1px;
-      outline:none; transition:border-color 0.2s; margin-bottom:0.75rem; text-align:center;
-    }
-    .modal-box input[type="password"]:focus { border-color:var(--gold); }
-    .modal-box input[type="password"]::placeholder { color:#2a4a6a; }
-    .modal-btn {
-      width:100%; padding:0.85rem;
-      background:var(--gold); color:#000;
-      font-family:'Bebas Neue',sans-serif; font-size:1.25rem; letter-spacing:2px;
-      border:none; border-radius:8px; cursor:pointer; transition:background 0.2s, transform 0.1s;
-    }
-    .modal-btn:hover { background:#a07830; transform:translateY(-2px); }
-    .modal-error { display:none; color:#f08080; font-family:'Oswald',sans-serif; font-size:0.78rem; letter-spacing:1px; margin-top:0.75rem; }
-    .modal-close-link { display:block; margin-top:1rem; color:var(--text-muted); font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:1px; text-transform:uppercase; cursor:pointer; }
-    .modal-close-link:hover { color:#fff; }
-
-    /* LIGHTBOX */
-    .lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.93); z-index:999; justify-content:center; align-items:center; flex-direction:column; gap:1.2rem; }
-    .lightbox.active { display:flex; }
-    .lightbox img { max-width:88vw; max-height:78vh; border-radius:12px; box-shadow:0 0 60px rgba(200,169,81,0.2); object-fit:contain; }
-    .lightbox-close { color:#fff; background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.2); padding:0.5rem 1.5rem; border-radius:6px; cursor:pointer; font-family:'Oswald',sans-serif; font-size:0.9rem; letter-spacing:1px; transition:background 0.2s; }
-    .lightbox-close:hover { background:rgba(255,255,255,0.2); }
-
-    footer { text-align:center; padding:2rem; color:#253545; font-size:0.78rem; font-family:'Oswald',sans-serif; letter-spacing:1px; border-top:1px solid var(--border); }
-
-    @media (max-width:640px) {
-      nav { padding:0 1rem; }
-      .nav-links a { font-size:0.72rem; padding:0 0.6rem; letter-spacing:1px; }
-      .page-header { padding:2.5rem 1.2rem 1.8rem; }
-      .main { padding:2rem 1rem 4rem; }
-      .team-photo { width:36px; height:36px; }
-      .score-cell { font-size:1.1rem; padding-right:1rem; }
-      .wagers-body { padding:1.2rem 1rem; }
-    }
+    :root{--dark:#0d0d0d;--mid:#1a1a1a;--navy:#111827;--red:#e63946;--gold:#f4c542;--text:#f0f0f0;--muted:#888;--win:#22c55e;--loss:#ef4444;}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;}
+    nav{background:var(--mid);border-bottom:3px solid var(--red);position:sticky;top:0;z-index:100;padding:0 1.5rem;}
+    .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;}
+    .nav-brand{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--gold);text-decoration:none;padding:1rem 1.5rem 1rem 0;border-right:1px solid #333;margin-right:0.5rem;letter-spacing:1px;}
+    .nav-links{display:flex;flex-wrap:wrap;}
+    nav a{color:var(--text);text-decoration:none;font-family:'Oswald',sans-serif;font-size:0.85rem;letter-spacing:0.5px;padding:1.1rem 0.85rem;display:inline-block;transition:color 0.2s;white-space:nowrap;}
+    nav a:hover{color:var(--gold);}
+    nav a.active{color:var(--gold);border-bottom:3px solid var(--gold);margin-bottom:-3px;}
+    .page-header{background:linear-gradient(160deg,#1a0505 0%,#0d0d0d 60%);padding:3.5rem 1.5rem 2.5rem;border-bottom:1px solid #1e1e1e;}
+    .page-header-inner{max-width:1100px;margin:0 auto;}
+    .ph-eyebrow{font-family:'Oswald',sans-serif;font-size:0.7rem;letter-spacing:3px;color:var(--red);text-transform:uppercase;margin-bottom:0.5rem;}
+    .ph-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.5rem,6vw,4rem);letter-spacing:2px;line-height:1;margin-bottom:0.5rem;}
+    .ph-sub{font-family:'Oswald',sans-serif;font-size:0.85rem;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:1rem;}
+    .ph-timestamp{font-family:'Oswald',sans-serif;font-size:0.72rem;color:#444;letter-spacing:1px;}
+    .ph-timestamp span{color:var(--muted);}
+    .section{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem;}
+    .section-header{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.5rem;border-bottom:2px solid #222;padding-bottom:0.75rem;}
+    .section-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;}
+    .section-badge{font-family:'Oswald',sans-serif;font-size:0.7rem;letter-spacing:2px;color:var(--red);text-transform:uppercase;background:rgba(230,57,70,0.1);border:1px solid rgba(230,57,70,0.3);padding:0.2rem 0.6rem;border-radius:3px;}
+    .rankings-table{width:100%;border-collapse:collapse;}
+    .rankings-table thead tr{background:#111;border-bottom:2px solid var(--red);}
+    .rankings-table th{font-family:'Oswald',sans-serif;font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);padding:0.75rem;text-align:left;}
+    .rankings-table th.center{text-align:center;}
+    .rank-row{border-bottom:1px solid #1e1e1e;opacity:0;transform:translateY(16px);animation:slideIn 0.4s ease forwards;transition:background 0.15s;}
+    .rank-row:hover{background:#1a1a1a;}
+    @keyframes slideIn{to{opacity:1;transform:translateY(0);}}
+    .rank-row td{padding:0.75rem;vertical-align:middle;}
+    .td-rank{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--muted);width:2.5rem;text-align:center;}
+    .td-rank.gold{color:var(--gold);}.td-rank.silver{color:#b0b8c1;}.td-rank.bronze{color:#cd7f32;}
+    .td-change{font-family:'Oswald',sans-serif;font-size:0.8rem;font-weight:600;text-align:center;width:3rem;}
+    .td-change.up{color:var(--win);}.td-change.down{color:var(--loss);}.td-change.flat{color:var(--muted);}
+    .td-team{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:500;}
+    .td-team a{color:var(--gold);font-size:0.7rem;margin-left:0.4rem;text-decoration:none;vertical-align:middle;}
+    .td-score{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);text-align:center;}
+    .form-dots{display:flex;gap:4px;align-items:center;}
+    .form-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+    .form-dot.w{background:var(--win);}.form-dot.l{background:var(--loss);}.form-dot.empty{background:#2a2a2a;}
+    .sparkline-cell{text-align:center;}
+    .wagers-section{background:var(--mid);border-radius:8px;padding:2rem;border:1px solid #222;}
+    .wagers-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:2px;margin-bottom:0.25rem;}
+    .wagers-sub{font-family:'Oswald',sans-serif;font-size:0.72rem;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:1.75rem;}
+    .match-card{background:#111;border:1px solid #1e1e1e;border-radius:6px;padding:1.25rem 1.5rem;margin-bottom:1rem;}
+    .match-tag{display:inline-flex;align-items:center;gap:0.4rem;font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:0.6rem;}
+    .tag-lock{color:#f4c542;}.tag-landslide{color:var(--red);}.tag-motm{color:#60a5fa;}
+    .match-scoreline{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px;color:var(--text);margin-bottom:0.5rem;}
+    .match-body{font-size:0.88rem;color:#bbb;line-height:1.65;}
+    .match-body strong{color:var(--text);}
+    .takeaways{background:#111;border-left:3px solid var(--red);padding:1.25rem 1.5rem;border-radius:0 6px 6px 0;margin-top:1.5rem;}
+    .takeaways h3{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;margin-bottom:0.75rem;}
+    .takeaways ul{list-style:none;display:flex;flex-direction:column;gap:0.4rem;}
+    .takeaways li{font-size:0.85rem;color:#bbb;padding-left:1rem;position:relative;}
+    .takeaways li::before{content:'•';color:var(--red);position:absolute;left:0;}
+    .sig{font-family:'Oswald',sans-serif;font-size:0.85rem;color:var(--muted);margin-top:1.25rem;}
+    .round-nav{display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:0 auto;padding:1.5rem;border-top:1px solid #1e1e1e;}
+    .round-nav a{font-family:'Oswald',sans-serif;font-size:0.85rem;color:var(--muted);text-decoration:none;letter-spacing:0.5px;transition:color 0.2s;}
+    .round-nav a:hover{color:var(--gold);}
+    footer{background:#080808;border-top:1px solid #1a1a1a;padding:1.25rem 1.5rem;text-align:center;font-family:'Oswald',sans-serif;font-size:0.75rem;letter-spacing:1px;color:#444;}
+    /* vault */
+    .vault-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:999;align-items:center;justify-content:center;}
+    .vault-overlay.open{display:flex;}
+    .vault-box{background:var(--mid);border:2px solid var(--gold);border-radius:10px;padding:2.5rem;max-width:380px;width:90%;text-align:center;}
+    .vault-icon{font-size:2.5rem;margin-bottom:0.75rem;}
+    .vault-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;margin-bottom:0.5rem;}
+    .vault-sub{font-size:0.82rem;color:var(--muted);margin-bottom:1.25rem;}
+    .vault-input{width:100%;background:#111;border:1px solid #333;color:var(--text);font-family:'Oswald',sans-serif;font-size:1rem;padding:0.6rem 1rem;border-radius:4px;outline:none;margin-bottom:0.75rem;text-align:center;}
+    .vault-input:focus{border-color:var(--gold);}
+    .vault-btn{background:var(--gold);color:#000;font-family:'Oswald',sans-serif;font-size:0.9rem;letter-spacing:1px;padding:0.65rem 2rem;border:none;border-radius:4px;cursor:pointer;font-weight:700;transition:background 0.2s;}
+    .vault-btn:hover{background:#e0b030;}
+    .vault-error{font-family:'Oswald',sans-serif;font-size:0.75rem;color:var(--loss);display:none;margin-top:0.5rem;}
+    .vault-close{position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--muted);font-size:1.2rem;cursor:pointer;}
+    .secret-img{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:1000;align-items:center;justify-content:center;}
+    .secret-img.open{display:flex;}
+    .secret-img img{max-width:90%;max-height:80vh;border-radius:8px;border:3px solid var(--gold);}
+    .secret-close{position:absolute;top:1rem;right:1rem;background:var(--mid);border:1px solid #444;color:var(--text);font-size:1rem;cursor:pointer;padding:0.4rem 0.8rem;border-radius:4px;font-family:'Oswald',sans-serif;}
   </style>
 </head>
 <body>
 
-  <div class="page-header">
-    <div class="eyebrow">Round 3 · Power Rankings</div>
-    <h1>Round 3 Rankings</h1>
-    <div class="subtitle">Paz's Power Rankings · Ligma League 2026</div>
-  </div>
-
-  <div class="main">
-
-    <div class="section-label">⚡ Round 3 Power Rankings</div>
-    <div class="section-title">Rankings <span class="badge">Updated</span></div>
-
-    <table class="rankings-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>±</th>
-          <th>Team</th>
-          <th style="text-align:right;">Score</th>
-        </tr>
-      </thead>
-      <tbody>
-
-        <!-- 1 · Holmes and Gardens · ↑2 (was 3) -->
-        <tr class="r1" onclick="openPhoto('Better Holmes and Gardens.jpg','Holmes and Gardens')">
-          <td class="rank-cell"><span class="rank-badge">1</span></td>
-          <td class="move-cell"><span class="mv mv-up">↑ 2</span></td>
-          <td class="team-cell"><div class="team-inner">
-            <img class="team-photo" src="Better Holmes and Gardens.jpg" alt="Holmes and Gardens">
-            <span class="team-name">Holmes and Gardens
-              <a class="medal-link" href="#" title="Unlock the Champion's Vault" onclick="openHGModal(event)">1</a>
-            </span>
-          </div></td>
-          <td class="score-cell">10.31</td>
-        </tr>
-
-        <!-- 2 · Flagdons · ↑2 (was 4) -->
-        <tr class="r2" onclick="openPhoto('Flagdons.jpg','Flagdons')">
-          <td class="rank-cell"><span class="rank-badge">2</span></td>
-          <td class="move-cell"><span class="mv mv-up">↑ 2</span></td>
-          <td class="team-cell"><div class="team-inner">
-            <img class="team-photo" src="Flagdons.jpg" alt="Flagdons">
-            <span class="team-name">Flagdons</span>
-          </div></td>
-          <td class="score-cell">10.06</td>
-        </tr>
-
-        <!-- 3 · DC & Tax Payers · ↓2 (was 1) -->
-        <tr class="r3" onclick="openPhoto('DC & Tax Payers.jpg','DC & Tax Payers')">
-          <td class="rank-cell"><span class="rank-badge">3</span></td>
-          <td class="move-cell"><span class="mv mv-down">↓ 2</span></td>
-          <td class="team-cell"><div class="team-inner">
-            <img class="team-photo" src="DC & Tax Payers.jpg" alt="DC & Tax Payers">
-            <span class="team-name">DC &amp; Tax Payers</span>
-          </div></td>
-          <td class="score-cell">9.50</td>
-        </tr>
-
-        <!-- 4 · Foopys · ↓2 (was 2) -->
-        <tr onclick="openPhoto('Foopys.jpg','Foopys')">
-          <td class="rank-cell"><span class="rank-badge">4</span></td>
-          <td class="move-cell"><span class="mv mv-down">↓ 2</span></td>
-          <td class="team-cell"><div class="team-inner">
-            <img class="team-photo" src="Foopys.jpg" alt="Foopys">
-            <span class="team-name">Foopys</span>
-          </div></td>
-          <td class="score-cell">9.44</td>
-        </tr>
-
-        <!-- 5 · Phillipou · ↑1 (was 6) -->
-        <tr onclick="openPhoto('Phillipou.jpg','Phillipou')">
-          <td class="rank-cell"><span class="rank-badge">5</span></td>
-          <td class="move-cell"><span class="mv mv-up">↑ 1</span></td>
-          <td class="team-cell"><div class="team-inner">
-            <img class="team-photo" src="Phillipou.jpg" alt="Phillipou">
-            <span class="team-name">Phillipou</span>
-          </div></td>
-          <td class="score-cell">9.38</td>
-        </tr>
-
-        <!-- 6 · Dark Magicians · ↓1 (was 5) -->
-        <tr onclick="openPhoto('Dark Magicians.jpg','Dark Magicians')">
-          <td class="rank-cell"><span class="rank-badge">6</span></td>
-          <td class="move-cell"><span class="mv mv-down">↓ 1</span></td>
-          <td class="team-cell"><div class="team-inner">
-            <img class="team-photo" src="Dark Magicians.jpg" alt="Dark Magicians">
-            <span class="team-name">Dark Magicians</span>
-          </div></td>
-          <td class="score-cell">9.25</td>
-        </tr>
-
-        <!-- 7 · Broncic · ±0 -->
-        <tr onclick="openPhoto('Broncic.jpg','Broncic')">
-          <td class="rank-cell"><span class="rank-badge">7</span></td>
-          <td class="move-cell"><span class="mv mv-same">— 0</span></td>
-          <td class="team-cell"><div class="team-inner">
-            <img class="team-photo" src="Broncic.jpg" alt="Broncic">
-            <span class="team-name">Broncic</span>
-          </div></td>
-          <td class="score-cell">9.25</td>
-        </tr>
-
-        <!-- 8 · Shavas · ±0 -->
-        <tr onclick="openPhoto('Shavas.jpg','Shavas')">
-          <td class="rank-cell"><span class="rank-badge">8</span></td>
-          <td class="move-cell"><span class="mv mv-same">— 0</span></td>
-          <td class="team-cell"><div class="team-inner">
-            <img class="team-photo" src="Shavas.jpg" alt="Shavas">
-            <span class="team-name">Shavas</span>
-          </div></td>
-          <td class="score-cell">9.06</td>
-        </tr>
-
-        <!-- 9 · Izaks · ↑2 (was 11) -->
-        <tr onclick="openPhoto('Izaks.jpg','Izaks')">
-          <td class="rank-cell"><span class="rank-badge">9</span></td>
-          <td class="move-cell"><span class="mv mv-up">↑ 2</span></td>
-          <td class="team-cell"><div class="team-inner">
-            <img class="team-photo" src="Izaks.jpg" alt="Izaks">
-            <span class="team-name">Izaks</span>
-          </div></td>
-          <td class="score-cell">8.75</td>
-        </tr>
-
-        <!-- 10 · Nethers men · ±0 -->
-        <tr onclick="openPhoto('Nethers men.jpg','Nethers men')">
-          <td class="rank-cell"><span class="rank-badge">10</span></td>
-          <td class="move-cell"><span class="mv mv-same">— 0</span></td>
-          <td class="team-cell"><div class="team-inner">
-            <img class="team-photo" src="Nethers men.jpg" alt="Nethers men">
-            <span class="team-name">Nethers men</span>
-          </div></td>
-          <td class="score-cell">8.50</td>
-        </tr>
-
-        <!-- 11 · Cripps Nipps · ↑1 (was 12) -->
-        <tr onclick="openPhoto('Cripps Nipps.jpg','Cripps Nipps')">
-          <td class="rank-cell"><span class="rank-badge">11</span></td>
-          <td class="move-cell"><span class="mv mv-up">↑ 1</span></td>
-          <td class="team-cell"><div class="team-inner">
-            <img class="team-photo" src="Cripps Nipps.jpg" alt="Cripps Nipps">
-            <span class="team-name">Cripps Nipps</span>
-          </div></td>
-          <td class="score-cell">7.43</td>
-        </tr>
-
-        <!-- 12 · Van Twists · ↓3 (was 9) -->
-        <tr onclick="openPhoto('Van Twists.jpg','Van Twists')">
-          <td class="rank-cell"><span class="rank-badge">12</span></td>
-          <td class="move-cell"><span class="mv mv-down">↓ 3</span></td>
-          <td class="team-cell"><div class="team-inner">
-            <img class="team-photo" src="Van Twists.jpg" alt="Van Twists">
-            <span class="team-name">Van Twists</span>
-          </div></td>
-          <td class="score-cell">7.38</td>
-        </tr>
-
-      </tbody>
-    </table>
-
-    <!-- WILL'S WEEKLY WAGERS -->
-    <div class="section-label">💸 Will's Weekly Wagers · Round 3</div>
-
-    <div class="wagers-wrap">
-      <div class="wagers-head">
-        <h2>💸 Will's Weekly Wagers</h2>
-        <span class="wagers-badge">Round 3 Edition</span>
-      </div>
-      <div class="wagers-body">
-
-        <p class="wagers-intro">Round 3 and the gloves are officially off. The honeymoon period is well and truly over — every team has had enough time to read the room, patch the holes, and figure out who they really are. This week's card is stacked. We've got a comeback, a throttling, and a bloke at the top of the rankings who apparently can't stop winning. Let's do it.</p>
-
-        <div class="match-grid">
-
-          <div class="match-item lock">
-            <span class="match-tag tag-lock">🔒 Lock of the Week</span>
-            <div class="match-top">
-              <span class="match-result">Holmes and Gardens def. Flagdons</span>
-              <span class="match-score">1,192 – 1,041 &nbsp;(+151)</span>
-            </div>
-            <p class="match-blurb"><strong>Holmes and Gardens march straight to the top</strong> and they're not apologising for it. A 151-point dismantling of the new number-twos is the kind of statement that gets the league buzzing. Matthew's mob look completely unplayable right now — deep, consistent, and absolutely ruthless when it counts. Flagdons tried. They just weren't ready for this.</p>
-          </div>
-
-          <div class="match-item">
-            <div class="match-top">
-              <span class="match-result">Phillipou def. DC &amp; Tax Payers</span>
-              <span class="match-score">1,088 – 997 &nbsp;(+91)</span>
-            </div>
-            <p class="match-blurb"><strong>The upset of the round.</strong> DC looked locked in all week and then completely unravelled. Meanwhile Phillipou — quiet for a few rounds — showed up with something to prove and delivered in spades. A 91-point win that rockets them into the top five and sends a shiver down the spine of the top end of town.</p>
-          </div>
-
-          <div class="match-item landslide">
-            <span class="match-tag tag-landslide">💥 Landslide</span>
-            <div class="match-top">
-              <span class="match-result">Izaks def. Van Twists</span>
-              <span class="match-score">1,063 – 873 &nbsp;(+190)</span>
-            </div>
-            <p class="match-blurb"><strong>Van Twists in freefall.</strong> Three rounds in and Tim's side have tumbled all the way to 12th. The Izaks, on the other hand, are turning into a genuine mid-table force. Zak's team dropped 190 on them without breaking a sweat — 190! The Van Twist rollercoaster officially has more downs than ups this season.</p>
-          </div>
-
-          <div class="match-item">
-            <div class="match-top">
-              <span class="match-result">Broncic def. Foopys</span>
-              <span class="match-score">1,047 – 1,029 &nbsp;(+18)</span>
-            </div>
-            <p class="match-blurb"><strong>Broncic digs deep and edges it by 18.</strong> Miller's Foopys were right there — that 350-point demolition from last week feels like ancient history now. William's Broncic held firm when it mattered and walked away with two points that look enormous in hindsight. Foopys slide from 2nd to 4th and have questions to answer.</p>
-          </div>
-
-          <div class="match-item">
-            <div class="match-top">
-              <span class="match-result">Dark Magicians def. Nethers men</span>
-              <span class="match-score">1,031 – 944 &nbsp;(+87)</span>
-            </div>
-            <p class="match-blurb"><strong>Dark Magicians doing just enough.</strong> They're not blowing teams away like Round 1, but Osei's side keep finding a way to get the job done. An 87-point win over Nethers Men is comfortable without being convincing — but in this competition, you take the two points and ask no further questions.</p>
-          </div>
-
-          <div class="match-item motw">
-            <span class="match-tag tag-motw">⭐ Match of the Round</span>
-            <div class="match-top">
-              <span class="match-result">Shavas def. Cripps Nipps</span>
-              <span class="match-score">986 – 971 &nbsp;(+15)</span>
-            </div>
-            <p class="match-blurb"><strong>Fifteen points. That's it. Fifteen.</strong> Patrick's Shavas nearly gave it away in the final quarter before grinding out a result that had everyone in the group chat going absolutely feral. Cripps Nipps — written off by half the competition — pushed hard and nearly pulled off the heist of the season. This one had more twists than the Van Twists. In a better week.</p>
-          </div>
-
-        </div>
-
-        <div class="takeaways">
-          <h3>💥 Takeaways</h3>
-          <ul>
-            <li>Holmes and Gardens are the real deal — 1st place and they don't look like giving it up.</li>
-            <li>Phillipou absolutely cooked DC &amp; Tax Payers. Top five now and surging.</li>
-            <li>Van Twists crashing hard — 12th after starting as one of the fancied sides. Ugly.</li>
-            <li>Broncic keep finding a way. Classic over-achievers — the competition's quiet assassin.</li>
-            <li>Cripps Nipps showing signs of life. Don't sleep on them in Round 4.</li>
-            <li>Izaks are building something real. 190-point wins don't lie.</li>
-          </ul>
-        </div>
-
-        <p class="wager-sig">Three rounds deep and it's already a mess at the top. Wouldn't have it any other way.<br><br><strong>Will 🧢</strong></p>
-
-      </div>
-    </div>
-
-  </div>
-
-  <!-- PASSWORD MODAL -->
-  <div class="modal-overlay" id="hg-modal">
-    <div class="modal-box">
-      <div class="modal-icon">🔐</div>
-      <h3>Restricted Access</h3>
-      <p class="modal-sub">This vault is locked. Champions only.</p>
-      <input type="password" id="hg-pw" placeholder="Enter the password..." />
-      <button class="modal-btn" onclick="checkHGPw()">Unlock the Vault 🏆</button>
-      <p id="hg-error" class="modal-error">❌ Wrong password. Not even close, mate.</p>
-      <span class="modal-close-link" onclick="closeHGModal()">✕ Close</span>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">PPR</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="rankings.html">Draft Night</a>
+      <a href="opening-round.html">Opening Round</a>
+      <a href="round-1.html">Round 1</a>
+      <a href="round-2.html">Round 2</a>
+      <a href="round-3.html" class="active">Round 3</a>
+      <a href="round-4.html">Round 4</a>
+      <a href="best-moments.html">📸 2026 Moments</a>
+      <a href="ppr-tunes.html">🎵 PPR Tunes</a>
+      <a href="snakes-and-ladders.html">🐍 Snakes &amp; Ladders</a>
     </div>
   </div>
+</nav>
 
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" src="" alt="">
-    <button class="lightbox-close" onclick="closeLightbox()">✕ Close</button>
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="ph-eyebrow">Round 3 · Power Rankings</p>
+    <h1 class="ph-title">Round 3 Rankings</h1>
+    <p class="ph-sub">Paz's Power Rankings · Ligma League 2026</p>
+    <p class="ph-timestamp">Rankings updated: <span>Sunday 30 Mar, 11:02pm</span></p>
   </div>
+</div>
 
-  <footer>Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</footer>
+<div class="section">
+  <div class="section-header">
+    <span class="section-title">⚡ Round 3 Power Rankings</span>
+    <span class="section-badge">Rankings Updated</span>
+  </div>
+  <div style="overflow-x:auto;">
+  <table class="rankings-table">
+    <thead>
+      <tr>
+        <th class="center">#</th>
+        <th class="center">±</th>
+        <th>Team</th>
+        <th class="center">Score</th>
+        <th class="center">Form</th>
+        <th class="center">History</th>
+      </tr>
+    </thead>
+    <tbody id="rankBody"></tbody>
+  </table>
+  </div>
+  <p style="font-family:'Oswald',sans-serif;font-size:0.68rem;letter-spacing:1px;color:#444;margin-top:0.75rem;">Form shows R1→R2→R3 results oldest→newest</p>
+</div>
 
-  <script>
-    function openPhoto(src, name) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox-img').alt = name;
-      document.getElementById('lightbox').classList.add('active');
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('active');
-      document.getElementById('lightbox-img').src = '';
-    }
-    function openHGModal(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      document.getElementById('hg-pw').value = '';
-      document.getElementById('hg-error').style.display = 'none';
-      document.getElementById('hg-pw').style.borderColor = 'rgba(255,255,255,0.1)';
-      document.getElementById('hg-modal').classList.add('open');
-    }
-    function closeHGModal() {
-      document.getElementById('hg-modal').classList.remove('open');
-    }
-    function checkHGPw() {
-      if (document.getElementById('hg-pw').value === 'Holmes&Gardens') {
-        window.location.href = 'holmes-gardens-secret.html';
-      } else {
-        document.getElementById('hg-error').style.display = 'block';
-        document.getElementById('hg-pw').style.borderColor = 'rgba(240,128,128,0.6)';
-        setTimeout(() => { document.getElementById('hg-pw').style.borderColor = 'rgba(255,255,255,0.1)'; }, 1800);
-      }
-    }
-    document.getElementById('hg-pw').addEventListener('keydown', e => { if (e.key === 'Enter') checkHGPw(); });
-    document.getElementById('hg-modal').addEventListener('click', function(e) { if (e.target === this) closeHGModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeLightbox(); closeHGModal(); } });
-  </script>
+<div class="section" style="padding-top:0;">
+  <div class="wagers-section">
+    <div class="wagers-title">💸 Will's Weekly Wagers</div>
+    <div class="wagers-sub">Round 3 Edition</div>
+    <p style="font-size:0.88rem;color:#bbb;line-height:1.7;margin-bottom:1.5rem;">Round 3 and the gloves are officially off. The honeymoon period is well and truly over — every team has had enough time to read the room, patch the holes, and figure out who they really are. This week's card is stacked. We've got a comeback, a throttling, and a bloke at the top of the rankings who apparently can't stop winning. Let's do it.</p>
 
-  <script src="nav.js"></script>
+    <div class="match-card">
+      <div class="match-tag tag-lock">🔒 Lock of the Week</div>
+      <div class="match-scoreline">Holmes and Gardens def. Flagdons · 1,192 – 1,041 (+151)</div>
+      <p class="match-body"><strong>Holmes and Gardens march straight to the top</strong> and they're not apologising for it. A 151-point dismantling of the new number-twos is the kind of statement that gets the league buzzing. Matthew's mob look completely unplayable right now — deep, consistent, and absolutely ruthless when it counts. Flagdons tried. They just weren't ready for this.</p>
+    </div>
+
+    <div class="match-card">
+      <div class="match-scoreline">Phillipou def. DC &amp; Tax Payers · 1,088 – 997 (+91)</div>
+      <p class="match-body"><strong>The upset of the round.</strong> DC looked locked in all week and then completely unravelled. Meanwhile Phillipou — quiet for a few rounds — showed up with something to prove and delivered in spades. A 91-point win that rockets them into the top five and sends a shiver down the spine of the top end of town.</p>
+    </div>
+
+    <div class="match-card">
+      <div class="match-tag tag-landslide">💥 Landslide</div>
+      <div class="match-scoreline">Izaks def. Van Twists · 1,063 – 873 (+190)</div>
+      <p class="match-body"><strong>Van Twists in freefall.</strong> Three rounds in and Tim's side have tumbled all the way to 12th. The Izaks, on the other hand, are turning into a genuine mid-table force. Zak's team dropped 190 on them without breaking a sweat — 190! The Van Twist rollercoaster officially has more downs than ups this season.</p>
+    </div>
+
+    <div class="match-card">
+      <div class="match-scoreline">Broncic def. Foopys · 1,047 – 1,029 (+18)</div>
+      <p class="match-body"><strong>Broncic digs deep and edges it by 18.</strong> Miller's Foopys were right there — that 350-point demolition from last week feels like ancient history now. William's Broncic held firm when it mattered and walked away with two points that look enormous in hindsight. Foopys slide from 2nd to 4th and have questions to answer.</p>
+    </div>
+
+    <div class="match-card">
+      <div class="match-scoreline">Dark Magicians def. Nethers Men · 1,031 – 944 (+87)</div>
+      <p class="match-body"><strong>Dark Magicians doing just enough.</strong> They're not blowing teams away like Round 1, but Osei's side keep finding a way to get the job done. An 87-point win over Nethers Men is comfortable without being convincing — but in this competition, you take the two points and ask no further questions.</p>
+    </div>
+
+    <div class="match-card">
+      <div class="match-tag tag-motm">⭐ Match of the Round</div>
+      <div class="match-scoreline">Shavas def. Cripps Nipps · 986 – 971 (+15)</div>
+      <p class="match-body"><strong>Fifteen points. That's it. Fifteen.</strong> Patrick's Shavas nearly gave it away in the final quarter before grinding out a result that had everyone in the group chat going absolutely feral. Cripps Nipps — written off by half the competition — pushed hard and nearly pulled off the heist of the season. This one had more twists than the Van Twists. In a better week.</p>
+    </div>
+
+    <div class="takeaways">
+      <h3>💥 Takeaways</h3>
+      <ul>
+        <li>Holmes and Gardens are the real deal — 1st place and they don't look like giving it up.</li>
+        <li>Phillipou absolutely cooked DC &amp; Tax Payers. Top five now and surging.</li>
+        <li>Van Twists crashing hard — 12th after starting as one of the fancied sides. Ugly.</li>
+        <li>Broncic keep finding a way. Classic over-achievers — the competition's quiet assassin.</li>
+        <li>Cripps Nipps showing signs of life. Don't sleep on them in Round 4.</li>
+        <li>Izaks are building something real. 190-point wins don't lie.</li>
+      </ul>
+    </div>
+    <p class="sig">Three rounds deep and it's already a mess at the top. Wouldn't have it any other way.<br><br><strong>Will 🧢</strong></p>
+  </div>
+</div>
+
+<!-- Vault modal -->
+<div class="vault-overlay" id="vaultOverlay">
+  <div class="vault-box" style="position:relative;">
+    <button class="vault-close" onclick="closeVault()">✕</button>
+    <div class="vault-icon">🔐</div>
+    <div class="vault-title">Restricted Access</div>
+    <div class="vault-sub">This vault is locked. Champions only.</div>
+    <input class="vault-input" id="vaultInput" type="password" placeholder="Enter password..." />
+    <button class="vault-btn" onclick="checkVault()">Unlock the Vault 🏆</button>
+    <p class="vault-error" id="vaultError">❌ Wrong password. Not even close, mate.</p>
+  </div>
+</div>
+<div class="secret-img" id="secretImg">
+  <button class="secret-close" onclick="closeSecret()">✕ Close</button>
+  <img id="secretImgEl" src="" alt="" />
+</div>
+
+<div class="round-nav">
+  <a href="round-2.html">← Round 2</a>
+  <a href="round-4.html">Round 4 →</a>
+</div>
+
+<footer>Paz's Power Rankings © 2026 · Ligma League AFL Fantasy</footer>
+
+<script>
+const round3Rankings = [
+  { rank:1,  change:2,  team:'Holmes and Gardens', score:10.31, secret:'holmes-gardens-secret.html' },
+  { rank:2,  change:2,  team:'Flagdons',            score:10.06 },
+  { rank:3,  change:-2, team:'DC & Tax Payers',     score:9.50  },
+  { rank:4,  change:-2, team:'Foopys',              score:9.44  },
+  { rank:5,  change:1,  team:'Phillipou',           score:9.38  },
+  { rank:6,  change:-1, team:'Dark Magicians',      score:9.25  },
+  { rank:7,  change:0,  team:'Broncic',             score:9.25  },
+  { rank:8,  change:0,  team:'Shavas',              score:9.06  },
+  { rank:9,  change:2,  team:'Izaks',               score:8.75  },
+  { rank:10, change:0,  team:'Nethers Men',         score:8.50  },
+  { rank:11, change:1,  team:'Cripps Nipps',        score:7.43  },
+  { rank:12, change:-3, team:'Van Twists',          score:7.38  },
+];
+
+const scoreHistory = {
+  'Holmes and Gardens': [9.75, 10.33, 9.75,  10.31],
+  'Flagdons':           [10.17,9.75,  9.38,  10.06],
+  'DC & Tax Payers':    [9.50, 10.00, 10.25, 9.50],
+  'Foopys':             [8.75, 10.17, 10.13, 9.44],
+  'Phillipou':          [7.25, 8.17,  8.50,  9.38],
+  'Dark Magicians':     [10.25,10.58, 9.25,  9.25],
+  'Broncic':            [8.42, 8.42,  8.38,  9.25],
+  'Shavas':             [8.17, 8.33,  8.25,  9.06],
+  'Izaks':              [7.58, 8.25,  7.63,  8.75],
+  'Nethers Men':        [7.83, 7.75,  7.88,  8.50],
+  'Cripps Nipps':       [9.08, 7.92,  7.13,  7.43],
+  'Van Twists':         [9.25, 9.67,  8.13,  7.38],
+};
+
+const formData = {
+  'Holmes and Gardens': ['W','L','W'],
+  'Flagdons':           ['W','L','W'],
+  'DC & Tax Payers':    ['W','W','L'],
+  'Foopys':             ['L','W','L'],
+  'Phillipou':          ['W','W','W'],
+  'Dark Magicians':     ['W','L','W'],
+  'Broncic':            ['L','W','W'],
+  'Shavas':             ['L','W','W'],
+  'Izaks':              ['L','L','W'],
+  'Nethers Men':        ['L','W','W'],
+  'Cripps Nipps':       ['W','L','W'],
+  'Van Twists':         ['L','W','L'],
+};
+
+function buildSparkline(scores){
+  if(!scores||scores.length<2)return'';
+  const W=70,H=26,PAD=3;
+  const min=Math.min(...scores)-0.3,max=Math.max(...scores)+0.3;
+  const pts=scores.map((s,i)=>{const x=PAD+(i/(scores.length-1))*(W-PAD*2);const y=H-PAD-((s-min)/(max-min))*(H-PAD*2);return`${x.toFixed(1)},${y.toFixed(1)}`;});
+  const latest=scores[scores.length-1],prev=scores[scores.length-2];
+  const color=latest>=prev?'#22c55e':'#ef4444';
+  const lp=pts[pts.length-1].split(',');
+  return`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><polyline points="${pts.join(' ')}" fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/><circle cx="${lp[0]}" cy="${lp[1]}" r="2.5" fill="${color}"/></svg>`;
+}
+
+function renderTable(){
+  const tbody=document.getElementById('rankBody');
+  const MAX_FORM=5;
+  round3Rankings.forEach((row,i)=>{
+    const tr=document.createElement('tr');
+    tr.className='rank-row';
+    tr.style.animationDelay=`${i*0.06}s`;
+    let rankClass='td-rank';
+    if(row.rank===1)rankClass+=' gold';
+    else if(row.rank===2)rankClass+=' silver';
+    else if(row.rank===3)rankClass+=' bronze';
+    let changeHTML='';
+    if(row.change>0)changeHTML=`<td class="td-change up">↑${row.change}</td>`;
+    else if(row.change<0)changeHTML=`<td class="td-change down">↓${Math.abs(row.change)}</td>`;
+    else changeHTML=`<td class="td-change flat">—</td>`;
+    const form=formData[row.team]||[];
+    let formHTML='<div class="form-dots">';
+    const padded=Array(MAX_FORM).fill(null);
+    form.forEach((r,idx)=>padded[MAX_FORM-form.length+idx]=r);
+    padded.forEach(r=>{
+      if(r===null)formHTML+=`<span class="form-dot empty"></span>`;
+      else if(r==='W')formHTML+=`<span class="form-dot w" title="Win"></span>`;
+      else formHTML+=`<span class="form-dot l" title="Loss"></span>`;
+    });
+    formHTML+='</div>';
+    const secretLink=row.secret?`<a href="#" onclick="openVault('${row.secret}');return false;" title="Unlock the Champion's Vault">🔐</a>`:'';
+    const spark=buildSparkline(scoreHistory[row.team]);
+    tr.innerHTML=`<td class="${rankClass}">${row.rank}</td>${changeHTML}<td class="td-team">${row.team}${secretLink}</td><td class="td-score">${row.score.toFixed(2)}</td><td>${formHTML}</td><td class="sparkline-cell">${spark}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+let vaultTarget='';
+function openVault(target){vaultTarget=target;document.getElementById('vaultOverlay').classList.add('open');document.getElementById('vaultInput').value='';document.getElementById('vaultError').style.display='none';}
+function closeVault(){document.getElementById('vaultOverlay').classList.remove('open');}
+function checkVault(){
+  const pw=document.getElementById('vaultInput').value.trim().toLowerCase();
+  if(pw==='champion'||pw==='holmes'||pw==='ligma'){
+    closeVault();
+    document.getElementById('secretImg').classList.add('open');
+    document.getElementById('secretImgEl').src=vaultTarget;
+  } else {
+    document.getElementById('vaultError').style.display='block';
+  }
+}
+function closeSecret(){document.getElementById('secretImg').classList.remove('open');}
+renderTable();
+</script>
 </body>
 </html>
