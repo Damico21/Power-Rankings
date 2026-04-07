@@ -228,6 +228,69 @@
       .vote-grid { grid-template-columns: 1fr; }
       .odo-digit { width: 13px; height: 19px; font-size: 0.78rem; }
     }
+
+    /* ── CUMULATIVE POWER RANKINGS ── */
+    #cumulative { background: var(--dark); border-top: 1px solid var(--border); }
+    .cum-outer { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem 3.5rem; }
+    .cum-note { font-size: 0.82rem; color: #3a5a7a; margin-bottom: 2rem; line-height: 1.6; font-family: 'Inter', sans-serif; }
+    .cum-scroll { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+    .cum-table { width: 100%; border-collapse: collapse; font-family: 'Oswald', sans-serif; min-width: 760px; }
+    .cum-table thead tr { background: #080d13; }
+    .cum-table thead th { padding: 0.9rem 0.85rem; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: #2a4a6a; text-align: center; border-bottom: 1px solid rgba(200,169,81,0.2); white-space: nowrap; }
+    .cum-table thead th.th-left { text-align: left; padding-left: 1.2rem; }
+    .cum-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.035); transition: background 0.12s; }
+    .cum-table tbody tr:last-child { border-bottom: none; }
+    .cum-table tbody tr:hover { background: rgba(255,255,255,0.02); }
+    .cum-table td { padding: 0.75rem 0.85rem; text-align: center; vertical-align: middle; }
+    .cum-table td.td-left { text-align: left; padding-left: 1.2rem; }
+    .cum-pos { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: #1e3a52; width: 2.2rem; }
+    .cum-pos.p1 { color: var(--gold); }
+    .cum-pos.p2 { color: #a8b8c8; }
+    .cum-pos.p3 { color: #7a5a30; }
+    .cum-name { font-family: 'Oswald', sans-serif; font-size: 0.92rem; font-weight: 600; color: var(--cream); letter-spacing: 0.3px; }
+    .cum-score { font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; color: #2a4a6a; }
+    .cum-score.played { color: #5a8aaa; }
+    .cum-score.best { color: var(--gold) !important; font-size: 1rem; }
+    .cum-total { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; color: var(--gold); border-left: 1px solid rgba(200,169,81,0.15); }
+    .cum-avg { font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; color: #4a7a8a; }
+    .cum-snake { padding: 0.5rem 0.85rem; }
+    svg.snake { display: block; }
+
+    /* ── H2H MATRIX ── */
+    #h2h { background: var(--dark); border-top: 1px solid var(--border); }
+    .h2h-outer { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 5rem; }
+    .h2h-legend { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.5rem; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; }
+    .leg-item { display: flex; align-items: center; gap: 0.4rem; color: #3a5a7a; }
+    .leg-swatch { width: 26px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+    .leg-w  { background: rgba(34,197,94,0.25); border: 1px solid rgba(34,197,94,0.5); }
+    .leg-l  { background: rgba(239,68,68,0.2);  border: 1px solid rgba(239,68,68,0.45); }
+    .leg-no { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
+    .h2h-scroll { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+    .h2h-table { border-collapse: collapse; font-family: 'Oswald', sans-serif; font-size: 0.72rem; width: 100%; }
+    .h2h-table th, .h2h-table td { border: 1px solid rgba(255,255,255,0.04); padding: 0; white-space: nowrap; }
+    .h2h-table .rh { background: #080d13; text-align: left; padding: 0.55rem 1rem 0.55rem 1.1rem; font-size: 0.76rem; letter-spacing: 0.4px; color: var(--cream); font-weight: 600; min-width: 140px; border-right: 1px solid rgba(200,169,81,0.12); border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .h2h-table .ch { background: #080d13; text-align: center; padding: 0.5rem 0.3rem; font-size: 0.6rem; letter-spacing: 0.8px; text-transform: uppercase; color: #2a4a6a; max-width: 58px; border-bottom: 1px solid rgba(200,169,81,0.2); }
+    .h2h-table .sh { background: #060b10; text-align: center; padding: 0.5rem 0.5rem; font-size: 0.6rem; letter-spacing: 0.8px; text-transform: uppercase; color: #1a4a3a; border-left: 1px solid rgba(200,169,81,0.12); border-bottom: 1px solid rgba(200,169,81,0.2); }
+    .h2h-table .cs { background: rgba(255,255,255,0.02); text-align: center; padding: 0.5rem; color: rgba(255,255,255,0.06); font-size: 0.7rem; }
+    .h2h-table .cw { background: rgba(34,197,94,0.12); text-align: center; padding: 0.3rem 0.25rem; transition: background 0.12s; cursor: default; }
+    .h2h-table .cw:hover { background: rgba(34,197,94,0.24); }
+    .cw-tag { color: #4ade80; font-size: 0.68rem; font-weight: 700; display: block; }
+    .cw-mg  { color: rgba(74,222,128,0.45); font-size: 0.56rem; display: block; margin-top: 1px; }
+    .h2h-table .cl { background: rgba(239,68,68,0.1); text-align: center; padding: 0.3rem 0.25rem; transition: background 0.12s; cursor: default; }
+    .h2h-table .cl:hover { background: rgba(239,68,68,0.22); }
+    .cl-tag { color: #f87171; font-size: 0.68rem; font-weight: 700; display: block; }
+    .cl-mg  { color: rgba(248,113,113,0.45); font-size: 0.56rem; display: block; margin-top: 1px; }
+    .h2h-table .cn { background: rgba(255,255,255,0.015); text-align: center; padding: 0.5rem 0.3rem; color: rgba(255,255,255,0.08); font-size: 0.6rem; }
+    .h2h-table .sc { background: #060b10; text-align: center; padding: 0.5rem 0.7rem; border-left: 1px solid rgba(200,169,81,0.1); }
+    .sc-w { color: #4ade80; font-weight: 700; font-size: 0.82rem; }
+    .sc-d { color: #1a3a2a; font-size: 0.75rem; }
+    .sc-l { color: #f87171; font-weight: 700; font-size: 0.82rem; }
+    .sc-pf { color: #2a5a6a; font-size: 0.75rem; margin-top: 2px; display: block; }
+
+    @media (max-width: 768px) {
+      .cum-outer { padding: 3rem 1.2rem 2rem; }
+      .h2h-outer { padding: 2rem 1.2rem 3rem; }
+    }
   </style>
 </head>
 <body>
@@ -268,6 +331,264 @@
       <div class="stat-item"><span class="stat-number">10.31</span><span class="stat-label">Top Score This Season</span></div>
     </div>
   </div>
+
+  <!-- ═══════════ CUMULATIVE POWER RANKINGS ═══════════ -->
+  <section id="cumulative">
+    <div class="cum-outer">
+      <div class="section-label">Season Overview</div>
+      <div class="section-title">Cumulative Power Rankings</div>
+      <p class="cum-note">
+        Total PPR score across all 6 rounds — Draft Night through Round 4.
+        The <span style="color:var(--gold)">best score each round is highlighted in gold.</span>
+        Trend snake (right column) shows trajectory across the last 5 rounds — green segments rising, red falling.
+      </p>
+      <div class="cum-scroll">
+        <table class="cum-table">
+          <thead>
+            <tr>
+              <th class="th-left" style="width:2rem;">#</th>
+              <th class="th-left">Team</th>
+              <th>Draft<br>Night</th>
+              <th>Opening<br>Rd</th>
+              <th>Round 1</th>
+              <th>Round 2</th>
+              <th>Round 3</th>
+              <th>Round 4</th>
+              <th>Total</th>
+              <th>Avg</th>
+              <th>Trend</th>
+            </tr>
+          </thead>
+          <tbody id="cumBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ HEAD-TO-HEAD MATRIX ═══════════ -->
+  <section id="h2h">
+    <div class="h2h-outer">
+      <div class="section-label">Season Results</div>
+      <div class="section-title">Head-to-Head Matrix</div>
+      <div class="h2h-legend">
+        <div class="leg-item"><div class="leg-swatch leg-w"></div>Win (row beat column)</div>
+        <div class="leg-item"><div class="leg-swatch leg-l"></div>Loss (row lost to column)</div>
+        <div class="leg-item"><div class="leg-swatch leg-no"></div>Not yet played</div>
+        <div class="leg-item" style="margin-left:auto;color:#1a3a52;">Point margin shown inside each cell</div>
+      </div>
+      <div class="h2h-scroll">
+        <table class="h2h-table" id="h2hTable"></table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ DATA + RENDER SCRIPT ═══════════ -->
+  <script>
+  (function(){
+
+    /* ── PPR scores: [DraftNight, OpeningRd, R1, R2, R3, R4] ── */
+    /* null = round not yet rated                                  */
+    const PPR = {
+      'Foopys':              [9.67,  9.50,  10.17, 10.13, 9.44,  8.94],
+      'Dark Magicians':      [7.08,  10.25, 10.58, 9.25,  9.25,  9.25],
+      'Holmes and Gardens':  [8.50,  9.92,  10.33, 9.75,  10.31, 10.31],
+      'DC & Tax Payers':     [7.58,  9.50,  10.00, 10.25, 9.50,  9.88],
+      'Phillipou':           [7.17,  7.92,  8.17,  8.50,  9.38,  9.00],
+      'Flagdons':            [8.33,  9.67,  9.75,  9.38,  10.06, 9.44],
+      'Van Twists':          [8.83,  9.42,  9.67,  8.13,  7.38,  8.89],
+      'Cripps Nipps':        [7.92,  8.92,  7.92,  7.13,  7.43,  7.88],
+      'Broncic':             [8.25,  9.33,  8.42,  8.38,  9.25,  8.88],
+      'Izaks':               [7.75,  8.08,  8.25,  7.63,  8.75,  9.25],
+      'Nethers men':         [7.42,  8.25,  7.75,  7.88,  8.50,  8.38],
+      'Shavas':              [7.33,  8.42,  8.33,  8.25,  9.06,  8.39],
+    };
+
+    /* ── H2H match results ── */
+    const MATCHES = [
+      // R1
+      {w:'Cripps Nipps',      l:'Broncic',            ws:1202,ls:1109},
+      {w:'Phillipou',          l:'Van Twists',         ws:1056,ls:1048},
+      {w:'Dark Magicians',     l:'Foopys',             ws:1196,ls:1180},
+      {w:'DC & Tax Payers',    l:'Izaks',              ws:1247,ls:1119},
+      {w:'Holmes and Gardens', l:'Nethers men',        ws:1347,ls:918 },
+      {w:'Flagdons',           l:'Shavas',             ws:1064,ls:1055},
+      // R2
+      {w:'Broncic',            l:'Flagdons',           ws:1226,ls:1000},
+      {w:'Phillipou',          l:'Dark Magicians',     ws:1155,ls:1126},
+      {w:'DC & Tax Payers',    l:'Van Twists',         ws:1158,ls:1143},
+      {w:'Foopys',             l:'Cripps Nipps',       ws:1066,ls:585 },
+      {w:'Nethers men',        l:'Izaks',              ws:870, ls:854 },
+      {w:'Shavas',             l:'Holmes and Gardens', ws:1101,ls:1013},
+      // R3
+      {w:'Broncic',            l:'Holmes and Gardens', ws:1123,ls:941 },
+      {w:'Phillipou',          l:'DC & Tax Payers',    ws:920, ls:916 },
+      {w:'Cripps Nipps',       l:'Dark Magicians',     ws:847, ls:697 },
+      {w:'Nethers men',        l:'Van Twists',         ws:1072,ls:964 },
+      {w:'Flagdons',           l:'Foopys',             ws:1177,ls:1054},
+      {w:'Izaks',              l:'Shavas',             ws:1147,ls:1116},
+      // R4
+      {w:'Izaks',              l:'Broncic',            ws:1139,ls:1061},
+      {w:'Cripps Nipps',       l:'Phillipou',          ws:1072,ls:717 },
+      {w:'DC & Tax Payers',    l:'Nethers men',        ws:1157,ls:1053},
+      {w:'Dark Magicians',     l:'Flagdons',           ws:1113,ls:1004},
+      {w:'Van Twists',         l:'Shavas',             ws:1221,ls:1100},
+      {w:'Holmes and Gardens', l:'Foopys',             ws:1290,ls:1095},
+    ];
+
+    const TEAMS = Object.keys(PPR);
+
+    /* ════════════════════════════════════════
+       CUMULATIVE TABLE
+    ════════════════════════════════════════ */
+    (function buildCumulative(){
+      /* per-round best score for gold highlight */
+      const numRounds = 6;
+      const roundBest = Array.from({length: numRounds}, (_, ri) => {
+        const vals = TEAMS.map(t => PPR[t][ri]).filter(v => v !== null);
+        return vals.length ? Math.max(...vals) : null;
+      });
+
+      /* build row data */
+      const rows = TEAMS.map(team => {
+        const scores = PPR[team];
+        const played = scores.filter(v => v !== null);
+        const total  = played.reduce((a,b) => a+b, 0);
+        const avg    = played.length ? total / played.length : 0;
+        return { team, scores, total, avg };
+      }).sort((a, b) => b.total - a.total);
+
+      const tbody = document.getElementById('cumBody');
+      rows.forEach((row, idx) => {
+        const rank = idx + 1;
+        let posClass = 'cum-pos';
+        if (rank === 1) posClass += ' p1';
+        else if (rank === 2) posClass += ' p2';
+        else if (rank === 3) posClass += ' p3';
+
+        /* score cells */
+        const scoreCells = row.scores.map((s, ri) => {
+          if (s === null) return `<td class="cum-score">—</td>`;
+          const isBest = roundBest[ri] !== null && s === roundBest[ri];
+          return `<td class="cum-score played${isBest ? ' best' : ''}">${s.toFixed(2)}</td>`;
+        }).join('');
+
+        /* trend snake: last 5 rounds = indices 1-5 (Opening Rd → R4) */
+        const trendScores = row.scores.slice(1).filter(v => v !== null);
+        const snake = buildSnakeSVG(trendScores);
+
+        const tr = document.createElement('tr');
+        tr.innerHTML =
+          `<td class="td-left"><span class="${posClass}">${rank}</span></td>` +
+          `<td class="td-left"><span class="cum-name">${row.team}</span></td>` +
+          scoreCells +
+          `<td class="cum-total">${row.total.toFixed(2)}</td>` +
+          `<td class="cum-avg">${row.avg.toFixed(2)}</td>` +
+          `<td class="cum-snake">${snake}</td>`;
+        tbody.appendChild(tr);
+      });
+    })();
+
+    function buildSnakeSVG(scores) {
+      const W = 88, H = 28, P = 4;
+      if (scores.length < 2) return `<svg class="snake" width="${W}" height="${H}"><text x="4" y="19" fill="#1a3a52" font-family="Oswald" font-size="11">—</text></svg>`;
+      const lo = Math.min(...scores) - 0.3;
+      const hi = Math.max(...scores) + 0.3;
+      const pts = scores.map((v, i) => [
+        P + (i / (scores.length - 1)) * (W - P*2),
+        H - P - ((v - lo) / (hi - lo)) * (H - P*2)
+      ]);
+      /* colour each segment independently */
+      let segs = '';
+      for (let i = 0; i < pts.length - 1; i++) {
+        const col = scores[i+1] >= scores[i] ? '#22c55e' : '#ef4444';
+        segs += `<line x1="${pts[i][0].toFixed(1)}" y1="${pts[i][1].toFixed(1)}" x2="${pts[i+1][0].toFixed(1)}" y2="${pts[i+1][1].toFixed(1)}" stroke="${col}" stroke-width="2" stroke-linecap="round"/>`;
+      }
+      /* dots */
+      let dots = '';
+      pts.forEach(([x,y], i) => {
+        const last  = i === pts.length - 1;
+        const col   = scores[i] >= (scores[i-1] ?? scores[i]) ? '#22c55e' : '#ef4444';
+        dots += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${last ? 3 : 1.8}" fill="${last ? col : 'rgba(255,255,255,0.2)'}"/>`;
+      });
+      return `<svg class="snake" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${segs}${dots}</svg>`;
+    }
+
+    /* ════════════════════════════════════════
+       H2H MATRIX
+    ════════════════════════════════════════ */
+    (function buildH2H(){
+      /* build win/loss lookup */
+      const wins = {}; /* wins[winner][loser] = margin */
+      TEAMS.forEach(t => { wins[t] = {}; });
+      MATCHES.forEach(m => { wins[m.w][m.l] = m.ws - m.ls; });
+
+      /* W-L record & points for per team */
+      const wl = {}, pf = {};
+      TEAMS.forEach(t => { wl[t] = {w:0, l:0}; pf[t] = 0; });
+      MATCHES.forEach(m => {
+        wl[m.w].w++; pf[m.w] += m.ws;
+        wl[m.l].l++; pf[m.l] += m.ls;
+      });
+
+      /* sort: most wins → tie-break by PF */
+      const sorted = TEAMS.slice().sort((a, b) =>
+        wl[b].w !== wl[a].w ? wl[b].w - wl[a].w : pf[b] - pf[a]
+      );
+
+      /* short column labels (max ~7 chars) */
+      const abbr = {
+        'Holmes and Gardens': 'H&G',
+        'DC & Tax Payers':    'DC',
+        'Dark Magicians':     'Mag.',
+        'Cripps Nipps':       'C.Nipps',
+        'Van Twists':         'VanTwi',
+        'Nethers men':        'Nethers',
+        'Phillipou':          'Phillipou',
+        'Flagdons':           'Flagdons',
+        'Foopys':             'Foopys',
+        'Broncic':            'Broncic',
+        'Izaks':              'Izaks',
+        'Shavas':             'Shavas',
+      };
+
+      const tbl = document.getElementById('h2hTable');
+      let html = '';
+
+      /* header row */
+      html += '<thead><tr>';
+      html += '<th class="rh" style="font-size:0.6rem;color:#1a3a52;letter-spacing:1px;">ROW vs COL ↓</th>';
+      sorted.forEach(t => { html += `<th class="ch">${abbr[t]||t}</th>`; });
+      html += '<th class="sh">W–L</th><th class="sh">PF</th>';
+      html += '</tr></thead>';
+
+      /* body rows */
+      html += '<tbody>';
+      sorted.forEach(rowT => {
+        html += `<tr><td class="rh">${rowT}</td>`;
+        sorted.forEach(colT => {
+          if (rowT === colT) {
+            html += `<td class="cs">—</td>`;
+          } else if (wins[rowT][colT] !== undefined) {
+            const mg = wins[rowT][colT];
+            html += `<td class="cw" title="${rowT} def. ${colT} by ${mg}"><span class="cw-tag">W</span><span class="cw-mg">+${mg}</span></td>`;
+          } else if (wins[colT][rowT] !== undefined) {
+            const mg = wins[colT][rowT];
+            html += `<td class="cl" title="${colT} def. ${rowT} by ${mg}"><span class="cl-tag">L</span><span class="cl-mg">−${mg}</span></td>`;
+          } else {
+            html += `<td class="cn">·</td>`;
+          }
+        });
+        html += `<td class="sc"><span class="sc-w">${wl[rowT].w}</span><span class="sc-d">–</span><span class="sc-l">${wl[rowT].l}</span></td>`;
+        html += `<td class="sc"><span class="sc-pf">${pf[rowT].toLocaleString()}</span></td>`;
+        html += '</tr>';
+      });
+      html += '</tbody>';
+
+      tbl.innerHTML = html;
+    })();
+
+  })();
+  </script>
 
   <!-- ═══════════ VOTE SECTION ═══════════ -->
   <section id="vote">
