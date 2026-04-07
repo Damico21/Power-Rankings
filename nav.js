@@ -13,7 +13,7 @@ const PPR_NAV = {
   // ── ROUNDS DROPDOWN ─────────────────────────────────────────────────────
   // Add new rounds here. That's the only change you ever need to make.
   rounds: [
-    { label: 'Round 1',  href: 'opening-round.html' },
+    { label: 'Round 1',  href: 'round-1.html' },
     { label: 'Round 2',  href: 'round-2.html' },
     { label: 'Round 3',  href: 'round-3.html' },
     { label: 'Round 4',  href: 'round-4.html' },
