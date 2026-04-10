@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rivalry Round — Paz's Power Rankings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#1b2a3b; --red:#8b1a1a; --gold:#c8a951; --cream:#e8dcc8;
+      --dark:#0d1117; --mid:#141d27; --text-muted:#6a8aaa; --border:rgba(255,255,255,0.06);
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Inter',sans-serif; background:var(--dark); color:#fff; min-height:100vh; }
+    .divider { height:3px; background:linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
+
+    /* PAGE HERO */
+    .page-hero {
+      text-align:center; padding:3.5rem 2rem 2.5rem;
+      border-bottom:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(139,26,26,0.08) 0%, transparent 100%);
+    }
+    .page-eyebrow {
+      font-family:'Oswald',sans-serif; font-size:0.72rem; letter-spacing:3px;
+      text-transform:uppercase; color:var(--red); margin-bottom:0.75rem;
+    }
+    .page-title {
+      font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,8vw,5.5rem);
+      letter-spacing:5px; color:#fff; line-height:1;
+    }
+    .page-subtitle {
+      font-family:'Oswald',sans-serif; font-size:1rem; letter-spacing:2px;
+      color:var(--text-muted); margin-top:0.5rem;
+    }
+
+    /* MAIN LAYOUT */
+    .main { max-width:900px; margin:0 auto; padding:3rem 1.5rem 5rem; }
+
+    /* SECTION HEADER */
+    .section-header {
+      display:flex; align-items:center; gap:1rem;
+      margin-bottom:2rem;
+    }
+    .section-icon {
+      width:44px; height:44px; border-radius:10px;
+      background:rgba(200,169,81,0.12); border:1px solid rgba(200,169,81,0.2);
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.2rem; flex-shrink:0;
+    }
+    .section-label {
+      font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:3px; color:#fff;
+    }
+    .section-sub {
+      font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:2px;
+      text-transform:uppercase; color:var(--text-muted);
+    }
+
+    /* INTRO BLURB */
+    .intro-blurb {
+      font-family:'Oswald',sans-serif; font-size:0.92rem; letter-spacing:0.5px;
+      color:#8fa8be; line-height:1.8; margin-bottom:2.5rem;
+      padding:1.5rem 2rem; border-left:3px solid var(--red);
+      background:rgba(139,26,26,0.05); border-radius:0 10px 10px 0;
+    }
+
+    /* MATCH CARDS */
+    .matches { display:flex; flex-direction:column; gap:1.25rem; margin-bottom:3rem; }
+
+    .match-card {
+      background:var(--mid); border:1px solid var(--border);
+      border-radius:14px; overflow:hidden;
+      transition:border-color 0.2s;
+    }
+    .match-card:hover { border-color:rgba(200,169,81,0.15); }
+
+    /* Special card variants */
+    .match-card.rivalry     { border-color:rgba(200,169,81,0.3); }
+    .match-card.hatred      { border-color:rgba(139,26,26,0.4); }
+    .match-card.grudge      { border-color:rgba(200,169,81,0.25); }
+    .match-card.blood       { border-color:rgba(200,100,100,0.35); }
+    .match-card.gathering   { border-color:rgba(100,180,100,0.25); }
+    .match-card.mates       { border-color:rgba(100,150,200,0.3); }
+
+    .match-top {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0.65rem 1.25rem;
+      border-bottom:1px solid var(--border);
+    }
+    .match-label {
+      font-family:'Oswald',sans-serif; font-size:0.65rem; letter-spacing:2.5px;
+      text-transform:uppercase; color:var(--text-muted);
+    }
+    .match-badge {
+      font-family:'Oswald',sans-serif; font-size:0.65rem; letter-spacing:2px;
+      text-transform:uppercase; padding:0.2rem 0.7rem; border-radius:100px;
+    }
+    .match-badge.badge-grudge    { background:rgba(200,169,81,0.12); color:var(--gold); border:1px solid rgba(200,169,81,0.3); }
+    .match-badge.badge-hatred    { background:rgba(139,26,26,0.18); color:#e06060; border:1px solid rgba(139,26,26,0.4); }
+    .match-badge.badge-blood     { background:rgba(200,80,80,0.12); color:#e08080; border:1px solid rgba(200,80,80,0.35); }
+    .match-badge.badge-gather    { background:rgba(100,200,100,0.1); color:#7ec87e; border:1px solid rgba(100,200,100,0.3); }
+    .match-badge.badge-mates     { background:rgba(100,150,220,0.1); color:#8ab4e8; border:1px solid rgba(100,150,220,0.3); }
+    .match-badge.badge-classic   { background:rgba(200,169,81,0.12); color:var(--gold); border:1px solid rgba(200,169,81,0.3); }
+
+    .match-body {
+      display:grid; grid-template-columns:1fr auto 1fr;
+      align-items:center; padding:1.5rem 1.5rem 1.25rem; gap:1rem;
+    }
+
+    /* Team photo + name layout */
+    .match-team { text-align:center; display:flex; flex-direction:column; align-items:center; gap:0.6rem; }
+    .match-team img {
+      width:72px; height:72px; border-radius:50%;
+      object-fit:cover; border:2px solid rgba(200,169,81,0.35);
+      background:var(--navy);
+    }
+    .match-team-name {
+      font-family:'Bebas Neue',sans-serif; font-size:1.25rem; letter-spacing:2px;
+      color:#fff; line-height:1.1;
+    }
+    .match-team-name.home { color:var(--gold); }
+
+    .match-vs { text-align:center; flex-shrink:0; }
+    .match-vs-text {
+      font-family:'Oswald',sans-serif; font-size:0.7rem; letter-spacing:3px;
+      text-transform:uppercase; color:#304558;
+    }
+    .match-vs-icon {
+      font-family:'Bebas Neue',sans-serif; font-size:2rem;
+      color:var(--red); letter-spacing:1px; margin-top:0.1rem;
+      line-height:1;
+    }
+
+    .match-analysis {
+      padding:0 1.5rem 1.25rem;
+      font-family:'Oswald',sans-serif; font-size:0.88rem;
+      letter-spacing:0.5px; color:#8fa8be; line-height:1.7;
+    }
+    .match-analysis strong { color:#fff; }
+
+    /* TAKEAWAYS */
+    .takeaways-card {
+      background:var(--mid); border:1px solid var(--border);
+      border-radius:14px; padding:2rem;
+    }
+    .takeaways-title {
+      font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:3px;
+      color:var(--gold); margin-bottom:1.25rem;
+    }
+    .takeaways-list { list-style:none; display:flex; flex-direction:column; gap:0.75rem; }
+    .takeaways-list li {
+      font-family:'Oswald',sans-serif; font-size:0.88rem; letter-spacing:0.5px;
+      color:#8fa8be; line-height:1.6;
+      padding-left:1.25rem; position:relative;
+    }
+    .takeaways-list li::before {
+      content:'▸'; position:absolute; left:0; color:var(--red); font-size:0.7rem; top:0.15rem;
+    }
+    .takeaways-list li strong { color:#fff; }
+
+    .sign-off {
+      margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border);
+      font-family:'Oswald',sans-serif; font-size:0.88rem; letter-spacing:0.5px;
+      color:#8fa8be; line-height:1.8;
+    }
+    .sign-off strong { color:#fff; }
+
+    footer {
+      text-align:center; padding:2rem; color:#253545;
+      font-size:0.78rem; font-family:'Oswald',sans-serif; letter-spacing:1px;
+      border-top:1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav injected by nav.js -->
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-eyebrow">Round 5 · Ligma League 2026</div>
+  <h1 class="page-title">⚔️ Rivalry Round</h1>
+  <div class="page-subtitle">Old grudges. New scores. Zero mercy.</div>
+</div>
+
+<div class="main">
+
+  <!-- SECTION HEADER -->
+  <div class="section-header">
+    <div class="section-icon">⚔️</div>
+    <div>
+      <div class="section-label">The Rivalries</div>
+      <div class="section-sub">Round 5 · Six Matchups · Six Stories</div>
+    </div>
+  </div>
+
+  <!-- INTRO BLURB -->
+  <div class="intro-blurb">
+    Round 5 isn't just footy. It's personal. Six matchups. Six stories written long before a single player was drafted. History, blood, betrayal, birthday lies and vapes lost to the Adelaide River. Welcome to the Rivalry Round — where friendships go to die and legends are born.
+  </div>
+
+  <!-- MATCH CARDS -->
+  <div class="matches">
+
+    <!-- Match 1: Broncic vs Van Twists -->
+    <div class="match-card rivalry">
+      <div class="match-top">
+        <span class="match-label">🔥 Match 1 · Grudge Match</span>
+        <span class="match-badge badge-grudge">The Ridley Affair</span>
+      </div>
+      <div class="match-body">
+        <div class="match-team">
+          <img src="Broncic.jpg" alt="Broncic" />
+          <div class="match-team-name">Broncic</div>
+        </div>
+        <div class="match-vs">
+          <div class="match-vs-text">vs</div>
+          <div class="match-vs-icon">⚔️</div>
+        </div>
+        <div class="match-team">
+          <img src="Van Twists.jpg" alt="Van Twists" />
+          <div class="match-team-name">Van Twists</div>
+        </div>
+      </div>
+      <div class="match-analysis">
+        <strong>It's been over a year and the Van Twists still can't look Broncic in the eye without that familiar twist in the gut.</strong> The Ridley trade of 2024 — was it sharp dealing or daylight robbery? Broncic says it was just good footy IQ. The Van Twists used words like "cheat" and "unethical," and they haven't been taken back since. But here's the uncomfortable truth — the rulebook doesn't care about your feelings, and neither does Broncic. Was it all part of the game? Almost certainly. Does that make it sting any less? Absolutely not. This one has been circled on the calendar since the fixture dropped. An absolute stunner of a matchup, and every single point will land like a statement.
+      </div>
+    </div>
+
+    <!-- Match 2: Dark Magicians vs Holmes and Gardens -->
+    <div class="match-card hatred">
+      <div class="match-top">
+        <span class="match-label">💀 Match 2 · Generational War</span>
+        <span class="match-badge badge-hatred">Sons &amp; Fathers</span>
+      </div>
+      <div class="match-body">
+        <div class="match-team">
+          <img src="Dark Magicians.jpg" alt="Dark Magicians" />
+          <div class="match-team-name">Dark<br>Magicians</div>
+        </div>
+        <div class="match-vs">
+          <div class="match-vs-text">vs</div>
+          <div class="match-vs-icon">⚔️</div>
+        </div>
+        <div class="match-team">
+          <img src="Better Holmes and Gardens.jpg" alt="Better Holmes and Gardens" />
+          <div class="match-team-name">Holmes &amp;<br>Gardens</div>
+        </div>
+      </div>
+      <div class="match-analysis">
+        <strong>Don't let anyone dress this one up as something wholesome.</strong> This is not a heartwarming generational tale of footy bonding between dads and sons. This is hatred — pure, distilled, generational hatred, built into the rivalry from the very beginning. The Dark Magicians and Holmes and Gardens don't just want to win. They want to humiliate. They want to grind the other into the turf and walk away grinning. The family connection doesn't soften the edges here — if anything, it sharpens them into something vicious. Boy oh boy, strap yourself in. This one could get very ugly, very fast.
+      </div>
+    </div>
+
+    <!-- Match 3: Phillipou vs Nethers Men -->
+    <div class="match-card grudge">
+      <div class="match-top">
+        <span class="match-label">🍺 Match 3 · Mates or Rivals?</span>
+        <span class="match-badge badge-classic">Elsternwick's Finest</span>
+      </div>
+      <div class="match-body">
+        <div class="match-team">
+          <img src="Phillipou.jpg" alt="Phillipou" />
+          <div class="match-team-name">Phillipou</div>
+        </div>
+        <div class="match-vs">
+          <div class="match-vs-text">vs</div>
+          <div class="match-vs-icon">⚔️</div>
+        </div>
+        <div class="match-team">
+          <img src="Nethers men.jpg" alt="Nethers Men" />
+          <div class="match-team-name">Nethers<br>Men</div>
+        </div>
+      </div>
+      <div class="match-analysis">
+        <strong>Since the days at Elsternwick, these two have been inseparable. Best of mates — the kind of blokes who'd do anything for each other on a Saturday arvo.</strong> But step inside the Ligma League and something shifts. Is it still friendship, or has years of competition quietly curdled into something no one wants to name out loud? The secret hatred theory has been floated in certain circles. Nobody's confirmed it. Nobody's denied it either. What we do know is that Phillipou and Nethers Men bring out the absolute best — and worst — in each other. This has been brewing since day one. An absolute belter of a match. The loser will be buying the first round. No questions asked.
+      </div>
+    </div>
+
+    <!-- Match 4: Izaks vs Foopys -->
+    <div class="match-card blood">
+      <div class="match-top">
+        <span class="match-label">⚡ Match 4 · Battle of the Week</span>
+        <span class="match-badge badge-blood">Blood vs Blood</span>
+      </div>
+      <div class="match-body">
+        <div class="match-team">
+          <img src="Izaks.jpg" alt="Izaks" />
+          <div class="match-team-name">Izaks</div>
+        </div>
+        <div class="match-vs">
+          <div class="match-vs-text">vs</div>
+          <div class="match-vs-icon">⚔️</div>
+        </div>
+        <div class="match-team">
+          <img src="Foopys.jpg" alt="Foopys" />
+          <div class="match-team-name">Foopys</div>
+        </div>
+      </div>
+      <div class="match-analysis">
+        <strong>They share a bloodline. That's where the pleasantries end.</strong> Cousins by birth, genuine foes on the footy field — Izaks and Foopys represent something entirely unique in the Ligma League. One team Jewish, one team not. The Battle of the Week. Family dinners have seen worse arguments than this, but few have had actual fantasy points on the line. There is no family discount inside the competition. Zero mercy. If anything, the shared history makes the hunger to win even more ferocious. This one could get ugly. And frankly, we wouldn't have it any other way.
+      </div>
+    </div>
+
+    <!-- Match 5: Shavas vs DC & Tax Payers -->
+    <div class="match-card gathering">
+      <div class="match-top">
+        <span class="match-label">🎭 Match 5 · Gather Round Classic</span>
+        <span class="match-badge badge-gather">1st vs 12th</span>
+      </div>
+      <div class="match-body">
+        <div class="match-team">
+          <img src="Shavas.jpg" alt="Shavas" />
+          <div class="match-team-name">Shavas</div>
+        </div>
+        <div class="match-vs">
+          <div class="match-vs-text">vs</div>
+          <div class="match-vs-icon">⚔️</div>
+        </div>
+        <div class="match-team">
+          <img src="DC & Tax Payers.jpg" alt="DC & Tax Payers" />
+          <div class="match-team-name">DC &amp; Tax<br>Payers</div>
+        </div>
+      </div>
+      <div class="match-analysis">
+        <strong>On paper it's 1st versus 12th. Don't be fooled for a single second.</strong> These are two larrikins who will absolutely get it done, and the ladder position tells you nothing about the soul of this contest. Shavas — the man who once told the whole school it was his birthday when it categorically was not. DC &amp; Tax Payers — the man whose vape was casually launched into the Adelaide River at Gather Round last year, never to be seen again. Two absolute characters. Two teams who play like their dignity depends on it. Gather round, people. Something magical is brewing, and the scoreline is going to be far closer than anyone expects.
+      </div>
+    </div>
+
+    <!-- Match 6: Cripps Nipps vs Flagdons -->
+    <div class="match-card mates">
+      <div class="match-top">
+        <span class="match-label">💍 Match 6 · Groomsmen on the Line</span>
+        <span class="match-badge badge-mates">Best Mates</span>
+      </div>
+      <div class="match-body">
+        <div class="match-team">
+          <img src="Cripps Nipps.jpg" alt="Cripps Nipps" />
+          <div class="match-team-name">Cripps<br>Nipps</div>
+        </div>
+        <div class="match-vs">
+          <div class="match-vs-text">vs</div>
+          <div class="match-vs-icon">⚔️</div>
+        </div>
+        <div class="match-team">
+          <img src="Flagdons.jpg" alt="Flagdons" />
+          <div class="match-team-name">Flagdons</div>
+        </div>
+      </div>
+      <div class="match-analysis">
+        <strong>Best mates. Long-time school companions. One of them engaged, one of them hurtling toward it at full pace.</strong> Cripps Nipps and Flagdons are the kind of friends who'd do anything for each other — or so we all thought. Because now there's a wrinkle. A delicious, complicated wrinkle. Does he actually want to win this week, or does he lose close enough to stay in the good books, secure the groomsmen spot, and avoid any lingering awkwardness at the bucks party? Every trade, every captain pick, every selection is loaded with subtext. Two long school mates, one engaged, one incoming. The most politically complex matchup of the season. We absolutely love to see it.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TAKEAWAYS -->
+  <div class="takeaways-card">
+    <div class="takeaways-title">⚔️ The Verdict</div>
+    <ul class="takeaways-list">
+      <li><strong>Broncic vs Van Twists</strong> — The Ridley trade haunts on. One team carrying a grudge, one team carrying form. An absolute stunner awaits.</li>
+      <li><strong>Dark Magicians vs Holmes and Gardens</strong> — Dads and sons. Pure hatred. Built into the rivalry from birth. Don't blink.</li>
+      <li><strong>Phillipou vs Nethers Men</strong> — Elsternwick's finest go to war. Best mates or secret enemies? Round 5 finds out. An absolute belter.</li>
+      <li><strong>Izaks vs Foopys</strong> — Cousins. Blood. Battle of the Week. One team Jewish, one team not. Zero family discount on the footy field.</li>
+      <li><strong>Shavas vs DC &amp; Tax Payers</strong> — Birthday liar vs the man whose vape met the Adelaide River. 1st vs 12th but don't trust the ladder on this one.</li>
+      <li><strong>Cripps Nipps vs Flagdons</strong> — The most politically charged match of the season. Groomsmen spots. Bucks parties. School compatriots. Good luck to both of them.</li>
+    </ul>
+    <div class="sign-off">
+      Six rivalries. Six stories. Round 5 isn't just a round of footy — it's a reckoning. See you on the other side.<br><br>
+      <strong>Will 🧢</strong>
+    </div>
+  </div>
+
+</div>
+
+<footer>Paz's Power Rankings © 2026 · Ligma League AFL Fantasy</footer>
+
+<script src="nav.js"></script>
+</body>
+</html>
