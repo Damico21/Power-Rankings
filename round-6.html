@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Round 5 Rankings — Paz's Power Rankings</title>
+  <title>Round 6 Rankings — Paz's Power Rankings</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -34,41 +34,70 @@
     }
 
     /* WEEKLY WRAP */
-    .weekly-wrap {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: var(--mid);
-      max-width: 420px;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: 2.5rem;
+    .weekly-wrap-section {
+      max-width:900px; margin:0 auto 0; padding:2rem 1.5rem 0;
     }
-    .weekly-wrap-label {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.68rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      padding: 0.65rem 1rem;
-      border-bottom: 1px solid var(--border);
-      background: rgba(255,255,255,0.02);
+    .weekly-wrap-heading {
+      display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem;
+      padding-bottom:1rem; border-bottom:1px solid var(--border);
     }
-    .wrap-dot {
-      width: 4px; height: 4px;
-      background: var(--red);
-      border-radius: 50%;
-      display: inline-block;
+    .weekly-wrap-heading-icon { font-size:1.6rem; }
+    .weekly-wrap-heading-title {
+      font-family:'Bebas Neue',sans-serif; font-size:2rem; letter-spacing:2px; color:var(--gold);
+    }
+    .weekly-wrap-heading-sub {
+      font-family:'Oswald',sans-serif; font-size:0.75rem; letter-spacing:2px;
+      text-transform:uppercase; color:var(--text-muted);
+    }
+
+    .weekly-wrap-card {
+      background:var(--mid); border:1px solid var(--border); border-radius:14px;
+      overflow:hidden; margin-bottom:2.5rem;
+    }
+    .weekly-wrap-img-wrap {
+      position:relative; overflow:hidden; border-bottom:1px solid var(--border);
     }
     .weekly-wrap-img {
-      width: 100%;
-      display: block;
-      height: auto;
+      width:100%; display:block; height:auto; max-height:460px; object-fit:cover;
+      object-position:center top;
     }
+    .weekly-wrap-img-caption {
+      position:absolute; bottom:0; left:0; right:0;
+      background:linear-gradient(transparent, rgba(13,17,23,0.92));
+      padding:2rem 1.8rem 1.2rem;
+      font-family:'Bebas Neue',sans-serif; font-size:1.4rem; letter-spacing:3px; color:var(--gold);
+    }
+    .weekly-wrap-body {
+      padding:1.8rem;
+    }
+    .wrap-tag {
+      display:inline-flex; align-items:center; gap:0.4rem;
+      font-family:'Oswald',sans-serif; font-size:0.65rem; letter-spacing:2.5px;
+      text-transform:uppercase; color:#e05555;
+      background:rgba(139,26,26,0.18); border:1px solid rgba(139,26,26,0.3);
+      padding:0.3rem 0.8rem; border-radius:100px; margin-bottom:1.1rem;
+    }
+    .wrap-tag-dot { width:5px; height:5px; border-radius:50%; background:#e05555; display:inline-block; }
+    .wrap-headline {
+      font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:2px;
+      color:#fff; margin-bottom:1rem; line-height:1.15;
+    }
+    .wrap-headline span { color:var(--red); }
+    .wrap-text {
+      font-size:0.95rem; line-height:1.85; color:#b0c4d4;
+    }
+    .wrap-text strong { color:#fff; }
+    .wrap-text em { color:var(--gold); font-style:normal; }
+    .wrap-divider {
+      height:1px; background:var(--border); margin:1.2rem 0;
+    }
+    .wrap-lock-fail {
+      background:rgba(139,26,26,0.08); border:1px solid rgba(139,26,26,0.2);
+      border-left:3px solid var(--red); border-radius:8px;
+      padding:1rem 1.2rem; margin-top:1.2rem;
+      font-size:0.9rem; line-height:1.75; color:#c8a0a0;
+    }
+    .wrap-lock-fail strong { color:#e05555; }
 
     /* MAIN LAYOUT */
     .main-wrap { max-width:900px; margin:0 auto; padding:2rem 1.5rem 5rem; }
@@ -142,13 +171,19 @@
     .team-avatar {
       width:38px; height:38px; border-radius:50%; object-fit:cover;
       border:2px solid var(--border); flex-shrink:0;
-      background:var(--mid);
+      background:var(--mid); cursor:pointer;
+      transition:border-color 0.2s, transform 0.15s;
     }
-    .team-name {
+    .team-avatar:hover { border-color:var(--gold); transform:scale(1.1); }
+    .team-name-btn {
       font-family:'Oswald',sans-serif; font-size:0.95rem; font-weight:600;
       letter-spacing:0.5px; color:#fff;
+      background:none; border:none; cursor:pointer; padding:0; text-align:left;
+      transition:color 0.2s;
     }
-    .team-name-1st { color:var(--gold); }
+    .team-name-btn:hover { color:var(--gold); }
+    .team-name-btn.team-name-1st { color:var(--gold); }
+    .team-name-btn.team-name-1st:hover { color:#e8c870; }
 
     /* Score cell */
     .score-cell {
@@ -235,6 +270,10 @@
       border-color:rgba(200,169,81,0.35);
       background:linear-gradient(135deg, rgba(200,169,81,0.06) 0%, var(--mid) 60%);
     }
+    .match-card.lock-fail {
+      border-color:rgba(139,26,26,0.4);
+      background:linear-gradient(135deg, rgba(139,26,26,0.07) 0%, var(--mid) 60%);
+    }
     .match-card.match-of-round {
       border-color:rgba(139,26,26,0.45);
       background:linear-gradient(135deg, rgba(139,26,26,0.07) 0%, var(--mid) 60%);
@@ -247,8 +286,10 @@
       font-family:'Oswald',sans-serif; font-size:0.68rem; letter-spacing:2px;
       text-transform:uppercase; padding:0.28rem 0.75rem; border-radius:100px;
       margin-bottom:0.9rem;
+      background:rgba(255,255,255,0.04); color:var(--text-muted); border:1px solid var(--border);
     }
     .badge-lock  { background:rgba(200,169,81,0.15); color:var(--gold); border:1px solid rgba(200,169,81,0.3); }
+    .badge-lock-fail { background:rgba(139,26,26,0.2); color:#e05555; border:1px solid rgba(139,26,26,0.4); }
     .badge-motr  { background:rgba(139,26,26,0.2); color:#e05555; border:1px solid rgba(139,26,26,0.35); }
     .badge-landslide { background:rgba(100,160,220,0.1); color:#7ab0d4; border:1px solid rgba(100,160,220,0.2); }
     .badge-upset { background:rgba(100,200,100,0.1); color:#7ec87e; border:1px solid rgba(100,200,100,0.3); }
@@ -304,9 +345,15 @@
       border-radius:16px; padding:0; max-width:420px; width:90%;
       text-align:center; position:relative; overflow:hidden;
     }
-    .team-modal-img { width:100%; display:block; max-height:360px; object-fit:cover; }
-    .team-modal-footer { padding:1rem 1.4rem; }
-    .team-modal-name { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:2px; color:var(--gold); }
+    .team-modal-img {
+      width:100%; display:block; max-height:360px; object-fit:cover;
+    }
+    .team-modal-footer {
+      padding:1rem 1.4rem;
+    }
+    .team-modal-name {
+      font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:2px; color:var(--gold);
+    }
     .team-modal-close {
       position:absolute; top:0.8rem; right:0.8rem; background:rgba(0,0,0,0.55);
       border:none; color:#fff; font-size:1.1rem; cursor:pointer;
@@ -314,12 +361,6 @@
       transition:background 0.2s;
     }
     .team-modal-close:hover { background:rgba(139,26,26,0.7); }
-
-    /* Clickable team elements */
-    .team-avatar { cursor:pointer; transition:border-color 0.2s, transform 0.15s !important; }
-    .team-avatar:hover { border-color:var(--gold) !important; transform:scale(1.1); }
-    .team-name { cursor:pointer; transition:color 0.2s; }
-    .team-name:hover { color:var(--gold) !important; }
 
     /* VAULT MODAL */
     .vault-overlay {
@@ -367,6 +408,8 @@
       .rankings-table th, .rankings-table td { padding:0.7rem 0.6rem; }
       .team-avatar { width:30px; height:30px; }
       .score-cell { font-size:1.1rem; }
+      .weekly-wrap-section { padding:1.5rem 1rem 0; }
+      .weekly-wrap-body { padding:1.2rem; }
     }
   </style>
 </head>
@@ -374,9 +417,47 @@
 
   <!-- PAGE HEADER -->
   <div class="page-header">
-    <div class="page-eyebrow">Round 5 · Ligma League 2026</div>
-    <h1 class="page-title">⚡ Round 5 Rankings</h1>
+    <div class="page-eyebrow">Round 6 · Ligma League 2026</div>
+    <h1 class="page-title">⚡ Round 6 Rankings</h1>
     <div class="page-sub">Paz's Power Rankings · Ligma League 2026</div>
+  </div>
+
+  <!-- ══════════════ WEEKLY WRAP ══════════════ -->
+  <div class="weekly-wrap-section">
+    <div class="weekly-wrap-heading">
+      <div class="weekly-wrap-heading-icon">📰</div>
+      <div>
+        <div class="weekly-wrap-heading-title">Weekly Wrap</div>
+        <div class="weekly-wrap-heading-sub">Round 6 · The Wagers Are Dead. Long Live The Wagers.</div>
+      </div>
+    </div>
+
+    <div class="weekly-wrap-card">
+      <div class="weekly-wrap-img-wrap">
+        <img class="weekly-wrap-img" src="SeanMillisCup.png" alt="Sean Millis Cup — ANZAC Day" />
+        <div class="weekly-wrap-img-caption">Sean Millis Cup · ANZAC Day Looms</div>
+      </div>
+      <div class="weekly-wrap-body">
+        <div class="wrap-tag"><span class="wrap-tag-dot"></span> Breaking News · Round 6</div>
+        <div class="wrap-headline">Will's Weekly Wagers<br><span>Files For Bankruptcy</span></div>
+        <div class="wrap-text">
+          Well. Here we are. After weeks of telling you the picks were coming, after week after week of "trust the process" and "the numbers don't lie," <strong>Will's Weekly Wagers has officially gone under.</strong> Not quietly, not with dignity — but in the most spectacular fashion the Ligma League has ever witnessed. The ledger is red. The ego is bruised. The accountant has left the building.
+
+          <div class="wrap-divider"></div>
+
+          In what can only be described as an act of mercy — or perhaps a business opportunity — <strong>Scoonz &amp; Jaco's Snakes &amp; Ladders</strong> have once again stepped in as the official sponsor and financial backer of this column. They didn't have to. They really, genuinely, didn't have to. But they did. Because that's the kind of operation Snakes &amp; Ladders is running. Goodwill. Faith. The occasional bad investment.
+
+          <div class="wrap-divider"></div>
+
+          Round 6 was supposed to be the comeback. The redemption arc. The week where the selections finally landed and the critics went quiet. Instead, it was more of the same — another round of selections that looked great on paper and dissolved on contact with actual football. The confidence remains unshaken, if only because there is genuinely nothing left to shake.
+        </div>
+
+        <div class="wrap-lock-fail">
+          <strong>🔒 Lock of the Week — Let's Not Talk About It.</strong><br>
+          Another week, another lock. And much like the ones before it, this one decided that performing was optional. The Lock of the Week has now strung together a streak that is, statistically speaking, impressive — just not in the way anyone intended. At some point you have to wonder if the lock is actually a very elaborate joke. We're choosing to believe in the system. The system, for its part, has not returned the favour. Not once. But hey — there's always Round 7.
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="main-wrap">
@@ -386,7 +467,7 @@
       <div class="rankings-icon">📊</div>
       <div>
         <div class="rankings-title">Power Rankings</div>
-        <div class="rankings-sub">Round 5 · Updated</div>
+        <div class="rankings-sub">Round 6 · Updated</div>
       </div>
       <div class="rankings-updated">Rankings Updated</div>
     </div>
@@ -409,88 +490,88 @@
           <td>
             <div class="team-cell">
               <img class="team-avatar" src="Better Holmes and Gardens.jpg" alt="Holmes and Gardens" onclick="openTeamPhoto('Better Holmes and Gardens.jpg','Holmes and Gardens')" />
-              <span class="team-name team-name-1st" onclick="openTeamPhoto('Better Holmes and Gardens.jpg','Holmes and Gardens')" style="cursor:pointer">
+              <button class="team-name-btn team-name-1st" onclick="openTeamPhoto('Better Holmes and Gardens.jpg','Holmes and Gardens')">
                 Holmes and Gardens
                 <a href="#vault" class="vault-link" onclick="openVault(event)" title="Unlock the Champion's Vault">🔐</a>
-              </span>
+              </button>
             </div>
           </td>
-          <td class="score-cell">11.44</td>
+          <td class="score-cell">11.38</td>
         </tr>
 
         <!-- 2. DC & Tax Payers -->
         <tr>
-          <td class="rank-cell">2</td>
+          <td class="rank-cell lower">2</td>
           <td class="move-cell"><span class="move-same">— 0</span></td>
           <td>
             <div class="team-cell">
-              <img class="team-avatar" src="DC &amp; Tax Payers.jpg" alt="DC &amp; Tax Payers" onclick="openTeamPhoto('DC &amp; Tax Payers.jpg','DC &amp; Tax Payers')" />
-              <span class="team-name" onclick="openTeamPhoto('DC &amp; Tax Payers.jpg','DC &amp; Tax Payers')" style="cursor:pointer">DC &amp; Tax Payers</span>
+              <img class="team-avatar" src="DC &amp; Tax Payers.jpg" alt="DC &amp; Tax Payers" onclick="openTeamPhoto('DC & Tax Payers.jpg','DC &amp; Tax Payers')" />
+              <button class="team-name-btn" onclick="openTeamPhoto('DC & Tax Payers.jpg','DC &amp; Tax Payers')">DC &amp; Tax Payers</button>
             </div>
           </td>
-          <td class="score-cell">10.86</td>
+          <td class="score-cell">10.63</td>
         </tr>
 
-        <!-- 3. Van Twists -->
+        <!-- 3. Broncic -->
         <tr>
           <td class="rank-cell lower">3</td>
-          <td class="move-cell"><span class="move-up">↑ 5</span></td>
+          <td class="move-cell"><span class="move-up">↑ 3</span></td>
           <td>
             <div class="team-cell">
-              <img class="team-avatar" src="Van Twists.jpg" alt="Van Twists" onclick="openTeamPhoto('Van Twists.jpg','Van Twists')" />
-              <span class="team-name" onclick="openTeamPhoto('Van Twists.jpg','Van Twists')" style="cursor:pointer">Van Twists</span>
+              <img class="team-avatar" src="Broncic.jpg" alt="Broncic" onclick="openTeamPhoto('Broncic.jpg','Broncic')" />
+              <button class="team-name-btn" onclick="openTeamPhoto('Broncic.jpg','Broncic')">Broncic</button>
             </div>
           </td>
-          <td class="score-cell">10.85</td>
+          <td class="score-cell">10.60</td>
         </tr>
 
         <!-- 4. Izaks -->
         <tr>
           <td class="rank-cell lower">4</td>
-          <td class="move-cell"><span class="move-up">↑ 1</span></td>
+          <td class="move-cell"><span class="move-same">— 0</span></td>
           <td>
             <div class="team-cell">
               <img class="team-avatar" src="Izaks.jpg" alt="Izaks" onclick="openTeamPhoto('Izaks.jpg','Izaks')" />
-              <span class="team-name" onclick="openTeamPhoto('Izaks.jpg','Izaks')" style="cursor:pointer">Izaks</span>
+              <button class="team-name-btn" onclick="openTeamPhoto('Izaks.jpg','Izaks')">Izaks</button>
             </div>
           </td>
           <td class="score-cell">10.50</td>
         </tr>
 
-        <!-- 5. Dark Magicians -->
+        <!-- 5. Van Twists -->
         <tr>
           <td class="rank-cell lower">5</td>
-          <td class="move-cell"><span class="move-down">↓ 1</span></td>
+          <td class="move-cell"><span class="move-down">↓ 2</span></td>
           <td>
             <div class="team-cell">
-              <img class="team-avatar" src="Dark Magicians.jpg" alt="Dark Magicians" onclick="openTeamPhoto('Dark Magicians.jpg','Dark Magicians')" />
-              <span class="team-name" onclick="openTeamPhoto('Dark Magicians.jpg','Dark Magicians')" style="cursor:pointer">Dark Magicians</span>
+              <img class="team-avatar" src="Van Twists.jpg" alt="Van Twists" onclick="openTeamPhoto('Van Twists.jpg','Van Twists')" />
+              <button class="team-name-btn" onclick="openTeamPhoto('Van Twists.jpg','Van Twists')">Van Twists</button>
             </div>
           </td>
-          <td class="score-cell">10.20</td>
+          <td class="score-cell">10.35</td>
         </tr>
 
-        <!-- 6. Broncic -->
+        <!-- 6. Phillipou -->
         <tr>
           <td class="rank-cell lower">6</td>
-          <td class="move-cell"><span class="move-up">↑ 3</span></td>
+          <td class="move-cell"><span class="move-up">↑ 4</span></td>
           <td>
             <div class="team-cell">
-              <img class="team-avatar" src="Broncic.jpg" alt="Broncic" onclick="openTeamPhoto('Broncic.jpg','Broncic')" />
-              <span class="team-name" onclick="openTeamPhoto('Broncic.jpg','Broncic')" style="cursor:pointer">Broncic</span>
+              <img class="team-avatar" src="Phillipou.jpg" alt="Phillipou" onclick="openTeamPhoto('Phillipou.jpg','Phillipou')" />
+              <button class="team-name-btn" onclick="openTeamPhoto('Phillipou.jpg','Phillipou')">Phillipou</button>
             </div>
           </td>
-          <td class="score-cell">10.25</td>
+          <td class="score-cell">9.94</td>
         </tr>
 
         <!-- 7. Nethers Men -->
         <tr>
           <td class="rank-cell lower">7</td>
-          <td class="move-cell"><span class="move-up">↑ 4</span></td>
+          <td class="move-cell"><span class="move-same">— 0</span></td>
           <td>
             <div class="team-cell">
               <img class="team-avatar" src="Nethers men.jpg" alt="Nethers Men" onclick="openTeamPhoto('Nethers men.jpg','Nethers Men')" />
-              <span class="team-name" onclick="openTeamPhoto('Nethers men.jpg','Nethers Men')" style="cursor:pointer">Nethers Men</span>
+              <button class="team-name-btn" onclick="openTeamPhoto('Nethers men.jpg','Nethers Men')">Nethers Men</button>
             </div>
           </td>
           <td class="score-cell">9.75</td>
@@ -499,66 +580,66 @@
         <!-- 8. Cripps Nipps -->
         <tr>
           <td class="rank-cell lower">8</td>
-          <td class="move-cell"><span class="move-up">↑ 4</span></td>
+          <td class="move-cell"><span class="move-same">— 0</span></td>
           <td>
             <div class="team-cell">
               <img class="team-avatar" src="Cripps Nipps.jpg" alt="Cripps Nipps" onclick="openTeamPhoto('Cripps Nipps.jpg','Cripps Nipps')" />
-              <span class="team-name" onclick="openTeamPhoto('Cripps Nipps.jpg','Cripps Nipps')" style="cursor:pointer">Cripps Nipps</span>
+              <button class="team-name-btn" onclick="openTeamPhoto('Cripps Nipps.jpg','Cripps Nipps')">Cripps Nipps</button>
             </div>
           </td>
-          <td class="score-cell">9.69</td>
+          <td class="score-cell">9.63</td>
         </tr>
 
-        <!-- 9. Shavas -->
+        <!-- 9. Dark Magicians -->
         <tr>
           <td class="rank-cell lower">9</td>
-          <td class="move-cell"><span class="move-up">↑ 1</span></td>
+          <td class="move-cell"><span class="move-down">↓ 4</span></td>
           <td>
             <div class="team-cell">
-              <img class="team-avatar" src="Shavas.jpg" alt="Shavas" onclick="openTeamPhoto('Shavas.jpg','Shavas')" />
-              <span class="team-name" onclick="openTeamPhoto('Shavas.jpg','Shavas')" style="cursor:pointer">Shavas</span>
+              <img class="team-avatar" src="Dark Magicians.jpg" alt="Dark Magicians" onclick="openTeamPhoto('Dark Magicians.jpg','Dark Magicians')" />
+              <button class="team-name-btn" onclick="openTeamPhoto('Dark Magicians.jpg','Dark Magicians')">Dark Magicians</button>
             </div>
           </td>
           <td class="score-cell">9.56</td>
         </tr>
 
-        <!-- 10. Phillipou -->
+        <!-- 10. Foopys -->
         <tr>
           <td class="rank-cell lower">10</td>
-          <td class="move-cell"><span class="move-down">↓ 4</span></td>
-          <td>
-            <div class="team-cell">
-              <img class="team-avatar" src="Phillipou.jpg" alt="Phillipou" onclick="openTeamPhoto('Phillipou.jpg','Phillipou')" />
-              <span class="team-name" onclick="openTeamPhoto('Phillipou.jpg','Phillipou')" style="cursor:pointer">Phillipou</span>
-            </div>
-          </td>
-          <td class="score-cell">9.50</td>
-        </tr>
-
-        <!-- 11. Foopys -->
-        <tr>
-          <td class="rank-cell lower">11</td>
-          <td class="move-cell"><span class="move-down">↓ 4</span></td>
+          <td class="move-cell"><span class="move-up">↑ 1</span></td>
           <td>
             <div class="team-cell">
               <img class="team-avatar" src="Foopys.jpg" alt="Foopys" onclick="openTeamPhoto('Foopys.jpg','Foopys')" />
-              <span class="team-name" onclick="openTeamPhoto('Foopys.jpg','Foopys')" style="cursor:pointer">Foopys</span>
+              <button class="team-name-btn" onclick="openTeamPhoto('Foopys.jpg','Foopys')">Foopys</button>
             </div>
           </td>
           <td class="score-cell">9.44</td>
         </tr>
 
-        <!-- 12. Flagdons -->
+        <!-- 11. Flagdons -->
         <tr>
-          <td class="rank-cell lower">12</td>
-          <td class="move-cell"><span class="move-down">↓ 9</span></td>
+          <td class="rank-cell lower">11</td>
+          <td class="move-cell"><span class="move-up">↑ 1</span></td>
           <td>
             <div class="team-cell">
               <img class="team-avatar" src="Flagdons.jpg" alt="Flagdons" onclick="openTeamPhoto('Flagdons.jpg','Flagdons')" />
-              <span class="team-name" onclick="openTeamPhoto('Flagdons.jpg','Flagdons')" style="cursor:pointer">Flagdons</span>
+              <button class="team-name-btn" onclick="openTeamPhoto('Flagdons.jpg','Flagdons')">Flagdons</button>
             </div>
           </td>
-          <td class="score-cell">9.13</td>
+          <td class="score-cell">9.00</td>
+        </tr>
+
+        <!-- 12. Shavas -->
+        <tr>
+          <td class="rank-cell lower">12</td>
+          <td class="move-cell"><span class="move-down">↓ 3</span></td>
+          <td>
+            <div class="team-cell">
+              <img class="team-avatar" src="Shavas.jpg" alt="Shavas" onclick="openTeamPhoto('Shavas.jpg','Shavas')" />
+              <button class="team-name-btn" onclick="openTeamPhoto('Shavas.jpg','Shavas')">Shavas</button>
+            </div>
+          </td>
+          <td class="score-cell">8.75</td>
         </tr>
 
       </tbody>
@@ -567,7 +648,7 @@
     <!-- SECTION DIVIDER -->
     <div class="section-divider">
       <div class="section-divider-line"></div>
-      <div class="section-divider-label">💸 Will's Weekly Wagers · Round 5</div>
+      <div class="section-divider-label">💸 Will's Weekly Wagers · Round 6</div>
       <div class="section-divider-line"></div>
     </div>
 
@@ -576,7 +657,7 @@
       <div class="wagers-icon">💸</div>
       <div>
         <div class="wagers-title">Will's Weekly Wagers</div>
-        <div class="wagers-sub">Round 5 Edition</div>
+        <div class="wagers-sub">Round 6 Edition · The Ruins</div>
       </div>
     </div>
 
@@ -585,113 +666,114 @@
       <div class="sponsor-inner">
         <img class="sponsor-img" src="Snakes_and_ladders.jpg" alt="Scoonz &amp; Jaco's Snakes &amp; Ladders" />
         <div class="sponsor-text">
-          <div class="sponsor-eyebrow">🤝 Official Partnership · Round 5</div>
-          <div class="sponsor-heading">Bailed Out By<br><span>Scoonz &amp; Jaco's</span><br>Snakes &amp; Ladders</div>
+          <div class="sponsor-eyebrow">🆘 Emergency Bailout · Round 6</div>
+          <div class="sponsor-heading">Liquidated &amp; Saved<br><span>Scoonz &amp; Jaco's</span><br>Snakes &amp; Ladders</div>
           <div class="sponsor-body-text">
-            Week five. The partnership endures. After last round's picks landed with the kind of conviction that only comes from either deep knowledge or deep delusion, <strong>Scoonz and Jaco's Snakes &amp; Ladders</strong> remain the only ones willing to put their name next to this column. We will not let them down. Probably.
-            <div class="sponsor-badge-green">🐍 Presented by Snakes &amp; Ladders</div>
+            The receivers were at the door. The assets were frozen. Will's Weekly Wagers was one bad result away from being a cautionary tale in a university finance lecture — and then, once again, <strong>Scoonz and Jaco's Snakes &amp; Ladders</strong> walked in with the chequebook. Bless them. Truly. We do not deserve them.
+            <div class="sponsor-badge-green">🐍 Official Lifeline · Presented by Snakes &amp; Ladders</div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- WAGERS INTRO -->
     <div class="wagers-intro">
-      Five rounds in and the Ligma League is done being polite. The pretenders are being exposed, the contenders are flexing, and Round 5 looks like the week where the standings start telling a story with real teeth. There's a demolition job, an upset of the season, a lock so obvious it almost writes itself, and Holmes and Gardens doing Holmes and Gardens things. Strap in.
+      Six rounds in and the Ligma League has moved past polite. It's fully feral now. Broncic are surging, Van Twists are sliding, and the competition's getting tighter in the middle. ANZAC Day looms on the horizon and the Sean Millis Cup is up for grabs. Somewhere in all this, there was a Lock of the Week. We're not going to talk about how it went. Let's just get into the footy.
     </div>
 
-    <!-- Match 1: Van Twists vs Broncic -->
+    <!-- Match 1: Broncic vs DC & Tax Payers -->
     <div class="match-card">
       <div class="match-badge">Match 1</div>
       <div class="match-scoreline">
-        <span class="match-team winner">Van Twists</span>
-        <span class="match-score winner">1,219</span>
+        <span class="match-team winner">Broncic</span>
+        <span class="match-score winner">1,260</span>
         <span class="match-vs">def.</span>
-        <span class="match-team">Broncic</span>
-        <span class="match-score loser">1,201</span>
-        <span class="match-margin">+18</span>
+        <span class="match-team">DC &amp; Tax Payers</span>
+        <span class="match-score loser">1,236</span>
+        <span class="match-margin">+24</span>
       </div>
       <div class="match-body-text">
-        <strong>Van Twists grind out a tight one and silence the doubters — for now.</strong> Tim's mob scraped through by just 18 points in a match that kept the scoreboard operators nervous until the final whistle. Broncic will be livid — this was theirs to win and they'll know it. Van Twists bank the two points and move, but they'll need more convincing performances to stay near the top of the pile.
+        <strong>Broncic announce themselves as genuine top-three material with a statement win.</strong> William's mob have been quietly building and this week they made it impossible to ignore — knocking off the second-ranked DC &amp; Tax Payers by 24 points and jumping three spots in the process. Rupe's side won't enjoy looking at those numbers. They were competitive right until they weren't, and that 24-point gap will sting more than a thrashing would.
       </div>
     </div>
 
-    <!-- Match 2: Nethers Men vs Phillipou (LOCK) -->
-    <div class="match-card lock">
-      <div class="match-badge badge-lock">🔒 Lock of the Week — Delivered</div>
+    <!-- Match 2: Phillipou vs Flagdons (LOCK FAIL) -->
+    <div class="match-card lock-fail">
+      <div class="match-badge badge-lock-fail">🔒 Lock of the Week — Let's Move On</div>
+      <div class="match-scoreline">
+        <span class="match-team winner">Phillipou</span>
+        <span class="match-score winner">1,105</span>
+        <span class="match-vs">def.</span>
+        <span class="match-team">Flagdons</span>
+        <span class="match-score loser">1,100</span>
+        <span class="match-margin">+5</span>
+      </div>
+      <div class="match-body-text">
+        <strong>Right. So. Moving on.</strong> Phillipou wins — great. But let's not get too excited when the margin is five points. This was one stiff breeze away from going the other way and no one in this league should feel good about that. The Lock — whatever it was, wherever it was pointed — has once again found a way to disappoint. At least it's consistent. That's something. Cam's side scraped through but this kind of form won't cut it forever.
+      </div>
+    </div>
+
+    <!-- Match 3: Nethers Men vs Shava Girthi (PUMMEL) -->
+    <div class="match-card match-of-round">
+      <div class="match-badge badge-motr">💥 Pummel of the Round</div>
       <div class="match-scoreline">
         <span class="match-team winner">Nethers Men</span>
-        <span class="match-score winner">1,077</span>
-        <span class="match-vs">def.</span>
-        <span class="match-team">Phillipou</span>
-        <span class="match-score loser">897</span>
-        <span class="match-margin">+180</span>
-      </div>
-      <div class="match-body-text">
-        <strong>Lock of the Week. Delivered. With authority.</strong> Max's Nethers Men were hungry, organised, and they proved it with a 180-point dismantling of Phillipou Cumming. We called it. We banked it. We would do it again. Phillipou dropped four spots off the back of this — a rough week that gets worse every time you look at the margin.
-      </div>
-    </div>
-
-    <!-- Match 3: Cripps Nipps vs FlagDons -->
-    <div class="match-card">
-      <div class="match-badge">Match 3</div>
-      <div class="match-scoreline">
-        <span class="match-team winner">Cripps Nipps</span>
-        <span class="match-score winner">1,023</span>
-        <span class="match-vs">def.</span>
-        <span class="match-team">FlagDons</span>
-        <span class="match-score loser">951</span>
-        <span class="match-margin">+72</span>
-      </div>
-      <div class="match-body-text">
-        <strong>Cripps Nipps finally close one out and it couldn't come at a better time.</strong> Hayden's side have been knocking on the door all season — the wrong end of tight results, never quite getting over the line. This week they kicked the door in. A 72-point win over FlagDons is not flukey — it's earned. And for FlagDons, a painful slide down nine spots after weeks of building. This game stings.
-      </div>
-    </div>
-
-    <!-- Match 4: DC & Tax Payers vs Shavas -->
-    <div class="match-card landslide">
-      <div class="match-badge badge-landslide">💥 Demolition Job</div>
-      <div class="match-scoreline">
-        <span class="match-team winner">30/09/2023ers</span>
-        <span class="match-score winner">1,162</span>
+        <span class="match-score winner">1,113</span>
         <span class="match-vs">def.</span>
         <span class="match-team">Shava Girthi</span>
-        <span class="match-score loser">1,121</span>
-        <span class="match-margin">+41</span>
+        <span class="match-score loser">942</span>
+        <span class="match-margin">+171</span>
       </div>
       <div class="match-body-text">
-        <strong>DC &amp; Tax Payers put Shava Girthi to the sword in a clinical performance.</strong> Rupe's side are back with a vengeance and this is exactly the kind of statement win that forces the competition to sit up and take notice. Patrick's Shavas came in with momentum but the DC machine had the answers. A rough evening in the office for Shavas — they move up a spot, but this one will linger.
+        <strong>Max's Nethers Men are back in business and they did not mess around.</strong> A 171-point demolition of Shava Girthi is not a win — it's a message. Nethers Men hold firm at 7th but with this kind of scoring power, they could move in either direction in a hurry. Patrick's Shavas, meanwhile, fall to last place on the PPR table and will need a serious rethink heading into the second half of the season.
       </div>
     </div>
 
-    <!-- Match 5: Holmes and Gardens vs Dark Magicians (PUMMEL) -->
-    <div class="match-card match-of-round">
-      <div class="match-badge badge-motr">⭐ Pummel of the Round</div>
+    <!-- Match 4: Holmes and Gardens vs Cripps Nipps -->
+    <div class="match-card">
+      <div class="match-badge">Match 4 · #1 vs #4</div>
       <div class="match-scoreline">
-        <span class="match-team winner">Holmes &amp; Gardens</span>
-        <span class="match-score winner">1,223</span>
+        <span class="match-team winner">Holmes and Gardens</span>
+        <span class="match-score winner">1,201</span>
         <span class="match-vs">def.</span>
-        <span class="match-team">Dark Magicians</span>
-        <span class="match-score loser">1,146</span>
-        <span class="match-margin">+77</span>
+        <span class="match-team">Cripps Nipps</span>
+        <span class="match-score loser">1,028</span>
+        <span class="match-margin">+173</span>
       </div>
       <div class="match-body-text">
-        <strong>Holmes and Gardens do not just win this game — they make an example of the Dark Magicians.</strong> Matthew's outfit have been the benchmark of this competition all season and this week they announce themselves in the most emphatic way possible. 1,223 points is a statement. Osei's side will remember this for a long time. When the best team in the league hits top gear, this is what it looks like. Five rounds at the top. No signs of stopping.
+        <strong>Holmes and Gardens remain unmoved at the summit and they did it with authority.</strong> Matthew's outfit put 1,201 on the board against a Cripps Nipps side that had been showing some form, and still won by 173 points. Six rounds. Six consecutive wins. The benchmark of the Ligma League, and it doesn't look like changing anytime soon. The Sean Millis Cup is on the horizon and no one else seems to want to step up and challenge them for it.
       </div>
     </div>
 
-    <!-- Match 6: IZaks vs Foopys (UPSET) -->
-    <div class="match-card upset">
-      <div class="match-badge badge-upset">⚡ Upset of the Round</div>
+    <!-- Match 5: IZaks vs Dark Magicians -->
+    <div class="match-card">
+      <div class="match-badge">Match 5</div>
       <div class="match-scoreline">
         <span class="match-team winner">IZaks</span>
-        <span class="match-score winner">1,152</span>
+        <span class="match-score winner">1,112</span>
         <span class="match-vs">def.</span>
-        <span class="match-team">Foopys</span>
-        <span class="match-score loser">1,022</span>
-        <span class="match-margin">+130</span>
+        <span class="match-team">Dark Magicians</span>
+        <span class="match-score loser">1,089</span>
+        <span class="match-margin">+23</span>
       </div>
       <div class="match-body-text">
-        <strong>IZaks bounce back with a thumping win and restore some order.</strong> Zak's mob were written off after last week's scare but they answered in the most convincing fashion — a 130-point win over Foopys is exactly the kind of response you want to see from a side with genuine top-four ambitions. Foopys had their moment of glory but this week the competition served up a reminder that it doesn't last long.
+        <strong>IZaks grind out another win and continue to quietly build a season worth watching.</strong> Zak's side are doing it the hard way — 23 points over Dark Magicians isn't a blowout, but it's two points in the ledger and a hold at 4th. The Dark Magicians fall four spots to 9th — a steep drop for a team that's been hovering in the top five all season. Osei's mob need to find something extra before the competition leaves them behind.
+      </div>
+    </div>
+
+    <!-- Match 6: Foopys vs Van Twists (UPSET) -->
+    <div class="match-card upset">
+      <div class="match-badge badge-upset">⚡ Result of the Round</div>
+      <div class="match-scoreline">
+        <span class="match-team winner">foopy is lyfe</span>
+        <span class="match-score winner">1,130</span>
+        <span class="match-vs">def.</span>
+        <span class="match-team">Van Twists</span>
+        <span class="match-score loser">1,036</span>
+        <span class="match-margin">+94</span>
+      </div>
+      <div class="match-body-text">
+        <strong>Foopys remind the competition they're not here to make up the numbers.</strong> A 94-point win over Van Twists — who had been on a serious upward trajectory — is a proper result and Miller's mob climb a spot for it. For Tim's Van Twists, this is a reality check. Three spots down and a loss that raises questions about whether last week's form was real or a blip. At 5th on the PPR table, they're still a top-five side — but this result asks a question they'll need to answer.
       </div>
     </div>
 
@@ -699,17 +781,18 @@
     <div class="takeaways-block">
       <div class="takeaways-heading">💥 Takeaways</div>
       <ul class="takeaways-list">
-        <li><strong>Holmes and Gardens</strong> are on a different planet. Five rounds unbeaten. The benchmark of the Ligma League.</li>
-        <li><strong>DC &amp; Tax Payers</strong> hold firm at #2 and win convincingly — the most consistent side outside the top spot.</li>
-        <li><strong>Van Twists</strong> rocket from 8th to 3rd — five spots up and a legitimate top-three contender now.</li>
-        <li><strong>Cripps Nipps</strong> finally deliver — jump four spots and send FlagDons spiralling nine places down the table.</li>
-        <li><strong>Nethers Men</strong> cash in the Lock of the Week and climb four spots. That is the Ligma League's most satisfying result.</li>
-        <li><strong>FlagDons</strong> fall off a cliff — from 3rd to 12th in one week. Brutal. They'll be back, but that one hurts.</li>
-        <li><strong>Phillipou</strong> absolutely smashed — 180-point loss ends their winning streak and drops them to 10th.</li>
-        <li><strong>IZaks</strong> bounce back in style. Foopys reminded that the upset was the exception, not the rule.</li>
+        <li><strong>Holmes and Gardens</strong> are untouchable. Six rounds, six wins. The Sean Millis Cup has their name written all over it.</li>
+        <li><strong>Broncic</strong> rocket three spots to 3rd — beating DC &amp; Tax Payers is no small thing. Watch this space.</li>
+        <li><strong>DC &amp; Tax Payers</strong> stay 2nd but concede their first loss in a while — Rupe's side need a response.</li>
+        <li><strong>IZaks</strong> hold firm at 4th. Steady. Reliable. Quietly dangerous.</li>
+        <li><strong>Van Twists</strong> drop two — a loss to Foopys raises more questions than it answers.</li>
+        <li><strong>Phillipou</strong> are back — jump four spots to 6th. Five-point wins won't win you a flag, but points are points.</li>
+        <li><strong>Dark Magicians</strong> fall four to 9th — their biggest single-round drop of the season.</li>
+        <li><strong>Shavas</strong> cop the worst loss of the round and tumble to dead last. Something needs to change.</li>
+        <li><strong>The Lock of the Week</strong> has been retired for the evening. We'll say no more.</li>
       </ul>
       <div class="sign-off">
-        Five rounds down and the table is chaos in the best possible way. FlagDons from 3rd to last. Van Twists surging. Holmes watching from the top with quiet menace. This league is not done surprising us yet.<br><br>
+        Six rounds done and the Sean Millis Cup is on the horizon. Holmes and Gardens are a freight train. Broncic are coming. And somewhere in the wreckage, Will's Weekly Wagers is being rebuilt — again, on Scoonz and Jaco's coin. Some things never change.<br><br>
         <strong>Will 🧢</strong>
       </div>
     </div>
@@ -745,9 +828,9 @@
   <script>
     // ── TEAM PHOTO MODAL ──────────────────────────────────────────────────
     function openTeamPhoto(src, name) {
-      var overlay = document.getElementById('teamModalOverlay');
-      var img     = document.getElementById('teamModalImg');
-      var label   = document.getElementById('teamModalName');
+      const overlay = document.getElementById('teamModalOverlay');
+      const img     = document.getElementById('teamModalImg');
+      const label   = document.getElementById('teamModalName');
       img.src = src;
       img.alt = name;
       label.innerHTML = name;
@@ -760,7 +843,7 @@
       if (e.target === document.getElementById('teamModalOverlay')) closeTeamPhoto();
     }
 
-    // ── VAULT ─────────────────────────────────────────────────────────────
+    // ── VAULT MODAL ───────────────────────────────────────────────────────
     function openVault(e) {
       if (e) e.preventDefault();
       document.getElementById('vaultOverlay').classList.add('open');

@@ -327,7 +327,7 @@
           Every week, someone's getting cooked. Where does your team stand?
         </p>
         <div class="hero-ctas">
-          <a href="round-5.html" class="btn-primary">📋 Round 5 Rankings</a>
+          <a href="round-6.html" class="btn-primary">📋 Round 6 Rankings</a>
           <a href="#vote" class="btn-secondary">🗳 Cast Your Vote ↓</a>
         </div>
       </div>
@@ -341,7 +341,7 @@
   <div class="stats-bar">
     <div class="stats-inner">
       <div class="stat-item"><span class="stat-number">12</span><span class="stat-label">Teams</span></div>
-      <div class="stat-item"><span class="stat-number">05</span><span class="stat-label">Rounds Complete</span></div>
+      <div class="stat-item"><span class="stat-number">06</span><span class="stat-label">Rounds Complete</span></div>
       <div class="stat-item"><span class="stat-number">11.44</span><span class="stat-label">Top Score This Season</span></div>
     </div>
   </div>
@@ -419,18 +419,18 @@
     /* ── PPR scores: [DraftNight, OpeningRd, R1, R2, R3, R4, R5…R19] ── */
     /* null = round not yet rated                                          */
     const PPR = {
-      'Foopys':              [9.67,  9.50,  10.17, 10.13, 9.44,  8.94,  9.44, null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-      'Dark Magicians':      [7.08,  10.25, 10.58, 9.25,  9.25,  9.25,  10.20,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-      'Holmes and Gardens':  [8.50,  9.92,  10.33, 9.75,  10.31, 10.31, 11.44,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-      'DC & Tax Payers':     [7.58,  9.50,  10.00, 10.25, 9.50,  9.88,  10.86,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-      'Phillipou':           [7.17,  7.92,  8.17,  8.50,  9.38,  9.00,  9.50, null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-      'Flagdons':            [8.33,  9.67,  9.75,  9.38,  10.06, 9.44,  9.13, null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-      'Van Twists':          [8.83,  9.42,  9.67,  8.13,  7.38,  8.89,  10.85,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-      'Cripps Nipps':        [7.92,  8.92,  7.92,  7.13,  7.43,  7.88,  9.69, null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-      'Broncic':             [8.25,  9.33,  8.42,  8.38,  9.25,  8.88,  10.25,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-      'Izaks':               [7.75,  8.08,  8.25,  7.63,  8.75,  9.25,  10.50,null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-      'Nethers men':         [7.42,  8.25,  7.75,  7.88,  8.50,  8.38,  9.75, null,null,null,null,null,null,null,null,null,null,null,null,null,null],
-      'Shavas':              [7.33,  8.42,  8.33,  8.25,  9.06,  8.39,  9.56, null,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Foopys':              [9.67,  9.50,  10.17, 10.13, 9.44,  8.94,  9.44,  9.44, null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Dark Magicians':      [7.08,  10.25, 10.58, 9.25,  9.25,  9.25,  10.20, 9.56, null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Holmes and Gardens':  [8.50,  9.92,  10.33, 9.75,  10.31, 10.31, 11.44, 11.38,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'DC & Tax Payers':     [7.58,  9.50,  10.00, 10.25, 9.50,  9.88,  10.86, 10.63,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Phillipou':           [7.17,  7.92,  8.17,  8.50,  9.38,  9.00,  9.50,  9.94, null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Flagdons':            [8.33,  9.67,  9.75,  9.38,  10.06, 9.44,  9.13,  9.00, null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Van Twists':          [8.83,  9.42,  9.67,  8.13,  7.38,  8.89,  10.85, 10.35,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Cripps Nipps':        [7.92,  8.92,  7.92,  7.13,  7.43,  7.88,  9.69,  9.63, null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Broncic':             [8.25,  9.33,  8.42,  8.38,  9.25,  8.88,  10.25, 10.60,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Izaks':               [7.75,  8.08,  8.25,  7.63,  8.75,  9.25,  10.50, 10.50,null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Nethers men':         [7.42,  8.25,  7.75,  7.88,  8.50,  8.38,  9.75,  9.75, null,null,null,null,null,null,null,null,null,null,null,null,null],
+      'Shavas':              [7.33,  8.42,  8.33,  8.25,  9.06,  8.39,  9.56,  8.75, null,null,null,null,null,null,null,null,null,null,null,null,null],
     };
 
     /* ── H2H match results ── */
@@ -470,6 +470,13 @@
       {w:'DC & Tax Payers',    l:'Shavas',             ws:1162,ls:1121},
       {w:'Holmes and Gardens', l:'Dark Magicians',     ws:1223,ls:1146},
       {w:'Izaks',              l:'Foopys',             ws:1152,ls:1022},
+      // R6
+      {w:'Broncic',            l:'DC & Tax Payers',    ws:1260,ls:1236},
+      {w:'Phillipou',          l:'Flagdons',           ws:1105,ls:1100},
+      {w:'Nethers men',        l:'Shavas',             ws:1113,ls:942 },
+      {w:'Holmes and Gardens', l:'Cripps Nipps',       ws:1201,ls:1028},
+      {w:'Izaks',              l:'Dark Magicians',     ws:1112,ls:1089},
+      {w:'Foopys',             l:'Van Twists',         ws:1130,ls:1036},
     ];
 
     const TEAMS = Object.keys(PPR);
@@ -747,11 +754,22 @@
           <span class="card-arrow">→</span>
         </div>
       </a>
-      <a class="week-card live" href="round-5.html">
+      <a class="week-card" href="round-5.html">
         <div class="card-left">
           <div class="card-round">Round 5</div>
           <div class="card-title">Round 5</div>
           <div class="card-leader">🥇 <strong>Holmes and Gardens — 11.44</strong></div>
+        </div>
+        <div class="card-right">
+          <div class="card-badge badge-done">Complete</div>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+      <a class="week-card live" href="round-6.html">
+        <div class="card-left">
+          <div class="card-round">Round 6</div>
+          <div class="card-title">Round 6</div>
+          <div class="card-leader">🥇 <strong>Holmes and Gardens — 11.38</strong></div>
         </div>
         <div class="card-right">
           <div class="card-badge badge-live">● Latest</div>
