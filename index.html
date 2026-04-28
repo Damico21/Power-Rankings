@@ -210,23 +210,101 @@
 
     footer { text-align: center; padding: 2rem; color: #253545; font-size: 0.78rem; font-family: 'Oswald', sans-serif; letter-spacing: 1px; border-top: 1px solid var(--border); }
 
+    /* ── HAMBURGER NAV ── */
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      z-index: 300;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: transform 0.25s, opacity 0.25s;
+    }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     @media (max-width: 768px) {
-      nav { padding: 1rem 1.2rem; }
-      .nav-links { gap: 0.8rem; }
-      .nav-links a { font-size: 0.72rem; }
+      /* Nav */
+      nav { padding: 0.85rem 1.2rem; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(10,14,20,0.98);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        z-index: 250;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { font-size: 1.1rem; letter-spacing: 3px; }
+
+      /* Hero */
       .hero-inner { flex-direction: column-reverse; padding: 3rem 1.2rem 2rem; text-align: center; }
-      .hero-ctas { justify-content: center; }
+      .hero-ctas { justify-content: center; flex-direction: column; align-items: center; }
+      .hero-ctas a { width: 100%; max-width: 280px; text-align: center; }
       .hero-desc { margin: 0 auto 2rem; }
-      .league-logo { width: 190px; }
+      .league-logo { width: 170px; }
+      .hero-bg-text { font-size: 4rem; }
+
+      /* Stats bar */
       .stats-inner { grid-template-columns: 1fr; }
       .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
       .stat-item:last-child { border-bottom: none; }
+
+      /* Archive */
       #archive { padding: 3rem 1.2rem; }
+
+      /* About */
       .about-inner { grid-template-columns: 1fr; padding: 3rem 1.2rem; gap: 2rem; }
-      .hero-bg-text { font-size: 5rem; }
+
+      /* Vote section */
       .vote-outer { padding: 3rem 1.2rem; }
       .vote-grid { grid-template-columns: 1fr; }
+      /* Collapse odometer to 4 digits on mobile to save space */
       .odo-digit { width: 13px; height: 19px; font-size: 0.78rem; }
+      .odo-digit:nth-child(-n+2) { display: none; } /* hide leading 2 zeros */
+      /* Make vote rows stack more comfortably */
+      .team-row { padding: 0.55rem 0.9rem; gap: 0.5rem; }
+      .team-name { font-size: 0.82rem; }
+      .vote-btn { padding: 5px 8px; font-size: 0.65rem; letter-spacing: 1px; }
+
+      /* Tables */
+      .cum-outer { padding: 3rem 1.2rem 2rem; }
+      .h2h-outer { padding: 2rem 1.2rem 3rem; }
+      /* Better touch scrolling */
+      .cum-scroll, .h2h-scroll {
+        -webkit-overflow-scrolling: touch;
+        overflow-x: auto;
+      }
+      /* Adjust sticky column offsets for mobile — rank col narrower */
+      .cum-table th:nth-child(2), .cum-table td:nth-child(2) {
+        left: 2.2rem;
+      }
+      /* H2H legend wraps naturally */
+      .h2h-legend { gap: 0.8rem; font-size: 0.65rem; }
+      .h2h-legend .leg-item:last-child { margin-left: 0; }
+    }
+
+    /* Extra small phones */
+    @media (max-width: 390px) {
+      .hero-title { font-size: 3rem; }
+      .league-logo { width: 140px; }
+      .stat-number { font-size: 2.4rem; }
+      .poll-card-title { font-size: 1.3rem; }
     }
 
     /* ── CUMULATIVE POWER RANKINGS ── */
@@ -301,13 +379,25 @@
     .sc-l { color: #f87171; font-weight: 700; font-size: 0.82rem; }
     .sc-pf { color: #2a5a6a; font-size: 0.75rem; margin-top: 2px; display: block; }
 
-    @media (max-width: 768px) {
-      .cum-outer { padding: 3rem 1.2rem 2rem; }
-      .h2h-outer { padding: 2rem 1.2rem 3rem; }
-    }
+    /* cum/h2h mobile handled in main @media block above */
   </style>
 </head>
 <body>
+
+  <nav id="ppr-nav">
+    <a class="nav-logo" href="index.html">PPR</a>
+    <button class="nav-hamburger" id="navToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="round-7.html">Round 7</a></li>
+      <li><a href="rankings.html">Draft Night</a></li>
+      <li><a href="best-moments.html">Best Moments</a></li>
+      <li><a href="ppr-tunes.html">PPR Tunes</a></li>
+      <li><a href="snakes-ladders.html">Snakes & Ladders</a></li>
+    </ul>
+  </nav>
 
   <section class="hero">
     <div class="hero-grain"></div>
@@ -964,6 +1054,25 @@
     }
   </script>
 
-  <script src="nav.js"></script>
+  <script>
+    // Hamburger menu toggle
+    const navToggle = document.getElementById('navToggle');
+    const navLinks  = document.getElementById('navLinks');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        const open = navLinks.classList.toggle('open');
+        navToggle.classList.toggle('open', open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+      // Close menu when a link is clicked
+      navLinks.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          navLinks.classList.remove('open');
+          navToggle.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+  </script>
 </body>
 </html>
