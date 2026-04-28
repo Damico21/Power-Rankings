@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║  PPR PAGE TEMPLATE — Copy this for every new/existing page  ║
+  ║  Nav is 100% automatic — just include nav.js at the bottom. ║
+  ╚══════════════════════════════════════════════════════════════╝
+
+  CHECKLIST FOR EACH PAGE:
+  ✅  Change <title> to match the page
+  ✅  nav.js path stays as "nav.js" (same folder) — no other nav code needed
+  ✅  Delete <nav>, hamburger buttons, and nav CSS from the page — nav.js handles all of it
+  ✅  Active page highlighting is automatic (matched by filename)
+  ✅  To add Round 8: open nav.js → uncomment the Round 8 line. Done.
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Round X — Paz's Power Rankings</title><!-- ← CHANGE THIS -->
+
+  <!-- Fonts (same as every other PPR page) -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── PPR Design tokens ── */
+    :root {
+      --navy:  #1b2a3b;
+      --red:   #8b1a1a;
+      --gold:  #c8a951;
+      --cream: #e8dcc8;
+      --dark:  #0d1117;
+      --mid:   #141d27;
+      --text-muted: #6a8aaa;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── All your page-specific styles go here ── */
+
+  </style>
+</head>
+<body>
+
+  <!--
+    ╔══════════════════════════════════════════════════════════╗
+    ║  DO NOT add any <nav> or hamburger HTML here.           ║
+    ║  nav.js injects the full nav + mobile menu automatically.║
+    ╚══════════════════════════════════════════════════════════╝
+  -->
+
+  <!-- ═══ YOUR PAGE CONTENT GOES HERE ═══ -->
+
+  <footer style="text-align:center;padding:2rem;color:#253545;font-size:0.78rem;font-family:'Oswald',sans-serif;letter-spacing:1px;border-top:1px solid var(--border);">
+    Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy
+  </footer>
+
+  <!--
+    nav.js MUST be the very last script before </body>.
+    It auto-detects the current filename and highlights the active link.
+    It removes any legacy <nav> or .divider elements automatically.
+  -->
+  <script src="nav.js"></script>
+
+  <!-- Your other page scripts go above nav.js -->
+
+</body>
+</html>
