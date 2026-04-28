@@ -842,6 +842,439 @@
     </div>
   </section>
 
+  <!-- ═══════════ MYSTERY MATCHUP WHEEL ═══════════ -->
+  <section id="wheel-section">
+    <div class="wheel-outer">
+      <div class="section-label">For a Laugh</div>
+      <div class="section-title">Mystery Matchup Wheel 🎡</div>
+      <p class="wheel-intro">Spin the wheel, get a random Ligma League team paired with an AFL player. The universe will do the rest.</p>
+
+      <div class="wheel-layout">
+        <div class="wheel-container">
+          <div class="wheel-pointer">▼</div>
+          <canvas id="wheelCanvas" width="440" height="440"></canvas>
+          <button id="spinBtn"><span id="spinBtnText">SPIN</span></button>
+        </div>
+        <div class="wheel-result-area">
+          <div id="result-placeholder">
+            <div class="rph-icon">🎡</div>
+            <div class="rph-text">Spin the wheel to reveal your mystery matchup</div>
+          </div>
+          <div id="result-card" style="display:none">
+            <div class="rc-header"><span class="rc-badge">MYSTERY MATCHUP</span></div>
+            <div class="rc-block">
+              <div class="rc-label">Ligma League Team</div>
+              <div class="rc-team" id="rc-team"></div>
+            </div>
+            <div class="rc-divider"><span class="rc-x">✕</span></div>
+            <div class="rc-block">
+              <div class="rc-label">AFL Player</div>
+              <div class="rc-player" id="rc-player"></div>
+            </div>
+            <div class="rc-oneliner-wrap">
+              <div class="rc-oneliner" id="rc-oneliner"></div>
+            </div>
+            <button id="spinAgainBtn">🔄 SPIN AGAIN</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    #wheel-section {
+      background: var(--dark);
+      border-top: 1px solid var(--border);
+    }
+    .wheel-outer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem;
+    }
+    .wheel-intro {
+      color: #6a8aaa;
+      font-size: 0.95rem;
+      line-height: 1.8;
+      max-width: 540px;
+      margin-bottom: 3rem;
+    }
+    .wheel-layout {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+    .wheel-container {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .wheel-pointer {
+      font-size: 2rem;
+      color: var(--gold);
+      filter: drop-shadow(0 0 8px rgba(200,169,81,0.6));
+      line-height: 1;
+      animation: wPointerBob 2s ease-in-out infinite;
+    }
+    @keyframes wPointerBob {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(4px); }
+    }
+    #wheelCanvas {
+      border-radius: 50%;
+      box-shadow: 0 0 40px rgba(139,26,26,0.4), 0 0 80px rgba(0,0,0,0.6);
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+    #spinBtn {
+      background: linear-gradient(135deg, var(--red) 0%, #a52020 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 1rem 3rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 4px;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 20px rgba(139,26,26,0.5);
+    }
+    #spinBtn:hover:not(:disabled) {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(139,26,26,0.7);
+    }
+    #spinBtn:disabled { opacity: 0.55; cursor: not-allowed; }
+
+    .wheel-result-area { flex: 1; min-width: 280px; }
+
+    #result-placeholder {
+      text-align: center;
+      padding: 3rem 2rem;
+      border: 1px dashed rgba(255,255,255,0.08);
+      border-radius: 16px;
+    }
+    .rph-icon { font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.4; }
+    .rph-text {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #2a4a6a;
+    }
+
+    #result-card {
+      background: var(--mid);
+      border: 1px solid rgba(200,169,81,0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      animation: wCardReveal 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes wCardReveal {
+      from { opacity: 0; transform: scale(0.85) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .rc-header {
+      background: linear-gradient(135deg, var(--red) 0%, #6b1010 100%);
+      padding: 0.85rem 1.5rem;
+    }
+    .rc-badge {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 4px;
+      color: rgba(255,255,255,0.8);
+    }
+    .rc-block { padding: 1.4rem 1.8rem; }
+    .rc-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #3a5a7a;
+      margin-bottom: 0.4rem;
+    }
+    .rc-team {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.3rem);
+      letter-spacing: 2px;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .rc-player {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.4rem, 3.5vw, 2rem);
+      letter-spacing: 2px;
+      color: var(--cream);
+      line-height: 1;
+    }
+    .rc-divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 1.8rem;
+    }
+    .rc-divider::before, .rc-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.07);
+    }
+    .rc-x { font-family: 'Oswald', sans-serif; font-size: 0.85rem; color: var(--red); opacity: 0.8; }
+    .rc-oneliner-wrap {
+      padding: 1.2rem 1.8rem 1.4rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .rc-oneliner {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      color: #6a8aaa;
+      line-height: 1.7;
+      font-style: italic;
+    }
+    #spinAgainBtn {
+      display: block;
+      width: calc(100% - 3.6rem);
+      margin: 0 1.8rem 1.5rem;
+      background: transparent;
+      border: 1px solid rgba(200,169,81,0.3);
+      color: var(--gold);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.7rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    #spinAgainBtn:hover { background: rgba(200,169,81,0.08); border-color: var(--gold); }
+
+    @media (max-width: 768px) {
+      .wheel-outer { padding: 3rem 1.2rem; }
+      .wheel-layout { flex-direction: column; gap: 2.5rem; }
+      .wheel-container { width: 100%; }
+      #wheelCanvas { width: 300px !important; height: 300px !important; }
+      .wheel-result-area { width: 100%; min-width: unset; }
+    }
+  </style>
+
+  <script>
+  (function() {
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    // ✏️  EDIT THESE LISTS FREELY
+    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    const WHEEL_TEAMS = [
+      "Foopys", "Van Twists", "Dark Magicians", "Cripps Nipps",
+      "Phillipou", "Flagdons", "Nethers men", "Shavas",
+      "Holmes & Gardens", "Izaks", "Broncic", "DC & Tax Payers"
+    ];
+
+    const AFL_PLAYERS = [
+      "Alex Neal-Bullen","Archie Ludowyke","Ben Keays","Billy Dowling","Brayden Cook","Callum Ah Chee","Charlie Edwards","Chayce Jones","Daniel Curtin","Darcy Fogarty","Finnbar Maley","Hugh Bond","Indy Cotton","Isaac Cumming","Izak Rankine","Jake Soligo","James Borlase","James Peatling","Jordan Dawson","Jordon Butts","Josh Rachele","Josh Worrell","Lachlan McAndrew","Lachlan Sholl","Luke Nankervis","Luke Pedlar","Mark Keane","Max Michalanney","Mitchell Hinge","Mitchell Marsh","Nick Murray","Oscar Ryan","Reilly O'Brien","Riley Thilthorpe","Rory Laird","Sam Berry","Sid Draper","Taylor Walker","Toby Murray","Tyler Welsh","Wayne Milera","Zac Taylor",
+      "Ben Murphy","Bruce Reville","Cam Rayner","Charlie Cameron","Cody Curtin","Conor McKenna","Daniel Annable","Darcy Fort","Darcy Gardiner","Darcy Wilmot","Darragh Joyce","Dayne Zorko","Eric Hipwood","Harris Andrews","Henry Smith","Hugh McCluggage","Jack Payne","James Tunstill","Jarrod Berry","Jaspa Fletcher","Josh Dunkley","Kai Lohmann","Keidean Coleman","Koby Evans","Lachie Neale","Levi Ashcroft","Lincoln McCarthy","Logan Morris","Luke Beecken","Luke Lloyd","Noah Answerth","Oscar Allen","Reece Torrent","Ryan Lester","Sam Draper","Sam Marshall","Shadeau Brain","Tai Hayes","Tom Doedee","Ty Gallop","Will Ashcroft","Will McLachlan","Zac Bailey","Zane Zakostelsky",
+      "Adam Cerra","Adam Saad","Ashton Moir","Ben Ainsworth","Ben Camporeale","Billy Wilson","Blake Acres","Brodie Kemp","Campbell Chesser","Cooper Lord","Elijah Hollands","Flynn Young","Francis Evans","George Hewett","Harry Charleson","Harry Dean","Harry McKay","Harry O'Farrell","Hudson O'Keeffe","Jack Ison","Jacob Weitering","Jagga Smith","Jesse Motlop","Jordan Boyd","Lachie Fogarty","Lachlan Cowan","Lewis Young","Liam Reidy","Lucas Camporeale","Marc Pittonet","Matt Duffy","Matthew Carroll","Matthew Cottrell","Mitch McGovern","Nic Newman","Nick Haynes","Oliver Florent","Oliver Hollands","Patrick Cripps","Rob Monahan","Sam Walsh","Talor Byrne","Wade Derksen","Will Hayward","Zac Williams",
+      "Angus Anderson","Beau McCreery","Billy Frampton","Bobby Hill","Brayden Maynard","Charlie West","Dan Houston","Daniel McStay","Darcy Cameron","Darcy Moore","Edward Allan","Harry DeMattia","Harry Perryman","Harvey Harrison","Iliro Smit","Isaac Quaynor","Jack Buller","Jack Crisp","Jai Saxena","Jakob Ryan","Jamie Elliott","Jeremy Howe","Joel Cochran","Jordan De Goey","Josh Daicos","Lachie Schultz","Lachlan Sullivan","Ned Long","Nick Daicos","Noah Howes","Oscar Steene","Patrick Lipinski","Reef McInnes","Roan Steele","Sam Swadling","Scott Pendlebury","Steele Sidebottom","Tew Jiath","Tim Membrey","Tyan Prindable","Wil Parker","William Hayes","Zac McCarthy",
+      "Andrew McGrath","Angus Clarke","Archer Day-Wicks","Archer May","Archie Perkins","Archie Roberts","Ben McKay","Brayden Fiorini","Cillian Bourke","Darcy Parish","Dyson Sharp","Elijah Tsatas","Harrison Jones","Hussien El Achkar","Isaac Kako","Jacob Farrow","Jade Gresham","Jaxon Prior","Jayden Nguyen","Jordan Ridley","Jye Caldwell","Kayle Gerreyn","Kyle Langford","Lachlan Blakiston","Lewis Hayes","Liam McMahon","Mason Redman","Matt Guelfi","Max Kondogiannis","Nate Caddy","Nic Martin","Nick Bryan","Nik Cox","Peter Wright","Rhys Unwin","Saad El-Hawli","Sam Durham","Sullivan Robey","Thomas Edwards","Vigo Visentini","Will Setterfield","Xavier Duursma","Zach Merrett","Zach Reid","Zak Johnson",
+      "Adam Sweid","Aiden Riddle","Alex Pearce","Andrew Brayshaw","Bailey Banfield","Brandon Walker","Brennan Cox","Caleb Serong","Charlie Nicholls","Christopher Scerri","Cooper Simpson","Corey Wagner","Hayden Young","Heath Chapman","Hugh Davies","Isaiah Dudley","Jaeger O'Meara","Jaren Carr","Jeremy Sharp","Jordan Clark","Josh Treacy","Joshua Draper","Judd McVee","Jye Amiss","Karl Worner","Leon Kickett","Luke Jackson","Luke Ryan","Mason Cox","Matthew Johnson","Michael Frederick","Murphy Reid","Nathan O'Driscoll","Neil Erasmus","Ollie Murphy","Oscar McDonald","Patrick Voss","Ryda Luke","Sam Sturt","Sam Switkowski","Sean Darcy","Shai Bolton","Toby Whan","Tobyn Murray",
+      "Bailey Smith","Brad Close","Cillian Burke","Connor O'Sullivan","George Stevens","Gryan Miers","Harley Barker","Hunter Holmes","Jack Bowes","Jack Henry","Jack Martin","Jacob Molier","Jake Kolodjashnij","James Worpel","Jay Polkinghorne","Jed Bews","Jeremy Cameron","Jesse Mellor","Jhye Clark","Joe Pike","Keighton Matofai-Forbes","Lawson Humphries","Lennox Hofmann","Mark Blicavs","Mark O'Connor","Max Holmes","Mitch Knevitt","Mitchell Edwards","Nicholas Driscoll","Oisin Mullin","Oliver Dempsey","Oliver Henry","Oliver Wiltshire","Patrick Dangerfield","Rhys Stanley","Sam De Koning","Shannon Neale","Shaun Mannagh","Tanner Bruhn","Toby Conway","Tom Atkins","Tom Stewart","Tyson Stengle","Zach Guthrie",
+      "Alex Davies","Asher Eastham","Avery Thomas","Bailey Humphrey","Beau Addinsall","Ben Jepson","Ben King","Ben Long","Bodhi Uwland","Caleb Graham","Caleb Lewis","Charlie Ballard","Christian Petracca","Cooper Bell","Daniel Rioli","Dylan Patterson","Elliott Himmelberg","Ethan Read","Jai Murray","Jake Rogers","Jamarra Ugle-Hagan","Jarrod Witts","Jed Walter","Joel Jeffrey","John Noble","Jy Farrar","Koby Coulson","Lachie Weller","Lachlan Gulbin","Leonardo Lombard","Mac Andrew","Matt Rowell","Max Knobel","Ned Moyle","Nick Holman","Noah Anderson","Oscar Adams","Sam Clohesy","Sam Collins","Touk Miller","Wil Powell","Will Graham","Zak Evans","Zeke Uwland",
+      "Aaron Cadman","Brent Daniels","Callum Brown","Clayton Oliver","Cody Angove","Connor Idun","Conor Stone","Darcy Jones","Finn Callaghan","Finnegan Davis","Harrison Oliver","Harry Himmelberg","Harry Rowston","Harvey Thomas","Jack Buckley","Jack Ough","Jake Riccardi","Jake Stringer","James Leake","Jayden Laverde","Jesse Hogan","Joe Fonti","Josaia Delana","Josh Kelly","Kieren Briggs","Lachie Ash","Lachie Whitfield","Leek Aleer","Logan Smith","Max Gruzewski","Nathan Wardius","Nicholas Madden","Oliver Hannaford","Oskar Taylor","Phoenix Gothard","Riley Hamilton","Ryan Angwin","Sam Taylor","Stephen Coniglio","Toby Bedford","Toby Greene","Toby McMullin","Tom Green","Xavier O'Halloran",
+      "Aidan Schubert","Bailey Macdonald","Blake Hardwick","Bodie Ryan","Calsher Dear","Cam Mackenzie","Cameron Nairn","Cody Anderson","Connor Macdonald","Conor Nash","Dylan Moore","Finn Maginness","Flynn Perez","Harry Morrison","Henry Hustwaite","Jack Dalton","Jack Ginnivan","Jack Gunston","Jack Scrimshaw","Jai Newcombe","Jaime Uhr-Henry","James Blanck","James Sicily","Jarman Impey","Josh Battle","Josh Ward","Josh Weddle","Karl Amon","Lloyd Meek","Mabior Chol","Massimo D'Ambrosio","Matt Hill","Matthew LeRay","Max Ramsden","Mitch Lewis","Ned Reeves","Nick Watson","Noah Mraz","Oliver Greeves","Sam Butler","Tom Barrass","Will Day","William McCabe",
+      "Aidan Johnson","Andy Moniz-Wakefield","Bailey Laurie","Bayley Fritsch","Blake Howes","Brody Mihocek","Caleb Windsor","Changkuoth Jiath","Christian Salem","Daniel Turner","Ed Langdon","Harrison Petty","Harry Sharp","Harvey Langford","Jack Henderson","Jack Steele","Jack Viney","Jacob van Rooyen","Jai Culley","Jake Bowey","Jake Lever","Jake Melksham","Jed Adams","Kade Chandler","Kalani White","Koltyn Tholstrup","Kysaiah Pickett","Latrelle Pickett","Luker Kentfield","Matthew Jefferson","Max Gawn","Max Heath","Oscar Berry","Paddy Cross","Ricky Mentha","Riley Onley","Shane McAdam","Steven May","Thomas Matthews","Tom Campbell","Tom McDonald","Tom Sparrow","Trent Rivers","Xavier Lindsay","Xavier Taylor",
+      "Aidan Corr","Bailey Scott","Blake Thredgold","Brayden George","Caleb Daniel","Callum Coleman-Jones","Cameron Zurhaar","Charlie Comben","Charlie Spargo","Colby McKercher","Cooper Harvey","Cooper Trembath","Dylan Stephens","Finn O'Sullivan","George Wardlaw","Griffin Logue","Harry Sheezel","Hugo Mikunda","Jack Darling","Jackson Archer","Jacob Konstanty","Josh Goater","Jy Simpkin","Lachy Dovaston","Luke Davies-Uniacke","Luke McDonald","Luke Parker","Luke Urquhart","Matt Whitlock","Nick Larkey","Paul Curtis","Riley Hardeman","River Stevens","Robert Hansen Jr","Taylor Goad","Toby Pink","Tom Blamires","Tom Powell","Tristan Xerri","Wil Dawson","Zac Banch","Zac Fisher","Zane Duursma",
+      "Aliir Aliir","Balyn O'Brien","Benny Barrett","Brandon Zerk-Thatcher","Christian Moraes","Connor Rozee","Corey Durdin","Dante Visentini","Darcy Byrne-Jones","Esava Ratugolea","Ewan Mackinlay","Harrison Ramm","Ivan Soldo","Jack Lukosius","Jack Watkins","Jack Whitlock","Jackson Mead","Jacob Moss","Jacob Wehr","Jase Burgoyne","Jason Horne-Francis","Joe Berry","Joe Richards","Jordon Sweet","Josh Lai","Josh Sinn","Kane Farrell","Lachie Jones","Logan Evans","Mani Liddy","Miles Bergman","Mitch Georgiades","Mitch Zadow","Ollie Lord","Ollie Wines","Sam Powell-Pepper","Todd Marshall","Tom Anastasopoulos","Tom Cochrane","Will Brodie","Will Lorenz","Willem Drew","Xavier Walsh","Zak Butters",
+      "Ben Miller","Campbell Gray","Dion Prestia","Harry Armstrong","Hugo Ralphsmith","Jack Ross","Jacob Hopper","James Trezise","Jasper Alger","Jayden Short","Jonty Faull","Josh Gibcus","Josh Smillie","Judson Clarke","Kaleb Smith","Kane McAuliffe","Liam Fawcett","Luke Trainor","Maurice Rioli","Mykelti Lefau","Nathan Broad","Nick Vlastuin","Noah Balta","Noah Roberts-Thomson","Oliver Hayes-Brown","Patrick Retschko","Rhyan Mansell","Sam Banks","Sam Cumming","Sam Grlj","Sam Lalor","Samson Ryan","Seth Campbell","Steely Green","Taj Hotton","Tim Taranto","Toby Nankervis","Tom Brown","Tom Burton","Tom Lynch","Tom Sims","Tyler Sonsie","Zane Peucker",
+      "Alex Dodson","Alix Tauru","Angus Hastie","Anthony Caminiti","Bradley Hill","Callum Wilkie","Charlie Banfield","Cooper Sharman","Dan Butler","Darcy Wilson","Dougal Howard","Eamonn Armstrong","Hugh Boxshall","Hugo Garcia","Hunter Clark","Isaac Keeler","Jack Carroll","Jack Higgins","Jack Macrae","Jack Silvagni","Jack Sinclair","James Barrat","Kobe McDonald","Kye Fincher","Lance Collard","Liam Henry","Liam O'Connell","Liam Ryan","Liam Stocker","Marcus Windhager","Mason Wood","Mattaes Phillipou","Max Hall","Max King","Mitch Owens","Nasiah Wanganeen-Milera","Paddy Dow","Patrick Said","Rowan Marshall","Ryan Byrnes","Sam Flanders","Tobie Travaglia","Tom De Koning",
+      "Angus Sheldrick","Billy Cootee","Braeden Campbell","Brodie Grundy","Caiden Cleary","Callum Mills","Chad Warner","Charlie Curnow","Corey Warner","Dane Rampe","Errol Gulden","Harry Cunningham","Harry Kyle","Hayden McLean","Isaac Heeney","Jai Serong","Jake Lloyd","James Jordon","James Rowbottom","Jesse Dattoli","Jevan Phillipou","Joel Amartey","Joel Hamling","Justin McInerney","Lewis Melican","Liam Hetherton","Logan McDonald","Malcolm Rosas","Matt Roberts","Ned Bowman","Nick Blakey","Noah Chamberlain","Patrick Snell","Peter Ladhams","Riak Andrew","Riley Bice","Sam Wicks","Taylor Adams","Tom Hanily","Tom McCartin","Tom Papley","William Edwards","William Green",
+      "Archer Reid","Bailey J. Williams","Bo Allan","Brady Hough","Brandon Starcevich","Clay Hall","Cooper Duff-Tytler","Deven Robertson","Elijah Hewett","Elliot Yeo","Finlay Macrae","Fred Rodriguez","Hamish Davis","Harley Reid","Harry Barnett","Harry Edwards","Harry Schoenberg","Harvey Johnston","Jack Graham","Jack Hutchinson","Jack Williams","Jacob Newton","Jake Waterman","Jamie Cripps","Jobe Shanahan","Josh Lindsay","Liam Baker","Liam Duggan","Lucca Grego","Malakai Champion","Matt Flynn","Matthew Owies","Milan Murdock","Noah Long","Reuben Ginbey","Rhett Bazzo","Ryan Maric","Sam Allen","Sandy Brock","Tim Kelly","Tom Cole","Tom Gross","Tom McCarthy","Tylah Williams","Tylar Young","Tyler Brockman","Tyrell Dewar","Willem Duursma",
+      "Aaron Naughton","Adam Treloar","Arthur Jones","Bailey Dale","Bailey Williams","Buku Khamis","Cody Weightman","Connor Budarick","Cooper Hynes","Ed Richards","Harvey Gallagher","James Harmes","James O'Donnell","Jedd Busslinger","Joel Freijah","Jordan Croft","Josh Dolan","Lachie Jaques","Lachlan Bramble","Lachlan Carmichael","Lachlan McNeil","Lachlan Smith","Laitham Vandermeer","Louis Emmett","Luke Cleary","Luke Kennedy","Marcus Bontempelli","Matthew Kennedy","Michael Sellwood","Nick Coffield","Oskar Baker","Rhylee West","Riley Garcia","Rory Lobb","Ryan Gardner","Ryley Sanders","Sam Darcy","Sam Davidson","Tim English","Tom Liberatore","Will Darcy","Will Lewis","Zac Walker"
+    ];
+
+    const ONE_LINERS = [
+      "An unstoppable duo or a total disaster waiting to happen?",
+      "The fantasy gods have spoken. No takebacks.",
+      "This pairing makes absolutely no sense. Perfect.",
+      "Somewhere, a trade offer is already being drafted.",
+      "The Ligma League just got a little more chaotic.",
+      "This is either genius or completely cooked.",
+      "The scouts couldn't have predicted this one.",
+      "Pure coincidence. Or is it destiny?",
+      "You didn't choose the matchup. The matchup chose you.",
+      "A combination only the Wheel could conjure.",
+      "Two legends. One cursed pairing.",
+      "Nobody saw this coming. Not even the algorithm.",
+      "Paz would not approve. And that's exactly why it works.",
+      "Filing a protest immediately.",
+      "The fantasy gods are testing us today.",
+      "Somewhere a coach just spat out their tea.",
+      "Don't overthink it. The Wheel is always right.",
+      "This pairing has no business going this hard.",
+      "One is elite. One is... in the Ligma League.",
+      "Statistically improbable. Emotionally inevitable.",
+      "If this were a trade, someone would get roasted in the group chat.",
+      "The commentators would lose their minds.",
+      "This combo wakes up at 3am thinking about contested marks.",
+      "Would be an elite podcast duo, no notes.",
+      "Chaos energy. Maximum chaos energy."
+    ];
+
+    // Slice colours — alternating from PPR palette
+    const SLICE_COLORS = [
+      ["#8b1a1a","#a52020"], ["#1b2a3b","#243549"], ["#6b3a1a","#8b4a22"],
+      ["#0d1a2b","#162233"], ["#7a1a2a","#952030"], ["#1a2b1a","#223322"],
+      ["#5a1a3a","#721e48"], ["#1a1b3a","#22234a"], ["#3a1a1a","#4a2020"],
+      ["#1a3a3a","#1e4a4a"], ["#2a1a3a","#35224a"], ["#1a3a1a","#224a22"],
+    ];
+    const TEXT_COLORS = [
+      "#f0c050","#a0c8f0","#f0a060","#80b8f0","#f08080","#80d0a0",
+      "#d080b0","#8090f0","#f0c080","#60d0c0","#c090e0","#80d880"
+    ];
+
+    const canvas = document.getElementById('wheelCanvas');
+    const ctx = canvas.getContext('2d');
+    const N = WHEEL_TEAMS.length;
+    const sliceAngle = (2 * Math.PI) / N;
+    let currentAngle = 0;
+    let isSpinning = false;
+
+    function drawWheel(rotation) {
+      const W = canvas.width, H = canvas.height;
+      const cx = W / 2, cy = H / 2;
+      const radius = Math.min(cx, cy) - 4;
+      ctx.clearRect(0, 0, W, H);
+
+      // glow ring
+      const glowGrad = ctx.createRadialGradient(cx, cy, radius - 4, cx, cy, radius + 4);
+      glowGrad.addColorStop(0, 'rgba(200,169,81,0.5)');
+      glowGrad.addColorStop(1, 'rgba(200,169,81,0)');
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius + 2, 0, 2 * Math.PI);
+      ctx.strokeStyle = glowGrad;
+      ctx.lineWidth = 6;
+      ctx.stroke();
+
+      for (let i = 0; i < N; i++) {
+        const startA = rotation + i * sliceAngle;
+        const endA   = startA + sliceAngle;
+        const midA   = startA + sliceAngle / 2;
+        const [c1, c2] = SLICE_COLORS[i % SLICE_COLORS.length];
+
+        const grad = ctx.createLinearGradient(
+          cx + Math.cos(startA) * radius * 0.3, cy + Math.sin(startA) * radius * 0.3,
+          cx + Math.cos(endA)   * radius * 0.9, cy + Math.sin(endA)   * radius * 0.9
+        );
+        grad.addColorStop(0, c1);
+        grad.addColorStop(1, c2);
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, radius, startA, endA);
+        ctx.closePath();
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(startA) * radius, cy + Math.sin(startA) * radius);
+        ctx.strokeStyle = 'rgba(200,169,81,0.25)';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(midA);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = TEXT_COLORS[i % TEXT_COLORS.length];
+        const fs = canvas.width < 350 ? 9 : 11;
+        ctx.font = `700 ${fs}px 'Oswald', sans-serif`;
+        const label = WHEEL_TEAMS[i].length > 12 ? WHEEL_TEAMS[i].slice(0, 11) + '…' : WHEEL_TEAMS[i];
+        ctx.fillText(label, radius - 14, 4);
+        ctx.restore();
+      }
+
+      // hub
+      const hubGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 28);
+      hubGrad.addColorStop(0, '#c8a951');
+      hubGrad.addColorStop(1, '#8b6a20');
+      ctx.beginPath();
+      ctx.arc(cx, cy, 28, 0, 2 * Math.PI);
+      ctx.fillStyle = hubGrad;
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.fillStyle = '#1b2a3b';
+      ctx.font = "bold 13px 'Bebas Neue', sans-serif";
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('PPR', cx, cy);
+    }
+
+    function getWinnerIdx(rotation) {
+      const norm = ((-rotation - Math.PI / 2) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+      return Math.floor(norm / sliceAngle) % N;
+    }
+
+    function showResult(teamIdx, player) {
+      const team     = WHEEL_TEAMS[teamIdx];
+      const oneliner = ONE_LINERS[Math.floor(Math.random() * ONE_LINERS.length)];
+      document.getElementById('result-placeholder').style.display = 'none';
+      const card = document.getElementById('result-card');
+      card.style.display = 'block';
+      card.style.animation = 'none';
+      void card.offsetWidth;
+      card.style.animation = '';
+      document.getElementById('rc-team').textContent   = team;
+      document.getElementById('rc-player').textContent = player;
+      document.getElementById('rc-oneliner').textContent = '\u201c' + oneliner + '\u201d';
+    }
+
+    function spin() {
+      if (isSpinning) return;
+      isSpinning = true;
+      document.getElementById('spinBtn').disabled = true;
+      document.getElementById('spinBtnText').textContent = 'SPINNING\u2026';
+      document.getElementById('result-card').style.display = 'none';
+      document.getElementById('result-placeholder').style.display = 'block';
+
+      const targetIdx  = Math.floor(Math.random() * N);
+      const player     = AFL_PLAYERS[Math.floor(Math.random() * AFL_PLAYERS.length)];
+      const extraSpins = (5 + Math.random() * 3) * 2 * Math.PI;
+      const targetMid  = targetIdx * sliceAngle + sliceAngle / 2;
+      const stopAngle  = -Math.PI / 2 - targetMid;
+      const endAngle   = currentAngle - ((currentAngle - stopAngle) % (2 * Math.PI)) - extraSpins;
+      const startAngle = currentAngle;
+      const duration   = 4500 + Math.random() * 1000;
+      const startTime  = performance.now();
+
+      function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
+
+      function frame(now) {
+        const t = Math.min((now - startTime) / duration, 1);
+        currentAngle = startAngle + (endAngle - startAngle) * easeOut(t);
+        drawWheel(currentAngle);
+        if (t < 1) {
+          requestAnimationFrame(frame);
+        } else {
+          currentAngle = endAngle;
+          drawWheel(currentAngle);
+          isSpinning = false;
+          document.getElementById('spinBtn').disabled = false;
+          document.getElementById('spinBtnText').textContent = 'SPIN';
+          showResult(getWinnerIdx(currentAngle), player);
+        }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    drawWheel(currentAngle);
+    document.getElementById('spinBtn').addEventListener('click', spin);
+    document.getElementById('spinAgainBtn').addEventListener('click', spin);
+  })();
+  </script>
+
   <footer>Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</footer>
 
   <!-- ═══════════ FIREBASE VOTING ═══════════ -->
