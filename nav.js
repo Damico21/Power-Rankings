@@ -1,5 +1,5 @@
 /**
- * PPR Shared Navigation — nav.js v3
+ * PPR Shared Navigation — nav.js v4
  * ===================================
  * Single source of truth for every page on the site.
  *
