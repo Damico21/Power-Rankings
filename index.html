@@ -70,9 +70,13 @@
     .btn-secondary { display: inline-block; background: transparent; color: var(--gold); padding: 0.85rem 2rem; font-family: 'Oswald', sans-serif; font-size: 0.88rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-radius: 4px; border: 1px solid var(--gold); transition: background 0.2s, transform 0.15s; }
     .btn-secondary:hover { background: rgba(200,169,81,0.1); transform: translateY(-2px); }
 
-    .hero-logo-wrap { flex-shrink: 0; position: relative; animation: fadeUp 0.7s 0.1s ease both; }
+    .hero-logo-wrap { flex-shrink: 0; position: relative; animation: fadeUp 0.7s 0.1s ease both; display: flex; flex-direction: column; align-items: center; gap: 0; }
     .logo-glow { position: absolute; inset: -30px; background: radial-gradient(ellipse, rgba(139,26,26,0.3) 0%, transparent 70%); filter: blur(25px); z-index: 0; pointer-events: none; }
-    .league-logo { position: relative; z-index: 1; width: clamp(240px, 28vw, 380px); height: auto; mix-blend-mode: lighten; display: block; }
+    .dual-logos { display: flex; align-items: center; justify-content: center; gap: 1.2rem; position: relative; z-index: 1; }
+    .dual-logos-divider { width: 1px; height: clamp(120px, 14vw, 190px); background: linear-gradient(180deg, transparent, rgba(200,169,81,0.4) 30%, rgba(200,169,81,0.4) 70%, transparent); flex-shrink: 0; }
+    .league-logo { width: clamp(110px, 13vw, 175px); height: auto; mix-blend-mode: lighten; display: block; }
+    .ppr-logo { width: clamp(110px, 13vw, 175px); height: auto; display: block; border-radius: 10px; }
+    .logo-label { font-family: 'Oswald', sans-serif; font-size: 0.58rem; letter-spacing: 2px; text-transform: uppercase; color: #2a4a6a; margin-top: 0.5rem; text-align: center; }
 
     .divider { height: 3px; background: linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
 
@@ -208,7 +212,9 @@
       .hero-ctas { justify-content: center; flex-direction: column; align-items: center; }
       .hero-ctas a { width: 100%; max-width: 280px; text-align: center; }
       .hero-desc { margin: 0 auto 2rem; }
-      .league-logo { width: 170px; }
+      .league-logo { width: 110px; }
+      .ppr-logo { width: 110px; }
+      .dual-logos-divider { height: 110px; }
       .hero-bg-text { font-size: 4rem; }
 
       /* Stats bar */
@@ -253,7 +259,9 @@
     /* Extra small phones */
     @media (max-width: 390px) {
       .hero-title { font-size: 3rem; }
-      .league-logo { width: 140px; }
+      .league-logo { width: 85px; }
+      .ppr-logo { width: 85px; }
+      .dual-logos-divider { height: 85px; }
       .stat-number { font-size: 2.4rem; }
       .poll-card-title { font-size: 1.3rem; }
     }
@@ -355,13 +363,23 @@
           Every week, someone's getting cooked. Where does your team stand?
         </p>
         <div class="hero-ctas">
-          <a href="round-8.html" class="btn-primary">📋 Round 8 Rankings</a>
+          <a href="round-9.html" class="btn-primary">📋 Round 9 Rankings</a>
           <a href="#vote" class="btn-secondary">🗳 Cast Your Vote ↓</a>
         </div>
       </div>
       <div class="hero-logo-wrap">
         <div class="logo-glow"></div>
-        <img class="league-logo" src="ligma-logo.jpg" alt="Ligma League AFL Fantasy">
+        <div class="dual-logos">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+            <img class="league-logo" src="ligma-logo.jpg" alt="Ligma League AFL Fantasy">
+            <span class="logo-label">Ligma League</span>
+          </div>
+          <div class="dual-logos-divider"></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+            <img class="ppr-logo" src="PPR.jpg" alt="Paz's Power Rankings">
+            <span class="logo-label">Power Rankings</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -369,7 +387,7 @@
   <div class="stats-bar">
     <div class="stats-inner">
       <div class="stat-item"><span class="stat-number">12</span><span class="stat-label">Teams</span></div>
-      <div class="stat-item"><span class="stat-number">08</span><span class="stat-label">Rounds Complete</span></div>
+      <div class="stat-item"><span class="stat-number">09</span><span class="stat-label">Rounds Complete</span></div>
       <div class="stat-item"><span class="stat-number">11.44</span><span class="stat-label">Top Score This Season</span></div>
     </div>
   </div>
@@ -519,6 +537,13 @@
       {w:'Nethers men',        l:'Foopys',             ws:1095,ls:1050},
       {w:'Van Twists',         l:'Cripps Nipps',       ws:1207,ls:1143},
       {w:'Dark Magicians',     l:'DC & Tax Payers',    ws:1147,ls:1060},
+      // R9
+      {w:'Broncic',            l:'Phillipou',           ws:1209,ls:1095},
+      {w:'Holmes and Gardens', l:'Izaks',               ws:1125,ls:934 },
+      {w:'Shavas',             l:'Foopys',              ws:1175,ls:1141},
+      {w:'Flagdons',           l:'Van Twists',          ws:1303,ls:1086},
+      {w:'Dark Magicians',     l:'Nethers men',         ws:1093,ls:1082},
+      {w:'DC & Tax Payers',    l:'Cripps Nipps',        ws:1195,ls:1082},
     ];
 
     const TEAMS = Object.keys(PPR);
@@ -829,10 +854,21 @@
           <span class="card-arrow">→</span>
         </div>
       </a>
-      <a class="week-card live" href="round-8.html">
+      <a class="week-card" href="round-8.html">
         <div class="card-left">
           <div class="card-round">Round 8</div>
           <div class="card-title">Round 8</div>
+          <div class="card-leader">🥇 <strong>Holmes and Gardens — 11.29</strong></div>
+        </div>
+        <div class="card-right">
+          <div class="card-badge badge-done">Complete</div>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+      <a class="week-card live" href="round-9.html">
+        <div class="card-left">
+          <div class="card-round">Round 9</div>
+          <div class="card-title">Round 9</div>
           <div class="card-leader">🥇 <strong>Holmes and Gardens — 11.29</strong></div>
         </div>
         <div class="card-right">
