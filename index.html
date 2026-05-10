@@ -72,11 +72,11 @@
 
     .hero-logo-wrap { flex-shrink: 0; position: relative; animation: fadeUp 0.7s 0.1s ease both; display: flex; flex-direction: column; align-items: center; gap: 0; }
     .logo-glow { position: absolute; inset: -30px; background: radial-gradient(ellipse, rgba(139,26,26,0.3) 0%, transparent 70%); filter: blur(25px); z-index: 0; pointer-events: none; }
-    .dual-logos { display: flex; align-items: center; justify-content: center; gap: 1.2rem; position: relative; z-index: 1; }
-    .dual-logos-divider { width: 1px; height: clamp(120px, 14vw, 190px); background: linear-gradient(180deg, transparent, rgba(200,169,81,0.4) 30%, rgba(200,169,81,0.4) 70%, transparent); flex-shrink: 0; }
-    .league-logo { width: clamp(110px, 13vw, 175px); height: auto; mix-blend-mode: lighten; display: block; }
-    .ppr-logo { width: clamp(110px, 13vw, 175px); height: auto; display: block; border-radius: 10px; }
-    .logo-label { font-family: 'Oswald', sans-serif; font-size: 0.58rem; letter-spacing: 2px; text-transform: uppercase; color: #2a4a6a; margin-top: 0.5rem; text-align: center; }
+    .dual-logos { display: flex; align-items: center; justify-content: center; gap: 2rem; position: relative; z-index: 1; }
+    .dual-logos-divider { width: 1px; height: clamp(180px, 22vw, 280px); background: linear-gradient(180deg, transparent, rgba(200,169,81,0.4) 30%, rgba(200,169,81,0.4) 70%, transparent); flex-shrink: 0; }
+    .league-logo { width: clamp(180px, 22vw, 290px); height: auto; mix-blend-mode: lighten; display: block; }
+    .ppr-logo { width: clamp(180px, 22vw, 290px); height: auto; display: block; border-radius: 12px; }
+    .logo-label { font-family: 'Oswald', sans-serif; font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; color: #2a4a6a; margin-top: 0.6rem; text-align: center; }
 
     .divider { height: 3px; background: linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
 
@@ -212,9 +212,10 @@
       .hero-ctas { justify-content: center; flex-direction: column; align-items: center; }
       .hero-ctas a { width: 100%; max-width: 280px; text-align: center; }
       .hero-desc { margin: 0 auto 2rem; }
-      .league-logo { width: 110px; }
-      .ppr-logo { width: 110px; }
-      .dual-logos-divider { height: 110px; }
+      .league-logo { width: 150px; }
+      .ppr-logo { width: 150px; }
+      .dual-logos-divider { height: 150px; }
+      .dual-logos { gap: 1.2rem; }
       .hero-bg-text { font-size: 4rem; }
 
       /* Stats bar */
@@ -259,9 +260,9 @@
     /* Extra small phones */
     @media (max-width: 390px) {
       .hero-title { font-size: 3rem; }
-      .league-logo { width: 85px; }
-      .ppr-logo { width: 85px; }
-      .dual-logos-divider { height: 85px; }
+      .league-logo { width: 115px; }
+      .ppr-logo { width: 115px; }
+      .dual-logos-divider { height: 115px; }
       .stat-number { font-size: 2.4rem; }
       .poll-card-title { font-size: 1.3rem; }
     }
