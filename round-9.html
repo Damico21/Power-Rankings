@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Round 9 Rankings — Paz's Power Rankings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy:#1b2a3b; --red:#8b1a1a; --gold:#c8a951; --cream:#e8dcc8;
+      --dark:#0d1117; --mid:#141d27; --text-muted:#6a8aaa;
+      --border:rgba(255,255,255,0.06);
+      --green:#22c55e; --red-move:#ef4444;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',sans-serif;background:var(--dark);color:#fff;min-height:100vh;overflow-x:hidden;}
+
+    /* ── PAGE HEADER ── */
+    .page-header{
+      background:linear-gradient(180deg,#111827 0%,var(--dark) 100%);
+      padding:3rem 2.5rem 2.5rem;text-align:center;
+      border-bottom:1px solid var(--border);position:relative;overflow:hidden;
+    }
+    .page-header::before{
+      content:'';position:absolute;inset:0;
+      background:radial-gradient(ellipse at 50% -20%,rgba(200,169,81,0.07) 0%,transparent 65%);
+      pointer-events:none;
+    }
+    .page-header .eyebrow{
+      font-family:'Oswald',sans-serif;font-size:0.72rem;letter-spacing:3px;
+      text-transform:uppercase;color:var(--red);margin-bottom:0.5rem;
+    }
+    .page-header h1{
+      font-family:'Bebas Neue',sans-serif;font-size:clamp(2.8rem,7vw,5rem);
+      color:#fff;letter-spacing:2px;margin-bottom:0.2rem;
+    }
+    .page-header .subtitle{
+      font-family:'Oswald',sans-serif;font-size:0.82rem;letter-spacing:2px;
+      text-transform:uppercase;color:#4a6a8a;
+    }
+
+    .divider{height:3px;background:linear-gradient(90deg,var(--red) 0%,var(--gold) 50%,var(--red) 100%);}
+
+    /* ── MAIN LAYOUT ── */
+    .main{max-width:900px;margin:0 auto;padding:3rem 1.5rem 6rem;}
+
+    .section-label{
+      font-family:'Oswald',sans-serif;font-size:0.72rem;letter-spacing:3px;
+      text-transform:uppercase;color:var(--red);margin-bottom:0.4rem;
+    }
+    .section-title{
+      font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);
+      color:#fff;letter-spacing:1px;margin-bottom:1.5rem;
+    }
+
+    /* ── SAFE BANNER ── */
+    .safe-section{margin-bottom:3rem;}
+    .safe-hero{
+      width:100%;border-radius:16px;overflow:hidden;position:relative;
+      margin-bottom:1.8rem;box-shadow:0 8px 50px rgba(0,0,0,0.6);
+    }
+    .safe-hero img{
+      width:100%;height:auto;display:block;
+      max-height:440px;object-fit:cover;object-position:center top;
+    }
+    .safe-hero-overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(180deg,transparent 55%,rgba(13,17,23,0.85) 100%);
+      pointer-events:none;
+    }
+
+    .safe-teams{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem;}
+    .safe-team-card{
+      background:var(--mid);border:1px solid var(--border);border-radius:12px;
+      padding:1.4rem 1.2rem;text-align:center;position:relative;overflow:hidden;
+    }
+    .safe-team-card::before{
+      content:'';position:absolute;top:0;left:0;right:0;height:3px;
+      background:linear-gradient(90deg,transparent,rgba(34,197,94,0.7),transparent);
+    }
+    .safe-team-card .safe-team-photo{
+      width:64px;height:64px;border-radius:50%;object-fit:cover;
+      border:2px solid rgba(34,197,94,0.35);margin:0 auto 0.8rem;display:block;
+    }
+    .safe-team-card .safe-team-name{
+      font-family:'Oswald',sans-serif;font-size:0.9rem;font-weight:600;
+      letter-spacing:0.5px;color:var(--cream);margin-bottom:0.3rem;
+    }
+    .safe-team-card .safe-team-badge{
+      display:inline-block;font-family:'Oswald',sans-serif;font-size:0.6rem;
+      letter-spacing:1.5px;text-transform:uppercase;
+      background:rgba(34,197,94,0.12);color:#4ade80;
+      border:1px solid rgba(34,197,94,0.3);border-radius:20px;
+      padding:0.2rem 0.6rem;margin-bottom:0.5rem;
+    }
+    .safe-team-card .safe-team-tagline{
+      font-size:0.78rem;color:#4a6a8a;line-height:1.5;
+    }
+    .safe-note{
+      background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.15);
+      border-radius:10px;padding:1.1rem 1.4rem;
+      font-size:0.88rem;color:#5a8a7a;line-height:1.7;
+    }
+    .safe-note strong{color:#6edd9a;}
+
+    /* ── RECAP CARD ── */
+    .recap-card{
+      background:var(--mid);border:1px solid var(--border);border-radius:14px;
+      padding:2rem 2rem;margin-bottom:3rem;
+      box-shadow:0 4px 30px rgba(0,0,0,0.35);
+    }
+    .recap-card .recap-eyebrow{
+      font-family:'Oswald',sans-serif;font-size:0.65rem;letter-spacing:3px;
+      text-transform:uppercase;color:var(--gold);margin-bottom:0.4rem;display:flex;align-items:center;gap:0.5rem;
+    }
+    .recap-card h3{
+      font-family:'Bebas Neue',sans-serif;font-size:clamp(1.4rem,3vw,2rem);
+      color:#fff;letter-spacing:1px;margin-bottom:1rem;line-height:1.1;
+    }
+    .recap-card p{color:#7a9ab5;line-height:1.82;font-size:0.94rem;margin-bottom:0.9rem;}
+    .recap-card p:last-child{margin-bottom:0;}
+    .recap-card p strong{color:var(--cream);}
+
+    /* ── RANKINGS TABLE ── */
+    .rankings-section{margin-bottom:3rem;}
+    .rankings-table{width:100%;border-collapse:collapse;font-family:'Oswald',sans-serif;}
+    .rankings-table thead tr{background:#080d13;}
+    .rankings-table thead th{
+      padding:0.8rem 1rem;font-size:0.65rem;letter-spacing:2px;
+      text-transform:uppercase;color:#2a4a6a;text-align:left;
+      border-bottom:1px solid rgba(200,169,81,0.2);
+    }
+    .rankings-table thead th:nth-child(1){width:3rem;text-align:center;}
+    .rankings-table thead th:nth-child(2){width:3rem;text-align:center;}
+    .rankings-table thead th:last-child{text-align:right;}
+
+    .rankings-table tbody tr{
+      border-bottom:1px solid rgba(255,255,255,0.04);
+      transition:background 0.15s;
+    }
+    .rankings-table tbody tr:hover{background:rgba(255,255,255,0.02);}
+
+    .rankings-table td{padding:0.9rem 1rem;vertical-align:middle;}
+    .rankings-table .td-rank{
+      text-align:center;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#1e3a52;
+    }
+    .rankings-table .td-rank.p1{color:var(--gold);}
+    .rankings-table .td-rank.p2{color:#a8b8c8;}
+    .rankings-table .td-rank.p3{color:#7a5a30;}
+
+    .rankings-table .td-move{text-align:center;font-family:'Oswald',sans-serif;font-size:0.75rem;font-weight:600;}
+    .move-up{color:#22c55e;}
+    .move-dn{color:#ef4444;}
+    .move-nc{color:#2a4a6a;}
+
+    .rankings-table .td-team{display:flex;align-items:center;gap:0.85rem;}
+    .team-photo{width:40px;height:40px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.07);flex-shrink:0;}
+    .team-info{}
+    .team-name{font-family:'Oswald',sans-serif;font-size:1rem;font-weight:600;color:var(--cream);letter-spacing:0.3px;}
+    .team-owner{font-size:0.72rem;color:#3a5a7a;margin-top:1px;}
+
+    .rankings-table .td-score{
+      text-align:right;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--gold);
+    }
+    .rankings-table .td-score.best{color:var(--gold);text-shadow:0 0 20px rgba(200,169,81,0.35);}
+
+    .table-wrap{
+      background:var(--mid);border:1px solid var(--border);border-radius:14px;
+      overflow:hidden;box-shadow:0 4px 30px rgba(0,0,0,0.3);
+    }
+
+    /* ── TEAM VERDICTS ── */
+    .verdicts-section{margin-bottom:3rem;}
+    .verdict-card{
+      background:var(--mid);border:1px solid var(--border);border-radius:12px;
+      padding:1.7rem 1.8rem;margin-bottom:1rem;
+      display:grid;grid-template-columns:auto 1fr;gap:1.2rem;
+      position:relative;overflow:hidden;transition:border-color 0.2s;
+    }
+    .verdict-card:hover{border-color:rgba(200,169,81,0.2);}
+    .verdict-card::before{
+      content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+    }
+    .verdict-card.pos-1::before{background:var(--gold);}
+    .verdict-card.pos-2::before{background:#a8b8c8;}
+    .verdict-card.pos-3::before{background:#7a5a30;}
+    .verdict-card.pos-mid::before{background:rgba(74,106,138,0.4);}
+    .verdict-card.pos-bot::before{background:rgba(192,57,43,0.5);}
+
+    .verdict-rank-col{display:flex;flex-direction:column;align-items:center;gap:0.4rem;padding-top:0.1rem;}
+    .verdict-rank{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;color:#1e3a52;}
+    .verdict-rank.p1{color:var(--gold);}
+    .verdict-rank.p2{color:#a8b8c8;}
+    .verdict-rank.p3{color:#7a5a30;}
+    .verdict-photo{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,0.07);}
+
+    .verdict-body{}
+    .verdict-header{display:flex;align-items:baseline;gap:0.75rem;margin-bottom:0.3rem;flex-wrap:wrap;}
+    .verdict-name{font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:600;color:var(--cream);}
+    .verdict-meta{font-family:'Oswald',sans-serif;font-size:0.68rem;letter-spacing:1.5px;text-transform:uppercase;}
+    .verdict-meta.up{color:#22c55e;}
+    .verdict-meta.dn{color:#ef4444;}
+    .verdict-meta.nc{color:#2a4a6a;}
+    .verdict-score-chip{
+      margin-left:auto;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);
+    }
+    .verdict-tag{
+      display:inline-block;font-family:'Oswald',sans-serif;font-size:0.6rem;
+      letter-spacing:1.5px;text-transform:uppercase;
+      padding:0.18rem 0.55rem;border-radius:20px;margin-bottom:0.6rem;
+    }
+    .tag-top{background:rgba(200,169,81,0.12);color:var(--gold);border:1px solid rgba(200,169,81,0.3);}
+    .tag-rise{background:rgba(34,197,94,0.1);color:#4ade80;border:1px solid rgba(34,197,94,0.25);}
+    .tag-fall{background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.25);}
+    .tag-steady{background:rgba(74,106,138,0.12);color:#6a9ab5;border:1px solid rgba(74,106,138,0.25);}
+    .tag-danger{background:rgba(192,57,43,0.12);color:#f08080;border:1px solid rgba(192,57,43,0.3);}
+
+    .verdict-text{font-size:0.88rem;color:#6a8aaa;line-height:1.78;}
+    .verdict-text strong{color:#bcd;}
+
+    /* ── MATCH RESULTS ── */
+    .matches-section{margin-bottom:3rem;}
+    .match-card{
+      background:var(--mid);border:1px solid var(--border);border-radius:12px;
+      padding:1.5rem 1.8rem;margin-bottom:1rem;
+      position:relative;overflow:hidden;
+    }
+    .match-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:rgba(200,169,81,0.3);}
+    .match-card.match-hero::before{background:var(--gold);}
+    .match-card.match-rise::before{background:var(--green);}
+    .match-card.match-upset::before{background:#a78bfa;}
+
+    .match-label{
+      font-family:'Oswald',sans-serif;font-size:0.62rem;letter-spacing:2px;
+      text-transform:uppercase;color:#2a4a6a;margin-bottom:0.5rem;
+    }
+    .match-label.lbl-hero{color:var(--gold);}
+    .match-label.lbl-rise{color:#4ade80;}
+    .match-label.lbl-upset{color:#a78bfa;}
+
+    .match-scoreline{
+      font-family:'Bebas Neue',sans-serif;font-size:clamp(1.1rem,2.5vw,1.5rem);
+      color:#fff;letter-spacing:1px;margin-bottom:0.6rem;
+    }
+    .match-scoreline .winner{color:var(--gold);}
+    .match-scoreline .margin{font-size:0.85em;color:#2a4a6a;margin-left:0.4rem;}
+    .match-text{font-size:0.88rem;color:#6a8aaa;line-height:1.75;}
+    .match-text strong{color:#bcd;}
+
+    /* ── TAKEAWAYS ── */
+    .takeaways-card{
+      background:var(--mid);border:1px solid var(--border);border-radius:14px;
+      padding:1.8rem 2rem;margin-bottom:3rem;
+    }
+    .takeaways-card h3{
+      font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:1px;
+      color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:0.6rem;
+    }
+    .takeaway-list{list-style:none;}
+    .takeaway-list li{
+      padding:0.65rem 0;border-bottom:1px solid rgba(255,255,255,0.04);
+      font-size:0.9rem;color:#6a8aaa;line-height:1.7;
+      display:flex;gap:0.75rem;
+    }
+    .takeaway-list li:last-child{border-bottom:none;}
+    .takeaway-list li::before{content:'→';color:var(--gold);flex-shrink:0;margin-top:0.05rem;}
+    .takeaway-list li strong{color:var(--cream);}
+
+    /* ── SIGN OFF ── */
+    .signoff{
+      text-align:center;padding:2.5rem 1.5rem;
+      font-family:'Oswald',sans-serif;font-size:0.8rem;letter-spacing:2px;
+      text-transform:uppercase;color:#2a4a6a;border-top:1px solid var(--border);
+    }
+    .signoff span{color:var(--gold);}
+
+    /* ── LIGHTBOX ── */
+    .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:999;justify-content:center;align-items:center;flex-direction:column;gap:1.2rem;}
+    .lightbox.active{display:flex;}
+    .lightbox img{max-width:88vw;max-height:78vh;border-radius:12px;box-shadow:0 0 60px rgba(200,169,81,0.2);object-fit:contain;}
+    .lightbox-close{color:#fff;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);padding:0.5rem 1.5rem;border-radius:6px;cursor:pointer;font-family:'Oswald',sans-serif;font-size:0.9rem;letter-spacing:1px;transition:background 0.2s;}
+    .lightbox-close:hover{background:rgba(255,255,255,0.2);}
+
+    footer{text-align:center;padding:2rem;color:#253545;font-size:0.78rem;font-family:'Oswald',sans-serif;letter-spacing:1px;border-top:1px solid var(--border);}
+
+    @media(max-width:640px){
+      .page-header{padding:2rem 1.2rem 1.6rem;}
+      .main{padding:2rem 1rem 4rem;}
+      .safe-teams{grid-template-columns:1fr;}
+      .verdict-card{grid-template-columns:1fr;gap:0.8rem;}
+      .verdict-rank-col{flex-direction:row;justify-content:flex-start;align-items:center;}
+      .verdict-header{flex-direction:column;gap:0.25rem;}
+      .verdict-score-chip{margin-left:0;}
+      .recap-card{padding:1.4rem 1.2rem;}
+      .takeaways-card{padding:1.4rem 1.2rem;}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <div class="eyebrow">Paz's Power Rankings · Ligma League 2026</div>
+    <h1>⚡ Round 9 Rankings</h1>
+    <div class="subtitle">Round 9 · The Table Heats Up</div>
+  </div>
+  <div class="divider"></div>
+
+  <div class="main">
+
+    <!-- ══════════ SAFE SECTION ══════════ -->
+    <div class="section-label">🛡️ Safety Check</div>
+    <div class="section-title">Window Washing Avoided</div>
+
+    <div class="safe-section">
+      <div class="safe-hero">
+        <img src="SAFE.jpg" alt="SAFE — Window Washing Avoided">
+        <div class="safe-hero-overlay"></div>
+      </div>
+
+      <div class="safe-teams">
+        <div class="safe-team-card">
+          <img class="safe-team-photo" src="Broncic.jpg" alt="Broncic" onclick="openPhoto('Broncic.jpg','Broncic')">
+          <div class="safe-team-name">Broncic</div>
+          <div class="safe-team-badge">✓ Safe</div>
+          <div class="safe-team-tagline">Back-to-back contender. William's mob have been elite all year — 2nd overall and not going anywhere.</div>
+        </div>
+        <div class="safe-team-card">
+          <img class="safe-team-photo" src="Better Holmes and Gardens.jpg" alt="Holmes and Gardens" onclick="openPhoto('Better Holmes and Gardens.jpg','Holmes and Gardens')">
+          <div class="safe-team-name">Holmes &amp; Gardens</div>
+          <div class="safe-team-badge">✓ Safe</div>
+          <div class="safe-team-tagline">Calculated. Resilient. Polished. Matthew's side have been #1 for most of the season and show no signs of fading.</div>
+        </div>
+        <div class="safe-team-card">
+          <img class="safe-team-photo" src="DC & Tax Payers.jpg" alt="DC &amp; Tax Payers" onclick="openPhoto('DC & Tax Payers.jpg','DC & Tax Payers')">
+          <div class="safe-team-name">DC &amp; Tax Payers</div>
+          <div class="safe-team-badge">✓ Safe</div>
+          <div class="safe-team-tagline">Corporate power. Untouchable. Rupe's side bounce back with 1,195 and reassert themselves firmly in the top tier.</div>
+        </div>
+      </div>
+
+      <div class="safe-note">
+        <strong>Window Washing: Not Today.</strong> Three sides have put together performances across the season serious enough to earn a clean pass from any forfeit conversation — Broncic, Holmes &amp; Gardens, and DC &amp; Tax Payers. Based on current PPR standings and season trajectory, these three are in a different class. The rest of the competition is still playing for their lives.
+      </div>
+    </div>
+
+    <!-- ══════════ ROUND RECAP ══════════ -->
+    <div class="section-label">📰 Round 9 Wrap</div>
+    <div class="section-title">Holmes Stay Up. Flagdons Are Flying.</div>
+
+    <div class="recap-card">
+      <div class="recap-eyebrow">📋 Round 9 · 2026 Season</div>
+      <h3>The Table Gets Serious</h3>
+      <p>
+        Nine rounds in and this competition has found its shape. <strong>Holmes and Gardens sit top</strong> with an 11.36 PPR rating that nobody has come close to matching all year. But the story of Round 9 — the result that will be talked about heading into the back half of the season — is <strong>FlagDons2026 posting 1,303 against Van Twists</strong>. That's not just a win. That's a statement.
+      </p>
+      <p>
+        Rick's Flagdons have now strung together three wins on the trot, knocking over elite competition along the way. They jump to 3rd in the PPR table and are officially the most dangerous team in the competition right now. Meanwhile, <strong>Broncic keep grinding</strong> — 1,209 over Phillipou, 2nd in the table, and firmly established as Holmes' primary challenger.
+      </p>
+      <p>
+        DC &amp; Tax Payers respond emphatically from their Round 8 dip, putting 1,195 on Cripps Nipps to push back into 4th. Below the top four, the story is Cripps Nipps — a team that was 4-1 and looking dangerous earlier this year and is now struggling badly to find any form at all. The slide is real, and the SALI Index has noticed. Nine rounds in. It's getting very interesting.
+      </p>
+    </div>
+
+    <!-- ══════════ POWER RANKINGS TABLE ══════════ -->
+    <div class="section-label">📊 Power Rankings</div>
+    <div class="section-title">Round 9 · Updated</div>
+
+    <div class="rankings-section">
+      <div class="table-wrap">
+        <table class="rankings-table">
+          <thead>
+            <tr>
+              <th style="text-align:center;">#</th>
+              <th style="text-align:center;">±</th>
+              <th>Team</th>
+              <th style="text-align:right;">Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="td-rank p1">1</td>
+              <td class="td-move"><span class="move-nc">— 0</span></td>
+              <td><div class="td-team"><img class="team-photo" src="Better Holmes and Gardens.jpg" alt="Holmes and Gardens" onclick="openPhoto('Better Holmes and Gardens.jpg','Holmes and Gardens')"><div class="team-info"><div class="team-name">Holmes &amp; Gardens 🔐</div><div class="team-owner">Matthew</div></div></div></td>
+              <td class="td-score best">11.36</td>
+            </tr>
+            <tr>
+              <td class="td-rank p2">2</td>
+              <td class="td-move"><span class="move-nc">— 0</span></td>
+              <td><div class="td-team"><img class="team-photo" src="Broncic.jpg" alt="Broncic" onclick="openPhoto('Broncic.jpg','Broncic')"><div class="team-info"><div class="team-name">Broncic</div><div class="team-owner">William</div></div></div></td>
+              <td class="td-score">11.31</td>
+            </tr>
+            <tr>
+              <td class="td-rank p3">3</td>
+              <td class="td-move"><span class="move-up">▲ 2</span></td>
+              <td><div class="td-team"><img class="team-photo" src="Flagdons.jpg" alt="Flagdons" onclick="openPhoto('Flagdons.jpg','Flagdons')"><div class="team-info"><div class="team-name">Flagdons</div><div class="team-owner">Rick</div></div></div></td>
+              <td class="td-score">11.06</td>
+            </tr>
+            <tr>
+              <td class="td-rank">4</td>
+              <td class="td-move"><span class="move-up">▲ 2</span></td>
+              <td><div class="td-team"><img class="team-photo" src="DC & Tax Payers.jpg" alt="DC & Tax Payers" onclick="openPhoto('DC & Tax Payers.jpg','DC & Tax Payers')"><div class="team-info"><div class="team-name">DC &amp; Tax Payers</div><div class="team-owner">Rupe</div></div></div></td>
+              <td class="td-score">10.94</td>
+            </tr>
+            <tr>
+              <td class="td-rank">5</td>
+              <td class="td-move"><span class="move-dn">▼ 1</span></td>
+              <td><div class="td-team"><img class="team-photo" src="Dark Magicians.jpg" alt="Dark Magicians" onclick="openPhoto('Dark Magicians.jpg','Dark Magicians')"><div class="team-info"><div class="team-name">Dark Magicians</div><div class="team-owner">Osei</div></div></div></td>
+              <td class="td-score">10.75</td>
+            </tr>
+            <tr>
+              <td class="td-rank">6</td>
+              <td class="td-move"><span class="move-dn">▼ 3</span></td>
+              <td><div class="td-team"><img class="team-photo" src="Van Twists.jpg" alt="Van Twists" onclick="openPhoto('Van Twists.jpg','Van Twists')"><div class="team-info"><div class="team-name">Van Twists</div><div class="team-owner">Tim</div></div></div></td>
+              <td class="td-score">10.13</td>
+            </tr>
+            <tr>
+              <td class="td-rank">7</td>
+              <td class="td-move"><span class="move-nc">— 0</span></td>
+              <td><div class="td-team"><img class="team-photo" src="Nethers men.jpg" alt="Nethers men" onclick="openPhoto('Nethers men.jpg','Nethers men')"><div class="team-info"><div class="team-name">Nethers men</div><div class="team-owner">Max</div></div></div></td>
+              <td class="td-score">10.00</td>
+            </tr>
+            <tr>
+              <td class="td-rank">8</td>
+              <td class="td-move"><span class="move-up">▲ 2</span></td>
+              <td><div class="td-team"><img class="team-photo" src="Shavas.jpg" alt="Shavas" onclick="openPhoto('Shavas.jpg','Shavas')"><div class="team-info"><div class="team-name">Shavas</div><div class="team-owner">Patrick</div></div></div></td>
+              <td class="td-score">9.63</td>
+            </tr>
+            <tr>
+              <td class="td-rank">9</td>
+              <td class="td-move"><span class="move-up">▲ 1</span></td>
+              <td><div class="td-team"><img class="team-photo" src="Phillipou.jpg" alt="Phillipou" onclick="openPhoto('Phillipou.jpg','Phillipou')"><div class="team-info"><div class="team-name">Phillipou</div><div class="team-owner">Cam</div></div></div></td>
+              <td class="td-score">9.58</td>
+            </tr>
+            <tr>
+              <td class="td-rank">10</td>
+              <td class="td-move"><span class="move-dn">▼ 1</span></td>
+              <td><div class="td-team"><img class="team-photo" src="Cripps Nipps.jpg" alt="Cripps Nipps" onclick="openPhoto('Cripps Nipps.jpg','Cripps Nipps')"><div class="team-info"><div class="team-name">Cripps Nipps</div><div class="team-owner">Hayden</div></div></div></td>
+              <td class="td-score">9.38</td>
+            </tr>
+            <tr>
+              <td class="td-rank">11</td>
+              <td class="td-move"><span class="move-dn">▼ 3</span></td>
+              <td><div class="td-team"><img class="team-photo" src="Izaks.jpg" alt="Izaks" onclick="openPhoto('Izaks.jpg','Izaks')"><div class="team-info"><div class="team-name">Izaks</div><div class="team-owner">Zak</div></div></div></td>
+              <td class="td-score">9.25</td>
+            </tr>
+            <tr>
+              <td class="td-rank">12</td>
+              <td class="td-move"><span class="move-nc">— 0</span></td>
+              <td><div class="td-team"><img class="team-photo" src="Foopys.jpg" alt="Foopys" onclick="openPhoto('Foopys.jpg','Foopys')"><div class="team-info"><div class="team-name">Foopys</div><div class="team-owner">Miller</div></div></div></td>
+              <td class="td-score">9.21</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══════════ TEAM VERDICTS ══════════ -->
+    <div class="section-label">🔍 The Verdict</div>
+    <div class="section-title">Where Each Team Stands After Round 9</div>
+
+    <div class="verdicts-section">
+
+      <!-- 1. Holmes and Gardens -->
+      <div class="verdict-card pos-1">
+        <div class="verdict-rank-col">
+          <div class="verdict-rank p1">1</div>
+          <img class="verdict-photo" src="Better Holmes and Gardens.jpg" alt="Holmes and Gardens" onclick="openPhoto('Better Holmes and Gardens.jpg','Holmes and Gardens')">
+        </div>
+        <div class="verdict-body">
+          <div class="verdict-header">
+            <span class="verdict-name">Holmes &amp; Gardens</span>
+            <span class="verdict-meta nc">— No change · 11.36 👑 #1 · Matthew</span>
+            <span class="verdict-score-chip">11.36</span>
+          </div>
+          <div class="verdict-tag tag-top">Season Leader</div>
+          <div class="verdict-text"><strong>Unmovable.</strong> Matthew's side beat IZaks convincingly — 1,125 to 934 — and their PPR rating ticks up to a season-high 11.36. The highest score in the competition. The longest run at the top. Nobody has been able to dislodge them and right now there's nothing to suggest that's about to change. Holmes &amp; Gardens are the benchmark, and the benchmark keeps rising.</div>
+        </div>
+      </div>
+
+      <!-- 2. Broncic -->
+      <div class="verdict-card pos-2">
+        <div class="verdict-rank-col">
+          <div class="verdict-rank p2">2</div>
+          <img class="verdict-photo" src="Broncic.jpg" alt="Broncic" onclick="openPhoto('Broncic.jpg','Broncic')">
+        </div>
+        <div class="verdict-body">
+          <div class="verdict-header">
+            <span class="verdict-name">Broncic</span>
+            <span class="verdict-meta nc">— No change · 11.31 🔥 Back-to-Back · William</span>
+            <span class="verdict-score-chip">11.31</span>
+          </div>
+          <div class="verdict-tag tag-top">Contender</div>
+          <div class="verdict-text"><strong>1,209 on the board and Phillipou never got close.</strong> William's Broncic remain 2nd with an 11.31 rating — a gap of just 0.05 points behind Holmes. They've been the most consistent side outside of the top spot all season. Back-to-back champion credentials written all over this squad. If Holmes blinks, Broncic are right there.</div>
+        </div>
+      </div>
+
+      <!-- 3. Flagdons -->
+      <div class="verdict-card pos-3">
+        <div class="verdict-rank-col">
+          <div class="verdict-rank p3">3</div>
+          <img class="verdict-photo" src="Flagdons.jpg" alt="Flagdons" onclick="openPhoto('Flagdons.jpg','Flagdons')">
+        </div>
+        <div class="verdict-body">
+          <div class="verdict-header">
+            <span class="verdict-name">Flagdons</span>
+            <span class="verdict-meta up">▲ 2 · 11.06 🚀 Riser of the Round · Rick</span>
+            <span class="verdict-score-chip">11.06</span>
+          </div>
+          <div class="verdict-tag tag-rise">Three on the Trot</div>
+          <div class="verdict-text"><strong>1,303 points. Van Twists obliterated by 217.</strong> That is not a number you post in a throwaway round. Rick's FlagDons2026 have now won three straight, climbing from 5th to 3rd and posting the highest individual score of Round 9 in the process. They're knocking over elite competition, they're scoring big, and they have momentum that nobody else in this competition can match right now. The top two should be paying attention.</div>
+        </div>
+      </div>
+
+      <!-- 4. DC & Tax Payers -->
+      <div class="verdict-card pos-mid">
+        <div class="verdict-rank-col">
+          <div class="verdict-rank">4</div>
+          <img class="verdict-photo" src="DC & Tax Payers.jpg" alt="DC & Tax Payers" onclick="openPhoto('DC & Tax Payers.jpg','DC & Tax Payers')">
+        </div>
+        <div class="verdict-body">
+          <div class="verdict-header">
+            <span class="verdict-name">DC &amp; Tax Payers</span>
+            <span class="verdict-meta up">▲ 2 · 10.94 💼 Bounce Back · Rupe</span>
+            <span class="verdict-score-chip">10.94</span>
+          </div>
+          <div class="verdict-tag tag-rise">Responded</div>
+          <div class="verdict-text"><strong>Rupe's mob don't stay down for long.</strong> After dropping four spots in Round 8, DC &amp; Tax Payers came back with 1,195 against Cripps Nipps — a commanding win that pushes them back to 4th. The corporate power is real. Two rounds ago people were writing them off. Now they're back in the top four and looking every bit like a genuine finals threat. Don't count them out.</div>
+        </div>
+      </div>
+
+      <!-- 5. Dark Magicians -->
+      <div class="verdict-card pos-mid">
+        <div class="verdict-rank-col">
+          <div class="verdict-rank">5</div>
+          <img class="verdict-photo" src="Dark Magicians.jpg" alt="Dark Magicians" onclick="openPhoto('Dark Magicians.jpg','Dark Magicians')">
+        </div>
+        <div class="verdict-body">
+          <div class="verdict-header">
+            <span class="verdict-name">Dark Magicians</span>
+            <span class="verdict-meta dn">▼ 1 · 10.75 🔮 Grinding · Osei</span>
+            <span class="verdict-score-chip">10.75</span>
+          </div>
+          <div class="verdict-tag tag-steady">Holding</div>
+          <div class="verdict-text"><strong>A narrow win over Nethers men — 1,093 to 1,082 — but a win nonetheless.</strong> Osei's Dark Magicians slip one spot to 5th but they're still in the top five and still in the conversation. The margins are getting tighter, which tells you the competition is closing in. They need a big score in the coming rounds to reassert themselves. The magic is still there — it just needs to be louder.</div>
+        </div>
+      </div>
+
+      <!-- 6. Van Twists -->
+      <div class="verdict-card pos-mid">
+        <div class="verdict-rank-col">
+          <div class="verdict-rank">6</div>
+          <img class="verdict-photo" src="Van Twists.jpg" alt="Van Twists" onclick="openPhoto('Van Twists.jpg','Van Twists')">
+        </div>
+        <div class="verdict-body">
+          <div class="verdict-header">
+            <span class="verdict-name">Van Twists</span>
+            <span class="verdict-meta dn">▼ 3 · 10.13 📉 Walloped · Tim</span>
+            <span class="verdict-score-chip">10.13</span>
+          </div>
+          <div class="verdict-tag tag-fall">Took a Hit</div>
+          <div class="verdict-text"><strong>1,086 against FlagDons and they were never in it.</strong> Tim's VANTWISTFC posted a decent enough score on paper but FlagDons were in another gear entirely. A 217-point loss is a hiding. Three spots down the PPR table. Van Twists had been climbing nicely in the mid-season but this is a serious reality check. They remain just above the 10.00 mark — the line that separates ambition from concern.</div>
+        </div>
+      </div>
+
+      <!-- 7. Nethers men -->
+      <div class="verdict-card pos-mid">
+        <div class="verdict-rank-col">
+          <div class="verdict-rank">7</div>
+          <img class="verdict-photo" src="Nethers men.jpg" alt="Nethers men" onclick="openPhoto('Nethers men.jpg','Nethers men')">
+        </div>
+        <div class="verdict-body">
+          <div class="verdict-header">
+            <span class="verdict-name">Nethers men</span>
+            <span class="verdict-meta nc">— No change · 10.00 ⚖️ Steady · Max</span>
+            <span class="verdict-score-chip">10.00</span>
+          </div>
+          <div class="verdict-tag tag-steady">Treading Water</div>
+          <div class="verdict-text"><strong>Lost to Dark Magicians by 11 points — 1,082 to 1,093.</strong> Max's Nethers men are the definition of a side that keeps showing up without quite making a statement. They hold 7th. Their PPR is exactly 10.00 — the round number, the border. They're not dropping below it, but they're not threatening the top five either. A result either way would tell us a lot about where this side actually sits.</div>
+        </div>
+      </div>
+
+      <!-- 8. Shavas -->
+      <div class="verdict-card pos-mid">
+        <div class="verdict-rank-col">
+          <div class="verdict-rank">8</div>
+          <img class="verdict-photo" src="Shavas.jpg" alt="Shavas" onclick="openPhoto('Shavas.jpg','Shavas')">
+        </div>
+        <div class="verdict-body">
+          <div class="verdict-header">
+            <span class="verdict-name">Shavas</span>
+            <span class="verdict-meta up">▲ 2 · 9.63 📈 Bounced Back · Patrick</span>
+            <span class="verdict-score-chip">9.63</span>
+          </div>
+          <div class="verdict-tag tag-rise">Climber</div>
+          <div class="verdict-text"><strong>1,175 over Foopys and Shavas move up two spots to 8th.</strong> Patrick's side have had a season defined by inconsistency — big wins followed by rough losses — but this was a clean, convincing performance. 1,175 is a good score. Two spots gained. They're still not in the top half of the table, but the trajectory after Round 9 is pointing in the right direction.</div>
+        </div>
+      </div>
+
+      <!-- 9. Phillipou -->
+      <div class="verdict-card pos-mid">
+        <div class="verdict-rank-col">
+          <div class="verdict-rank">9</div>
+          <img class="verdict-photo" src="Phillipou.jpg" alt="Phillipou" onclick="openPhoto('Phillipou.jpg','Phillipou')">
+        </div>
+        <div class="verdict-body">
+          <div class="verdict-header">
+            <span class="verdict-name">Phillipou</span>
+            <span class="verdict-meta up">▲ 1 · 9.58 ↩️ Recovering · Cam</span>
+            <span class="verdict-score-chip">9.58</span>
+          </div>
+          <div class="verdict-tag tag-steady">Slowly Climbing</div>
+          <div class="verdict-text"><strong>Lost to Broncic 1,095 to 1,209 — but move up one spot regardless.</strong> Cam's Phillipou are in recovery mode and the progress is slow. They didn't win but they climbed through the table movement around them. 9th. Not where they expected to be. Not in free fall either. The next few rounds are pivotal — Phillipou need a proper win to arrest any lingering slide.</div>
+        </div>
+      </div>
+
+      <!-- 10. Cripps Nipps -->
+      <div class="verdict-card pos-bot">
+        <div class="verdict-rank-col">
+          <div class="verdict-rank">10</div>
+          <img class="verdict-photo" src="Cripps Nipps.jpg" alt="Cripps Nipps" onclick="openPhoto('Cripps Nipps.jpg','Cripps Nipps')">
+        </div>
+        <div class="verdict-body">
+          <div class="verdict-header">
+            <span class="verdict-name">Cripps Nipps</span>
+            <span class="verdict-meta dn">▼ 1 · 9.38 📉 Struggling · Hayden</span>
+            <span class="verdict-score-chip">9.38</span>
+          </div>
+          <div class="verdict-tag tag-fall">🐍 Snake Watch</div>
+          <div class="verdict-text"><strong>Lost to DC &amp; Tax Payers 1,082 to 1,195.</strong> Remember when Hayden's Cripps Nipps were 4-1 and looked like a genuine force? That feels like a long time ago. The form has completely dried up, the table position is worsening, and the SALI Index crowned them Snake of the Week for good reason. From 5th to 10th. The slide is real and it needs to stop before it becomes a collapse.</div>
+        </div>
+      </div>
+
+      <!-- 11. Izaks -->
+      <div class="verdict-card pos-bot">
+        <div class="verdict-rank-col">
+          <div class="verdict-rank">11</div>
+          <img class="verdict-photo" src="Izaks.jpg" alt="Izaks" onclick="openPhoto('Izaks.jpg','Izaks')">
+        </div>
+        <div class="verdict-body">
+          <div class="verdict-header">
+            <span class="verdict-name">Izaks</span>
+            <span class="verdict-meta dn">▼ 3 · 9.25 📉 Sinking · Zak</span>
+            <span class="verdict-score-chip">9.25</span>
+          </div>
+          <div class="verdict-tag tag-danger">Danger Zone</div>
+          <div class="verdict-text"><strong>Lost to Holmes &amp; Gardens 934 to 1,125.</strong> Ouch. Zak's Izaks put up their lowest score in weeks and got comprehensively beaten by the top side. Three spots down. 11th place. At one point this season Izaks were pushing the top five — now they're pushing the bottom of the table. The slide from their mid-season peak has been sharp and sustained. They need to rediscover their best form urgently.</div>
+        </div>
+      </div>
+
+      <!-- 12. Foopys -->
+      <div class="verdict-card pos-bot">
+        <div class="verdict-rank-col">
+          <div class="verdict-rank">12</div>
+          <img class="verdict-photo" src="Foopys.jpg" alt="Foopys" onclick="openPhoto('Foopys.jpg','Foopys')">
+        </div>
+        <div class="verdict-body">
+          <div class="verdict-header">
+            <span class="verdict-name">Foopys</span>
+            <span class="verdict-meta nc">— No change · 9.21 🥄 Wooden Spoon Watch · Miller</span>
+            <span class="verdict-score-chip">9.21</span>
+          </div>
+          <div class="verdict-tag tag-danger">Still Last</div>
+          <div class="verdict-text"><strong>Lost to Shavas 1,141 to 1,175.</strong> foopy is lyfe put up 1,141 — not a terrible score — and still went down. That's becoming a theme. Miller's side score enough to stay competitive but not enough to win. Nine rounds of last place. The wooden spoon isn't a conversation anymore. It's the most likely outcome in the competition unless something changes dramatically. Fast.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══════════ MATCH RESULTS ══════════ -->
+    <div class="section-label">⚔️ Round 9 Results</div>
+    <div class="section-title">All Six Matches · Full Breakdown</div>
+
+    <div class="matches-section">
+
+      <div class="match-card match-rise">
+        <div class="match-label lbl-rise">🚀 Match of the Round · Biggest Statement</div>
+        <div class="match-scoreline">
+          <span class="winner">FlagDons2026 1,303</span> def. VANTWISTFC 1,086 <span class="margin">+217</span>
+        </div>
+        <div class="match-text">
+          <strong>217 points.</strong> That is not a normal margin. Rick's FlagDons posted 1,303 — the highest score of the round — and turned what could have been a tough game against Van Twists into a demolition. Three wins on the trot. A jump to 3rd in the PPR table. This side is on a different level right now and the top two are starting to look over their shoulder.
+        </div>
+      </div>
+
+      <div class="match-card match-hero">
+        <div class="match-label lbl-hero">🏆 Controlled Win · Holmes Stay Perfect</div>
+        <div class="match-scoreline">
+          <span class="winner">Holmes &amp; Gardens 1,125</span> def. IZaks 934 <span class="margin">+191</span>
+        </div>
+        <div class="match-text">
+          Matthew's side beat IZaks by 191 points. <strong>Comfortable. Dominant. Expected.</strong> Holmes &amp; Gardens do not have bad rounds. They just win — sometimes narrowly, sometimes comprehensively. This was the latter. IZaks were never in it, and Holmes tick to 11.36 on the PPR table. Still #1. Still the team to beat.
+        </div>
+      </div>
+
+      <div class="match-card">
+        <div class="match-label">💼 Bounce Back · DC Reassert</div>
+        <div class="match-scoreline">
+          <span class="winner">30/09/2023ers (DC &amp; Tax Payers) 1,195</span> def. Cripps Nipps 1,082 <span class="margin">+113</span>
+        </div>
+        <div class="match-text">
+          After falling four spots in Round 8, Rupe's DC &amp; Tax Payers came out swinging — 1,195 to 1,082. <strong>113 points. A statement win.</strong> This is what top-tier sides do. They don't wallow in a bad result — they respond. DC move back to 4th and remind everyone they're not going anywhere.
+        </div>
+      </div>
+
+      <div class="match-card">
+        <div class="match-label">🔥 Back-to-Back Contender · Broncic Cruise</div>
+        <div class="match-scoreline">
+          <span class="winner">Broncic 1,209</span> def. Phillipou Cumming 1,095 <span class="margin">+114</span>
+        </div>
+        <div class="match-text">
+          William's Broncic are relentless. 1,209 against Phillipou — a 114-point win — and they stay 2nd with an 11.31 PPR rating. <strong>Broncic haven't put a foot wrong in weeks.</strong> Phillipou put up 1,095 which isn't embarrassing, but when you come up against this Broncic side in full flight, decent just isn't enough.
+        </div>
+      </div>
+
+      <div class="match-card">
+        <div class="match-label">🔮 Narrow Win · Dark Magicians Grind</div>
+        <div class="match-scoreline">
+          <span class="winner">Dark Magicians 1,093</span> def. Nethers men 1,082 <span class="margin">+11</span>
+        </div>
+        <div class="match-text">
+          The closest match of the round. <strong>11 points between them.</strong> Osei's Dark Magicians did just enough to beat Max's Nethers men in a tight affair. 1,093 to 1,082. A win is a win, but the Magicians will know they need more than this to threaten the top four. Nethers will feel the one that got away.
+        </div>
+      </div>
+
+      <div class="match-card">
+        <div class="match-label">📈 Shavas Bounce · Foopys Slide Continues</div>
+        <div class="match-scoreline">
+          <span class="winner">Shava Girthi 1,175</span> def. foopy is lyfe 1,141 <span class="margin">+34</span>
+        </div>
+        <div class="match-text">
+          Patrick's Shavas put up 1,175 and get the job done against a Foopys side that generated 1,141 — a perfectly reasonable score that still wasn't enough. <strong>Foopys continue to be the unluckiest team in the competition</strong>, losing games they probably deserved to be competitive in. Shavas, meanwhile, take two steps up the table. The round-by-round inconsistency continues for both sides.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ══════════ TAKEAWAYS ══════════ -->
+    <div class="takeaways-card">
+      <h3>📋 Round 9 Takeaways</h3>
+      <ul class="takeaway-list">
+        <li><strong>Holmes &amp; Gardens</strong> are still #1 and their 11.36 PPR rating is now a season-high. Nobody has come close to them all year. To unseat them, someone needs to win consistently — and even then it might not be enough.</li>
+        <li><strong>FlagDons2026</strong> are the team of the moment. Three wins on the bounce, 1,303 points, a 217-point demolition of Van Twists, and a jump to 3rd on the table. Rick's mob are the most dangerous team in the competition right now.</li>
+        <li><strong>Broncic</strong> stay 2nd with 11.31 — just 0.05 behind Holmes. William's side haven't missed a beat all season. If there's one team capable of catching Holmes, it's them.</li>
+        <li><strong>DC &amp; Tax Payers</strong> bounced back brilliantly from their Round 8 drop with 1,195. They're 4th and firmly back in the conversation. Don't write Rupe off.</li>
+        <li><strong>Cripps Nipps</strong> are in a genuine form crisis. From 4-1 to 10th on the PPR table. The SALI Index called it — the slide is real, and it needs to stop soon.</li>
+        <li><strong>Izaks</strong> fall three spots to 11th after being held to 934 by Holmes. At their mid-season peak they were pushing the top five. Right now they're pushing the wooden spoon conversation.</li>
+        <li><strong>Foopys</strong> put up 1,141 and still lost. Nine rounds. Still last. The wooden spoon is no longer a possibility — it's a probability.</li>
+      </ul>
+    </div>
+
+    <div class="signoff">
+      Nine rounds in. Holmes still lead, but FlagDons are charging and the top three is genuinely contested.<br>
+      The back half of the season starts now. <span>PPR · Round 9 · Done.</span>
+    </div>
+
+  </div><!-- /main -->
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="">
+    <button class="lightbox-close" onclick="closeLightbox()">✕ Close</button>
+  </div>
+
+  <footer>Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</footer>
+
+  <script>
+    function openPhoto(src,name){
+      document.getElementById('lightbox-img').src=src;
+      document.getElementById('lightbox-img').alt=name;
+      document.getElementById('lightbox').classList.add('active');
+    }
+    function closeLightbox(){
+      document.getElementById('lightbox').classList.remove('active');
+      document.getElementById('lightbox-img').src='';
+    }
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox();});
+  </script>
+
+  <script src="nav.js"></script>
+</body>
+</html>
