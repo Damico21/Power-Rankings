@@ -14,7 +14,7 @@
 const PPR_NAV = {
 
   // ── LATEST ROUND (reference only — used for documentation) ──────────────
-  latestRound: 'round-9.html',
+  latestRound: 'round-11.html',
 
   // ── ROUNDS DROPDOWN ──────────────────────────────────────────────────────
   rounds: [
@@ -28,7 +28,8 @@ const PPR_NAV = {
     { label: 'Round 7',       href: 'round-7.html'       },
     { label: 'Round 8',       href: 'round-8.html'       },
     { label: 'Round 9',       href: 'round-9.html'       },
-    // { label: 'Round 10', href: 'round-10.html' },
+    { label: 'Round 10',      href: 'round-10.html'      },
+    { label: 'Round 11',      href: 'round-11.html'      },
   ],
 
   // ── STATIC NAV ITEMS ─────────────────────────────────────────────────────
