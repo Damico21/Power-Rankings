@@ -39,6 +39,7 @@ const PPR_NAV = {
   ],
 
   after: [
+    { label: '🏆 Grand Final',          href: 'grand-final.html', cls: 'ppr-gf' },
     { label: '⚔️ Rivalry Round',       href: 'rivalry-round.html'      },
     { label: '📸 Best Moments',         href: 'best-moments.html'       },
     { label: '🎵 PPR Tunes',            href: 'ppr-tunes.html'          },
@@ -80,6 +81,11 @@ const PPR_NAV = {
       letter-spacing: 3px;
       flex-shrink: 0;
       line-height: 1;
+      /* Guard against page-level .ppr-logo image rules (e.g. index.html hero logo) */
+      width: auto;
+      height: auto;
+      border-radius: 0;
+      display: inline-block;
     }
 
     #ppr-nav .ppr-links {
@@ -163,6 +169,20 @@ const PPR_NAV = {
     }
     #ppr-nav .ppr-dropdown-menu a:hover { color: #fff; background: rgba(255,255,255,0.04); }
     #ppr-nav .ppr-dropdown-menu a.active { color: #c8a951; border-bottom: none !important; }
+
+    /* ── Grand Final highlight ── */
+    #ppr-nav .ppr-links a.ppr-gf {
+      color: #c8a951;
+      font-weight: 600;
+      text-shadow: 0 0 12px rgba(200,169,81,0.45);
+      animation: pprGfGlow 2.4s ease-in-out infinite;
+    }
+    #ppr-nav .ppr-links a.ppr-gf:hover { color: #fff; text-shadow: 0 0 14px rgba(200,169,81,0.8); }
+    #ppr-mobile-menu a.ppr-gf { color: #c8a951; text-shadow: 0 0 12px rgba(200,169,81,0.45); }
+    @keyframes pprGfGlow { 0%,100% { opacity: 1; } 50% { opacity: 0.68; } }
+    @media (prefers-reduced-motion: reduce) {
+      #ppr-nav .ppr-links a.ppr-gf { animation: none; }
+    }
 
     #ppr-nav-divider {
       height: 3px;
@@ -252,12 +272,20 @@ const PPR_NAV = {
     }
 
     /* ── Breakpoints ── */
-    @media (max-width: 1080px) {
+    @media (max-width: 1340px) {
+      #ppr-nav { padding: 0 1.6rem; }
       #ppr-nav .ppr-links a,
       #ppr-nav .ppr-dropdown-btn { font-size: 0.74rem; padding: 0 0.7rem; letter-spacing: 1px; }
     }
-    @media (max-width: 820px) {
+    @media (max-width: 1150px) {
+      #ppr-nav { padding: 0 1rem; }
+      #ppr-nav .ppr-logo { font-size: 1.5rem; letter-spacing: 2px; }
+      #ppr-nav .ppr-links a,
+      #ppr-nav .ppr-dropdown-btn { font-size: 0.68rem; padding: 0 0.45rem; letter-spacing: 0.5px; }
+    }
+    @media (max-width: 1000px) {
       #ppr-nav { padding: 0 1.2rem; }
+      #ppr-nav .ppr-logo { font-size: 1.8rem; letter-spacing: 3px; }
       #ppr-nav .ppr-links { display: none; }
       #ppr-hamburger { display: flex; }
     }
@@ -279,8 +307,8 @@ const PPR_NAV = {
   }
 
   // Desktop
-  const beforeHTML = PPR_NAV.before.map(i => `<li><a href="${i.href}"${ac(i.href)}>${i.label}</a></li>`).join('');
-  const afterHTML  = PPR_NAV.after.map(i  => `<li><a href="${i.href}"${ac(i.href)}>${i.label}</a></li>`).join('');
+  const beforeHTML = PPR_NAV.before.map(i => `<li><a href="${i.href}"${ac(i.href, i.cls)}>${i.label}</a></li>`).join('');
+  const afterHTML  = PPR_NAV.after.map(i  => `<li><a href="${i.href}"${ac(i.href, i.cls)}>${i.label}</a></li>`).join('');
 
   const dropdownItems = PPR_NAV.rounds.map(r =>
     `<a href="${r.href}"${ac(r.href)}>${r.label}</a>`
@@ -298,9 +326,9 @@ const PPR_NAV = {
     </li>`;
 
   // Mobile
-  const mobBefore = PPR_NAV.before.map(i => `<a href="${i.href}"${ac(i.href,'ppr-mob-primary')}>${i.label}</a>`).join('');
+  const mobBefore = PPR_NAV.before.map(i => `<a href="${i.href}"${ac(i.href,['ppr-mob-primary',i.cls].filter(Boolean).join(' '))}>${i.label}</a>`).join('');
   const mobRounds = PPR_NAV.rounds.map(r => `<a href="${r.href}"${ac(r.href,'ppr-mob-round')}>${r.label}</a>`).join('');
-  const mobAfter  = PPR_NAV.after.map(i  => `<a href="${i.href}"${ac(i.href,'ppr-mob-primary')}>${i.label}</a>`).join('');
+  const mobAfter  = PPR_NAV.after.map(i  => `<a href="${i.href}"${ac(i.href,['ppr-mob-primary',i.cls].filter(Boolean).join(' '))}>${i.label}</a>`).join('');
 
   // Remove any existing PPR nav elements first (idempotent injection)
   ['ppr-nav','ppr-mobile-menu','ppr-nav-divider'].forEach(id => {

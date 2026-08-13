@@ -202,6 +202,59 @@
 
     footer { text-align: center; padding: 2rem; color: #253545; font-size: 0.78rem; font-family: 'Oswald', sans-serif; letter-spacing: 1px; border-top: 1px solid var(--border); }
 
+    /* ══════════ GRAND FINAL PROMO ══════════ */
+    .btn-gf {
+      display: inline-block; padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none;
+      font-family: 'Oswald', sans-serif; font-size: 0.88rem; letter-spacing: 2px; text-transform: uppercase;
+      color: #0d1117; font-weight: 600;
+      background: linear-gradient(135deg, #e8cf7a, var(--gold) 55%, #a5842f);
+      box-shadow: 0 0 26px rgba(200,169,81,0.35);
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-gf:hover { transform: translateY(-2px); box-shadow: 0 0 38px rgba(200,169,81,0.6); }
+
+    .gf-banner {
+      display: block; position: relative; overflow: hidden; text-decoration: none;
+      background: linear-gradient(115deg, #0f2a1e 0%, #0d1117 42%, #1a0f08 72%, #2c1408 100%);
+      border-top: 1px solid rgba(200,169,81,0.35); border-bottom: 1px solid rgba(200,169,81,0.35);
+    }
+    .gf-banner-glow { position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse at 20% 50%, rgba(143,214,174,0.16), transparent 55%),
+                  radial-gradient(ellipse at 80% 50%, rgba(255,122,47,0.18), transparent 55%); }
+    .gf-banner-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto;
+      padding: 3rem 2.5rem; display: grid; grid-template-columns: 1fr 0.85fr; gap: 2.5rem; align-items: center; }
+    .gf-banner-badge { display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(139,26,26,0.28); border: 1px solid rgba(139,26,26,0.55); border-radius: 100px;
+      padding: 0.32rem 1rem; font-family: 'Oswald', sans-serif; font-size: 0.66rem; letter-spacing: 2.5px;
+      text-transform: uppercase; color: #f08080; margin-bottom: 1.1rem; }
+    .gf-banner-dot { width: 6px; height: 6px; border-radius: 50%; background: #f08080; animation: pulse 1.5s infinite; }
+    .gf-banner-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.6rem, 7vw, 5rem); line-height: 0.9; letter-spacing: 3px;
+      background: linear-gradient(180deg, #fff, var(--gold) 60%, #7a5f18);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: var(--gold); }
+    .gf-banner-teams { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1rem, 2.6vw, 1.6rem); letter-spacing: 1.5px; margin-top: 0.6rem; }
+    .gf-banner-teams .gf-h { color: #8fd6ae; }
+    .gf-banner-teams .gf-t { color: #ff7a2f; }
+    .gf-banner-teams .gf-vs { color: #fff; opacity: 0.5; margin: 0 0.5rem; }
+    .gf-banner-desc { color: #8aa8c2; font-size: 0.93rem; line-height: 1.8; max-width: 470px; margin-top: 1rem; }
+    .gf-banner-cta { display: inline-block; margin-top: 1.5rem; font-family: 'Oswald', sans-serif; font-size: 0.8rem;
+      letter-spacing: 2px; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid rgba(200,169,81,0.4);
+      padding-bottom: 3px; transition: color 0.2s, border-color 0.2s; }
+    .gf-banner:hover .gf-banner-cta { color: #fff; border-color: #fff; }
+    .gf-banner-right img { width: 100%; height: auto; display: block; border-radius: 10px;
+      border: 1px solid rgba(200,169,81,0.25); box-shadow: 0 16px 50px rgba(0,0,0,0.7); transition: transform 0.3s; }
+    .gf-banner:hover .gf-banner-right img { transform: scale(1.02); }
+
+    .week-card.gf-card { border-color: rgba(200,169,81,0.45); background: linear-gradient(135deg, #1d1a10, var(--mid)); }
+    .week-card.gf-card::before { background: var(--gold); opacity: 1; }
+    .week-card.gf-card .card-title { color: var(--gold); }
+    .badge-gf { background: rgba(200,169,81,0.18); color: var(--gold); border: 1px solid rgba(200,169,81,0.5); }
+
+    @media (max-width: 900px) {
+      .gf-banner-inner { grid-template-columns: 1fr; padding: 2.5rem 1.2rem; gap: 1.8rem; text-align: center; }
+      .gf-banner-desc { margin-left: auto; margin-right: auto; }
+      .gf-banner-right { order: -1; }
+    }
+
     /* hamburger handled by nav.js */
 
     @media (max-width: 768px) {
@@ -364,6 +417,7 @@
           Every week, someone's getting cooked. Where does your team stand?
         </p>
         <div class="hero-ctas">
+          <a href="grand-final.html" class="btn-gf">🏆 Grand Final</a>
           <a href="round-11.html" class="btn-primary">📋 Round 11 Rankings</a>
           <a href="#vote" class="btn-secondary">🗳 Cast Your Vote ↓</a>
         </div>
@@ -384,6 +438,30 @@
       </div>
     </div>
   </section>
+
+  <!-- ═══════════ GRAND FINAL BANNER ═══════════ -->
+  <a class="gf-banner" href="grand-final.html">
+    <div class="gf-banner-glow"></div>
+    <div class="gf-banner-inner">
+      <div class="gf-banner-left">
+        <div class="gf-banner-badge"><span class="gf-banner-dot"></span>Now Live · 3rd Edition Decider</div>
+        <div class="gf-banner-title">GRAND FINAL</div>
+        <div class="gf-banner-teams">
+          <span class="gf-h">Better Holmes and Gardens</span>
+          <span class="gf-vs">vs</span>
+          <span class="gf-t">Van Twists</span>
+        </div>
+        <p class="gf-banner-desc">
+          A 25% ownership deal. A waiver glitch that broke the league. $4,000 on the line.
+          The most controversial matchup in Ligma League history.
+        </p>
+        <span class="gf-banner-cta">Read The Grand Final Edition →</span>
+      </div>
+      <div class="gf-banner-right">
+        <img src="Twists_vs_Holmes.png" alt="Grand Final: Better Holmes and Gardens vs The Van Twists" loading="lazy">
+      </div>
+    </div>
+  </a>
 
   <div class="stats-bar">
     <div class="stats-inner">
@@ -912,6 +990,17 @@
         </div>
         <div class="card-right">
           <div class="card-badge badge-live">● Latest</div>
+          <span class="card-arrow">→</span>
+        </div>
+      </a>
+      <a class="week-card gf-card" href="grand-final.html">
+        <div class="card-left">
+          <div class="card-round">The Decider</div>
+          <div class="card-title">🏆 Grand Final</div>
+          <div class="card-leader">Holmes and Gardens <strong>vs</strong> Van Twists</div>
+        </div>
+        <div class="card-right">
+          <div class="card-badge badge-gf">● Live</div>
           <span class="card-arrow">→</span>
         </div>
       </a>

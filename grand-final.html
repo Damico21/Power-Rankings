@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Grand Final — Ligma League</title>
+  <meta name="description" content="Better Holmes and Gardens vs Van Twists. The most controversial Grand Final in Ligma League history.">
+  <link rel="preload" as="image" href="Twists_vs_Holmes.png">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1b2a3b;
+      --red: #8b1a1a;
+      --gold: #c8a951;
+      --cream: #e8dcc8;
+      --dark: #0d1117;
+      --mid: #141d27;
+      --text-muted: #6a8aaa;
+      --border: rgba(255,255,255,0.06);
+
+      /* Grand Final team identities */
+      --holmes: #8fd6ae;
+      --holmes-deep: #0f2a1e;
+      --holmes-glow: rgba(143,214,174,0.35);
+      --twists: #ff7a2f;
+      --twists-deep: #2c1408;
+      --twists-glow: rgba(255,122,47,0.35);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: #fff; min-height: 100vh; overflow-x: hidden; }
+    img { max-width: 100%; display: block; }
+
+    /* NAV handled by nav.js */
+
+    /* Offset in-page anchors so targets clear the sticky nav */
+    section[id], div[id] { scroll-margin-top: 72px; }
+
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
+    .divider { height: 3px; background: linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
+    .section-label { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 0.4rem; }
+    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.4rem); color: #fff; letter-spacing: 1px; line-height: 1; }
+    .section-sub { font-family: 'Oswald', sans-serif; font-size: clamp(0.85rem, 2vw, 1.05rem); letter-spacing: 2px; text-transform: uppercase; color: var(--cream); opacity: 0.7; margin-top: 0.6rem; }
+    .prose p { color: #7a9ab5; line-height: 1.9; font-size: 0.97rem; margin-bottom: 1.15rem; }
+    .prose p strong { color: var(--cream); }
+    .prose p em { color: var(--gold); font-style: normal; }
+
+    /* ── TICKER ── */
+    .ticker { background: var(--red); overflow: hidden; white-space: nowrap; border-bottom: 1px solid rgba(0,0,0,0.4); }
+    .ticker-track { display: inline-flex; gap: 2.5rem; padding: 0.5rem 0; animation: tick 38s linear infinite; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 2.5px; text-transform: uppercase; color: #ffe9e9; }
+    .ticker-track span { flex-shrink: 0; }
+    .ticker-track b { color: #fff; }
+    @keyframes tick { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── HERO ── */
+    .gf-hero { position: relative; overflow: hidden; padding: 4.5rem 1.5rem 3rem; text-align: center;
+      background:
+        radial-gradient(ellipse at 18% 45%, rgba(143,214,174,0.13) 0%, transparent 55%),
+        radial-gradient(ellipse at 82% 45%, rgba(255,122,47,0.15) 0%, transparent 55%),
+        linear-gradient(160deg, var(--dark) 0%, var(--navy) 55%, #0d1117 100%);
+    }
+    .hero-grain { position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: 0.35;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E"); }
+    .hero-bolt { position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; transform: translateX(-50%);
+      background: linear-gradient(180deg, transparent, rgba(255,255,255,0.5) 20%, rgba(200,169,81,0.6) 50%, rgba(255,255,255,0.4) 80%, transparent);
+      opacity: 0.5; z-index: 1; pointer-events: none; }
+    .gf-hero-inner { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; }
+
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(139,26,26,0.28); border: 1px solid rgba(139,26,26,0.55);
+      border-radius: 100px; padding: 0.38rem 1.1rem; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 2.5px;
+      text-transform: uppercase; color: #f08080; margin-bottom: 1.6rem; animation: fadeUp 0.6s ease both; }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #f08080; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+    .gf-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 16vw, 12rem); line-height: 0.85; letter-spacing: 4px;
+      background: linear-gradient(180deg, #fff 0%, var(--gold) 55%, #7a5f18 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: var(--gold);
+      text-shadow: 0 0 60px rgba(200,169,81,0.25); animation: fadeUp 0.7s 0.1s ease both; }
+    .gf-versus { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.6rem 1.2rem; margin-top: 1.4rem; animation: fadeUp 0.7s 0.18s ease both; }
+    .gf-versus .t-h { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.3rem, 3.6vw, 2.6rem); letter-spacing: 2px; color: var(--holmes); text-shadow: 0 0 24px var(--holmes-glow); }
+    .gf-versus .t-t { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.3rem, 3.6vw, 2.6rem); letter-spacing: 2px; color: var(--twists); text-shadow: 0 0 24px var(--twists-glow); }
+    .gf-versus .vs { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1rem, 2.4vw, 1.7rem); color: #fff; opacity: 0.55; letter-spacing: 3px; }
+    .gf-support { max-width: 640px; margin: 1.8rem auto 0; color: #8aa8c2; line-height: 1.9; font-size: clamp(0.92rem, 2vw, 1.05rem); animation: fadeUp 0.7s 0.26s ease both; }
+    .gf-support strong { color: var(--cream); }
+    .gf-hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2.2rem; animation: fadeUp 0.7s 0.34s ease both; }
+    .btn-primary { display: inline-block; background: var(--red); color: #fff; padding: 0.85rem 2rem; font-family: 'Oswald', sans-serif; font-size: 0.88rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: background 0.2s, transform 0.15s; }
+    .btn-primary:hover { background: #a52020; transform: translateY(-2px); }
+    .btn-secondary { display: inline-block; background: transparent; color: var(--gold); padding: 0.85rem 2rem; font-family: 'Oswald', sans-serif; font-size: 0.88rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-radius: 4px; border: 1px solid var(--gold); transition: background 0.2s, transform 0.15s; }
+    .btn-secondary:hover { background: rgba(200,169,81,0.1); transform: translateY(-2px); }
+
+    /* ── COVER IMAGE ── */
+    .cover { position: relative; background: #000; }
+    .cover img { width: 100%; height: auto; }
+    .cover::after { content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(180deg, rgba(13,17,23,0.55) 0%, transparent 18%, transparent 72%, rgba(13,17,23,0.95) 100%),
+                  radial-gradient(ellipse at center, transparent 45%, rgba(0,0,0,0.55) 100%); }
+    .cover-cap { position: absolute; bottom: 0.9rem; left: 0; right: 0; z-index: 2; text-align: center;
+      font-family: 'Oswald', sans-serif; font-size: clamp(0.55rem, 1.5vw, 0.72rem); letter-spacing: 3px; text-transform: uppercase; color: var(--gold); opacity: 0.85; padding: 0 1rem; }
+
+    /* ── STATS BAR ── */
+    .stats-bar { background: var(--navy); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); }
+    .stat-item { padding: 2rem 1rem; text-align: center; border-right: 1px solid rgba(255,255,255,0.07); }
+    .stat-item:last-child { border-right: none; }
+    .stat-number { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3rem); color: var(--gold); line-height: 1; display: block; }
+    .stat-label { font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: #4a6a8a; margin-top: 0.35rem; display: block; }
+
+    /* ── SCANDAL / OPENING STORY ── */
+    .scandal { background: linear-gradient(180deg, #0d1117 0%, #150f10 100%); border-bottom: 1px solid var(--border); }
+    .byline { font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: #3a5a7a; margin: 1.6rem 0 2rem; padding-left: 0.9rem; border-left: 2px solid var(--red); }
+    .dropcap::first-letter { font-family: 'Bebas Neue', sans-serif; font-size: 3.6rem; line-height: 0.8; float: left; margin: 0.15rem 0.6rem 0 0; color: var(--gold); }
+
+    .redact { background: rgba(200,169,81,0.14); border-bottom: 1px dashed rgba(200,169,81,0.5); color: var(--cream); padding: 0 3px; }
+
+    /* deal box */
+    .deal-box { margin-top: 2.5rem; background: linear-gradient(135deg, rgba(139,26,26,0.16), rgba(0,0,0,0.35)); border: 1px solid rgba(139,26,26,0.4); border-radius: 14px; padding: 2rem; position: relative; overflow: hidden; }
+    .deal-stamp { position: absolute; top: 3.1rem; right: -3.4rem; transform: rotate(18deg); transform-origin: center; background: var(--red); color: #fff; font-family: 'Oswald', sans-serif; font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; padding: 0.3rem 3.5rem; opacity: 0.92; white-space: nowrap; }
+    .deal-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.5rem, 4vw, 2.2rem); letter-spacing: 1.5px; color: #fff; margin-bottom: 0.5rem; }
+    .deal-pct { font-family: 'Bebas Neue', sans-serif; font-size: clamp(5rem, 20vw, 11rem); line-height: 0.85; color: var(--gold); text-shadow: 0 0 50px rgba(200,169,81,0.3); text-align: center; margin: 1rem 0 0.3rem; }
+    .deal-pct-label { text-align: center; font-family: 'Oswald', sans-serif; font-size: clamp(0.7rem, 2vw, 0.9rem); letter-spacing: 3px; text-transform: uppercase; color: var(--cream); opacity: 0.75; }
+    .disclaimer { margin-top: 1.8rem; font-size: 0.78rem; color: #4a6a8a; line-height: 1.7; font-style: italic; border-top: 1px solid var(--border); padding-top: 1.1rem; }
+
+    /* ── TEAM SECTIONS ── */
+    .team-sec { border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .team-sec.holmes { background: linear-gradient(140deg, var(--holmes-deep) 0%, #0d1117 62%); }
+    .team-sec.twists { background: linear-gradient(220deg, var(--twists-deep) 0%, #0d1117 62%); }
+    .team-ghost { position: absolute; font-family: 'Bebas Neue', sans-serif; font-size: clamp(6rem, 20vw, 18rem); line-height: 0.8; color: rgba(255,255,255,0.022); white-space: nowrap; pointer-events: none; top: 50%; transform: translateY(-50%); }
+    .team-sec.holmes .team-ghost { left: -2rem; }
+    .team-sec.twists .team-ghost { right: -2rem; }
+    .team-sec .wrap { position: relative; z-index: 2; }
+    .team-eyebrow { font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 0.6rem; }
+    .team-sec.holmes .team-eyebrow { color: var(--holmes); }
+    .team-sec.twists .team-eyebrow { color: var(--twists); }
+    .team-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.4rem, 8vw, 5.5rem); line-height: 0.9; letter-spacing: 2px; }
+    .team-sec.holmes .team-name { color: var(--holmes); text-shadow: 0 0 40px var(--holmes-glow); }
+    .team-sec.twists .team-name { color: var(--twists); text-shadow: 0 0 40px var(--twists-glow); }
+    .team-tagline { font-family: 'Oswald', sans-serif; font-size: clamp(0.9rem, 2.4vw, 1.25rem); letter-spacing: 2px; text-transform: uppercase; color: var(--cream); opacity: 0.72; margin-top: 0.7rem; }
+    .team-rule { height: 3px; width: 90px; margin: 1.6rem 0 2rem; }
+    .team-sec.holmes .team-rule { background: linear-gradient(90deg, var(--holmes), transparent); }
+    .team-sec.twists .team-rule { background: linear-gradient(90deg, var(--twists), transparent); }
+
+    /* quote cards */
+    .quote-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 2.5rem; }
+    .quote-card { background: rgba(0,0,0,0.35); border: 1px solid var(--border); border-radius: 12px; padding: 1.6rem 1.5rem 1.4rem; position: relative; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s; }
+    .quote-card::before { content: '“'; position: absolute; top: -0.6rem; left: 0.9rem; font-family: 'Bebas Neue', sans-serif; font-size: 4rem; line-height: 1; opacity: 0.22; }
+    .team-sec.holmes .quote-card::before { color: var(--holmes); }
+    .team-sec.twists .quote-card::before { color: var(--twists); }
+    .quote-card:hover { transform: translateY(-3px); box-shadow: 0 10px 34px rgba(0,0,0,0.5); }
+    .team-sec.holmes .quote-card:hover { border-color: rgba(143,214,174,0.35); }
+    .team-sec.twists .quote-card:hover { border-color: rgba(255,122,47,0.35); }
+    .quote-text { font-family: 'Oswald', sans-serif; font-weight: 500; font-size: clamp(0.98rem, 2.2vw, 1.12rem); line-height: 1.55; color: #fff; position: relative; z-index: 1; }
+    .quote-attr { font-family: 'Oswald', sans-serif; font-size: 0.64rem; letter-spacing: 2px; text-transform: uppercase; color: #4a6a8a; margin-top: 1rem; }
+
+    /* featured pull quote */
+    .pullquote { margin-top: 2.5rem; border-radius: 14px; padding: 2.2rem 2rem; position: relative; overflow: hidden;
+      background: linear-gradient(135deg, rgba(143,214,174,0.10), rgba(0,0,0,0.4)); border: 1px solid rgba(143,214,174,0.28); }
+    .pullquote-label { font-family: 'Oswald', sans-serif; font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; color: var(--holmes); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .pullquote-label .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--holmes); animation: pulse 1.5s infinite; }
+    .pullquote-text { font-family: 'Oswald', sans-serif; font-weight: 400; font-size: clamp(1rem, 2.6vw, 1.45rem); line-height: 1.6; color: #fff; }
+    .leaked { display: inline-block; background: rgba(139,26,26,0.35); border: 1px dashed rgba(240,128,128,0.7); color: #ffbaba; border-radius: 4px; padding: 0 0.45rem; margin-left: 0.2rem; position: relative; }
+    .leaked::after { content: ''; display: inline-block; width: 2px; height: 1em; background: #ffbaba; margin-left: 4px; vertical-align: -0.15em; animation: caret 1s steps(1) infinite; }
+    @keyframes caret { 0%,50%{opacity:1} 51%,100%{opacity:0} }
+    .leaked-note { margin-top: 1.1rem; font-family: 'Oswald', sans-serif; font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; color: #f08080; }
+
+    /* ── WAIVER / BROKE THE LEAGUE ── */
+    .breaker { text-align: center; padding: 3.5rem 1.5rem; background: repeating-linear-gradient(45deg, rgba(255,122,47,0.05) 0 12px, transparent 12px 24px), #120a05; border-top: 1px solid rgba(255,122,47,0.2); border-bottom: 1px solid rgba(255,122,47,0.2); }
+    .breaker-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 7vw, 4.6rem); line-height: 0.95; letter-spacing: 2px; color: #fff; text-shadow: 0 0 40px rgba(255,122,47,0.4); }
+    .breaker-text span { color: var(--twists); }
+    .verdict-lines { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.8rem 2.5rem; margin-top: 1.8rem; }
+    .verdict-line { font-family: 'Oswald', sans-serif; font-size: clamp(0.75rem, 2vw, 0.95rem); letter-spacing: 1.5px; text-transform: uppercase; color: #8aa8c2; }
+    .verdict-line b { color: var(--twists); }
+
+    /* question list */
+    .q-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0.8rem; margin-top: 2rem; }
+    .q-item { background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-left: 3px solid var(--twists); border-radius: 8px; padding: 0.9rem 1.1rem; font-family: 'Oswald', sans-serif; font-size: 0.86rem; letter-spacing: 0.5px; color: #cbd9e5; }
+
+    /* ── MAX HALL AFFAIR ── */
+    .maxhall { background: linear-gradient(180deg, #0d1117 0%, #16100a 50%, #0d1117 100%); border-bottom: 1px solid var(--border); position: relative; overflow: hidden; }
+    .affair-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.6rem, 11vw, 8rem); line-height: 0.86; letter-spacing: 2px; color: #fff; text-align: center; }
+    .affair-title span { display: block; color: var(--twists); text-shadow: 0 0 50px var(--twists-glow); }
+    .timeline { margin-top: 3.5rem; position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 6px; top: 6px; bottom: 6px; width: 2px; background: linear-gradient(180deg, var(--twists), rgba(255,122,47,0.15)); }
+    .tl-item { position: relative; margin-bottom: 2rem; }
+    .tl-item::before { content: ''; position: absolute; left: -2rem; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: #0d1117; border: 2px solid var(--twists); box-shadow: 0 0 14px var(--twists-glow); }
+    .tl-step { font-family: 'Oswald', sans-serif; font-size: 0.64rem; letter-spacing: 3px; text-transform: uppercase; color: var(--twists); margin-bottom: 0.35rem; }
+    .tl-text { font-family: 'Oswald', sans-serif; font-weight: 500; font-size: clamp(1rem, 2.6vw, 1.35rem); line-height: 1.5; color: #fff; }
+    .tl-sub { color: #7a9ab5; font-size: 0.92rem; line-height: 1.8; margin-top: 0.5rem; font-family: 'Inter', sans-serif; }
+    .verdict-stack { margin-top: 3rem; text-align: center; border-top: 1px solid rgba(255,122,47,0.25); padding-top: 2.5rem; }
+    .verdict-stack div { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.4rem, 5vw, 3rem); line-height: 1.15; letter-spacing: 2px; color: #fff; }
+    .verdict-stack div:nth-child(2) { color: var(--twists); }
+    .verdict-stack div:nth-child(3) { color: var(--gold); }
+
+    /* ── MONEY SECTION ── */
+    .money { background: linear-gradient(180deg, #0d1117, #101a14); border-bottom: 1px solid var(--border); }
+    .money-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .money-card { border-radius: 14px; padding: 2.2rem 1.8rem; text-align: center; position: relative; overflow: hidden; }
+    .money-card.win { background: linear-gradient(160deg, rgba(143,214,174,0.14), rgba(0,0,0,0.4)); border: 1px solid rgba(143,214,174,0.35); }
+    .money-card.lose { background: linear-gradient(160deg, rgba(139,26,26,0.16), rgba(0,0,0,0.4)); border: 1px solid rgba(139,26,26,0.45); }
+    .money-head { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.1rem, 3vw, 1.7rem); letter-spacing: 1.5px; line-height: 1.1; color: #fff; margin-bottom: 1.2rem; }
+    .money-prize { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 2.5px; text-transform: uppercase; color: #6a8aaa; }
+    .money-prize b { color: var(--cream); font-size: 1.05rem; letter-spacing: 1px; }
+    .money-arrow { font-size: 1.4rem; color: #3a5a7a; margin: 0.9rem 0; }
+    .money-amount { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.2rem, 12vw, 6.5rem); line-height: 0.9; }
+    .money-card.win .money-amount { color: var(--holmes); text-shadow: 0 0 40px var(--holmes-glow); }
+    .money-card.lose .money-amount { color: #f08080; text-shadow: 0 0 40px rgba(240,128,128,0.3); }
+    .money-note { font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: #4a6a8a; margin-top: 0.6rem; }
+    .money-punch { margin-top: 3rem; text-align: center; font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem, 6vw, 4rem); line-height: 1; letter-spacing: 2px; color: var(--gold); text-shadow: 0 0 50px rgba(200,169,81,0.3); }
+    .money-unless { text-align: center; margin-top: 1.2rem; font-size: 0.92rem; color: #6a8aaa; font-style: italic; line-height: 1.7; }
+
+    /* ── HEAD TO HEAD ── */
+    .h2h { background: #080c12; border-bottom: 1px solid var(--border); }
+    .h2h-crown { text-align: center; font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem, 7vw, 4.4rem); line-height: 1; letter-spacing: 2px; color: #fff; margin-bottom: 2.5rem; }
+    .fight-img { position: relative; border-radius: 14px; overflow: hidden; border: 1px solid rgba(200,169,81,0.28); box-shadow: 0 20px 70px rgba(0,0,0,0.75); }
+    .fight-img img { width: 100%; }
+    .fight-img::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.5) 100%); }
+    .h2h-central { text-align: center; margin: 3rem 0 2.5rem; }
+    .h2h-1v1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 18vw, 11rem); line-height: 0.85; letter-spacing: 4px;
+      background: linear-gradient(180deg, #fff 0%, var(--gold) 50%, #6d5314 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: var(--gold); }
+    .h2h-showdown { font-family: 'Oswald', sans-serif; font-size: clamp(0.7rem, 2.4vw, 1.05rem); letter-spacing: 6px; text-transform: uppercase; color: var(--cream); opacity: 0.75; }
+    .tale { display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.5rem; align-items: start; margin-top: 3rem; }
+    .tale-col { border-radius: 14px; padding: 1.8rem 1.5rem; }
+    .tale-col.h { background: linear-gradient(160deg, rgba(143,214,174,0.10), rgba(0,0,0,0.35)); border: 1px solid rgba(143,214,174,0.3); }
+    .tale-col.t { background: linear-gradient(200deg, rgba(255,122,47,0.10), rgba(0,0,0,0.35)); border: 1px solid rgba(255,122,47,0.3); }
+    .tale-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.3rem, 3.4vw, 2.1rem); letter-spacing: 1.5px; line-height: 1; margin-bottom: 1.3rem; }
+    .tale-col.h .tale-name { color: var(--holmes); }
+    .tale-col.t .tale-name { color: var(--twists); }
+    .tale-col ul { list-style: none; }
+    .tale-col li { font-family: 'Oswald', sans-serif; font-size: 0.87rem; letter-spacing: 0.5px; color: #cbd9e5; padding: 0.7rem 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; gap: 0.6rem; }
+    .tale-col li:last-child { border-bottom: none; }
+    .tale-col li::before { content: '▸'; flex-shrink: 0; }
+    .tale-col.h li::before { color: var(--holmes); }
+    .tale-col.t li::before { color: var(--twists); }
+    .tale-mid { display: flex; align-items: center; justify-content: center; align-self: stretch; }
+    .tale-vs { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.6rem, 4vw, 2.8rem); color: #fff; opacity: 0.35; letter-spacing: 3px; }
+
+    /* ── WHAT COULD GO WRONG ── */
+    .wrong { background: var(--dark); border-bottom: 1px solid var(--border); }
+    .wrong-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+    .wrong-card { border-radius: 14px; padding: 2rem 1.8rem; }
+    .wrong-card.h { background: linear-gradient(160deg, rgba(143,214,174,0.08), rgba(0,0,0,0.3)); border: 1px solid rgba(143,214,174,0.25); }
+    .wrong-card.t { background: linear-gradient(200deg, rgba(255,122,47,0.08), rgba(0,0,0,0.3)); border: 1px solid rgba(255,122,47,0.25); }
+    .wrong-head { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.4rem, 4vw, 2.2rem); letter-spacing: 1.5px; line-height: 1; margin-bottom: 1.4rem; }
+    .wrong-card.h .wrong-head { color: var(--holmes); }
+    .wrong-card.t .wrong-head { color: var(--twists); }
+    .wrong-card ol { list-style: none; counter-reset: w; }
+    .wrong-card li { counter-increment: w; position: relative; padding: 0.75rem 0 0.75rem 2.3rem; border-bottom: 1px solid rgba(255,255,255,0.05); color: #a8bccd; font-size: 0.92rem; line-height: 1.65; }
+    .wrong-card li:last-child { border-bottom: none; }
+    .wrong-card li::before { content: counter(w, decimal-leading-zero); position: absolute; left: 0; top: 0.8rem; font-family: 'Bebas Neue', sans-serif; font-size: 1rem; opacity: 0.7; }
+    .wrong-card.h li::before { color: var(--holmes); }
+    .wrong-card.t li::before { color: var(--twists); }
+
+    /* ── VERDICT SPLIT ── */
+    .split { display: grid; grid-template-columns: 1fr 1fr; min-height: 60vh; position: relative; }
+    .split-side { padding: 5rem 2rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; }
+    .split-side.h { background: linear-gradient(135deg, var(--holmes-deep), #0d1117); }
+    .split-side.t { background: linear-gradient(225deg, var(--twists-deep), #0d1117); }
+    .split-name { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 6vw, 4.2rem); line-height: 0.9; letter-spacing: 2px; }
+    .split-side.h .split-name { color: var(--holmes); text-shadow: 0 0 40px var(--holmes-glow); }
+    .split-side.t .split-name { color: var(--twists); text-shadow: 0 0 40px var(--twists-glow); }
+    .split-tag { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: #8aa8c2; margin-top: 1rem; }
+    .split-vs { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 5;
+      width: clamp(64px, 12vw, 110px); height: clamp(64px, 12vw, 110px); border-radius: 50%;
+      background: #0d1117; border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.2rem, 3.5vw, 2.2rem); color: var(--gold); letter-spacing: 2px;
+      box-shadow: 0 0 50px rgba(200,169,81,0.4); }
+    .verdict-facts { background: #0d1117; padding: 4rem 1.5rem; text-align: center; border-top: 1px solid var(--border); }
+    .verdict-facts p { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.2rem, 4vw, 2.4rem); line-height: 1.35; letter-spacing: 1.5px; color: #fff; }
+    .verdict-facts p .g { color: var(--gold); }
+    .verdict-facts p .h { color: var(--holmes); }
+    .verdict-facts p .t { color: var(--twists); }
+    .let-begin { margin-top: 2.5rem; font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.4rem, 10vw, 7rem); line-height: 0.9; letter-spacing: 3px;
+      background: linear-gradient(180deg, #fff, var(--gold) 60%, #6d5314); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: var(--gold); }
+
+    /* ── FINAL WORD ── */
+    .final-word { background: linear-gradient(180deg, #0d1117 0%, #000 100%); text-align: center; }
+    .fw-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 9vw, 6rem); line-height: 0.9; letter-spacing: 3px; color: var(--gold); }
+    .fw-body { max-width: 720px; margin: 2.5rem auto 0; }
+    .fw-body p { color: #7a9ab5; line-height: 2; font-size: 1rem; margin-bottom: 1.3rem; }
+    .fw-body p strong { color: var(--cream); }
+    .next-up { margin-top: 3.5rem; border-top: 1px solid var(--border); padding-top: 3rem; }
+    .next-label { font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 0.8rem; }
+    .next-year { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 14vw, 8rem); line-height: 0.9; letter-spacing: 4px; color: #fff; }
+    .next-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.7rem; margin-top: 1.8rem; }
+    .next-pill { font-family: 'Oswald', sans-serif; font-size: 0.76rem; letter-spacing: 2px; text-transform: uppercase; color: var(--cream); background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 100px; padding: 0.5rem 1.2rem; }
+    .signoff { margin-top: 3.5rem; padding-top: 3rem; border-top: 1px solid var(--border); }
+    .signoff-main { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.5rem, 6vw, 3.4rem); line-height: 1; letter-spacing: 2px; color: var(--gold); }
+    .signoff-sub { font-family: 'Oswald', sans-serif; font-size: clamp(0.75rem, 2.2vw, 1rem); letter-spacing: 3px; text-transform: uppercase; color: #6a8aaa; margin-top: 1rem; }
+
+    footer { text-align: center; padding: 2rem; color: #253545; font-size: 0.78rem; font-family: 'Oswald', sans-serif; letter-spacing: 1px; border-top: 1px solid var(--border); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .tale { grid-template-columns: 1fr; }
+      .tale-mid { padding: 0.5rem 0; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .stat-item:nth-child(2n) { border-right: none; }
+      .stat-item:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,0.07); }
+    }
+    @media (max-width: 768px) {
+      .wrap { padding: 3rem 1.2rem; }
+      .money-grid, .wrong-grid { grid-template-columns: 1fr; }
+      .split { grid-template-columns: 1fr; min-height: 0; }
+      .split-side { padding: 3.5rem 1.5rem; }
+      .split-vs { position: static; transform: none; margin: -1.5rem auto; }
+      .gf-hero { padding: 3rem 1.1rem 2.2rem; }
+      .gf-hero-ctas a { width: 100%; max-width: 300px; text-align: center; }
+      .deal-box { padding: 1.5rem 1.2rem; }
+      .deal-stamp { right: -3.6rem; font-size: 0.55rem; }
+      .timeline { padding-left: 1.5rem; }
+      .tl-item::before { left: -1.5rem; width: 11px; height: 11px; }
+      .final-word .wrap { padding: 3.5rem 1.2rem; }
+      .money-card { padding: 1.8rem 1.2rem; }
+    }
+    @media (max-width: 420px) {
+      .stats-inner { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+      .stat-item:last-child { border-bottom: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track { animation: none; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- nav injected by nav.js -->
+
+  <!-- ═══════════ BREAKING TICKER ═══════════ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span><b>BREAKING</b> · GRAND FINAL WEEK · THE 3RD EDITION ENDS HERE</span>
+      <span>25% OWNERSHIP DEAL UNDER SCRUTINY</span>
+      <span>THE MAX HALL WAIVER GLITCH · LEAGUE DEMANDS ANSWERS</span>
+      <span>$4,000 ON THE LINE · $250 GUARANTEED REGARDLESS</span>
+      <span>NOBODY READ THE TERMS AND CONDITIONS</span>
+      <span><b>BREAKING</b> · GRAND FINAL WEEK · THE 3RD EDITION ENDS HERE</span>
+      <span>25% OWNERSHIP DEAL UNDER SCRUTINY</span>
+      <span>THE MAX HALL WAIVER GLITCH · LEAGUE DEMANDS ANSWERS</span>
+      <span>$4,000 ON THE LINE · $250 GUARANTEED REGARDLESS</span>
+      <span>NOBODY READ THE TERMS AND CONDITIONS</span>
+    </div>
+  </div>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="gf-hero">
+    <div class="hero-grain"></div>
+    <div class="hero-bolt"></div>
+    <div class="gf-hero-inner">
+      <div class="hero-badge"><span class="hero-badge-dot"></span>Ligma League · 3rd Edition · The Decider</div>
+      <h1 class="gf-title">GRAND FINAL</h1>
+      <div class="gf-versus">
+        <span class="t-h">BETTER HOLMES AND GARDENS</span>
+        <span class="vs">VS</span>
+        <span class="t-t">VAN TWISTS</span>
+      </div>
+      <p class="gf-support">
+        The 1v1 showdown nobody expected. One team has dominated all year.
+        The other came from the clouds. <strong>Both now have everything to lose.</strong>
+      </p>
+      <div class="gf-hero-ctas">
+        <a href="#scandal" class="btn-primary">🔥 The Scandal</a>
+        <a href="#h2h" class="btn-secondary">⚔️ Head To Head ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ COVER IMAGE ═══════════ -->
+  <div class="cover">
+    <img src="Twists_vs_Holmes.png"
+         alt="Grand Final cover: Better Holmes and Gardens versus The Van Twists"
+         width="1264" height="843" fetchpriority="high">
+    <div class="cover-cap">The Grand Final Edition · Dollar bills in podcasts · Contracts from the Twist-er · League in uproar</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════ STATS BAR ═══════════ -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item"><span class="stat-number">$4,000</span><span class="stat-label">Winner Takes</span></div>
+      <div class="stat-item"><span class="stat-number">25%</span><span class="stat-label">Twists' Stake In Holmes</span></div>
+      <div class="stat-item"><span class="stat-number">1v1</span><span class="stat-label">Winner Takes All</span></div>
+      <div class="stat-item"><span class="stat-number">$0</span><span class="stat-label">Chance Twists Leave Broke</span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ OPENING STORY ═══════════ -->
+  <section class="scandal" id="scandal">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="section-label">Investigation</div>
+        <h2 class="section-title">THE MOST CONTROVERSIAL<br>GRAND FINAL YET</h2>
+        <div class="byline">Ligma League Investigations Unit · Grand Final Week · 3rd Edition</div>
+      </div>
+
+      <div class="prose reveal">
+        <p class="dropcap">
+          Every league has a Grand Final. Very few have a Grand Final where one of the participants
+          owns a piece of the other one. That is the situation the Ligma League has walked itself into,
+          eyes wide open, paperwork unread, and it is now too late to do anything about it.
+        </p>
+        <p>
+          To understand how we arrived here, you have to go back to before a single ball was bounced this season.
+          Before the draft. Before the trades. Before Max Hall became the most argued about name in the competition.
+          You have to go back to <strong>one fateful afternoon at the Australian Open</strong>.
+        </p>
+        <p>
+          The details of that afternoon remain, by every available account, <em>incomplete</em>. What is known is this.
+          The <strong>Better Holmes and Gardens</strong> were at a genuine crossroads. Years of frustration had piled up.
+          Multiple bottom four finishes had done real damage. There were serious conversations, some of them public,
+          most of them not, about walking away from the league entirely. A foundation club was one bad conversation
+          away from being a former club.
+        </p>
+        <p>
+          Meanwhile, on the other side of the same afternoon, the <strong>Van Twists</strong> had comfortably worked their way
+          through what witnesses have described as an inadvisable number of <span class="redact">Balter's</span>,
+          and apparently identified what they believed to be a market inefficiency. Where everyone else saw a club in decline,
+          the Van Twists saw an <em>investment opportunity</em>.
+        </p>
+        <p>
+          The deal that followed has never been fully explained to anyone. The buy in was covered.
+          The club was saved. And in return, the Van Twists walked away with a
+          <strong>25% stake in Better Holmes and Gardens' winnings</strong>.
+        </p>
+        <p>
+          Nobody blinked at the time. There was no announcement, no ratification, no governance process,
+          because the Ligma League has never had any of those things. It was a handshake in the sun,
+          allegedly at a tennis tournament, allegedly under the influence, and it is now the single most
+          financially significant document in league history.
+        </p>
+      </div>
+
+      <!-- 25% deal box -->
+      <div class="deal-box reveal">
+        <div class="deal-stamp">Terms Not Reviewed</div>
+        <div class="deal-title">THE ARRANGEMENT</div>
+        <p style="color:#8aa8c2;line-height:1.8;font-size:0.95rem;">
+          The Van Twists hold a minority shareholding in their Grand Final opponent's prize money.
+          Not a bet. Not a side agreement. An actual equity position in the other team's winnings.
+        </p>
+        <div class="deal-pct">25%</div>
+        <div class="deal-pct-label">Van Twists' stake in Better Holmes and Gardens</div>
+        <div class="disclaimer">
+          Disclaimer: no member of the Ligma League governing body appears to have read the terms and conditions.
+          The governing body, for the record, is a group chat. The terms and conditions, as far as anyone can tell,
+          were never written down. Any resemblance to private equity, insider trading or a deeply questionable
+          mates rates investment deal is entirely intentional.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ BETTER HOLMES AND GARDENS ═══════════ -->
+  <section class="team-sec holmes" id="holmes">
+    <div class="team-ghost">HOLMES</div>
+    <div class="wrap">
+      <div class="reveal">
+        <div class="team-eyebrow">The Favourite</div>
+        <h2 class="team-name">BETTER HOLMES<br>AND GARDENS</h2>
+        <p class="team-tagline">The team that has had everything to lose all year.</p>
+        <div class="team-rule"></div>
+      </div>
+
+      <div class="prose reveal" style="max-width:820px;">
+        <p>
+          Here is the part of the story that nobody disputes. Since round one, Better Holmes and Gardens have been
+          the best team in the Ligma League. Not the luckiest. Not the loudest. The best.
+        </p>
+        <p>
+          That sentence would have been a punchline twelve months ago. This is a club that made a habit of the bottom four,
+          that turned late season irrelevance into an art form, and that spent more time managing disappointment than
+          managing a forward line. The team that was seriously considering leaving the league has instead spent the entire
+          season at the top of it.
+        </p>
+        <p>
+          The pressure has been constant, because favouritism in this competition is a burden rather than a privilege.
+          Every week there has been a target on their back. Every week they have handled it.
+          <strong>They have gone from potential league exit to genuine premiership favourite in a single season.</strong>
+        </p>
+        <p>
+          And then there is the irony, which is almost too neat. To finish the job, they have to beat the person
+          who kept them in the league. Their minority shareholder is sitting on the other side of the matchup,
+          wearing the opposition colours, holding <em>25% of the winnings either way</em>.
+        </p>
+        <p>
+          They have dominated all year. Now they have to finish the job.
+        </p>
+      </div>
+
+      <div class="quote-grid reveal">
+        <div class="quote-card">
+          <p class="quote-text">Everyone tryna hate from outside the club, they can't even get in</p>
+          <div class="quote-attr">Better Holmes and Gardens</div>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">I'd much rather be playing for $1000 than washing windows on punt rd</p>
+          <div class="quote-attr">Better Holmes and Gardens</div>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">I've been the best team all year, this matchup wont be any different</p>
+          <div class="quote-attr">Better Holmes and Gardens</div>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">We will be celebrating like Baz sunday night once we get the job done #slopes #electric</p>
+          <div class="quote-attr">Better Holmes and Gardens</div>
+        </div>
+      </div>
+
+      <div class="pullquote reveal">
+        <div class="pullquote-label"><span class="dot"></span>Statement received · unedited draft</div>
+        <p class="pullquote-text">
+          “I'd like to thank my opponent for showing faith in me and paying for my buy-in during what was a
+          difficult time personally and financially. I'd love nothing more than to win not just to repay the faith
+          in the Holmes and Gardens fans, but also to Tim Van Twest, my angel investor, sincere friend, and club
+          colleague during 2026 <span class="leaked">(wait, delete that last part)</span>”
+        </p>
+        <div class="leaked-note">⚠ Statement was leaked before editing. The Ligma League Investigations Unit has published it in full.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ VAN TWISTS ═══════════ -->
+  <section class="team-sec twists" id="twists">
+    <div class="team-ghost">TWISTS</div>
+    <div class="wrap">
+      <div class="reveal">
+        <div class="team-eyebrow">The Contender</div>
+        <h2 class="team-name">THE VAN TWISTS</h2>
+        <p class="team-tagline">From league controversy to Grand Final contender.</p>
+        <div class="team-rule"></div>
+      </div>
+
+      <div class="prose reveal" style="max-width:820px;">
+        <p>
+          For most of the season, the Van Twists were nowhere near this. Not in the conversation, not in the frame,
+          not remotely a threat to anybody's premiership plans. They were a team with an investment portfolio and
+          not much else.
+        </p>
+        <p>
+          Then came the night that changed everything.
+        </p>
+        <p>
+          During a chaotic waiver period, the Van Twists glitched the season and somehow emerged holding
+          <strong>Max Hall</strong>. The league erupted immediately. The questions started within minutes and,
+          months later, they still have not been answered.
+        </p>
+      </div>
+
+      <div class="q-list reveal">
+        <div class="q-item">Was this a glitch?</div>
+        <div class="q-item">Was this legal?</div>
+        <div class="q-item">Was this cheating?</div>
+        <div class="q-item">Was the system simply exploited?</div>
+        <div class="q-item">Should Max Hall have even been available?</div>
+        <div class="q-item">Did the Van Twists know exactly what they were doing?</div>
+      </div>
+
+      <div class="prose reveal" style="max-width:820px;margin-top:2.5rem;">
+        <p>
+          Regardless of the answer, the league was furious. Allegations flew. Screenshots were circulated.
+          Integrity, a word previously unknown to this competition, was suddenly being used in full sentences.
+        </p>
+        <p>
+          And then Max Hall started delivering. Week after week, the player who caused the controversy became the
+          player dragging the Van Twists towards the promised land. The scandal became a weapon.
+          <strong>The team that came from nowhere is now ninety minutes from a premiership.</strong>
+        </p>
+      </div>
+    </div>
+
+    <div class="breaker reveal">
+      <div class="breaker-text">THE WAIVER PICKUP<br>THAT <span>BROKE THE LEAGUE</span>.</div>
+      <div class="verdict-lines">
+        <div class="verdict-line">Potentially cheated? <b>Absolutely debated.</b></div>
+        <div class="verdict-line">Effective? <b>Undeniably.</b></div>
+        <div class="verdict-line">Grand Finalist? <b>Somehow.</b></div>
+      </div>
+    </div>
+
+    <div class="wrap" style="padding-top:3.5rem;">
+      <div class="reveal">
+        <div class="team-eyebrow">Press Conference</div>
+        <h3 class="section-title" style="font-size:clamp(1.8rem,5vw,3rem);">THE VAN TWISTS DEFENCE</h3>
+        <p style="color:#8aa8c2;line-height:1.8;margin-top:1rem;max-width:700px;">
+          When asked about the controversy, the Van Twists did not exactly deny the allegations.
+        </p>
+      </div>
+
+      <div class="quote-grid reveal">
+        <div class="quote-card">
+          <p class="quote-text">I'm not the first person to cheat in the league</p>
+          <div class="quote-attr">The Van Twists · on the record</div>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">Lachie Neale lead the team, he didnt cheat and neither did I #swingers</p>
+          <div class="quote-attr">The Van Twists · on the record</div>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">Rankine is the epitome of what the vantwists look for and how they act on the footy field</p>
+          <div class="quote-attr">The Van Twists · on the record</div>
+        </div>
+        <div class="quote-card">
+          <p class="quote-text">If you dont invest in the league, you dont make money</p>
+          <div class="quote-attr">The Van Twists · on the record</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ THE MAX HALL AFFAIR ═══════════ -->
+  <section class="maxhall" id="max-hall">
+    <div class="wrap">
+      <div class="reveal" style="text-align:center;">
+        <div class="section-label" style="color:var(--twists);">The Defining Controversy</div>
+        <h2 class="affair-title">THE MAX HALL<span>AFFAIR</span></h2>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item reveal">
+          <div class="tl-step">Before</div>
+          <div class="tl-text">The season was heading one way.</div>
+          <p class="tl-sub">
+            The ladder made sense. The favourites were the favourites. The Van Twists were a mid table curiosity
+            with a strange financial interest in someone else's success.
+          </p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-step">The Night</div>
+          <div class="tl-text">Then, one night, everything changed.</div>
+          <p class="tl-sub">
+            The Van Twists somehow navigated the waiver system and emerged with Max Hall.
+            How it happened depends entirely on who you ask, and nobody agrees with anybody.
+          </p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-step">The Fallout</div>
+          <div class="tl-text">The league immediately went into meltdown.</div>
+          <p class="tl-sub">
+            Rumours spread. Managers questioned the integrity of the waiver system for the first time in three editions.
+            Old grudges were reopened for no reason other than the atmosphere.
+          </p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-step">The Verdicts</div>
+          <div class="tl-text">Some called it a glitch. Some called it exploitation. Some called it cheating.</div>
+          <p class="tl-sub">
+            The Van Twists called it winning.
+          </p>
+        </div>
+        <div class="tl-item reveal">
+          <div class="tl-step">The Consequence</div>
+          <div class="tl-text">And Max Hall went on to become one of the central reasons they are now playing in the Grand Final.</div>
+          <p class="tl-sub">
+            The player at the centre of the storm turned into the engine room of a premiership campaign.
+            Whatever the league believes about how he arrived, he has been worth every ounce of the argument.
+          </p>
+        </div>
+      </div>
+
+      <div class="verdict-stack reveal">
+        <div>The league wanted an investigation.</div>
+        <div>The Van Twists wanted a premiership.</div>
+        <div>Max Hall wanted points.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ MONEY ═══════════ -->
+  <section class="money" id="money">
+    <div class="wrap">
+      <div class="reveal" style="text-align:center;">
+        <div class="section-label">Conflict Of Interest</div>
+        <h2 class="section-title">THE STRANGEST GRAND FINAL<br>INVESTMENT IN SPORT</h2>
+        <p class="section-sub">Van Twists own 25% of Better Holmes and Gardens' winnings</p>
+      </div>
+
+      <div class="money-grid">
+        <div class="money-card win reveal">
+          <div class="money-head">BETTER HOLMES AND GARDENS WIN</div>
+          <div class="money-prize">Prize pool <b>$4,000</b></div>
+          <div class="money-arrow">↓</div>
+          <div class="money-amount">$1,000</div>
+          <div class="money-note">Van Twists receive</div>
+        </div>
+        <div class="money-card lose reveal">
+          <div class="money-head">BETTER HOLMES AND GARDENS LOSE</div>
+          <div class="money-prize">Runner up <b>$1,000</b></div>
+          <div class="money-arrow">↓</div>
+          <div class="money-amount">$250</div>
+          <div class="money-note">Van Twists receive</div>
+        </div>
+      </div>
+
+      <div class="money-punch reveal">THERE IS NO SCENARIO WHERE<br>VAN TWISTS LEAVE EMPTY-HANDED.</div>
+      <p class="money-unless reveal">
+        Unless, of course, the league discovers the investment agreement was somehow illegal.
+        Which would require somebody to find it, read it, and understand it. Three things that have never
+        happened in the history of this competition.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════ HEAD TO HEAD ═══════════ -->
+  <section class="h2h" id="h2h">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="h2h-crown">ONE WILL BE CROWNED CHAMPION.</div>
+      </div>
+
+      <div class="fight-img reveal">
+        <img src="1v1.jpg"
+             alt="1v1 Grand Final showdown: Vantwist FC versus Better Holmes and Gardens"
+             width="1536" height="1024" loading="lazy">
+      </div>
+
+      <div class="h2h-central reveal">
+        <div class="h2h-1v1">1V1</div>
+        <div class="h2h-showdown">Grand Final Showdown</div>
+      </div>
+
+      <div class="tale">
+        <div class="tale-col h reveal">
+          <div class="tale-name">BETTER HOLMES<br>AND GARDENS</div>
+          <ul>
+            <li>Dominant all season</li>
+            <li>Strongest regular-season campaign</li>
+            <li>Everything to lose</li>
+            <li>$4,000 at stake</li>
+            <li>Has the backing of the league</li>
+            <li>Has been waiting for this moment</li>
+          </ul>
+        </div>
+        <div class="tale-mid reveal"><div class="tale-vs">VS</div></div>
+        <div class="tale-col t reveal">
+          <div class="tale-name">VAN TWISTS</div>
+          <ul>
+            <li>Came from nowhere</li>
+            <li>Survived the Max Hall controversy</li>
+            <li>Potentially exploited the waiver system</li>
+            <li>Own 25% of their opponent</li>
+            <li>Have nothing to lose</li>
+            <li>Have the momentum</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ WHAT COULD POSSIBLY GO WRONG ═══════════ -->
+  <section class="wrong">
+    <div class="wrap">
+      <div class="reveal" style="text-align:center;">
+        <div class="section-label">Scenario Planning</div>
+        <h2 class="section-title">WHAT COULD POSSIBLY GO WRONG?</h2>
+      </div>
+
+      <div class="wrong-grid">
+        <div class="wrong-card h reveal">
+          <div class="wrong-head">IF HOLMES AND GARDENS WIN</div>
+          <ol>
+            <li>They finally escape years of bottom-four misery.</li>
+            <li>They collect the biggest prize in league history.</li>
+            <li>Van Twists receive $1,000.</li>
+            <li>The 25% ownership arrangement suddenly looks like genius.</li>
+            <li>Holmes and Gardens will have to celebrate with the knowledge that they technically made their opponent richer.</li>
+          </ol>
+        </div>
+        <div class="wrong-card t reveal">
+          <div class="wrong-head">IF VAN TWISTS WIN</div>
+          <ol>
+            <li>One of the biggest Grand Final upsets in Ligma League history.</li>
+            <li>The Max Hall waiver controversy becomes legendary.</li>
+            <li>Van Twists win the league despite entering the season as an unlikely contender.</li>
+            <li>Holmes and Gardens' greatest season ends in disaster.</li>
+            <li>The 25% investment suddenly becomes completely irrelevant.</li>
+            <li>The league will never hear the end of it.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ THE VERDICT ═══════════ -->
+  <section id="verdict">
+    <div class="wrap" style="padding-bottom:0;text-align:center;">
+      <div class="reveal">
+        <div class="section-label">The Final Call</div>
+        <h2 class="section-title">THE VERDICT</h2>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="split-side h">
+        <div class="split-name">BETTER HOLMES<br>AND GARDENS</div>
+        <div class="split-tag">The best team all year</div>
+      </div>
+      <div class="split-vs">VS</div>
+      <div class="split-side t">
+        <div class="split-name">VAN TWISTS</div>
+        <div class="split-tag">The team with nothing to lose</div>
+      </div>
+    </div>
+
+    <div class="verdict-facts">
+      <div class="reveal">
+        <p>One team has been the <span class="h">best all year</span>.</p>
+        <p>One team has the <span class="t">momentum</span>.</p>
+        <p>One team has <span class="t">Max Hall</span>.</p>
+        <p>One team owns <span class="g">25%</span> of the other.</p>
+        <p>Only one can lift the trophy.</p>
+      </div>
+      <div class="let-begin reveal">LET THE GAMES BEGIN.</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ═══════════ THE FINAL WORD ═══════════ -->
+  <section class="final-word">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="section-label">Closing Credits</div>
+        <h2 class="fw-title">THE FINAL WORD</h2>
+      </div>
+
+      <div class="fw-body reveal">
+        <p>And with that, we reach the final segment of the <strong>3rd edition of the Ligma League</strong>.</p>
+        <p>Good luck to everyone involved in the Grand Final.</p>
+        <p>
+          Thank you for another season of questionable trades, suspicious waiver activity, outrageous banter,
+          unnecessary controversy and <strong>absolutely zero governance</strong>.
+        </p>
+      </div>
+
+      <div class="next-up reveal">
+        <div class="next-label">Next Up</div>
+        <div class="next-year">2027</div>
+        <div class="next-list">
+          <span class="next-pill">The forfeit</span>
+          <span class="next-pill">The Chinese meal AGM</span>
+          <span class="next-pill">Draft night</span>
+        </div>
+      </div>
+
+      <div class="signoff reveal">
+        <div class="signoff-main">SEE YOU IN 6 MONTHS<br>ON THE PENINSULA.</div>
+        <div class="signoff-sub">With Cam and Pat in the pool.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</footer>
+
+  <script>
+    // Scroll reveal
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+
+  <script src="nav.js"></script>
+</body>
+</html>
