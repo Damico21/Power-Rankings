@@ -282,12 +282,15 @@
       }
       const extras = $('extrasGrid');
       if (extras && cfg.extras) {
-        extras.innerHTML = cfg.extras.map(x => `
-          <a class="extra-card" href="${esc(x.href)}">
+        extras.innerHTML = cfg.extras.map(x => {
+          const inner = `
             <span class="extra-icon" aria-hidden="true">${x.icon}</span>
-            <span class="extra-title">${x.title}</span>
-            <span class="extra-desc">${esc(x.desc)}</span>
-          </a>`).join('');
+            <span class="extra-title">${x.title}${x.href ? '' : ' <span class="extra-soon">Soon</span>'}</span>
+            <span class="extra-desc">${esc(x.desc)}</span>`;
+          return x.href
+            ? `<a class="extra-card" href="${esc(x.href)}">${inner}</a>`
+            : `<div class="extra-card soon" aria-disabled="true">${inner}</div>`;
+        }).join('');
       }
     }
 

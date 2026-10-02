@@ -82,7 +82,10 @@ const PPR_NAV = {
         // { label: 'Round 1',       href: '2027-round-1.html'       },
       ],
       after: [
-        { label: '🏆 Grand Final', href: null, cls: 'ppr-gf' },
+        { label: '🏆 Grand Final',          href: null, cls: 'ppr-gf' },
+        { label: '🐍 Snakes &amp; Ladders', href: null },   // e.g. '2027-snakes-and-ladders.html'
+        { label: '📸 Best Moments',         href: null },   // e.g. '2027-best-moments.html'
+        { label: '🎵 PPR Tunes',            href: null },   // e.g. '2027-ppr-tunes.html'
       ],
       hidden: [],
     },

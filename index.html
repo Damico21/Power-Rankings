@@ -142,6 +142,16 @@
     .honour-ed { font-family: 'Oswald', sans-serif; font-size: 0.66rem; letter-spacing: 2px; text-transform: uppercase; color: #4a6a8a; }
     .honour-club { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 1.5px; line-height: 1; color: var(--gold); margin: 0.45rem 0 0.55rem; }
     .honour-note { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+    .honour-card { display: flex; flex-direction: column; }
+    .honour-spoon {
+      margin-top: auto; padding-top: 0.9rem; border-top: 1px dashed rgba(126,207,255,0.18);
+      display: flex; flex-direction: column; gap: 0.15rem;
+    }
+    .honour-note { margin-bottom: 1rem; }
+    .spoon-label { font-family: 'Oswald', sans-serif; font-size: 0.6rem; letter-spacing: 1.8px; text-transform: uppercase; color: #3a5a7a; }
+    .spoon-club { font-family: 'Bebas Neue', sans-serif; font-size: 1.35rem; letter-spacing: 1px; line-height: 1.1; color: var(--ice); }
+    .spoon-club.is-tbd { color: #2f4a63; }
+    .spoon-forfeit { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
     .honour.is-current::before { border-color: var(--twists); background: var(--twists); box-shadow: 0 0 12px rgba(255,122,47,0.7); }
     .honour.is-current .honour-card { border-color: rgba(255,122,47,0.4); background: linear-gradient(160deg, rgba(255,122,47,0.1), rgba(0,0,0,0.22) 60%); }
     .honour.is-current .honour-club { color: var(--twists); }
@@ -182,6 +192,7 @@
       background: rgba(13,17,23,0.75); border: 1px solid rgba(200,169,81,0.5); color: var(--gold);
     }
     .club-tag.champ { border-color: rgba(255,122,47,0.7); color: var(--twists); }
+    .club-tag.spoon { border-color: rgba(126,207,255,0.55); color: var(--ice); }
     .club-tag.runner { border-color: rgba(143,214,174,0.55); color: var(--holmes); }
 
     /* ═══════════ RESPONSIVE ═══════════ */
@@ -301,40 +312,60 @@
   <!-- ═══════════ HONOUR ROLL ═══════════ -->
   <section class="band band-navy" aria-labelledby="honours-title">
     <div class="wrap">
-      <div class="section-label">Champions</div>
+      <div class="section-label">Glory and shame</div>
       <h2 class="section-title" id="honours-title">The Honour Roll</h2>
-      <p class="section-intro">Three editions, two names on the cup. The 2027 line is still blank.</p>
+      <p class="section-intro">Three editions, three different names on the cup, and three forfeits nobody will be allowed to forget. The 2027 line is still blank.</p>
       <ol class="honours">
         <li class="honour">
           <span class="honour-year">2024</span>
           <div class="honour-card">
-            <div class="honour-ed">1st edition</div>
-            <div class="honour-club">Broncic</div>
-            <p class="honour-note">The first name on the cup. William set the standard everyone else has been chasing since.</p>
+            <div class="honour-ed">1st edition · Champions</div>
+            <div class="honour-club">Nethers men</div>
+            <p class="honour-note">The first name on the cup. Max set the standard everyone else has been chasing since.</p>
+            <div class="honour-spoon">
+              <span class="spoon-label">🥄 Wooden spoon</span>
+              <span class="spoon-club">Foopys</span>
+              <span class="spoon-forfeit">Forfeit: a pub chase in the rain</span>
+            </div>
           </div>
         </li>
         <li class="honour">
           <span class="honour-year">2025</span>
           <div class="honour-card">
-            <div class="honour-ed">2nd edition</div>
+            <div class="honour-ed">2nd edition · Champions</div>
             <div class="honour-club">Broncic</div>
-            <p class="honour-note">Back-to-back. The league started to wonder if anyone else would ever win it.</p>
+            <p class="honour-note">William's year. Walked into 2026 as the reigning champions.</p>
+            <div class="honour-spoon">
+              <span class="spoon-label">🥄 Wooden spoon</span>
+              <span class="spoon-club">Nethers men</span>
+              <span class="spoon-forfeit">Forfeit: a stand-up comedy gig</span>
+            </div>
           </div>
         </li>
         <li class="honour is-current">
           <span class="honour-year">2026</span>
           <div class="honour-card">
-            <div class="honour-ed">3rd edition</div>
+            <div class="honour-ed">3rd edition · Champions</div>
             <div class="honour-club">Van Twists</div>
             <p class="honour-note">From 7th. Beat Better Holmes and Gardens, the best team all year, in the Grand Final.</p>
+            <div class="honour-spoon">
+              <span class="spoon-label">🥄 Wooden spoon</span>
+              <span class="spoon-club">Shavas</span>
+              <span class="spoon-forfeit">Forfeit: window washing on Punt Rd</span>
+            </div>
           </div>
         </li>
         <li class="honour is-next">
           <span class="honour-year">2027</span>
           <div class="honour-card">
-            <div class="honour-ed">4th edition</div>
+            <div class="honour-ed">4th edition · Champions</div>
             <div class="honour-club">To be decided</div>
             <p class="honour-note">Draft night first. <a href="2027.html" style="color:var(--ice)">See who is building for it.</a></p>
+            <div class="honour-spoon">
+              <span class="spoon-label">🥄 Wooden spoon</span>
+              <span class="spoon-club is-tbd">Nobody yet</span>
+              <span class="spoon-forfeit">Forfeit: decided at the AGM</span>
+            </div>
           </div>
         </li>
       </ol>
@@ -353,7 +384,7 @@
       <div class="about-facts">
         <div class="fact-card"><div class="fact-icon">📊</div><div class="fact-title">Power Rankings</div><div class="fact-desc">Every team scored, every round. The truth hurts.</div></div>
         <div class="fact-card"><div class="fact-icon">🐍</div><div class="fact-title">The SALI Index</div><div class="fact-desc">Scoons and Jaco hand out a Snake and a Ladder each week.</div></div>
-        <div class="fact-card"><div class="fact-icon">🥄</div><div class="fact-title">Wooden Spoon</div><div class="fact-desc">Last place gets immortalised. Not in a good way.</div></div>
+        <div class="fact-card"><div class="fact-icon">🥄</div><div class="fact-title">Wooden Spoon</div><div class="fact-desc">Last place earns a forfeit. Ask Shavas about Punt Rd.</div></div>
         <div class="fact-card"><div class="fact-icon">🥢</div><div class="fact-title">The Off-Season</div><div class="fact-desc">The forfeit, the Chinese meal, the AGM, then draft night.</div></div>
       </div>
     </div>
@@ -371,8 +402,8 @@
           <img src="Better%20Holmes%20and%20Gardens.jpg" alt="" loading="lazy" width="1024" height="1536">
           <span class="club-info"><span class="club-name">Better Holmes and Gardens</span><span class="club-owner">Matthew</span></span>
         </button></li>
-        <li><button type="button" class="club" data-lightbox="Broncic.jpg" data-alt="Broncic poster" data-caption="Broncic · William">
-          <span class="club-tag">2× champions</span>
+        <li><button type="button" class="club" data-lightbox="Broncic.jpg" data-alt="Broncic poster" data-caption="Broncic · William · 2025 champions">
+          <span class="club-tag">2025 champions</span>
           <img src="Broncic.jpg" alt="" loading="lazy" width="1536" height="1024">
           <span class="club-info"><span class="club-name">Broncic</span><span class="club-owner">William</span></span>
         </button></li>
@@ -392,7 +423,7 @@
           <img src="Flagdons.jpg" alt="" loading="lazy" width="1024" height="1536">
           <span class="club-info"><span class="club-name">Flagdons</span><span class="club-owner">Rick</span></span>
         </button></li>
-        <li><button type="button" class="club" data-lightbox="Foopys.jpg" data-alt="Foopys poster" data-caption="Foopys · Miller">
+        <li><button type="button" class="club" data-lightbox="Foopys.jpg" data-alt="Foopys poster" data-caption="Foopys · Miller · 2024 wooden spoon">
           <img src="Foopys.jpg" alt="" loading="lazy" width="1024" height="1536">
           <span class="club-info"><span class="club-name">Foopys</span><span class="club-owner">Miller</span></span>
         </button></li>
@@ -400,7 +431,8 @@
           <img src="Izaks.jpg" alt="" loading="lazy" width="1024" height="1536">
           <span class="club-info"><span class="club-name">Izaks</span><span class="club-owner">Zak</span></span>
         </button></li>
-        <li><button type="button" class="club" data-lightbox="Nethers%20men.jpg" data-alt="Nethers men poster" data-caption="Nethers men · Max">
+        <li><button type="button" class="club" data-lightbox="Nethers%20men.jpg" data-alt="Nethers men poster" data-caption="Nethers men · Max · 2024 champions, 2025 wooden spoon">
+          <span class="club-tag">2024 champions</span>
           <img src="Nethers%20men.jpg" alt="" loading="lazy" width="1024" height="1536">
           <span class="club-info"><span class="club-name">Nethers men</span><span class="club-owner">Max</span></span>
         </button></li>
@@ -408,7 +440,8 @@
           <img src="Phillipou.jpg" alt="" loading="lazy" width="1536" height="1024">
           <span class="club-info"><span class="club-name">Phillipou</span><span class="club-owner">Cam</span></span>
         </button></li>
-        <li><button type="button" class="club" data-lightbox="Shavas.jpg" data-alt="Shavas poster" data-caption="Shavas · Patrick">
+        <li><button type="button" class="club" data-lightbox="Shavas.jpg" data-alt="Shavas poster" data-caption="Shavas · Patrick · 2026 wooden spoon">
+          <span class="club-tag spoon">2026 wooden spoon</span>
           <img src="Shavas.jpg" alt="" loading="lazy" width="1024" height="687">
           <span class="club-info"><span class="club-name">Shavas</span><span class="club-owner">Patrick</span></span>
         </button></li>
