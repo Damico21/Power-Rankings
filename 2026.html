@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2026 Season — Paz's Power Rankings</title>
+  <meta name="description" content="The 2026 Ligma League season: every power ranking, the head-to-head matrix, the fan polls and the Grand Final where the Van Twists won from 7th.">
+  <meta property="og:title" content="2026 Season · Paz's Power Rankings">
+  <meta property="og:description" content="Van Twists are the 2026 Ligma League champions. Every ranking, every result, every controversy.">
+  <meta property="og:image" content="Van%20Twists.jpg">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="icon" href="PPR.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="ppr.css">
+</head>
+<body class="season-2026">
+
+  <!-- header injected by nav.js -->
+
+  <main>
+
+  <!-- ═══════════ SEASON HERO ═══════════ -->
+  <section class="season-hero" aria-labelledby="season-title">
+    <div class="hero-grain"></div>
+    <div class="season-hero-inner">
+      <div>
+        <div class="season-crumb"><a href="index.html">Ligma League</a> <span aria-hidden="true">/</span> 3rd edition</div>
+        <h1 id="season-title" class="season-year" aria-label="2026 season">2026</h1>
+        <div class="season-status">🏆 Season complete</div>
+        <p class="season-lede">
+          The <strong>Van Twists</strong> are your 2026 champions. Four and seven after Round 11, into the finals from
+          <strong>7th</strong>, and then a Grand Final win over Better Holmes and Gardens, the best team all year.
+          One of the biggest boilovers this league has ever seen.
+        </p>
+        <p class="season-lede">
+          Everything from the season lives here: every power ranking, the full head-to-head record, the fan polls
+          and the moments nobody will let go of.
+        </p>
+        <div class="season-ctas">
+          <a href="grand-final.html" class="btn btn-gf">🏆 Grand Final edition</a>
+          <a href="round-11.html" class="btn btn-primary">📋 Final rankings</a>
+          <a href="#cumulative" class="btn btn-secondary">📊 Season tables</a>
+        </div>
+      </div>
+
+      <figure class="hero-frame">
+        <button type="button" class="hero-frame-img" data-lightbox="Van%20Twists.jpg" data-alt="The Van Twists" data-caption="Van Twists · 2026 Ligma League champions" aria-label="View the Van Twists image full size">
+          <span class="hero-ribbon">Champions</span>
+          <img src="Van%20Twists.jpg" alt="The Van Twists" width="1536" height="1024">
+        </button>
+        <figcaption>
+          <span class="hero-frame-team">Van Twists</span>
+          <span class="hero-frame-note">Tim's side<br>Won from 7th</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ═══════════ GRAND FINAL RESULT ═══════════ -->
+  <a class="gf-banner" href="grand-final.html">
+    <div class="gf-banner-glow"></div>
+    <div class="gf-banner-inner">
+      <div>
+        <div class="gf-banner-badge">Grand Final · Result</div>
+        <div class="gf-banner-title">Boilover</div>
+        <div class="gf-score">
+          <span class="gf-w">Van Twists</span>
+          <span class="gf-def">def.</span>
+          <span class="gf-l">Better Holmes and Gardens</span>
+        </div>
+        <p class="gf-banner-desc">
+          A 25% ownership deal, the Max Hall waiver glitch and $4,000 on the line. The favourite fell, and thanks to that
+          stake in their opponent, the Twists even pocketed a cut of the runners-up cheque.
+        </p>
+        <span class="gf-banner-cta">Read the Grand Final edition</span>
+      </div>
+      <div class="gf-banner-right">
+        <img src="Twists_vs_Holmes.png" alt="Grand Final poster: Better Holmes and Gardens vs The Van Twists" loading="lazy" width="1264" height="843">
+      </div>
+    </div>
+  </a>
+
+  <!-- ═══════════ STATS ═══════════ -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item"><span class="stat-number" data-stat="teams">12</span><span class="stat-label">Teams</span></div>
+      <div class="stat-item"><span class="stat-number" data-stat="rounds">13</span><span class="stat-label">Rankings published</span></div>
+      <div class="stat-item"><span class="stat-number" data-stat="top">11.44</span><span class="stat-label">Top PPR score</span></div>
+      <div class="stat-item"><span class="stat-number is-text">Van Twists</span><span class="stat-label">Champions</span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ CUMULATIVE POWER RANKINGS ═══════════ -->
+  <section id="cumulative" class="band band-dark">
+    <div class="wrap">
+      <div class="section-label">Season overview</div>
+      <h2 class="section-title">Cumulative Power Rankings</h2>
+      <p class="cum-note">
+        Total PPR across every ranking of the season, Draft Night through Round 11.
+        <span class="gold">Gold marks the best score of each round.</span>
+        The trend line follows the last five scored rounds, green rising and red falling. Averages only count rounds that were scored.
+      </p>
+      <div class="table-tools">
+        <div class="seg" id="cumSort" role="group" aria-label="Sort the table">
+          <button type="button" data-sort="total" aria-pressed="true">Total</button>
+          <button type="button" data-sort="avg" aria-pressed="false">Average</button>
+          <button type="button" data-sort="latest" aria-pressed="false">Final round</button>
+        </div>
+        <span class="table-hint">Tap a team to highlight it in both tables</span>
+      </div>
+      <div class="table-shell">
+        <div class="cum-scroll"><table class="cum-table" id="cumTable"></table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ HEAD-TO-HEAD ═══════════ -->
+  <section id="h2h" class="band band-dark">
+    <div class="wrap">
+      <div class="section-label">Season results</div>
+      <h2 class="section-title">Head-to-Head Matrix</h2>
+      <p class="section-intro">Every regular season result from Round 1 to Round 11, sorted by wins and then points for.</p>
+      <div class="h2h-legend">
+        <div class="leg-item"><div class="leg-swatch leg-w"></div>Win (row beat column)</div>
+        <div class="leg-item"><div class="leg-swatch leg-l"></div>Loss (row lost to column)</div>
+        <div class="leg-item"><div class="leg-swatch leg-no"></div>Did not meet</div>
+        <div class="leg-item leg-note">Point margin shown in each cell</div>
+      </div>
+      <div class="table-shell">
+        <div class="h2h-scroll"><table class="h2h-table" id="h2hTable"></table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ POLLS ═══════════ -->
+  <section id="vote" class="band band-dark">
+    <div class="wrap">
+      <div class="section-label">Community poll</div>
+      <h2 class="section-title">The Final Tally</h2>
+      <p class="section-intro">Voting closed when the season ended. Here is where the league put its faith, and how few saw the Twists coming.</p>
+      <div class="vote-grid">
+        <div class="poll-card spoon">
+          <div class="poll-card-top">
+            <div class="poll-card-icon">🥄</div>
+            <div class="poll-card-title">Wooden Spoon</div>
+            <div class="poll-card-sub">Who finishes last place?</div>
+            <div class="live-pill closed"><span class="live-pill-dot"></span>Voting closed</div>
+          </div>
+          <div class="poll-body" id="rows-spoon">
+            <div style="padding:1.5rem 1.4rem">
+              <div class="skeleton" style="width:80%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:60%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:72%"></div>
+            </div>
+          </div>
+          <div class="poll-footer" id="total-spoon">Loading…</div>
+        </div>
+        <div class="poll-card champ">
+          <div class="poll-card-top">
+            <div class="poll-card-icon">🏆</div>
+            <div class="poll-card-title">Championship</div>
+            <div class="poll-card-sub">Who wins the Ligma League?</div>
+            <div class="live-pill closed"><span class="live-pill-dot"></span>Voting closed</div>
+          </div>
+          <div class="poll-body" id="rows-champ">
+            <div style="padding:1.5rem 1.4rem">
+              <div class="skeleton" style="width:80%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:60%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:72%"></div>
+            </div>
+          </div>
+          <div class="poll-footer" id="total-champ">Loading…</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ARCHIVE ═══════════ -->
+  <section id="archive" class="band band-dark">
+    <div class="wrap">
+      <div class="section-label">Rankings archive</div>
+      <h2 class="section-title">Every Round of 2026</h2>
+      <div class="weeks-grid" id="archiveGrid"></div>
+      <h3 class="archive-sub">Season specials</h3>
+      <div class="extras-grid" id="extrasGrid"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ WHEEL ═══════════ -->
+  <section id="wheel-section" class="band band-dark">
+    <div class="wrap">
+      <div class="section-label">For a laugh</div>
+      <h2 class="section-title">Mystery Matchup Wheel 🎡</h2>
+      <p class="wheel-intro">Spin the wheel, get a random Ligma League team paired with an AFL player. The universe will do the rest.</p>
+      <div class="wheel-layout">
+        <div class="wheel-container">
+          <div class="wheel-pointer" aria-hidden="true">▼</div>
+          <canvas id="wheelCanvas" width="440" height="440" role="img" aria-label="Spinning wheel of Ligma League teams"></canvas>
+          <button id="spinBtn" type="button"><span id="spinBtnText">SPIN</span></button>
+        </div>
+        <div class="wheel-result-area" aria-live="polite">
+          <div id="result-placeholder">
+            <div class="rph-icon">🎡</div>
+            <div class="rph-text">Spin the wheel to reveal your mystery matchup</div>
+          </div>
+          <div id="result-card" style="display:none">
+            <div class="rc-header"><span class="rc-badge">MYSTERY MATCHUP</span></div>
+            <div class="rc-block"><div class="rc-label">Ligma League team</div><div class="rc-team" id="rc-team"></div></div>
+            <div class="rc-divider"><span class="rc-x">✕</span></div>
+            <div class="rc-block"><div class="rc-label">AFL player</div><div class="rc-player" id="rc-player"></div></div>
+            <div class="rc-oneliner-wrap"><div class="rc-oneliner" id="rc-oneliner"></div></div>
+            <button id="spinAgainBtn" type="button">🔄 Spin again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <a class="footer-brand" href="index.html">PPR</a>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="2026.html">2026 season</a></li>
+        <li><a href="2027.html">2027 season</a></li>
+        <li><a href="grand-final.html">Grand Final</a></li>
+      </ul>
+      <div class="footer-copy">Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</div>
+    </div>
+  </footer>
+
+  <script src="ppr.js"></script>
+  <script>
+  /* ══════════════════════════════════════════════════════════════════
+     2026 SEASON DATA
+     PPR scores follow roundLabels: [Draft Night, Opening Rd, R1 … R11]
+     ══════════════════════════════════════════════════════════════════ */
+  PPR.season({
+    year: 2026,
+    hideEmptyRounds: true,
+    roundLabels: ['Draft Night', 'Opening Rd', 'Round 1', 'Round 2', 'Round 3', 'Round 4', 'Round 5', 'Round 6', 'Round 7', 'Round 8', 'Round 9', 'Round 10', 'Round 11'],
+
+    ppr: {
+      'Foopys':              [ 9.67,  9.50, 10.17, 10.13,  9.44,  8.94,  9.44,  9.44,  8.69,  9.00,  9.21,  9.21,  9.75],
+      'Dark Magicians':      [ 7.08, 10.25, 10.58,  9.25,  9.25,  9.25, 10.20,  9.56, 10.44, 10.50, 10.75, 10.75, 10.75],
+      'Holmes and Gardens':  [ 8.50,  9.92, 10.33,  9.75, 10.31, 10.31, 11.44, 11.38, 11.13, 11.29, 11.36, 11.36, 11.44],
+      'DC & Tax Payers':     [ 7.58,  9.50, 10.00, 10.25,  9.50,  9.88, 10.86, 10.63, 10.80, 10.13, 10.94, 11.10, 10.50],
+      'Phillipou':           [ 7.17,  7.92,  8.17,  8.50,  9.38,  9.00,  9.50,  9.94,  9.40,  9.63,  9.58,  9.75,  9.00],
+      'Flagdons':            [ 8.33,  9.67,  9.75,  9.38, 10.06,  9.44,  9.13,  9.00,  9.75, 10.25, 11.06, 11.00, 10.44],
+      'Van Twists':          [ 8.83,  9.42,  9.67,  8.13,  7.38,  8.89, 10.85, 10.35, 10.56, 10.53, 10.13,  9.80, 10.25],
+      'Cripps Nipps':        [ 7.92,  8.92,  7.92,  7.13,  7.43,  7.88,  9.69,  9.63,  9.69,  9.69,  9.38,  9.38,  9.38],
+      'Broncic':             [ 8.25,  9.33,  8.42,  8.38,  9.25,  8.88, 10.25, 10.60, 10.75, 10.75, 11.31, 11.06, 11.19],
+      'Izaks':               [ 7.75,  8.08,  8.25,  7.63,  8.75,  9.25, 10.50, 10.50, 10.13,  9.75,  9.25,  9.25,  9.56],
+      'Nethers men':         [ 7.42,  8.25,  7.75,  7.88,  8.50,  8.38,  9.75,  9.75,  9.88, 10.00, 10.00, 10.00, 10.00],
+      'Shavas':              [ 7.33,  8.42,  8.33,  8.25,  9.06,  8.39,  9.56,  8.75,  9.44,  9.31,  9.63,  9.00,  8.94],
+    },
+
+    matches: [
+      // R1
+      {w:'Cripps Nipps',      l:'Broncic',            ws:1202,ls:1109},
+      {w:'Phillipou',          l:'Van Twists',         ws:1056,ls:1048},
+      {w:'Dark Magicians',     l:'Foopys',             ws:1196,ls:1180},
+      {w:'DC & Tax Payers',    l:'Izaks',              ws:1247,ls:1119},
+      {w:'Holmes and Gardens', l:'Nethers men',        ws:1347,ls:918 },
+      {w:'Flagdons',           l:'Shavas',             ws:1064,ls:1055},
+      // R2
+      {w:'Broncic',            l:'Flagdons',           ws:1226,ls:1000},
+      {w:'Phillipou',          l:'Dark Magicians',     ws:1155,ls:1126},
+      {w:'DC & Tax Payers',    l:'Van Twists',         ws:1158,ls:1143},
+      {w:'Foopys',             l:'Cripps Nipps',       ws:1066,ls:585 },
+      {w:'Nethers men',        l:'Izaks',              ws:870, ls:854 },
+      {w:'Shavas',             l:'Holmes and Gardens', ws:1101,ls:1013},
+      // R3
+      {w:'Broncic',            l:'Holmes and Gardens', ws:1123,ls:941 },
+      {w:'Phillipou',          l:'DC & Tax Payers',    ws:920, ls:916 },
+      {w:'Cripps Nipps',       l:'Dark Magicians',     ws:847, ls:697 },
+      {w:'Nethers men',        l:'Van Twists',         ws:1072,ls:964 },
+      {w:'Flagdons',           l:'Foopys',             ws:1177,ls:1054},
+      {w:'Izaks',              l:'Shavas',             ws:1147,ls:1116},
+      // R4
+      {w:'Izaks',              l:'Broncic',            ws:1139,ls:1061},
+      {w:'Cripps Nipps',       l:'Phillipou',          ws:1072,ls:717 },
+      {w:'DC & Tax Payers',    l:'Nethers men',        ws:1157,ls:1053},
+      {w:'Dark Magicians',     l:'Flagdons',           ws:1113,ls:1004},
+      {w:'Van Twists',         l:'Shavas',             ws:1221,ls:1100},
+      {w:'Holmes and Gardens', l:'Foopys',             ws:1290,ls:1095},
+      // R5
+      {w:'Van Twists',         l:'Broncic',            ws:1219,ls:1201},
+      {w:'Nethers men',        l:'Phillipou',          ws:1077,ls:897 },
+      {w:'Cripps Nipps',       l:'Flagdons',           ws:1023,ls:951 },
+      {w:'DC & Tax Payers',    l:'Shavas',             ws:1162,ls:1121},
+      {w:'Holmes and Gardens', l:'Dark Magicians',     ws:1223,ls:1146},
+      {w:'Izaks',              l:'Foopys',             ws:1152,ls:1022},
+      // R6
+      {w:'Broncic',            l:'DC & Tax Payers',    ws:1260,ls:1236},
+      {w:'Phillipou',          l:'Flagdons',           ws:1105,ls:1100},
+      {w:'Nethers men',        l:'Shavas',             ws:1113,ls:942 },
+      {w:'Holmes and Gardens', l:'Cripps Nipps',       ws:1201,ls:1028},
+      {w:'Izaks',              l:'Dark Magicians',     ws:1112,ls:1089},
+      {w:'Foopys',             l:'Van Twists',         ws:1130,ls:1036},
+      // R7
+      {w:'Broncic',            l:'Nethers men',        ws:1136,ls:1105},
+      {w:'Shavas',             l:'Phillipou',          ws:1153,ls:1018},
+      {w:'Flagdons',           l:'Holmes and Gardens', ws:1048,ls:926 },
+      {w:'Izaks',              l:'Cripps Nipps',       ws:1022,ls:981 },
+      {w:'DC & Tax Payers',    l:'Foopys',             ws:1073,ls:978 },
+      {w:'Dark Magicians',     l:'Van Twists',         ws:1267,ls:1241},
+      // R8
+      {w:'Broncic',            l:'Shavas',             ws:1216,ls:1057},
+      {w:'Holmes and Gardens', l:'Phillipou',          ws:1173,ls:1112},
+      {w:'Flagdons',           l:'Izaks',              ws:1170,ls:1024},
+      {w:'Nethers men',        l:'Foopys',             ws:1095,ls:1050},
+      {w:'Van Twists',         l:'Cripps Nipps',       ws:1207,ls:1143},
+      {w:'Dark Magicians',     l:'DC & Tax Payers',    ws:1147,ls:1060},
+      // R9
+      {w:'Broncic',            l:'Phillipou',           ws:1209,ls:1095},
+      {w:'Holmes and Gardens', l:'Izaks',               ws:1125,ls:934 },
+      {w:'Shavas',             l:'Foopys',              ws:1175,ls:1141},
+      {w:'Flagdons',           l:'Van Twists',          ws:1303,ls:1086},
+      {w:'Dark Magicians',     l:'Nethers men',         ws:1093,ls:1082},
+      {w:'DC & Tax Payers',    l:'Cripps Nipps',        ws:1195,ls:1082},
+      // R10
+      {w:'Foopys',             l:'Broncic',             ws:1036,ls:1019},
+      {w:'Phillipou',          l:'Izaks',               ws:1231,ls:1101},
+      {w:'Holmes and Gardens', l:'Van Twists',          ws:1381,ls:1034},
+      {w:'Dark Magicians',     l:'Shavas',              ws:1300,ls:1009},
+      {w:'DC & Tax Payers',    l:'Flagdons',            ws:1102,ls:1083},
+      {w:'Cripps Nipps',       l:'Nethers men',         ws:1156,ls:1061},
+      // R11
+      {w:'Broncic',            l:'Dark Magicians',      ws:1150,ls:1111},
+      {w:'Foopys',             l:'Phillipou',           ws:1109,ls:981 },
+      {w:'Van Twists',         l:'Izaks',               ws:1250,ls:1149},
+      {w:'Holmes and Gardens', l:'DC & Tax Payers',     ws:1159,ls:1005},
+      {w:'Cripps Nipps',       l:'Shavas',              ws:942, ls:935 },
+      {w:'Nethers men',        l:'Flagdons',            ws:1138,ls:973 },
+    ],
+
+    abbr: {
+      'Holmes and Gardens': 'H&G',  'DC & Tax Payers': 'DC',   'Dark Magicians': 'Mag.',
+      'Cripps Nipps': 'C.Nipps',    'Van Twists': 'VanTwi',    'Nethers men': 'Nethers',
+      'Phillipou': 'Phillipou',     'Flagdons': 'Flagdons',    'Foopys': 'Foopys',
+      'Broncic': 'Broncic',         'Izaks': 'Izaks',          'Shavas': 'Shavas',
+    },
+
+    polls: {
+      open: false,
+      docs: { spoon: 'spoon', champ: 'champ' },
+      result: { champ: 'Van Twists' },
+      teams: ['Foopys', 'Van Twists', 'Dark Magicians', 'Cripps Nipps', 'Phillipou', 'Flagdons', 'Nethers men', 'Shavas', 'Better Holmes and Gardens', 'Izaks', 'Broncic', 'DC & Tax Payers'],
+    },
+
+    archive: [
+      { kicker: 'Pre-season',    title: 'Draft Night',   href: 'rankings.html',      round: 0 },
+      { kicker: 'Round 0',       title: 'Opening Round', href: 'opening-round.html', round: 1 },
+      { kicker: 'Round 1',       title: 'Round 1',       href: 'round-1.html',       round: 2 },
+      { kicker: 'Round 2',       title: 'Round 2',       href: 'round-2.html',       round: 3 },
+      { kicker: 'Round 3',       title: 'Round 3',       href: 'round-3.html',       round: 4 },
+      { kicker: 'Round 4',       title: 'Round 4',       href: 'round-4.html',       round: 5 },
+      { kicker: 'Round 5',       title: 'Round 5',       href: 'round-5.html',       round: 6 },
+      { kicker: 'Round 6',       title: 'Round 6',       href: 'round-6.html',       round: 7 },
+      { kicker: 'Round 7',       title: 'Round 7',       href: 'round-7.html',       round: 8 },
+      { kicker: 'Round 8',       title: 'Round 8',       href: 'round-8.html',       round: 9 },
+      { kicker: 'Round 9',       title: 'Round 9',       href: 'round-9.html',       round: 10 },
+      { kicker: 'Round 10',      title: 'Round 10',      href: 'round-10.html',      round: 11 },
+      { kicker: 'Final ranking', title: 'Round 11',      href: 'round-11.html',      round: 12 },
+      { kicker: 'The decider',   title: '🏆 Grand Final', href: 'grand-final.html', status: 'gf', badgeText: 'Champions',
+        leader: '<strong>Van Twists</strong> def. Holmes and Gardens' },
+    ],
+
+    extras: [
+      { icon: '⚔️', title: 'Rivalry Round',     href: 'rivalry-round.html',      desc: 'Round 5. Six matchups, six grudges written long before the draft.' },
+      { icon: '📸', title: 'Best Moments',      href: 'best-moments.html',       desc: 'The trades, the chat drama and the memories worth keeping.' },
+      { icon: '🎵', title: 'PPR Tunes',         href: 'ppr-tunes.html',          desc: 'One banger per round, hand-picked to match the vibe.' },
+      { icon: '🐍', title: 'Snakes &amp; Ladders', href: 'snakes-and-ladders.html', desc: "Scoons and Jaco's SALI Index: the biggest riser and faller every round." },
+    ],
+
+    wheelTeams: ['Foopys', 'Van Twists', 'Dark Magicians', 'Cripps Nipps', 'Phillipou', 'Flagdons', 'Nethers men', 'Shavas', 'Holmes & Gardens', 'Izaks', 'Broncic', 'DC & Tax Payers'],
+  });
+  </script>
+
+  <script src="nav.js"></script>
+</body>
+</html>

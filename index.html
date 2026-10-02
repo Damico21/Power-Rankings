@@ -4,405 +4,233 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Paz's Power Rankings — Ligma League</title>
+  <meta name="description" content="The official power rankings of the Ligma League, a 12-team AFL Fantasy competition. Pick a season: 2026 is complete, 2027 is coming.">
+  <meta property="og:title" content="Paz's Power Rankings · Ligma League">
+  <meta property="og:description" content="Twelve clubs, three editions and zero governance. Pick a season and find out where your team stands.">
+  <meta property="og:image" content="PPR.jpg">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="icon" href="PPR.jpg">
+  <script>
+    /* Old links to the season sections (e.g. index.html#vote) now live on the 2026 page */
+    (function () {
+      var moved = ['#vote', '#archive', '#cumulative', '#h2h', '#wheel-section'];
+      if (moved.indexOf(location.hash) !== -1) location.replace('2026.html' + location.hash);
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="ppr.css">
   <style>
-    :root {
-      --navy: #1b2a3b;
-      --red: #8b1a1a;
-      --gold: #c8a951;
-      --cream: #e8dcc8;
-      --dark: #0d1117;
-      --mid: #141d27;
-      --text-muted: #6a8aaa;
-      --border: rgba(255,255,255,0.06);
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--dark); color: #fff; min-height: 100vh; overflow-x: hidden; }
-
-    /* NAV handled by nav.js */
-
-    /* ── HERO ── */
-    .hero {
-      position: relative; min-height: 92vh;
-      display: flex; align-items: center; overflow: hidden;
+    /* ═══════════ HERO ═══════════ */
+    .home-hero {
+      position: relative; overflow: hidden;
       background: linear-gradient(135deg, var(--dark) 0%, var(--navy) 60%, #0d1117 100%);
     }
-    .hero-grain {
-      position: absolute; inset: 0; pointer-events: none; z-index: 1; opacity: 0.35;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
-    }
     .hero-bg-text {
-      position: absolute; bottom: -1rem; left: -1rem;
+      position: absolute; bottom: -1.5rem; left: -1rem; z-index: 1; pointer-events: none;
       font-family: 'Bebas Neue', sans-serif; font-size: clamp(7rem, 18vw, 16rem);
-      color: rgba(255,255,255,0.022); pointer-events: none; z-index: 1;
-      white-space: nowrap; line-height: 1; letter-spacing: -0.02em;
+      color: rgba(255,255,255,0.022); white-space: nowrap; line-height: 1; letter-spacing: -0.02em;
     }
-    .hero-inner {
-      position: relative; z-index: 2;
-      display: flex; align-items: center; justify-content: space-between;
-      width: 100%; max-width: 1200px; margin: 0 auto;
-      padding: 4rem 2.5rem; gap: 3rem;
+    .home-hero-inner {
+      position: relative; z-index: 2; max-width: 1200px; margin: 0 auto;
+      padding: 4.5rem 2.5rem 4rem; display: flex; align-items: center; justify-content: space-between; gap: 3rem;
     }
     .hero-left { flex: 1; }
     .hero-badge {
-      display: inline-flex; align-items: center; gap: 0.5rem;
-      background: rgba(139,26,26,0.25); border: 1px solid rgba(139,26,26,0.5);
-      border-radius: 100px; padding: 0.35rem 1rem;
-      font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 2px;
-      text-transform: uppercase; color: #f08080; margin-bottom: 1.5rem;
+      display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 1.5rem;
+      background: rgba(139,26,26,0.25); border: 1px solid rgba(139,26,26,0.5); border-radius: 100px; padding: 0.35rem 1rem;
+      font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: #f08080;
       animation: fadeUp 0.6s ease both;
     }
     .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #f08080; animation: pulse 1.5s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
-    .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 7rem); line-height: 0.92; letter-spacing: 2px; margin-bottom: 0.4rem; animation: fadeUp 0.6s 0.1s ease both; }
+    .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.5rem, 8vw, 7rem); line-height: 0.92; letter-spacing: 2px; margin-bottom: 0.4rem; font-weight: 400; animation: fadeUp 0.6s 0.1s ease both; }
     .hero-title .gold { color: var(--gold); display: block; }
     .hero-title .white { color: #fff; display: block; }
-    .hero-subtitle { font-family: 'Oswald', sans-serif; font-size: clamp(1rem, 2.5vw, 1.35rem); color: var(--cream); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 1.8rem; opacity: 0.75; animation: fadeUp 0.6s 0.15s ease both; }
-    .hero-desc { font-size: 0.97rem; color: #7a9ab5; line-height: 1.8; max-width: 460px; margin-bottom: 2.5rem; animation: fadeUp 0.6s 0.2s ease both; }
-    .hero-desc strong { color: var(--cream); }
+    .hero-subtitle { font-family: 'Oswald', sans-serif; font-size: clamp(1rem, 2.5vw, 1.35rem); color: var(--cream); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 1.6rem; opacity: 0.75; animation: fadeUp 0.6s 0.15s ease both; }
+    .hero-desc { font-size: 0.98rem; color: var(--body); line-height: 1.8; max-width: 470px; margin-bottom: 2.3rem; animation: fadeUp 0.6s 0.2s ease both; }
+    .hero-desc strong { color: var(--cream); font-weight: 600; }
     .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.6s 0.25s ease both; }
 
-    .btn-primary { display: inline-block; background: var(--red); color: #fff; padding: 0.85rem 2rem; font-family: 'Oswald', sans-serif; font-size: 0.88rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-radius: 4px; transition: background 0.2s, transform 0.15s; }
-    .btn-primary:hover { background: #a52020; transform: translateY(-2px); }
-    .btn-secondary { display: inline-block; background: transparent; color: var(--gold); padding: 0.85rem 2rem; font-family: 'Oswald', sans-serif; font-size: 0.88rem; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-radius: 4px; border: 1px solid var(--gold); transition: background 0.2s, transform 0.15s; }
-    .btn-secondary:hover { background: rgba(200,169,81,0.1); transform: translateY(-2px); }
-
-    .hero-logo-wrap { flex-shrink: 0; position: relative; animation: fadeUp 0.7s 0.1s ease both; display: flex; flex-direction: column; align-items: center; gap: 0; }
-    .logo-glow { position: absolute; inset: -30px; background: radial-gradient(ellipse, rgba(139,26,26,0.3) 0%, transparent 70%); filter: blur(25px); z-index: 0; pointer-events: none; }
+    .hero-logo-wrap { flex-shrink: 0; position: relative; animation: fadeUp 0.7s 0.1s ease both; }
+    .logo-glow { position: absolute; inset: -30px; background: radial-gradient(ellipse, rgba(139,26,26,0.3) 0%, transparent 70%); filter: blur(25px); pointer-events: none; }
     .dual-logos { display: flex; align-items: center; justify-content: center; gap: 2rem; position: relative; z-index: 1; }
-    .dual-logos-divider { width: 1px; height: clamp(180px, 22vw, 280px); background: linear-gradient(180deg, transparent, rgba(200,169,81,0.4) 30%, rgba(200,169,81,0.4) 70%, transparent); flex-shrink: 0; }
-    .league-logo { width: clamp(180px, 22vw, 290px); height: auto; mix-blend-mode: lighten; display: block; }
-    .ppr-logo { width: clamp(180px, 22vw, 290px); height: auto; display: block; border-radius: 12px; }
-    .logo-label { font-family: 'Oswald', sans-serif; font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; color: #2a4a6a; margin-top: 0.6rem; text-align: center; }
+    .dual-logo { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+    .dual-logos-divider { width: 1px; height: clamp(170px, 19vw, 250px); background: linear-gradient(180deg, transparent, rgba(200,169,81,0.4) 30%, rgba(200,169,81,0.4) 70%, transparent); flex-shrink: 0; }
+    .hero-league-logo { width: clamp(160px, 18vw, 250px); height: auto; mix-blend-mode: lighten; }
+    .hero-ppr-logo { width: clamp(160px, 18vw, 250px); height: auto; border-radius: 12px; }
+    .logo-label { font-family: 'Oswald', sans-serif; font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase; color: #2a4a6a; }
 
-    .divider { height: 3px; background: linear-gradient(90deg, var(--red) 0%, var(--gold) 50%, var(--red) 100%); }
+    /* ═══════════ SEASON DOORS ═══════════ */
+    .doors { background: var(--dark); border-top: 1px solid var(--border); }
+    .doors-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .doors-head .section-title { margin-bottom: 0; }
+    .doors-head p { color: var(--text-muted); font-size: 0.9rem; max-width: 360px; line-height: 1.7; }
+    .doors-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 1.4rem; }
 
-    /* ── STATS BAR ── */
-    .stats-bar { background: var(--navy); border-bottom: 1px solid var(--border); }
-    .stats-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); }
-    .stat-item { padding: 2rem; text-align: center; border-right: 1px solid rgba(255,255,255,0.07); }
-    .stat-item:last-child { border-right: none; }
-    .stat-number { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--gold); line-height: 1; display: block; }
-    .stat-label { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: #4a6a8a; margin-top: 0.3rem; display: block; }
-
-    /* ── VOTE SECTION ── */
-    #vote { background: var(--dark); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .vote-outer { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
-    .vote-header { margin-bottom: 2.5rem; }
-    .vote-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-
-    .poll-card { background: var(--mid); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-
-    .poll-card-top { padding: 1.4rem 1.6rem 1.2rem; border-bottom: 1px solid var(--border); position: relative; }
-    .poll-card-top::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; }
-    .poll-card.spoon .poll-card-top::after { background: #7ecfff; }
-    .poll-card.champ .poll-card-top::after { background: var(--gold); }
-
-    .poll-card-icon { font-size: 1.8rem; line-height: 1; margin-bottom: 0.4rem; }
-    .poll-card-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 2px; line-height: 1; }
-    .poll-card.spoon .poll-card-title { color: #7ecfff; }
-    .poll-card.champ .poll-card-title { color: var(--gold); }
-    .poll-card-sub { font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: #4a6a8a; margin-top: 0.2rem; }
-
-    .live-pill {
-      display: inline-flex; align-items: center; gap: 5px;
-      font-family: 'Oswald', sans-serif; font-size: 0.65rem;
-      letter-spacing: 1.5px; text-transform: uppercase;
-      color: #4caf50; margin-top: 0.6rem;
+    .door {
+      position: relative; isolation: isolate; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      min-height: 440px; padding: 2.2rem; border-radius: 14px; text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
     }
-    .live-pill-dot { width: 6px; height: 6px; border-radius: 50%; background: #4caf50; animation: pulse 1.5s infinite; display: inline-block; }
+    .door:hover { transform: translateY(-4px); box-shadow: 0 22px 50px rgba(0,0,0,0.55); }
+    .door-bg { position: absolute; inset: 0; z-index: -2; }
+    .door-bg img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.2,0.7,0.2,1); }
+    .door:hover .door-bg img { transform: scale(1.05); }
+    .door::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
 
-    .poll-body { padding: 0.4rem 0; }
+    .door-2026 { border-color: rgba(255,122,47,0.3); }
+    .door-2026:hover { border-color: rgba(255,122,47,0.7); }
+    .door-2026::after { background: linear-gradient(180deg, rgba(13,17,23,0.15) 0%, rgba(13,17,23,0.55) 40%, rgba(13,17,23,0.96) 82%), linear-gradient(90deg, rgba(13,17,23,0.6), transparent 60%); }
 
-    .team-row {
-      display: flex; align-items: center; gap: 0.7rem;
-      padding: 0.6rem 1.4rem;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      position: relative; transition: background 0.15s;
+    .door-2027 {
+      border-color: rgba(126,207,255,0.22);
+      background:
+        radial-gradient(ellipse at 85% 10%, rgba(126,207,255,0.18) 0%, transparent 50%),
+        radial-gradient(ellipse at 0% 100%, rgba(27,42,59,0.95) 0%, transparent 60%),
+        repeating-linear-gradient(135deg, rgba(126,207,255,0.035) 0 1px, transparent 1px 22px),
+        linear-gradient(160deg, #0d1a28 0%, #102133 55%, #0b131c 100%);
     }
-    .team-row:last-child { border-bottom: none; }
-    .team-row:hover { background: rgba(255,255,255,0.025); }
+    .door-2027:hover { border-color: rgba(126,207,255,0.6); }
 
-    .team-row-bar { position: absolute; left: 0; top: 0; bottom: 0; opacity: 0.07; transition: width 0.5s ease; pointer-events: none; }
-    .poll-card.spoon .team-row-bar { background: #7ecfff; }
-    .poll-card.champ .team-row-bar { background: var(--gold); }
-
-    .team-num { font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem; color: #2a4a6a; width: 18px; flex-shrink: 0; text-align: right; }
-    .team-name { flex: 1; font-family: 'Oswald', sans-serif; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--cream); }
-
-    /* ── ODOMETER ── */
-    .odo { display: flex; gap: 1px; flex-shrink: 0; margin-right: 0.4rem; }
-    .odo-digit {
-      background: #0a0f16; border: 1px solid rgba(255,255,255,0.08); border-radius: 3px;
-      width: 15px; height: 21px;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem;
-      color: #2a3a4a; transition: color 0.15s, background 0.15s; overflow: hidden;
+    .door-year {
+      position: absolute; top: 1.2rem; right: 1.6rem;
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(6rem, 12vw, 10rem); line-height: 0.8; letter-spacing: 4px;
+      transition: transform 0.5s cubic-bezier(0.2,0.7,0.2,1), letter-spacing 0.5s;
     }
-    .odo-digit.lit { color: #e8e8e8; }
-    .poll-card.spoon .odo-digit.lit { color: #7ecfff; background: rgba(126,207,255,0.07); border-color: rgba(126,207,255,0.2); }
-    .poll-card.champ .odo-digit.lit { color: var(--gold); background: rgba(200,169,81,0.07); border-color: rgba(200,169,81,0.2); }
-    @keyframes digitPop { 0%{transform:translateY(-60%);opacity:0} 100%{transform:translateY(0);opacity:1} }
-    .odo-digit.pop { animation: digitPop 0.18s ease; }
-
-    /* ── VOTE BUTTON ── */
-    .vote-btn {
-      background: transparent; border: 1px solid rgba(255,255,255,0.1); color: #4a6a8a;
-      font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 4px; cursor: pointer; flex-shrink: 0; transition: all 0.15s; white-space: nowrap;
+    .door:hover .door-year { transform: translateY(-4px); letter-spacing: 6px; }
+    .door-2026 .door-year {
+      background: linear-gradient(180deg, #fff 0%, var(--gold) 60%, #7a5f18 100%);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: var(--gold);
+      filter: drop-shadow(0 6px 20px rgba(0,0,0,0.6));
     }
-    .poll-card.spoon .vote-btn:hover { color: #7ecfff; border-color: #7ecfff; background: rgba(126,207,255,0.1); }
-    .poll-card.champ .vote-btn:hover { color: var(--gold); border-color: var(--gold); background: rgba(200,169,81,0.1); }
+    .door-2027 .door-year { color: transparent; -webkit-text-fill-color: transparent; -webkit-text-stroke: 2px var(--ice); text-shadow: 0 0 40px rgba(126,207,255,0.25); }
 
-    .poll-footer { padding: 0.9rem 1.4rem; border-top: 1px solid var(--border); }
-    .poll-total { font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: #2a4a6a; }
+    .door-meta { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.9rem; font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--cream); opacity: 0.85; }
+    .door-pill { padding: 0.25rem 0.7rem; border-radius: 100px; font-size: 0.62rem; letter-spacing: 1.5px; }
+    .door-2026 .door-pill { color: var(--gold); background: rgba(200,169,81,0.14); border: 1px solid rgba(200,169,81,0.45); }
+    .door-2027 .door-pill { color: var(--ice); background: rgba(126,207,255,0.08); border: 1px solid rgba(126,207,255,0.4); display: inline-flex; align-items: center; gap: 0.4rem; }
+    .door-2027 .door-pill::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; animation: pulse 1.6s infinite; }
+    .door-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 2.9rem); letter-spacing: 1.5px; line-height: 0.95; color: #fff; max-width: 440px; }
+    .door-2026 .door-title span { color: var(--twists); }
+    .door-desc { color: #9ab3c8; font-size: 0.92rem; line-height: 1.7; margin-top: 0.8rem; max-width: 440px; }
+    .door-cta {
+      display: inline-flex; align-items: center; gap: 0.6rem; margin-top: 1.5rem;
+      font-family: 'Oswald', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase;
+      padding-bottom: 3px; border-bottom: 1px solid currentColor; align-self: flex-start;
+    }
+    .door-2026 .door-cta { color: var(--gold); }
+    .door-2027 .door-cta { color: var(--ice); }
+    .door-cta-arrow { transition: transform 0.25s; }
+    .door:hover .door-cta-arrow { transform: translateX(5px); }
 
-    /* skeleton loader */
-    .skeleton { background: linear-gradient(90deg,#141d27 25%,#1e2d3d 50%,#141d27 75%); background-size:200% 100%; animation:shimmer 1.2s infinite; border-radius:3px; height:14px; }
-    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+    /* ═══════════ HONOUR ROLL ═══════════ */
+    .honours { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; position: relative; list-style: none; }
+    .honours::before {
+      content: ''; position: absolute; left: 1.6rem; right: 1.6rem; top: 2.15rem; height: 1px;
+      background: linear-gradient(90deg, rgba(200,169,81,0.45), rgba(255,122,47,0.6) 70%, rgba(126,207,255,0.4));
+    }
+    .honour { position: relative; padding-top: 3.4rem; }
+    .honour::before {
+      content: ''; position: absolute; top: 1.75rem; left: 1.35rem; width: 0.8rem; height: 0.8rem; border-radius: 50%;
+      background: var(--navy); border: 2px solid var(--gold); box-sizing: border-box;
+    }
+    .honour-year { position: absolute; top: 0; left: 1.2rem; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 2px; color: var(--cream); line-height: 1; }
+    .honour-card { background: rgba(0,0,0,0.22); border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem 1.3rem 1.4rem; height: 100%; }
+    .honour-ed { font-family: 'Oswald', sans-serif; font-size: 0.66rem; letter-spacing: 2px; text-transform: uppercase; color: #4a6a8a; }
+    .honour-club { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; letter-spacing: 1.5px; line-height: 1; color: var(--gold); margin: 0.45rem 0 0.55rem; }
+    .honour-note { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+    .honour.is-current::before { border-color: var(--twists); background: var(--twists); box-shadow: 0 0 12px rgba(255,122,47,0.7); }
+    .honour.is-current .honour-card { border-color: rgba(255,122,47,0.4); background: linear-gradient(160deg, rgba(255,122,47,0.1), rgba(0,0,0,0.22) 60%); }
+    .honour.is-current .honour-club { color: var(--twists); }
+    .honour.is-next::before { border-color: var(--ice); border-style: dashed; }
+    .honour.is-next .honour-card { border-style: dashed; border-color: rgba(126,207,255,0.25); }
+    .honour.is-next .honour-club { color: transparent; -webkit-text-stroke: 1px var(--ice); }
 
-    /* ── ARCHIVE ── */
-    #archive { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; }
-    .section-label { font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 0.4rem; }
-    .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 5vw, 3.2rem); color: #fff; letter-spacing: 1px; margin-bottom: 2.5rem; }
-    .weeks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem; }
-    .week-card { background: var(--mid); border: 1px solid var(--border); border-radius: 10px; padding: 1.5rem; text-decoration: none; display: flex; align-items: center; justify-content: space-between; gap: 1rem; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s; position: relative; overflow: hidden; }
-    .week-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); opacity: 0; transition: opacity 0.2s; }
-    .week-card:hover { border-color: rgba(200,169,81,0.3); transform: translateY(-3px); box-shadow: 0 8px 30px rgba(0,0,0,0.4); }
-    .week-card:hover::before { opacity: 1; }
-    .week-card.live { border-color: rgba(139,26,26,0.4); background: linear-gradient(135deg, #1a1212, var(--mid)); }
-    .week-card.live::before { background: var(--red); opacity: 1; }
-    .week-card.soon { opacity: 0.45; pointer-events: none; }
-    .week-card.soon::before { display: none; }
-    .card-round { font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; color: #4a6a8a; margin-bottom: 0.3rem; }
-    .card-title { font-family: 'Oswald', sans-serif; font-size: 1.1rem; font-weight: 600; color: #fff; margin-bottom: 0.4rem; }
-    .card-leader { font-size: 0.8rem; color: #5a7a9a; }
-    .card-leader strong { color: var(--gold); }
-    .card-right { text-align: right; flex-shrink: 0; }
-    .card-badge { display: inline-block; padding: 0.28rem 0.7rem; border-radius: 100px; font-family: 'Oswald', sans-serif; font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
-    .badge-live { background: rgba(139,26,26,0.3); color: #f08080; border: 1px solid rgba(139,26,26,0.5); }
-    .badge-done { background: rgba(200,169,81,0.12); color: var(--gold); border: 1px solid rgba(200,169,81,0.3); }
-    .badge-soon { background: rgba(255,255,255,0.04); color: #3a5a7a; border: 1px solid rgba(255,255,255,0.07); }
-    .card-arrow { font-size: 1.1rem; color: var(--gold); margin-top: 0.5rem; display: block; transition: transform 0.2s; }
-    .week-card:hover .card-arrow { transform: translateX(4px); }
-
-    /* ── ABOUT ── */
-    .about-section { background: var(--navy); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .about-inner { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .about-text p { color: #6a8aaa; line-height: 1.85; margin-bottom: 1rem; font-size: 0.95rem; }
-    .about-text p strong { color: var(--cream); }
+    /* ═══════════ ABOUT ═══════════ */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .about-text p { color: var(--text-muted); line-height: 1.85; margin-bottom: 1rem; font-size: 0.95rem; }
+    .about-text p strong { color: var(--cream); font-weight: 600; }
     .about-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     .fact-card { background: rgba(0,0,0,0.25); border: 1px solid var(--border); border-radius: 10px; padding: 1.3rem; }
     .fact-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
     .fact-title { font-family: 'Oswald', sans-serif; font-size: 0.82rem; letter-spacing: 1px; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
-    .fact-desc { font-size: 0.8rem; color: #4a6a8a; line-height: 1.5; }
+    .fact-desc { font-size: 0.8rem; color: #4a6a8a; line-height: 1.55; }
 
-    footer { text-align: center; padding: 2rem; color: #253545; font-size: 0.78rem; font-family: 'Oswald', sans-serif; letter-spacing: 1px; border-top: 1px solid var(--border); }
-
-    /* ══════════ GRAND FINAL PROMO ══════════ */
-    .btn-gf {
-      display: inline-block; padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none;
-      font-family: 'Oswald', sans-serif; font-size: 0.88rem; letter-spacing: 2px; text-transform: uppercase;
-      color: #0d1117; font-weight: 600;
-      background: linear-gradient(135deg, #e8cf7a, var(--gold) 55%, #a5842f);
-      box-shadow: 0 0 26px rgba(200,169,81,0.35);
-      transition: transform 0.15s, box-shadow 0.2s;
+    /* ═══════════ CLUBS ═══════════ */
+    .clubs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.1rem; list-style: none; }
+    .club {
+      position: relative; display: block; width: 100%; padding: 0; cursor: zoom-in; text-align: left;
+      border-radius: 12px; overflow: hidden; background: var(--mid); border: 1px solid var(--border);
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s; color: inherit; font: inherit;
     }
-    .btn-gf:hover { transform: translateY(-2px); box-shadow: 0 0 38px rgba(200,169,81,0.6); }
-
-    .gf-banner {
-      display: block; position: relative; overflow: hidden; text-decoration: none;
-      background: linear-gradient(115deg, #0f2a1e 0%, #0d1117 42%, #1a0f08 72%, #2c1408 100%);
-      border-top: 1px solid rgba(200,169,81,0.35); border-bottom: 1px solid rgba(200,169,81,0.35);
+    .club:hover { border-color: rgba(200,169,81,0.4); transform: translateY(-3px); box-shadow: 0 14px 34px rgba(0,0,0,0.5); }
+    .club img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transition: transform 0.5s ease; }
+    .club:hover img { transform: scale(1.05); }
+    .club-info {
+      position: absolute; left: 0; right: 0; bottom: 0; padding: 2.6rem 1rem 0.95rem;
+      background: linear-gradient(180deg, transparent, rgba(8,12,18,0.92) 55%);
     }
-    .gf-banner-glow { position: absolute; inset: 0; pointer-events: none;
-      background: radial-gradient(ellipse at 20% 50%, rgba(143,214,174,0.16), transparent 55%),
-                  radial-gradient(ellipse at 80% 50%, rgba(255,122,47,0.18), transparent 55%); }
-    .gf-banner-inner { position: relative; z-index: 2; max-width: 1200px; margin: 0 auto;
-      padding: 3rem 2.5rem; display: grid; grid-template-columns: 1fr 0.85fr; gap: 2.5rem; align-items: center; }
-    .gf-banner-badge { display: inline-flex; align-items: center; gap: 0.5rem;
-      background: rgba(139,26,26,0.28); border: 1px solid rgba(139,26,26,0.55); border-radius: 100px;
-      padding: 0.32rem 1rem; font-family: 'Oswald', sans-serif; font-size: 0.66rem; letter-spacing: 2.5px;
-      text-transform: uppercase; color: #f08080; margin-bottom: 1.1rem; }
-    .gf-banner-dot { width: 6px; height: 6px; border-radius: 50%; background: #f08080; animation: pulse 1.5s infinite; }
-    .gf-banner-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.6rem, 7vw, 5rem); line-height: 0.9; letter-spacing: 3px;
-      background: linear-gradient(180deg, #fff, var(--gold) 60%, #7a5f18);
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: var(--gold); }
-    .gf-banner-teams { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1rem, 2.6vw, 1.6rem); letter-spacing: 1.5px; margin-top: 0.6rem; }
-    .gf-banner-teams .gf-h { color: #8fd6ae; }
-    .gf-banner-teams .gf-t { color: #ff7a2f; }
-    .gf-banner-teams .gf-vs { color: #fff; opacity: 0.5; margin: 0 0.5rem; }
-    .gf-banner-desc { color: #8aa8c2; font-size: 0.93rem; line-height: 1.8; max-width: 470px; margin-top: 1rem; }
-    .gf-banner-cta { display: inline-block; margin-top: 1.5rem; font-family: 'Oswald', sans-serif; font-size: 0.8rem;
-      letter-spacing: 2px; text-transform: uppercase; color: var(--gold); border-bottom: 1px solid rgba(200,169,81,0.4);
-      padding-bottom: 3px; transition: color 0.2s, border-color 0.2s; }
-    .gf-banner:hover .gf-banner-cta { color: #fff; border-color: #fff; }
-    .gf-banner-right img { width: 100%; height: auto; display: block; border-radius: 10px;
-      border: 1px solid rgba(200,169,81,0.25); box-shadow: 0 16px 50px rgba(0,0,0,0.7); transition: transform 0.3s; }
-    .gf-banner:hover .gf-banner-right img { transform: scale(1.02); }
-
-    .week-card.gf-card { border-color: rgba(200,169,81,0.45); background: linear-gradient(135deg, #1d1a10, var(--mid)); }
-    .week-card.gf-card::before { background: var(--gold); opacity: 1; }
-    .week-card.gf-card .card-title { color: var(--gold); }
-    .badge-gf { background: rgba(200,169,81,0.18); color: var(--gold); border: 1px solid rgba(200,169,81,0.5); }
-
-    @media (max-width: 900px) {
-      .gf-banner-inner { grid-template-columns: 1fr; padding: 2.5rem 1.2rem; gap: 1.8rem; text-align: center; }
-      .gf-banner-desc { margin-left: auto; margin-right: auto; }
-      .gf-banner-right { order: -1; }
+    .club-name { display: block; font-family: 'Bebas Neue', sans-serif; font-size: 1.45rem; letter-spacing: 1px; line-height: 1; color: #fff; }
+    .club-owner { display: block; font-family: 'Oswald', sans-serif; font-size: 0.66rem; letter-spacing: 1.8px; text-transform: uppercase; color: #6a8aaa; margin-top: 0.3rem; }
+    .club-tag {
+      position: absolute; top: 0.75rem; left: 0.75rem; z-index: 1;
+      font-family: 'Oswald', sans-serif; font-size: 0.58rem; letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 0.25rem 0.6rem; border-radius: 100px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      background: rgba(13,17,23,0.75); border: 1px solid rgba(200,169,81,0.5); color: var(--gold);
     }
+    .club-tag.champ { border-color: rgba(255,122,47,0.7); color: var(--twists); }
+    .club-tag.runner { border-color: rgba(143,214,174,0.55); color: var(--holmes); }
 
-    /* hamburger handled by nav.js */
-
+    /* ═══════════ RESPONSIVE ═══════════ */
+    @media (max-width: 960px) {
+      .doors-grid { grid-template-columns: 1fr; }
+      .door { min-height: 380px; }
+      .honours { grid-template-columns: 1fr 1fr; row-gap: 1.6rem; }
+      .honours::before { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.2rem; }
+      .clubs-grid { grid-template-columns: repeat(3, 1fr); }
+    }
     @media (max-width: 768px) {
-      /* Nav handled by nav.js */
-
-      /* Hero */
-      .hero-inner { flex-direction: column-reverse; padding: 3rem 1.2rem 2rem; text-align: center; }
-      .hero-ctas { justify-content: center; flex-direction: column; align-items: center; }
-      .hero-ctas a { width: 100%; max-width: 280px; text-align: center; }
+      .home-hero-inner { flex-direction: column-reverse; padding: 3rem 1.2rem 2.6rem; text-align: center; gap: 2.2rem; }
       .hero-desc { margin: 0 auto 2rem; }
-      .league-logo { width: 150px; }
-      .ppr-logo { width: 150px; }
-      .dual-logos-divider { height: 150px; }
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .hero-ctas .btn { width: 100%; max-width: 300px; }
+      .hero-league-logo, .hero-ppr-logo { width: 140px; }
+      .dual-logos-divider { height: 140px; }
       .dual-logos { gap: 1.2rem; }
-      .hero-bg-text { font-size: 4rem; }
-
-      /* Stats bar */
-      .stats-inner { grid-template-columns: 1fr; }
-      .stat-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
-      .stat-item:last-child { border-bottom: none; }
-
-      /* Archive */
-      #archive { padding: 3rem 1.2rem; }
-
-      /* About */
-      .about-inner { grid-template-columns: 1fr; padding: 3rem 1.2rem; gap: 2rem; }
-
-      /* Vote section */
-      .vote-outer { padding: 3rem 1.2rem; }
-      .vote-grid { grid-template-columns: 1fr; }
-      /* Collapse odometer to 4 digits on mobile to save space */
-      .odo-digit { width: 13px; height: 19px; font-size: 0.78rem; }
-      .odo-digit:nth-child(-n+2) { display: none; } /* hide leading 2 zeros */
-      /* Make vote rows stack more comfortably */
-      .team-row { padding: 0.55rem 0.9rem; gap: 0.5rem; }
-      .team-name { font-size: 0.82rem; }
-      .vote-btn { padding: 5px 8px; font-size: 0.65rem; letter-spacing: 1px; }
-
-      /* Tables */
-      .cum-outer { padding: 3rem 1.2rem 2rem; }
-      .h2h-outer { padding: 2rem 1.2rem 3rem; }
-      /* Better touch scrolling */
-      .cum-scroll, .h2h-scroll {
-        -webkit-overflow-scrolling: touch;
-        overflow-x: auto;
-      }
-      /* Adjust sticky column offsets for mobile — rank col narrower */
-      .cum-table th:nth-child(2), .cum-table td:nth-child(2) {
-        left: 2.2rem;
-      }
-      /* H2H legend wraps naturally */
-      .h2h-legend { gap: 0.8rem; font-size: 0.65rem; }
-      .h2h-legend .leg-item:last-child { margin-left: 0; }
+      .hero-bg-text { font-size: 4.5rem; }
+      .door { padding: 1.6rem; min-height: 0; padding-top: 1.4rem; }
+      .door-2026 { min-height: 420px; }
+      .door-year { position: static; font-size: 5.2rem; margin-bottom: auto; padding-bottom: 1.4rem; align-self: flex-start; }
+      .doors-head p { max-width: none; }
+      .clubs-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+      .club-name { font-size: 1.2rem; }
     }
-
-    /* Extra small phones */
+    @media (max-width: 480px) {
+      .honours { grid-template-columns: 1fr; }
+      .about-facts { grid-template-columns: 1fr; }
+    }
     @media (max-width: 390px) {
       .hero-title { font-size: 3rem; }
-      .league-logo { width: 115px; }
-      .ppr-logo { width: 115px; }
-      .dual-logos-divider { height: 115px; }
-      .stat-number { font-size: 2.4rem; }
-      .poll-card-title { font-size: 1.3rem; }
+      .hero-league-logo, .hero-ppr-logo { width: 112px; }
+      .dual-logos-divider { height: 112px; }
     }
-
-    /* ── CUMULATIVE POWER RANKINGS ── */
-    #cumulative { background: var(--dark); border-top: 1px solid var(--border); }
-    .cum-outer { max-width: 1200px; margin: 0 auto; padding: 5rem 2.5rem 3.5rem; }
-    .cum-note { font-size: 0.82rem; color: #3a5a7a; margin-bottom: 2rem; line-height: 1.6; font-family: 'Inter', sans-serif; }
-    .cum-scroll { overflow-x: scroll; border-radius: 12px; border: 1px solid var(--border); -webkit-overflow-scrolling: touch; }
-    .cum-scroll::-webkit-scrollbar { height: 6px; }
-    .cum-scroll::-webkit-scrollbar-track { background: #080d13; border-radius: 3px; }
-    .cum-scroll::-webkit-scrollbar-thumb { background: rgba(200,169,81,0.35); border-radius: 3px; }
-    .cum-scroll::-webkit-scrollbar-thumb:hover { background: rgba(200,169,81,0.6); }
-    .cum-table { width: 100%; border-collapse: collapse; font-family: 'Oswald', sans-serif; min-width: 1800px; }
-    .cum-table thead tr { background: #080d13; }
-    .cum-table thead th { padding: 0.9rem 0.85rem; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: #2a4a6a; text-align: center; border-bottom: 1px solid rgba(200,169,81,0.2); white-space: nowrap; }
-    .cum-table thead th.th-left { text-align: left; padding-left: 1.2rem; }
-    /* Sticky first two columns (rank + team name) */
-    .cum-table th:nth-child(1), .cum-table td:nth-child(1) { position: sticky; left: 0; z-index: 2; background: #080d13; }
-    .cum-table th:nth-child(2), .cum-table td:nth-child(2) { position: sticky; left: 2.8rem; z-index: 2; background: #080d13; min-width: 150px; border-right: 1px solid rgba(200,169,81,0.15); }
-    .cum-table tbody tr:hover th:nth-child(1),
-    .cum-table tbody tr:hover td:nth-child(1),
-    .cum-table tbody tr:hover td:nth-child(2) { background: #0f1820; }
-    /* Sticky last three columns (total, avg, trend) */
-    .cum-table th:nth-last-child(1), .cum-table td:nth-last-child(1) { position: sticky; right: 0; z-index: 2; background: #080d13; border-left: 1px solid rgba(200,169,81,0.15); }
-    .cum-table th:nth-last-child(2), .cum-table td:nth-last-child(2) { position: sticky; right: 100px; z-index: 2; background: #080d13; }
-    .cum-table th:nth-last-child(3), .cum-table td:nth-last-child(3) { position: sticky; right: 165px; z-index: 2; background: #080d13; border-left: 1px solid rgba(200,169,81,0.15); }
-    .cum-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.035); transition: background 0.12s; }
-    .cum-table tbody tr:last-child { border-bottom: none; }
-    .cum-table tbody tr:hover { background: rgba(255,255,255,0.02); }
-    .cum-table td { padding: 0.75rem 0.85rem; text-align: center; vertical-align: middle; }
-    .cum-table td.td-left { text-align: left; padding-left: 1.2rem; }
-    .cum-pos { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; color: #1e3a52; width: 2.2rem; }
-    .cum-pos.p1 { color: var(--gold); }
-    .cum-pos.p2 { color: #a8b8c8; }
-    .cum-pos.p3 { color: #7a5a30; }
-    .cum-name { font-family: 'Oswald', sans-serif; font-size: 0.92rem; font-weight: 600; color: var(--cream); letter-spacing: 0.3px; }
-    .cum-score { font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; color: #2a4a6a; }
-    .cum-score.played { color: #5a8aaa; }
-    .cum-score.best { color: var(--gold) !important; font-size: 1rem; }
-    .cum-total { font-family: 'Bebas Neue', sans-serif; font-size: 1.15rem; color: var(--gold); border-left: 1px solid rgba(200,169,81,0.15); }
-    .cum-avg { font-family: 'Bebas Neue', sans-serif; font-size: 0.9rem; color: #4a7a8a; }
-    .cum-snake { padding: 0.5rem 0.85rem; }
-    svg.snake { display: block; }
-
-    /* ── H2H MATRIX ── */
-    #h2h { background: var(--dark); border-top: 1px solid var(--border); }
-    .h2h-outer { max-width: 1200px; margin: 0 auto; padding: 3rem 2.5rem 5rem; }
-    .h2h-legend { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; margin-bottom: 1.5rem; font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; }
-    .leg-item { display: flex; align-items: center; gap: 0.4rem; color: #3a5a7a; }
-    .leg-swatch { width: 26px; height: 14px; border-radius: 3px; flex-shrink: 0; }
-    .leg-w  { background: rgba(34,197,94,0.25); border: 1px solid rgba(34,197,94,0.5); }
-    .leg-l  { background: rgba(239,68,68,0.2);  border: 1px solid rgba(239,68,68,0.45); }
-    .leg-no { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); }
-    .h2h-scroll { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
-    .h2h-table { border-collapse: collapse; font-family: 'Oswald', sans-serif; font-size: 0.72rem; width: 100%; }
-    .h2h-table th, .h2h-table td { border: 1px solid rgba(255,255,255,0.04); padding: 0; white-space: nowrap; }
-    .h2h-table .rh { background: #080d13; text-align: left; padding: 0.55rem 1rem 0.55rem 1.1rem; font-size: 0.76rem; letter-spacing: 0.4px; color: var(--cream); font-weight: 600; min-width: 140px; border-right: 1px solid rgba(200,169,81,0.12); border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .h2h-table .ch { background: #080d13; text-align: center; padding: 0.5rem 0.3rem; font-size: 0.6rem; letter-spacing: 0.8px; text-transform: uppercase; color: #2a4a6a; max-width: 58px; border-bottom: 1px solid rgba(200,169,81,0.2); }
-    .h2h-table .sh { background: #060b10; text-align: center; padding: 0.5rem 0.5rem; font-size: 0.6rem; letter-spacing: 0.8px; text-transform: uppercase; color: #1a4a3a; border-left: 1px solid rgba(200,169,81,0.12); border-bottom: 1px solid rgba(200,169,81,0.2); }
-    .h2h-table .cs { background: rgba(255,255,255,0.02); text-align: center; padding: 0.5rem; color: rgba(255,255,255,0.06); font-size: 0.7rem; }
-    .h2h-table .cw { background: rgba(34,197,94,0.12); text-align: center; padding: 0.3rem 0.25rem; transition: background 0.12s; cursor: default; }
-    .h2h-table .cw:hover { background: rgba(34,197,94,0.24); }
-    .cw-tag { color: #4ade80; font-size: 0.68rem; font-weight: 700; display: block; }
-    .cw-mg  { color: rgba(74,222,128,0.45); font-size: 0.56rem; display: block; margin-top: 1px; }
-    .h2h-table .cl { background: rgba(239,68,68,0.1); text-align: center; padding: 0.3rem 0.25rem; transition: background 0.12s; cursor: default; }
-    .h2h-table .cl:hover { background: rgba(239,68,68,0.22); }
-    .cl-tag { color: #f87171; font-size: 0.68rem; font-weight: 700; display: block; }
-    .cl-mg  { color: rgba(248,113,113,0.45); font-size: 0.56rem; display: block; margin-top: 1px; }
-    .h2h-table .cn { background: rgba(255,255,255,0.015); text-align: center; padding: 0.5rem 0.3rem; color: rgba(255,255,255,0.08); font-size: 0.6rem; }
-    .h2h-table .sc { background: #060b10; text-align: center; padding: 0.5rem 0.7rem; border-left: 1px solid rgba(200,169,81,0.1); }
-    .sc-w { color: #4ade80; font-weight: 700; font-size: 0.82rem; }
-    .sc-d { color: #1a3a2a; font-size: 0.75rem; }
-    .sc-l { color: #f87171; font-weight: 700; font-size: 0.82rem; }
-    .sc-pf { color: #2a5a6a; font-size: 0.75rem; margin-top: 2px; display: block; }
-
-    /* cum/h2h mobile handled in main @media block above */
   </style>
 </head>
 <body>
 
-  <!-- nav injected by nav.js -->
+  <!-- header injected by nav.js -->
 
-  <section class="hero">
+  <main>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="home-hero">
     <div class="hero-grain"></div>
-    <div class="hero-bg-text">LIGMA</div>
-    <div class="hero-inner">
+    <div class="hero-bg-text" aria-hidden="true">LIGMA</div>
+    <div class="home-hero-inner">
       <div class="hero-left">
         <div class="hero-badge"><span class="hero-badge-dot"></span>AFL Fantasy · Est. 2024</div>
         <h1 class="hero-title">
@@ -412,26 +240,25 @@
         </h1>
         <p class="hero-subtitle">Ligma League</p>
         <p class="hero-desc">
-          Welcome to the official power rankings of the <strong>Ligma League</strong> — 12 teams,
-          zero mercy, and a whole lot of opinions. Every round, the rankings shift.
-          Every week, someone's getting cooked. Where does your team stand?
+          The official power rankings of the <strong>Ligma League</strong>. Twelve clubs, three editions,
+          zero governance and a whole lot of opinions. Every round the rankings shift and every week someone gets cooked.
+          Pick a season and find out where your team stands.
         </p>
         <div class="hero-ctas">
-          <a href="grand-final.html" class="btn-gf">🏆 Grand Final</a>
-          <a href="round-11.html" class="btn-primary">📋 Round 11 Rankings</a>
-          <a href="#vote" class="btn-secondary">🗳 Cast Your Vote ↓</a>
+          <a href="2026.html" class="btn btn-gf">🏆 Enter the 2026 season</a>
+          <a href="2027.html" class="btn btn-ice">Preview 2027</a>
         </div>
       </div>
       <div class="hero-logo-wrap">
         <div class="logo-glow"></div>
         <div class="dual-logos">
-          <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
-            <img class="league-logo" src="ligma-logo.jpg" alt="Ligma League AFL Fantasy">
+          <div class="dual-logo">
+            <img class="hero-league-logo" src="ligma-logo.jpg" alt="Ligma League AFL Fantasy logo" width="1024" height="1024">
             <span class="logo-label">Ligma League</span>
           </div>
           <div class="dual-logos-divider"></div>
-          <div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
-            <img class="ppr-logo" src="PPR.jpg" alt="Paz's Power Rankings">
+          <div class="dual-logo">
+            <img class="hero-ppr-logo" src="PPR.jpg" alt="Paz's Power Rankings logo" width="896" height="1115">
             <span class="logo-label">Power Rankings</span>
           </div>
         </div>
@@ -439,1174 +266,177 @@
     </div>
   </section>
 
-  <!-- ═══════════ GRAND FINAL BANNER ═══════════ -->
-  <a class="gf-banner" href="grand-final.html">
-    <div class="gf-banner-glow"></div>
-    <div class="gf-banner-inner">
-      <div class="gf-banner-left">
-        <div class="gf-banner-badge"><span class="gf-banner-dot"></span>Now Live · 3rd Edition Decider</div>
-        <div class="gf-banner-title">GRAND FINAL</div>
-        <div class="gf-banner-teams">
-          <span class="gf-h">Better Holmes and Gardens</span>
-          <span class="gf-vs">vs</span>
-          <span class="gf-t">Van Twists</span>
+  <!-- ═══════════ SEASON DOORS ═══════════ -->
+  <section class="doors" aria-labelledby="doors-title">
+    <div class="wrap">
+      <div class="doors-head">
+        <div>
+          <div class="section-label">Pick a season</div>
+          <h2 class="section-title" id="doors-title">Two seasons. One league.</h2>
         </div>
-        <p class="gf-banner-desc">
-          A 25% ownership deal. A waiver glitch that broke the league. $4,000 on the line.
-          The most controversial matchup in Ligma League history.
-        </p>
-        <span class="gf-banner-cta">Read The Grand Final Edition →</span>
+        <p>Each season has its own rankings, results, polls and stories. 2026 is in the books and 2027 is loading.</p>
       </div>
-      <div class="gf-banner-right">
-        <img src="Twists_vs_Holmes.png" alt="Grand Final: Better Holmes and Gardens vs The Van Twists" loading="lazy">
-      </div>
-    </div>
-  </a>
 
-  <div class="stats-bar">
-    <div class="stats-inner">
-      <div class="stat-item"><span class="stat-number">12</span><span class="stat-label">Teams</span></div>
-      <div class="stat-item"><span class="stat-number">09</span><span class="stat-label">Rounds Complete</span></div>
-      <div class="stat-item"><span class="stat-number">11.44</span><span class="stat-label">Top Score This Season</span></div>
-    </div>
-  </div>
+      <div class="doors-grid">
+        <a class="door door-2026" href="2026.html" aria-label="2026 season, complete. Van Twists won it from 7th.">
+          <div class="door-bg"><img src="Van%20Twists.jpg" alt="" width="1536" height="1024"></div>
+          <span class="door-year" aria-hidden="true">2026</span>
+          <div class="door-meta">3rd edition <span class="door-pill">Complete</span></div>
+          <div class="door-title"><span>Van Twists</span> win it from 7th</div>
+          <p class="door-desc">Thirteen power rankings, sixty-six results, one waiver glitch and a Grand Final boilover nobody will ever stop talking about.</p>
+          <span class="door-cta">Open the 2026 season <span class="door-cta-arrow" aria-hidden="true">→</span></span>
+        </a>
 
-  <!-- ═══════════ CUMULATIVE POWER RANKINGS ═══════════ -->
-  <section id="cumulative">
-    <div class="cum-outer">
-      <div class="section-label">Season Overview</div>
-      <div class="section-title">Cumulative Power Rankings</div>
-      <p class="cum-note">
-        Total PPR score across all rounds — Draft Night through Round 19. Scroll right to see upcoming rounds.
-        The <span style="color:var(--gold)">best score each round is highlighted in gold.</span>
-        Trend snake shows trajectory across the last 5 scored rounds — green rising, red falling.
-        Average is calculated from scored rounds only.
-      </p>
-      <div class="cum-scroll">
-        <table class="cum-table">
-          <thead>
-            <tr>
-              <th class="th-left" style="width:2rem;">#</th>
-              <th class="th-left">Team</th>
-              <th>Draft<br>Night</th>
-              <th>Opening<br>Rd</th>
-              <th>Round 1</th>
-              <th>Round 2</th>
-              <th>Round 3</th>
-              <th>Round 4</th>
-              <th>Round 5</th>
-              <th>Round 6</th>
-              <th>Round 7</th>
-              <th>Round 8</th>
-              <th>Round 9</th>
-              <th>Round 10</th>
-              <th>Round 11</th>
-              <th>Round 10</th>
-              <th>Round 11</th>
-              <th>Round 12</th>
-              <th>Round 13</th>
-              <th>Round 14</th>
-              <th>Round 15</th>
-              <th>Round 16</th>
-              <th>Round 17</th>
-              <th>Round 18</th>
-              <th>Round 19</th>
-              <th>Total</th>
-              <th>Avg</th>
-              <th>Trend</th>
-            </tr>
-          </thead>
-          <tbody id="cumBody"></tbody>
-        </table>
+        <a class="door door-2027" href="2027.html" aria-label="2027 season, coming soon.">
+          <span class="door-year" aria-hidden="true">2027</span>
+          <div class="door-meta">4th edition <span class="door-pill">Coming soon</span></div>
+          <div class="door-title">Can anyone stop the Twists?</div>
+          <p class="door-desc">Holmes want revenge, Broncic want their crown back and everyone else just wants to stay clear of the spoon. Draft night is on the way.</p>
+          <span class="door-cta">Preview the 2027 season <span class="door-cta-arrow" aria-hidden="true">→</span></span>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ HEAD-TO-HEAD MATRIX ═══════════ -->
-  <section id="h2h">
-    <div class="h2h-outer">
-      <div class="section-label">Season Results</div>
-      <div class="section-title">Head-to-Head Matrix</div>
-      <div class="h2h-legend">
-        <div class="leg-item"><div class="leg-swatch leg-w"></div>Win (row beat column)</div>
-        <div class="leg-item"><div class="leg-swatch leg-l"></div>Loss (row lost to column)</div>
-        <div class="leg-item"><div class="leg-swatch leg-no"></div>Not yet played</div>
-        <div class="leg-item" style="margin-left:auto;color:#1a3a52;">Point margin shown inside each cell</div>
-      </div>
-      <div class="h2h-scroll">
-        <table class="h2h-table" id="h2hTable"></table>
-      </div>
+  <!-- ═══════════ HONOUR ROLL ═══════════ -->
+  <section class="band band-navy" aria-labelledby="honours-title">
+    <div class="wrap">
+      <div class="section-label">Champions</div>
+      <h2 class="section-title" id="honours-title">The Honour Roll</h2>
+      <p class="section-intro">Three editions, two names on the cup. The 2027 line is still blank.</p>
+      <ol class="honours">
+        <li class="honour">
+          <span class="honour-year">2024</span>
+          <div class="honour-card">
+            <div class="honour-ed">1st edition</div>
+            <div class="honour-club">Broncic</div>
+            <p class="honour-note">The first name on the cup. William set the standard everyone else has been chasing since.</p>
+          </div>
+        </li>
+        <li class="honour">
+          <span class="honour-year">2025</span>
+          <div class="honour-card">
+            <div class="honour-ed">2nd edition</div>
+            <div class="honour-club">Broncic</div>
+            <p class="honour-note">Back-to-back. The league started to wonder if anyone else would ever win it.</p>
+          </div>
+        </li>
+        <li class="honour is-current">
+          <span class="honour-year">2026</span>
+          <div class="honour-card">
+            <div class="honour-ed">3rd edition</div>
+            <div class="honour-club">Van Twists</div>
+            <p class="honour-note">From 7th. Beat Better Holmes and Gardens, the best team all year, in the Grand Final.</p>
+          </div>
+        </li>
+        <li class="honour is-next">
+          <span class="honour-year">2027</span>
+          <div class="honour-card">
+            <div class="honour-ed">4th edition</div>
+            <div class="honour-club">To be decided</div>
+            <p class="honour-note">Draft night first. <a href="2027.html" style="color:var(--ice)">See who is building for it.</a></p>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 
-  <!-- ═══════════ DATA + RENDER SCRIPT ═══════════ -->
-  <script>
-  (function(){
-
-    /* ── PPR scores: [DraftNight, OpeningRd, R1, R2, R3, R4, R5…R19] ── */
-    /* null = round not yet rated                                          */
-    const PPR = {
-      'Foopys':              [9.67,  9.50,  10.17, 10.13, 9.44,  8.94,  9.44,  9.44, 8.69, 9.00, 9.21, 9.75, null,null,null,null,null,null,null,null,null],
-      'Dark Magicians':      [7.08,  10.25, 10.58, 9.25,  9.25,  9.25,  10.20, 9.56, 10.44,10.50,10.75,10.75,null,null,null,null,null,null,null,null,null],
-      'Holmes and Gardens':  [8.50,  9.92,  10.33, 9.75,  10.31, 10.31, 11.44, 11.38,11.13,11.29,11.36,11.44,null,null,null,null,null,null,null,null,null],
-      'DC & Tax Payers':     [7.58,  9.50,  10.00, 10.25, 9.50,  9.88,  10.86, 10.63,10.80,10.13,11.10,10.50,null,null,null,null,null,null,null,null,null],
-      'Phillipou':           [7.17,  7.92,  8.17,  8.50,  9.38,  9.00,  9.50,  9.94, 9.40, 9.63, 9.75, 9.00, null,null,null,null,null,null,null,null,null],
-      'Flagdons':            [8.33,  9.67,  9.75,  9.38,  10.06, 9.44,  9.13,  9.00, 9.75, 10.25,11.00,10.44,null,null,null,null,null,null,null,null,null],
-      'Van Twists':          [8.83,  9.42,  9.67,  8.13,  7.38,  8.89,  10.85, 10.35,10.56,10.53,9.80, 10.25,null,null,null,null,null,null,null,null,null],
-      'Cripps Nipps':        [7.92,  8.92,  7.92,  7.13,  7.43,  7.88,  9.69,  9.63, 9.69, 9.69, 9.38, 9.38, null,null,null,null,null,null,null,null,null],
-      'Broncic':             [8.25,  9.33,  8.42,  8.38,  9.25,  8.88,  10.25, 10.60,10.75,10.75,11.06,11.19,null,null,null,null,null,null,null,null,null],
-      'Izaks':               [7.75,  8.08,  8.25,  7.63,  8.75,  9.25,  10.50, 10.50,10.13,9.75, 9.25, 9.56, null,null,null,null,null,null,null,null,null],
-      'Nethers men':         [7.42,  8.25,  7.75,  7.88,  8.50,  8.38,  9.75,  9.75, 9.88, 10.00,10.00,10.00,null,null,null,null,null,null,null,null,null],
-      'Shavas':              [7.33,  8.42,  8.33,  8.25,  9.06,  8.39,  9.56,  8.75, 9.44, 9.31, 9.00, 8.94, null,null,null,null,null,null,null,null,null],
-    };
-
-    /* ── H2H match results ── */
-    const MATCHES = [
-      // R1
-      {w:'Cripps Nipps',      l:'Broncic',            ws:1202,ls:1109},
-      {w:'Phillipou',          l:'Van Twists',         ws:1056,ls:1048},
-      {w:'Dark Magicians',     l:'Foopys',             ws:1196,ls:1180},
-      {w:'DC & Tax Payers',    l:'Izaks',              ws:1247,ls:1119},
-      {w:'Holmes and Gardens', l:'Nethers men',        ws:1347,ls:918 },
-      {w:'Flagdons',           l:'Shavas',             ws:1064,ls:1055},
-      // R2
-      {w:'Broncic',            l:'Flagdons',           ws:1226,ls:1000},
-      {w:'Phillipou',          l:'Dark Magicians',     ws:1155,ls:1126},
-      {w:'DC & Tax Payers',    l:'Van Twists',         ws:1158,ls:1143},
-      {w:'Foopys',             l:'Cripps Nipps',       ws:1066,ls:585 },
-      {w:'Nethers men',        l:'Izaks',              ws:870, ls:854 },
-      {w:'Shavas',             l:'Holmes and Gardens', ws:1101,ls:1013},
-      // R3
-      {w:'Broncic',            l:'Holmes and Gardens', ws:1123,ls:941 },
-      {w:'Phillipou',          l:'DC & Tax Payers',    ws:920, ls:916 },
-      {w:'Cripps Nipps',       l:'Dark Magicians',     ws:847, ls:697 },
-      {w:'Nethers men',        l:'Van Twists',         ws:1072,ls:964 },
-      {w:'Flagdons',           l:'Foopys',             ws:1177,ls:1054},
-      {w:'Izaks',              l:'Shavas',             ws:1147,ls:1116},
-      // R4
-      {w:'Izaks',              l:'Broncic',            ws:1139,ls:1061},
-      {w:'Cripps Nipps',       l:'Phillipou',          ws:1072,ls:717 },
-      {w:'DC & Tax Payers',    l:'Nethers men',        ws:1157,ls:1053},
-      {w:'Dark Magicians',     l:'Flagdons',           ws:1113,ls:1004},
-      {w:'Van Twists',         l:'Shavas',             ws:1221,ls:1100},
-      {w:'Holmes and Gardens', l:'Foopys',             ws:1290,ls:1095},
-      // R5
-      {w:'Van Twists',         l:'Broncic',            ws:1219,ls:1201},
-      {w:'Nethers men',        l:'Phillipou',          ws:1077,ls:897 },
-      {w:'Cripps Nipps',       l:'Flagdons',           ws:1023,ls:951 },
-      {w:'DC & Tax Payers',    l:'Shavas',             ws:1162,ls:1121},
-      {w:'Holmes and Gardens', l:'Dark Magicians',     ws:1223,ls:1146},
-      {w:'Izaks',              l:'Foopys',             ws:1152,ls:1022},
-      // R6
-      {w:'Broncic',            l:'DC & Tax Payers',    ws:1260,ls:1236},
-      {w:'Phillipou',          l:'Flagdons',           ws:1105,ls:1100},
-      {w:'Nethers men',        l:'Shavas',             ws:1113,ls:942 },
-      {w:'Holmes and Gardens', l:'Cripps Nipps',       ws:1201,ls:1028},
-      {w:'Izaks',              l:'Dark Magicians',     ws:1112,ls:1089},
-      {w:'Foopys',             l:'Van Twists',         ws:1130,ls:1036},
-      // R7
-      {w:'Broncic',            l:'Nethers men',        ws:1136,ls:1105},
-      {w:'Shavas',             l:'Phillipou',          ws:1153,ls:1018},
-      {w:'Flagdons',           l:'Holmes and Gardens', ws:1048,ls:926 },
-      {w:'Izaks',              l:'Cripps Nipps',       ws:1022,ls:981 },
-      {w:'DC & Tax Payers',    l:'Foopys',             ws:1073,ls:978 },
-      {w:'Dark Magicians',     l:'Van Twists',         ws:1267,ls:1241},
-      // R8
-      {w:'Broncic',            l:'Shavas',             ws:1216,ls:1057},
-      {w:'Holmes and Gardens', l:'Phillipou',          ws:1173,ls:1112},
-      {w:'Flagdons',           l:'Izaks',              ws:1170,ls:1024},
-      {w:'Nethers men',        l:'Foopys',             ws:1095,ls:1050},
-      {w:'Van Twists',         l:'Cripps Nipps',       ws:1207,ls:1143},
-      {w:'Dark Magicians',     l:'DC & Tax Payers',    ws:1147,ls:1060},
-      // R9
-      {w:'Broncic',            l:'Phillipou',           ws:1209,ls:1095},
-      {w:'Holmes and Gardens', l:'Izaks',               ws:1125,ls:934 },
-      {w:'Shavas',             l:'Foopys',              ws:1175,ls:1141},
-      {w:'Flagdons',           l:'Van Twists',          ws:1303,ls:1086},
-      {w:'Dark Magicians',     l:'Nethers men',         ws:1093,ls:1082},
-      {w:'DC & Tax Payers',    l:'Cripps Nipps',        ws:1195,ls:1082},
-      // R10
-      {w:'Foopys',             l:'Broncic',             ws:1036,ls:1019},
-      {w:'Phillipou',          l:'Izaks',               ws:1231,ls:1101},
-      {w:'Holmes and Gardens', l:'Van Twists',          ws:1381,ls:1034},
-      {w:'Dark Magicians',     l:'Shavas',              ws:1300,ls:1009},
-      {w:'DC & Tax Payers',    l:'Flagdons',            ws:1102,ls:1083},
-      {w:'Cripps Nipps',       l:'Nethers men',         ws:1156,ls:1061},
-      // R11
-      {w:'Broncic',            l:'Dark Magicians',      ws:1150,ls:1111},
-      {w:'Foopys',             l:'Phillipou',           ws:1109,ls:981 },
-      {w:'Van Twists',         l:'Izaks',               ws:1250,ls:1149},
-      {w:'Holmes and Gardens', l:'DC & Tax Payers',     ws:1159,ls:1005},
-      {w:'Cripps Nipps',       l:'Shavas',              ws:942, ls:935 },
-      {w:'Nethers men',        l:'Flagdons',            ws:1138,ls:973 },
-    ];
-
-    const TEAMS = Object.keys(PPR);
-
-    /* ════════════════════════════════════════
-       CUMULATIVE TABLE
-    ════════════════════════════════════════ */
-    (function buildCumulative(){
-      /* 21 columns: Draft Night + Opening Rd + R1-R19 */
-      const numRounds = 21;
-      /* per-round best score for gold highlight (only among played scores) */
-      const roundBest = Array.from({length: numRounds}, (_, ri) => {
-        const vals = TEAMS.map(t => PPR[t][ri]).filter(v => v !== null);
-        return vals.length ? Math.max(...vals) : null;
-      });
-
-      /* build row data — avg only from played rounds */
-      const rows = TEAMS.map(team => {
-        const scores = PPR[team];
-        const played = scores.filter(v => v !== null);
-        const total  = played.reduce((a,b) => a+b, 0);
-        const avg    = played.length ? total / played.length : null;
-        return { team, scores, total, avg, playedCount: played.length };
-      }).sort((a, b) => b.total - a.total);
-
-      const tbody = document.getElementById('cumBody');
-      rows.forEach((row, idx) => {
-        const rank = idx + 1;
-        let posClass = 'cum-pos';
-        if (rank === 1) posClass += ' p1';
-        else if (rank === 2) posClass += ' p2';
-        else if (rank === 3) posClass += ' p3';
-
-        /* score cells — all 21 columns */
-        const scoreCells = row.scores.map((s, ri) => {
-          if (s === null) return `<td class="cum-score">—</td>`;
-          const isBest = roundBest[ri] !== null && s === roundBest[ri];
-          return `<td class="cum-score played${isBest ? ' best' : ''}">${s.toFixed(2)}</td>`;
-        }).join('');
-
-        /* trend snake: last 5 *played* scores (skip nulls), from index 1 onward */
-        const trendScores = row.scores.slice(1).filter(v => v !== null).slice(-5);
-        const snake = buildSnakeSVG(trendScores);
-
-        const avgDisplay = row.avg !== null ? row.avg.toFixed(2) : '—';
-
-        const tr = document.createElement('tr');
-        tr.innerHTML =
-          `<td class="td-left"><span class="${posClass}">${rank}</span></td>` +
-          `<td class="td-left"><span class="cum-name">${row.team}</span></td>` +
-          scoreCells +
-          `<td class="cum-total">${row.total.toFixed(2)}</td>` +
-          `<td class="cum-avg">${avgDisplay}</td>` +
-          `<td class="cum-snake">${snake}</td>`;
-        tbody.appendChild(tr);
-      });
-    })();
-
-    function buildSnakeSVG(scores) {
-      const W = 88, H = 28, P = 4;
-      if (scores.length < 2) return `<svg class="snake" width="${W}" height="${H}"><text x="4" y="19" fill="#1a3a52" font-family="Oswald" font-size="11">—</text></svg>`;
-      const lo = Math.min(...scores) - 0.3;
-      const hi = Math.max(...scores) + 0.3;
-      const pts = scores.map((v, i) => [
-        P + (i / (scores.length - 1)) * (W - P*2),
-        H - P - ((v - lo) / (hi - lo)) * (H - P*2)
-      ]);
-      /* colour each segment independently */
-      let segs = '';
-      for (let i = 0; i < pts.length - 1; i++) {
-        const col = scores[i+1] >= scores[i] ? '#22c55e' : '#ef4444';
-        segs += `<line x1="${pts[i][0].toFixed(1)}" y1="${pts[i][1].toFixed(1)}" x2="${pts[i+1][0].toFixed(1)}" y2="${pts[i+1][1].toFixed(1)}" stroke="${col}" stroke-width="2" stroke-linecap="round"/>`;
-      }
-      /* dots */
-      let dots = '';
-      pts.forEach(([x,y], i) => {
-        const last  = i === pts.length - 1;
-        const col   = scores[i] >= (scores[i-1] ?? scores[i]) ? '#22c55e' : '#ef4444';
-        dots += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${last ? 3 : 1.8}" fill="${last ? col : 'rgba(255,255,255,0.2)'}"/>`;
-      });
-      return `<svg class="snake" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${segs}${dots}</svg>`;
-    }
-
-    /* ════════════════════════════════════════
-       H2H MATRIX
-    ════════════════════════════════════════ */
-    (function buildH2H(){
-      /* build win/loss lookup */
-      const wins = {}; /* wins[winner][loser] = margin */
-      TEAMS.forEach(t => { wins[t] = {}; });
-      MATCHES.forEach(m => { wins[m.w][m.l] = m.ws - m.ls; });
-
-      /* W-L record & points for per team */
-      const wl = {}, pf = {};
-      TEAMS.forEach(t => { wl[t] = {w:0, l:0}; pf[t] = 0; });
-      MATCHES.forEach(m => {
-        wl[m.w].w++; pf[m.w] += m.ws;
-        wl[m.l].l++; pf[m.l] += m.ls;
-      });
-
-      /* sort: most wins → tie-break by PF */
-      const sorted = TEAMS.slice().sort((a, b) =>
-        wl[b].w !== wl[a].w ? wl[b].w - wl[a].w : pf[b] - pf[a]
-      );
-
-      /* short column labels (max ~7 chars) */
-      const abbr = {
-        'Holmes and Gardens': 'H&G',
-        'DC & Tax Payers':    'DC',
-        'Dark Magicians':     'Mag.',
-        'Cripps Nipps':       'C.Nipps',
-        'Van Twists':         'VanTwi',
-        'Nethers men':        'Nethers',
-        'Phillipou':          'Phillipou',
-        'Flagdons':           'Flagdons',
-        'Foopys':             'Foopys',
-        'Broncic':            'Broncic',
-        'Izaks':              'Izaks',
-        'Shavas':             'Shavas',
-      };
-
-      const tbl = document.getElementById('h2hTable');
-      let html = '';
-
-      /* header row */
-      html += '<thead><tr>';
-      html += '<th class="rh" style="font-size:0.6rem;color:#1a3a52;letter-spacing:1px;">ROW vs COL ↓</th>';
-      sorted.forEach(t => { html += `<th class="ch">${abbr[t]||t}</th>`; });
-      html += '<th class="sh">W–L</th><th class="sh">PF</th>';
-      html += '</tr></thead>';
-
-      /* body rows */
-      html += '<tbody>';
-      sorted.forEach(rowT => {
-        html += `<tr><td class="rh">${rowT}</td>`;
-        sorted.forEach(colT => {
-          if (rowT === colT) {
-            html += `<td class="cs">—</td>`;
-          } else if (wins[rowT][colT] !== undefined) {
-            const mg = wins[rowT][colT];
-            html += `<td class="cw" title="${rowT} def. ${colT} by ${mg}"><span class="cw-tag">W</span><span class="cw-mg">+${mg}</span></td>`;
-          } else if (wins[colT][rowT] !== undefined) {
-            const mg = wins[colT][rowT];
-            html += `<td class="cl" title="${colT} def. ${rowT} by ${mg}"><span class="cl-tag">L</span><span class="cl-mg">−${mg}</span></td>`;
-          } else {
-            html += `<td class="cn">·</td>`;
-          }
-        });
-        html += `<td class="sc"><span class="sc-w">${wl[rowT].w}</span><span class="sc-d">–</span><span class="sc-l">${wl[rowT].l}</span></td>`;
-        html += `<td class="sc"><span class="sc-pf">${pf[rowT].toLocaleString()}</span></td>`;
-        html += '</tr>';
-      });
-      html += '</tbody>';
-
-      tbl.innerHTML = html;
-    })();
-
-  })();
-  </script>
-
-  <!-- ═══════════ VOTE SECTION ═══════════ -->
-  <section id="vote">
-    <div class="vote-outer">
-      <div class="vote-header">
-        <div class="section-label">Community Poll</div>
-        <div class="section-title">Cast Your Vote</div>
-      </div>
-      <div class="vote-grid">
-
-        <div class="poll-card spoon">
-          <div class="poll-card-top">
-            <div class="poll-card-icon">🥄</div>
-            <div class="poll-card-title">Wooden Spoon</div>
-            <div class="poll-card-sub">Who finishes last place?</div>
-            <div class="live-pill"><span class="live-pill-dot"></span>Live · Updates in real time</div>
-          </div>
-          <div class="poll-body" id="rows-spoon">
-            <div style="padding:1.5rem 1.4rem">
-              <div class="skeleton" style="width:80%;margin-bottom:10px"></div>
-              <div class="skeleton" style="width:60%;margin-bottom:10px"></div>
-              <div class="skeleton" style="width:72%"></div>
-            </div>
-          </div>
-          <div class="poll-footer"><span class="poll-total" id="total-spoon">Loading…</span></div>
-        </div>
-
-        <div class="poll-card champ">
-          <div class="poll-card-top">
-            <div class="poll-card-icon">🏆</div>
-            <div class="poll-card-title">Championship</div>
-            <div class="poll-card-sub">Who wins the Ligma League?</div>
-            <div class="live-pill"><span class="live-pill-dot"></span>Live · Updates in real time</div>
-          </div>
-          <div class="poll-body" id="rows-champ">
-            <div style="padding:1.5rem 1.4rem">
-              <div class="skeleton" style="width:80%;margin-bottom:10px"></div>
-              <div class="skeleton" style="width:60%;margin-bottom:10px"></div>
-              <div class="skeleton" style="width:72%"></div>
-            </div>
-          </div>
-          <div class="poll-footer"><span class="poll-total" id="total-champ">Loading…</span></div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="archive">
-    <div class="section-label">Rankings Archive</div>
-    <div class="section-title">All Rounds</div>
-    <div class="weeks-grid">
-      <a class="week-card" href="rankings.html">
-        <div class="card-left">
-          <div class="card-round">Week 0</div>
-          <div class="card-title">Draft Night</div>
-          <div class="card-leader">🥇 <strong>Foopys — 9.67</strong></div>
-        </div>
-        <div class="card-right">
-          <div class="card-badge badge-done">Complete</div>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-      <a class="week-card" href="opening-round.html">
-        <div class="card-left">
-          <div class="card-round">Opening Round</div>
-          <div class="card-title">Opening Round</div>
-          <div class="card-leader">🥇 <strong>Dark Magicians — 10.25</strong></div>
-        </div>
-        <div class="card-right">
-          <div class="card-badge badge-done">Complete</div>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-      <a class="week-card" href="round-1.html">
-        <div class="card-left">
-          <div class="card-round">Round 1</div>
-          <div class="card-title">Round 1</div>
-          <div class="card-leader">🥇 <strong>Dark Magicians — 10.58</strong></div>
-        </div>
-        <div class="card-right">
-          <div class="card-badge badge-done">Complete</div>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-      <a class="week-card" href="round-2.html">
-        <div class="card-left">
-          <div class="card-round">Round 2</div>
-          <div class="card-title">Round 2</div>
-          <div class="card-leader">🥇 <strong>DC &amp; Tax Payers — 10.25</strong></div>
-        </div>
-        <div class="card-right">
-          <div class="card-badge badge-done">Complete</div>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-      <a class="week-card" href="round-3.html">
-        <div class="card-left">
-          <div class="card-round">Round 3</div>
-          <div class="card-title">Round 3</div>
-          <div class="card-leader">🥇 <strong>Holmes and Gardens — 10.31</strong></div>
-        </div>
-        <div class="card-right">
-          <div class="card-badge badge-done">Complete</div>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-      <a class="week-card" href="round-4.html">
-        <div class="card-left">
-          <div class="card-round">Round 4</div>
-          <div class="card-title">Round 4</div>
-          <div class="card-leader">🥇 <strong>Holmes and Gardens — 10.31</strong></div>
-        </div>
-        <div class="card-right">
-          <div class="card-badge badge-done">Complete</div>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-      <a class="week-card" href="round-5.html">
-        <div class="card-left">
-          <div class="card-round">Round 5</div>
-          <div class="card-title">Round 5</div>
-          <div class="card-leader">🥇 <strong>Holmes and Gardens — 11.44</strong></div>
-        </div>
-        <div class="card-right">
-          <div class="card-badge badge-done">Complete</div>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-      <a class="week-card" href="round-6.html">
-        <div class="card-left">
-          <div class="card-round">Round 6</div>
-          <div class="card-title">Round 6</div>
-          <div class="card-leader">🥇 <strong>Holmes and Gardens — 11.38</strong></div>
-        </div>
-        <div class="card-right">
-          <div class="card-badge badge-done">Complete</div>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-      <a class="week-card" href="round-7.html">
-        <div class="card-left">
-          <div class="card-round">Round 7</div>
-          <div class="card-title">Round 7</div>
-          <div class="card-leader">🥇 <strong>Holmes and Gardens — 11.13</strong></div>
-        </div>
-        <div class="card-right">
-          <div class="card-badge badge-done">Complete</div>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-      <a class="week-card" href="round-8.html">
-        <div class="card-left">
-          <div class="card-round">Round 8</div>
-          <div class="card-title">Round 8</div>
-          <div class="card-leader">🥇 <strong>Holmes and Gardens — 11.29</strong></div>
-        </div>
-        <div class="card-right">
-          <div class="card-badge badge-done">Complete</div>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-      <a class="week-card" href="round-9.html">
-        <div class="card-left">
-          <div class="card-round">Round 9</div>
-          <div class="card-title">Round 9</div>
-          <div class="card-leader">🥇 <strong>Holmes and Gardens — 11.36</strong></div>
-        </div>
-        <div class="card-right">
-          <div class="card-badge badge-done">Complete</div>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-      <a class="week-card" href="round-10.html">
-        <div class="card-left">
-          <div class="card-round">Round 10</div>
-          <div class="card-title">Round 10</div>
-          <div class="card-leader">🥇 <strong>Holmes and Gardens — 11.36</strong></div>
-        </div>
-        <div class="card-right">
-          <div class="card-badge badge-done">Complete</div>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-      <a class="week-card live" href="round-11.html">
-        <div class="card-left">
-          <div class="card-round">Round 11</div>
-          <div class="card-title">Round 11</div>
-          <div class="card-leader">🥇 <strong>Holmes and Gardens — 11.44</strong></div>
-        </div>
-        <div class="card-right">
-          <div class="card-badge badge-live">● Latest</div>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-      <a class="week-card gf-card" href="grand-final.html">
-        <div class="card-left">
-          <div class="card-round">The Decider</div>
-          <div class="card-title">🏆 Grand Final</div>
-          <div class="card-leader">Holmes and Gardens <strong>vs</strong> Van Twists</div>
-        </div>
-        <div class="card-right">
-          <div class="card-badge badge-gf">● Live</div>
-          <span class="card-arrow">→</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-  <section class="about-section">
-    <div class="about-inner">
+  <!-- ═══════════ ABOUT ═══════════ -->
+  <section class="band band-dark" aria-labelledby="about-title">
+    <div class="wrap about-grid">
       <div class="about-text">
-        <div class="section-label">The League</div>
-        <div class="section-title">What is the<br>Ligma League?</div>
-        <p>The <strong>Ligma League</strong> is a 12-team AFL Fantasy competition where bragging rights are everything and no lead is ever safe. Founded in 2024, the league has quickly become a hotbed of trade controversy, trash talk, and the occasional miracle comeback.</p>
-        <p>Every week, Paz drops the official <strong>Power Rankings</strong> — an unbiased, ruthlessly honest assessment of where every team stands. If you're at the bottom, you earned it.</p>
+        <div class="section-label">The league</div>
+        <h2 class="section-title" id="about-title">What is the<br>Ligma League?</h2>
+        <p>The <strong>Ligma League</strong> is a 12-team AFL Fantasy competition where bragging rights are everything and no lead is ever safe. Founded in 2024, it has become a hotbed of trade controversy, trash talk, questionable investments and the occasional miracle comeback.</p>
+        <p>Every round, Paz drops the official <strong>Power Rankings</strong>: an unbiased, ruthlessly honest assessment of where every team stands. If you're at the bottom, you earned it.</p>
       </div>
       <div class="about-facts">
-        <div class="fact-card"><div class="fact-icon">🏆</div><div class="fact-title">12 Teams</div><div class="fact-desc">One winner. Eleven ways to lose. No excuses.</div></div>
-        <div class="fact-card"><div class="fact-icon">📊</div><div class="fact-title">Weekly Rankings</div><div class="fact-desc">Updated every round. The truth hurts.</div></div>
-        <div class="fact-card"><div class="fact-icon">🔥</div><div class="fact-title">Est. 2024</div><div class="fact-desc">Fresh league. Long memories.</div></div>
+        <div class="fact-card"><div class="fact-icon">📊</div><div class="fact-title">Power Rankings</div><div class="fact-desc">Every team scored, every round. The truth hurts.</div></div>
+        <div class="fact-card"><div class="fact-icon">🐍</div><div class="fact-title">The SALI Index</div><div class="fact-desc">Scoons and Jaco hand out a Snake and a Ladder each week.</div></div>
         <div class="fact-card"><div class="fact-icon">🥄</div><div class="fact-title">Wooden Spoon</div><div class="fact-desc">Last place gets immortalised. Not in a good way.</div></div>
+        <div class="fact-card"><div class="fact-icon">🥢</div><div class="fact-title">The Off-Season</div><div class="fact-desc">The forfeit, the Chinese meal, the AGM, then draft night.</div></div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════ MYSTERY MATCHUP WHEEL ═══════════ -->
-  <section id="wheel-section">
-    <div class="wheel-outer">
-      <div class="section-label">For a Laugh</div>
-      <div class="section-title">Mystery Matchup Wheel 🎡</div>
-      <p class="wheel-intro">Spin the wheel, get a random Ligma League team paired with an AFL player. The universe will do the rest.</p>
-
-      <div class="wheel-layout">
-        <div class="wheel-container">
-          <div class="wheel-pointer">▼</div>
-          <canvas id="wheelCanvas" width="440" height="440"></canvas>
-          <button id="spinBtn"><span id="spinBtnText">SPIN</span></button>
-        </div>
-        <div class="wheel-result-area">
-          <div id="result-placeholder">
-            <div class="rph-icon">🎡</div>
-            <div class="rph-text">Spin the wheel to reveal your mystery matchup</div>
-          </div>
-          <div id="result-card" style="display:none">
-            <div class="rc-header"><span class="rc-badge">MYSTERY MATCHUP</span></div>
-            <div class="rc-block">
-              <div class="rc-label">Ligma League Team</div>
-              <div class="rc-team" id="rc-team"></div>
-            </div>
-            <div class="rc-divider"><span class="rc-x">✕</span></div>
-            <div class="rc-block">
-              <div class="rc-label">AFL Player</div>
-              <div class="rc-player" id="rc-player"></div>
-            </div>
-            <div class="rc-oneliner-wrap">
-              <div class="rc-oneliner" id="rc-oneliner"></div>
-            </div>
-            <button id="spinAgainBtn">🔄 SPIN AGAIN</button>
-          </div>
-        </div>
-      </div>
+  <!-- ═══════════ CLUBS ═══════════ -->
+  <section class="band band-dark" aria-labelledby="clubs-title">
+    <div class="wrap">
+      <div class="section-label">The clubs</div>
+      <h2 class="section-title" id="clubs-title">Twelve Clubs. One Cup.</h2>
+      <p class="section-intro">Every club and the person responsible for it. Tap a poster to see it full size.</p>
+      <ul class="clubs-grid">
+        <li><button type="button" class="club" data-lightbox="Better%20Holmes%20and%20Gardens.jpg" data-alt="Better Holmes and Gardens poster" data-caption="Better Holmes and Gardens · Matthew">
+          <span class="club-tag runner">2026 runners-up</span>
+          <img src="Better%20Holmes%20and%20Gardens.jpg" alt="" loading="lazy" width="1024" height="1536">
+          <span class="club-info"><span class="club-name">Better Holmes and Gardens</span><span class="club-owner">Matthew</span></span>
+        </button></li>
+        <li><button type="button" class="club" data-lightbox="Broncic.jpg" data-alt="Broncic poster" data-caption="Broncic · William">
+          <span class="club-tag">2× champions</span>
+          <img src="Broncic.jpg" alt="" loading="lazy" width="1536" height="1024">
+          <span class="club-info"><span class="club-name">Broncic</span><span class="club-owner">William</span></span>
+        </button></li>
+        <li><button type="button" class="club" data-lightbox="Cripps%20Nipps.jpg" data-alt="Cripps Nipps poster" data-caption="Cripps Nipps · Hayden">
+          <img src="Cripps%20Nipps.jpg" alt="" loading="lazy" width="1536" height="1024">
+          <span class="club-info"><span class="club-name">Cripps Nipps</span><span class="club-owner">Hayden</span></span>
+        </button></li>
+        <li><button type="button" class="club" data-lightbox="Dark%20Magicians.jpg" data-alt="Dark Magicians poster" data-caption="Dark Magicians · Osei">
+          <img src="Dark%20Magicians.jpg" alt="" loading="lazy" width="1024" height="1536">
+          <span class="club-info"><span class="club-name">Dark Magicians</span><span class="club-owner">Osei</span></span>
+        </button></li>
+        <li><button type="button" class="club" data-lightbox="DC%20&amp;%20Tax%20Payers.jpg" data-alt="DC and Tax Payers poster" data-caption="DC &amp; Tax Payers · Rupe">
+          <img src="DC%20&amp;%20Tax%20Payers.jpg" alt="" loading="lazy" width="1536" height="1024">
+          <span class="club-info"><span class="club-name">DC &amp; Tax Payers</span><span class="club-owner">Rupe</span></span>
+        </button></li>
+        <li><button type="button" class="club" data-lightbox="Flagdons.jpg" data-alt="Flagdons poster" data-caption="Flagdons · Rick">
+          <img src="Flagdons.jpg" alt="" loading="lazy" width="1024" height="1536">
+          <span class="club-info"><span class="club-name">Flagdons</span><span class="club-owner">Rick</span></span>
+        </button></li>
+        <li><button type="button" class="club" data-lightbox="Foopys.jpg" data-alt="Foopys poster" data-caption="Foopys · Miller">
+          <img src="Foopys.jpg" alt="" loading="lazy" width="1024" height="1536">
+          <span class="club-info"><span class="club-name">Foopys</span><span class="club-owner">Miller</span></span>
+        </button></li>
+        <li><button type="button" class="club" data-lightbox="Izaks.jpg" data-alt="Izaks poster" data-caption="Izaks · Zak">
+          <img src="Izaks.jpg" alt="" loading="lazy" width="1024" height="1536">
+          <span class="club-info"><span class="club-name">Izaks</span><span class="club-owner">Zak</span></span>
+        </button></li>
+        <li><button type="button" class="club" data-lightbox="Nethers%20men.jpg" data-alt="Nethers men poster" data-caption="Nethers men · Max">
+          <img src="Nethers%20men.jpg" alt="" loading="lazy" width="1024" height="1536">
+          <span class="club-info"><span class="club-name">Nethers men</span><span class="club-owner">Max</span></span>
+        </button></li>
+        <li><button type="button" class="club" data-lightbox="Phillipou.jpg" data-alt="Phillipou poster" data-caption="Phillipou · Cam">
+          <img src="Phillipou.jpg" alt="" loading="lazy" width="1536" height="1024">
+          <span class="club-info"><span class="club-name">Phillipou</span><span class="club-owner">Cam</span></span>
+        </button></li>
+        <li><button type="button" class="club" data-lightbox="Shavas.jpg" data-alt="Shavas poster" data-caption="Shavas · Patrick">
+          <img src="Shavas.jpg" alt="" loading="lazy" width="1024" height="687">
+          <span class="club-info"><span class="club-name">Shavas</span><span class="club-owner">Patrick</span></span>
+        </button></li>
+        <li><button type="button" class="club" data-lightbox="Van%20Twists.jpg" data-alt="Van Twists poster" data-caption="Van Twists · Tim · 2026 champions">
+          <span class="club-tag champ">2026 champions</span>
+          <img src="Van%20Twists.jpg" alt="" loading="lazy" width="1536" height="1024">
+          <span class="club-info"><span class="club-name">Van Twists</span><span class="club-owner">Tim</span></span>
+        </button></li>
+      </ul>
     </div>
   </section>
 
-  <style>
-    #wheel-section {
-      background: var(--dark);
-      border-top: 1px solid var(--border);
-    }
-    .wheel-outer {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 5rem 2.5rem;
-    }
-    .wheel-intro {
-      color: #6a8aaa;
-      font-size: 0.95rem;
-      line-height: 1.8;
-      max-width: 540px;
-      margin-bottom: 3rem;
-    }
-    .wheel-layout {
-      display: flex;
-      align-items: center;
-      gap: 4rem;
-      flex-wrap: wrap;
-    }
-    .wheel-container {
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1.5rem;
-    }
-    .wheel-pointer {
-      font-size: 2rem;
-      color: var(--gold);
-      filter: drop-shadow(0 0 8px rgba(200,169,81,0.6));
-      line-height: 1;
-      animation: wPointerBob 2s ease-in-out infinite;
-    }
-    @keyframes wPointerBob {
-      0%,100% { transform: translateY(0); }
-      50%      { transform: translateY(4px); }
-    }
-    #wheelCanvas {
-      border-radius: 50%;
-      box-shadow: 0 0 40px rgba(139,26,26,0.4), 0 0 80px rgba(0,0,0,0.6);
-      display: block;
-      max-width: 100%;
-      height: auto;
-    }
-    #spinBtn {
-      background: linear-gradient(135deg, var(--red) 0%, #a52020 100%);
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      padding: 1rem 3rem;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
-      letter-spacing: 4px;
-      cursor: pointer;
-      transition: transform 0.15s, box-shadow 0.15s;
-      box-shadow: 0 4px 20px rgba(139,26,26,0.5);
-    }
-    #spinBtn:hover:not(:disabled) {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(139,26,26,0.7);
-    }
-    #spinBtn:disabled { opacity: 0.55; cursor: not-allowed; }
+  </main>
 
-    .wheel-result-area { flex: 1; min-width: 280px; }
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <a class="footer-brand" href="index.html">PPR</a>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="2026.html">2026 season</a></li>
+        <li><a href="2027.html">2027 season</a></li>
+        <li><a href="grand-final.html">Grand Final</a></li>
+      </ul>
+      <div class="footer-copy">Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</div>
+    </div>
+  </footer>
 
-    #result-placeholder {
-      text-align: center;
-      padding: 3rem 2rem;
-      border: 1px dashed rgba(255,255,255,0.08);
-      border-radius: 16px;
-    }
-    .rph-icon { font-size: 3.5rem; margin-bottom: 1rem; opacity: 0.4; }
-    .rph-text {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #2a4a6a;
-    }
-
-    #result-card {
-      background: var(--mid);
-      border: 1px solid rgba(200,169,81,0.2);
-      border-radius: 16px;
-      overflow: hidden;
-      animation: wCardReveal 0.5s cubic-bezier(0.34,1.56,0.64,1) both;
-    }
-    @keyframes wCardReveal {
-      from { opacity: 0; transform: scale(0.85) translateY(20px); }
-      to   { opacity: 1; transform: scale(1) translateY(0); }
-    }
-    .rc-header {
-      background: linear-gradient(135deg, var(--red) 0%, #6b1010 100%);
-      padding: 0.85rem 1.5rem;
-    }
-    .rc-badge {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 0.95rem;
-      letter-spacing: 4px;
-      color: rgba(255,255,255,0.8);
-    }
-    .rc-block { padding: 1.4rem 1.8rem; }
-    .rc-label {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.68rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #3a5a7a;
-      margin-bottom: 0.4rem;
-    }
-    .rc-team {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.6rem, 4vw, 2.3rem);
-      letter-spacing: 2px;
-      color: var(--gold);
-      line-height: 1;
-    }
-    .rc-player {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: clamp(1.4rem, 3.5vw, 2rem);
-      letter-spacing: 2px;
-      color: var(--cream);
-      line-height: 1;
-    }
-    .rc-divider {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 0 1.8rem;
-    }
-    .rc-divider::before, .rc-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: rgba(255,255,255,0.07);
-    }
-    .rc-x { font-family: 'Oswald', sans-serif; font-size: 0.85rem; color: var(--red); opacity: 0.8; }
-    .rc-oneliner-wrap {
-      padding: 1.2rem 1.8rem 1.4rem;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-    .rc-oneliner {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.88rem;
-      color: #6a8aaa;
-      line-height: 1.7;
-      font-style: italic;
-    }
-    #spinAgainBtn {
-      display: block;
-      width: calc(100% - 3.6rem);
-      margin: 0 1.8rem 1.5rem;
-      background: transparent;
-      border: 1px solid rgba(200,169,81,0.3);
-      color: var(--gold);
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 0.7rem;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.15s, border-color 0.15s;
-    }
-    #spinAgainBtn:hover { background: rgba(200,169,81,0.08); border-color: var(--gold); }
-
-    @media (max-width: 768px) {
-      .wheel-outer { padding: 3rem 1.2rem; }
-      .wheel-layout { flex-direction: column; gap: 2.5rem; }
-      .wheel-container { width: 100%; }
-      #wheelCanvas { width: 300px !important; height: 300px !important; }
-      .wheel-result-area { width: 100%; min-width: unset; }
-    }
-  </style>
-
-  <script>
-  (function() {
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    // ✏️  EDIT THESE LISTS FREELY
-    // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    const WHEEL_TEAMS = [
-      "Foopys", "Van Twists", "Dark Magicians", "Cripps Nipps",
-      "Phillipou", "Flagdons", "Nethers men", "Shavas",
-      "Holmes & Gardens", "Izaks", "Broncic", "DC & Tax Payers"
-    ];
-
-    const AFL_PLAYERS = [
-      "Alex Neal-Bullen","Archie Ludowyke","Ben Keays","Billy Dowling","Brayden Cook","Callum Ah Chee","Charlie Edwards","Chayce Jones","Daniel Curtin","Darcy Fogarty","Finnbar Maley","Hugh Bond","Indy Cotton","Isaac Cumming","Izak Rankine","Jake Soligo","James Borlase","James Peatling","Jordan Dawson","Jordon Butts","Josh Rachele","Josh Worrell","Lachlan McAndrew","Lachlan Sholl","Luke Nankervis","Luke Pedlar","Mark Keane","Max Michalanney","Mitchell Hinge","Mitchell Marsh","Nick Murray","Oscar Ryan","Reilly O'Brien","Riley Thilthorpe","Rory Laird","Sam Berry","Sid Draper","Taylor Walker","Toby Murray","Tyler Welsh","Wayne Milera","Zac Taylor",
-      "Ben Murphy","Bruce Reville","Cam Rayner","Charlie Cameron","Cody Curtin","Conor McKenna","Daniel Annable","Darcy Fort","Darcy Gardiner","Darcy Wilmot","Darragh Joyce","Dayne Zorko","Eric Hipwood","Harris Andrews","Henry Smith","Hugh McCluggage","Jack Payne","James Tunstill","Jarrod Berry","Jaspa Fletcher","Josh Dunkley","Kai Lohmann","Keidean Coleman","Koby Evans","Lachie Neale","Levi Ashcroft","Lincoln McCarthy","Logan Morris","Luke Beecken","Luke Lloyd","Noah Answerth","Oscar Allen","Reece Torrent","Ryan Lester","Sam Draper","Sam Marshall","Shadeau Brain","Tai Hayes","Tom Doedee","Ty Gallop","Will Ashcroft","Will McLachlan","Zac Bailey","Zane Zakostelsky",
-      "Adam Cerra","Adam Saad","Ashton Moir","Ben Ainsworth","Ben Camporeale","Billy Wilson","Blake Acres","Brodie Kemp","Campbell Chesser","Cooper Lord","Elijah Hollands","Flynn Young","Francis Evans","George Hewett","Harry Charleson","Harry Dean","Harry McKay","Harry O'Farrell","Hudson O'Keeffe","Jack Ison","Jacob Weitering","Jagga Smith","Jesse Motlop","Jordan Boyd","Lachie Fogarty","Lachlan Cowan","Lewis Young","Liam Reidy","Lucas Camporeale","Marc Pittonet","Matt Duffy","Matthew Carroll","Matthew Cottrell","Mitch McGovern","Nic Newman","Nick Haynes","Oliver Florent","Oliver Hollands","Patrick Cripps","Rob Monahan","Sam Walsh","Talor Byrne","Wade Derksen","Will Hayward","Zac Williams",
-      "Angus Anderson","Beau McCreery","Billy Frampton","Bobby Hill","Brayden Maynard","Charlie West","Dan Houston","Daniel McStay","Darcy Cameron","Darcy Moore","Edward Allan","Harry DeMattia","Harry Perryman","Harvey Harrison","Iliro Smit","Isaac Quaynor","Jack Buller","Jack Crisp","Jai Saxena","Jakob Ryan","Jamie Elliott","Jeremy Howe","Joel Cochran","Jordan De Goey","Josh Daicos","Lachie Schultz","Lachlan Sullivan","Ned Long","Nick Daicos","Noah Howes","Oscar Steene","Patrick Lipinski","Reef McInnes","Roan Steele","Sam Swadling","Scott Pendlebury","Steele Sidebottom","Tew Jiath","Tim Membrey","Tyan Prindable","Wil Parker","William Hayes","Zac McCarthy",
-      "Andrew McGrath","Angus Clarke","Archer Day-Wicks","Archer May","Archie Perkins","Archie Roberts","Ben McKay","Brayden Fiorini","Cillian Bourke","Darcy Parish","Dyson Sharp","Elijah Tsatas","Harrison Jones","Hussien El Achkar","Isaac Kako","Jacob Farrow","Jade Gresham","Jaxon Prior","Jayden Nguyen","Jordan Ridley","Jye Caldwell","Kayle Gerreyn","Kyle Langford","Lachlan Blakiston","Lewis Hayes","Liam McMahon","Mason Redman","Matt Guelfi","Max Kondogiannis","Nate Caddy","Nic Martin","Nick Bryan","Nik Cox","Peter Wright","Rhys Unwin","Saad El-Hawli","Sam Durham","Sullivan Robey","Thomas Edwards","Vigo Visentini","Will Setterfield","Xavier Duursma","Zach Merrett","Zach Reid","Zak Johnson",
-      "Adam Sweid","Aiden Riddle","Alex Pearce","Andrew Brayshaw","Bailey Banfield","Brandon Walker","Brennan Cox","Caleb Serong","Charlie Nicholls","Christopher Scerri","Cooper Simpson","Corey Wagner","Hayden Young","Heath Chapman","Hugh Davies","Isaiah Dudley","Jaeger O'Meara","Jaren Carr","Jeremy Sharp","Jordan Clark","Josh Treacy","Joshua Draper","Judd McVee","Jye Amiss","Karl Worner","Leon Kickett","Luke Jackson","Luke Ryan","Mason Cox","Matthew Johnson","Michael Frederick","Murphy Reid","Nathan O'Driscoll","Neil Erasmus","Ollie Murphy","Oscar McDonald","Patrick Voss","Ryda Luke","Sam Sturt","Sam Switkowski","Sean Darcy","Shai Bolton","Toby Whan","Tobyn Murray",
-      "Bailey Smith","Brad Close","Cillian Burke","Connor O'Sullivan","George Stevens","Gryan Miers","Harley Barker","Hunter Holmes","Jack Bowes","Jack Henry","Jack Martin","Jacob Molier","Jake Kolodjashnij","James Worpel","Jay Polkinghorne","Jed Bews","Jeremy Cameron","Jesse Mellor","Jhye Clark","Joe Pike","Keighton Matofai-Forbes","Lawson Humphries","Lennox Hofmann","Mark Blicavs","Mark O'Connor","Max Holmes","Mitch Knevitt","Mitchell Edwards","Nicholas Driscoll","Oisin Mullin","Oliver Dempsey","Oliver Henry","Oliver Wiltshire","Patrick Dangerfield","Rhys Stanley","Sam De Koning","Shannon Neale","Shaun Mannagh","Tanner Bruhn","Toby Conway","Tom Atkins","Tom Stewart","Tyson Stengle","Zach Guthrie",
-      "Alex Davies","Asher Eastham","Avery Thomas","Bailey Humphrey","Beau Addinsall","Ben Jepson","Ben King","Ben Long","Bodhi Uwland","Caleb Graham","Caleb Lewis","Charlie Ballard","Christian Petracca","Cooper Bell","Daniel Rioli","Dylan Patterson","Elliott Himmelberg","Ethan Read","Jai Murray","Jake Rogers","Jamarra Ugle-Hagan","Jarrod Witts","Jed Walter","Joel Jeffrey","John Noble","Jy Farrar","Koby Coulson","Lachie Weller","Lachlan Gulbin","Leonardo Lombard","Mac Andrew","Matt Rowell","Max Knobel","Ned Moyle","Nick Holman","Noah Anderson","Oscar Adams","Sam Clohesy","Sam Collins","Touk Miller","Wil Powell","Will Graham","Zak Evans","Zeke Uwland",
-      "Aaron Cadman","Brent Daniels","Callum Brown","Clayton Oliver","Cody Angove","Connor Idun","Conor Stone","Darcy Jones","Finn Callaghan","Finnegan Davis","Harrison Oliver","Harry Himmelberg","Harry Rowston","Harvey Thomas","Jack Buckley","Jack Ough","Jake Riccardi","Jake Stringer","James Leake","Jayden Laverde","Jesse Hogan","Joe Fonti","Josaia Delana","Josh Kelly","Kieren Briggs","Lachie Ash","Lachie Whitfield","Leek Aleer","Logan Smith","Max Gruzewski","Nathan Wardius","Nicholas Madden","Oliver Hannaford","Oskar Taylor","Phoenix Gothard","Riley Hamilton","Ryan Angwin","Sam Taylor","Stephen Coniglio","Toby Bedford","Toby Greene","Toby McMullin","Tom Green","Xavier O'Halloran",
-      "Aidan Schubert","Bailey Macdonald","Blake Hardwick","Bodie Ryan","Calsher Dear","Cam Mackenzie","Cameron Nairn","Cody Anderson","Connor Macdonald","Conor Nash","Dylan Moore","Finn Maginness","Flynn Perez","Harry Morrison","Henry Hustwaite","Jack Dalton","Jack Ginnivan","Jack Gunston","Jack Scrimshaw","Jai Newcombe","Jaime Uhr-Henry","James Blanck","James Sicily","Jarman Impey","Josh Battle","Josh Ward","Josh Weddle","Karl Amon","Lloyd Meek","Mabior Chol","Massimo D'Ambrosio","Matt Hill","Matthew LeRay","Max Ramsden","Mitch Lewis","Ned Reeves","Nick Watson","Noah Mraz","Oliver Greeves","Sam Butler","Tom Barrass","Will Day","William McCabe",
-      "Aidan Johnson","Andy Moniz-Wakefield","Bailey Laurie","Bayley Fritsch","Blake Howes","Brody Mihocek","Caleb Windsor","Changkuoth Jiath","Christian Salem","Daniel Turner","Ed Langdon","Harrison Petty","Harry Sharp","Harvey Langford","Jack Henderson","Jack Steele","Jack Viney","Jacob van Rooyen","Jai Culley","Jake Bowey","Jake Lever","Jake Melksham","Jed Adams","Kade Chandler","Kalani White","Koltyn Tholstrup","Kysaiah Pickett","Latrelle Pickett","Luker Kentfield","Matthew Jefferson","Max Gawn","Max Heath","Oscar Berry","Paddy Cross","Ricky Mentha","Riley Onley","Shane McAdam","Steven May","Thomas Matthews","Tom Campbell","Tom McDonald","Tom Sparrow","Trent Rivers","Xavier Lindsay","Xavier Taylor",
-      "Aidan Corr","Bailey Scott","Blake Thredgold","Brayden George","Caleb Daniel","Callum Coleman-Jones","Cameron Zurhaar","Charlie Comben","Charlie Spargo","Colby McKercher","Cooper Harvey","Cooper Trembath","Dylan Stephens","Finn O'Sullivan","George Wardlaw","Griffin Logue","Harry Sheezel","Hugo Mikunda","Jack Darling","Jackson Archer","Jacob Konstanty","Josh Goater","Jy Simpkin","Lachy Dovaston","Luke Davies-Uniacke","Luke McDonald","Luke Parker","Luke Urquhart","Matt Whitlock","Nick Larkey","Paul Curtis","Riley Hardeman","River Stevens","Robert Hansen Jr","Taylor Goad","Toby Pink","Tom Blamires","Tom Powell","Tristan Xerri","Wil Dawson","Zac Banch","Zac Fisher","Zane Duursma",
-      "Aliir Aliir","Balyn O'Brien","Benny Barrett","Brandon Zerk-Thatcher","Christian Moraes","Connor Rozee","Corey Durdin","Dante Visentini","Darcy Byrne-Jones","Esava Ratugolea","Ewan Mackinlay","Harrison Ramm","Ivan Soldo","Jack Lukosius","Jack Watkins","Jack Whitlock","Jackson Mead","Jacob Moss","Jacob Wehr","Jase Burgoyne","Jason Horne-Francis","Joe Berry","Joe Richards","Jordon Sweet","Josh Lai","Josh Sinn","Kane Farrell","Lachie Jones","Logan Evans","Mani Liddy","Miles Bergman","Mitch Georgiades","Mitch Zadow","Ollie Lord","Ollie Wines","Sam Powell-Pepper","Todd Marshall","Tom Anastasopoulos","Tom Cochrane","Will Brodie","Will Lorenz","Willem Drew","Xavier Walsh","Zak Butters",
-      "Ben Miller","Campbell Gray","Dion Prestia","Harry Armstrong","Hugo Ralphsmith","Jack Ross","Jacob Hopper","James Trezise","Jasper Alger","Jayden Short","Jonty Faull","Josh Gibcus","Josh Smillie","Judson Clarke","Kaleb Smith","Kane McAuliffe","Liam Fawcett","Luke Trainor","Maurice Rioli","Mykelti Lefau","Nathan Broad","Nick Vlastuin","Noah Balta","Noah Roberts-Thomson","Oliver Hayes-Brown","Patrick Retschko","Rhyan Mansell","Sam Banks","Sam Cumming","Sam Grlj","Sam Lalor","Samson Ryan","Seth Campbell","Steely Green","Taj Hotton","Tim Taranto","Toby Nankervis","Tom Brown","Tom Burton","Tom Lynch","Tom Sims","Tyler Sonsie","Zane Peucker",
-      "Alex Dodson","Alix Tauru","Angus Hastie","Anthony Caminiti","Bradley Hill","Callum Wilkie","Charlie Banfield","Cooper Sharman","Dan Butler","Darcy Wilson","Dougal Howard","Eamonn Armstrong","Hugh Boxshall","Hugo Garcia","Hunter Clark","Isaac Keeler","Jack Carroll","Jack Higgins","Jack Macrae","Jack Silvagni","Jack Sinclair","James Barrat","Kobe McDonald","Kye Fincher","Lance Collard","Liam Henry","Liam O'Connell","Liam Ryan","Liam Stocker","Marcus Windhager","Mason Wood","Mattaes Phillipou","Max Hall","Max King","Mitch Owens","Nasiah Wanganeen-Milera","Paddy Dow","Patrick Said","Rowan Marshall","Ryan Byrnes","Sam Flanders","Tobie Travaglia","Tom De Koning",
-      "Angus Sheldrick","Billy Cootee","Braeden Campbell","Brodie Grundy","Caiden Cleary","Callum Mills","Chad Warner","Charlie Curnow","Corey Warner","Dane Rampe","Errol Gulden","Harry Cunningham","Harry Kyle","Hayden McLean","Isaac Heeney","Jai Serong","Jake Lloyd","James Jordon","James Rowbottom","Jesse Dattoli","Jevan Phillipou","Joel Amartey","Joel Hamling","Justin McInerney","Lewis Melican","Liam Hetherton","Logan McDonald","Malcolm Rosas","Matt Roberts","Ned Bowman","Nick Blakey","Noah Chamberlain","Patrick Snell","Peter Ladhams","Riak Andrew","Riley Bice","Sam Wicks","Taylor Adams","Tom Hanily","Tom McCartin","Tom Papley","William Edwards","William Green",
-      "Archer Reid","Bailey J. Williams","Bo Allan","Brady Hough","Brandon Starcevich","Clay Hall","Cooper Duff-Tytler","Deven Robertson","Elijah Hewett","Elliot Yeo","Finlay Macrae","Fred Rodriguez","Hamish Davis","Harley Reid","Harry Barnett","Harry Edwards","Harry Schoenberg","Harvey Johnston","Jack Graham","Jack Hutchinson","Jack Williams","Jacob Newton","Jake Waterman","Jamie Cripps","Jobe Shanahan","Josh Lindsay","Liam Baker","Liam Duggan","Lucca Grego","Malakai Champion","Matt Flynn","Matthew Owies","Milan Murdock","Noah Long","Reuben Ginbey","Rhett Bazzo","Ryan Maric","Sam Allen","Sandy Brock","Tim Kelly","Tom Cole","Tom Gross","Tom McCarthy","Tylah Williams","Tylar Young","Tyler Brockman","Tyrell Dewar","Willem Duursma",
-      "Aaron Naughton","Adam Treloar","Arthur Jones","Bailey Dale","Bailey Williams","Buku Khamis","Cody Weightman","Connor Budarick","Cooper Hynes","Ed Richards","Harvey Gallagher","James Harmes","James O'Donnell","Jedd Busslinger","Joel Freijah","Jordan Croft","Josh Dolan","Lachie Jaques","Lachlan Bramble","Lachlan Carmichael","Lachlan McNeil","Lachlan Smith","Laitham Vandermeer","Louis Emmett","Luke Cleary","Luke Kennedy","Marcus Bontempelli","Matthew Kennedy","Michael Sellwood","Nick Coffield","Oskar Baker","Rhylee West","Riley Garcia","Rory Lobb","Ryan Gardner","Ryley Sanders","Sam Darcy","Sam Davidson","Tim English","Tom Liberatore","Will Darcy","Will Lewis","Zac Walker"
-    ];
-
-    const ONE_LINERS = [
-      "An unstoppable duo or a total disaster waiting to happen?",
-      "The fantasy gods have spoken. No takebacks.",
-      "This pairing makes absolutely no sense. Perfect.",
-      "Somewhere, a trade offer is already being drafted.",
-      "The Ligma League just got a little more chaotic.",
-      "This is either genius or completely cooked.",
-      "The scouts couldn't have predicted this one.",
-      "Pure coincidence. Or is it destiny?",
-      "You didn't choose the matchup. The matchup chose you.",
-      "A combination only the Wheel could conjure.",
-      "Two legends. One cursed pairing.",
-      "Nobody saw this coming. Not even the algorithm.",
-      "Paz would not approve. And that's exactly why it works.",
-      "Filing a protest immediately.",
-      "The fantasy gods are testing us today.",
-      "Somewhere a coach just spat out their tea.",
-      "Don't overthink it. The Wheel is always right.",
-      "This pairing has no business going this hard.",
-      "One is elite. One is... in the Ligma League.",
-      "Statistically improbable. Emotionally inevitable.",
-      "If this were a trade, someone would get roasted in the group chat.",
-      "The commentators would lose their minds.",
-      "This combo wakes up at 3am thinking about contested marks.",
-      "Would be an elite podcast duo, no notes.",
-      "Chaos energy. Maximum chaos energy."
-    ];
-
-    // Slice colours — alternating from PPR palette
-    const SLICE_COLORS = [
-      ["#8b1a1a","#a52020"], ["#1b2a3b","#243549"], ["#6b3a1a","#8b4a22"],
-      ["#0d1a2b","#162233"], ["#7a1a2a","#952030"], ["#1a2b1a","#223322"],
-      ["#5a1a3a","#721e48"], ["#1a1b3a","#22234a"], ["#3a1a1a","#4a2020"],
-      ["#1a3a3a","#1e4a4a"], ["#2a1a3a","#35224a"], ["#1a3a1a","#224a22"],
-    ];
-    const TEXT_COLORS = [
-      "#f0c050","#a0c8f0","#f0a060","#80b8f0","#f08080","#80d0a0",
-      "#d080b0","#8090f0","#f0c080","#60d0c0","#c090e0","#80d880"
-    ];
-
-    const canvas = document.getElementById('wheelCanvas');
-    const ctx = canvas.getContext('2d');
-    const N = WHEEL_TEAMS.length;
-    const sliceAngle = (2 * Math.PI) / N;
-    let currentAngle = 0;
-    let isSpinning = false;
-
-    function drawWheel(rotation) {
-      const W = canvas.width, H = canvas.height;
-      const cx = W / 2, cy = H / 2;
-      const radius = Math.min(cx, cy) - 4;
-      ctx.clearRect(0, 0, W, H);
-
-      // glow ring
-      const glowGrad = ctx.createRadialGradient(cx, cy, radius - 4, cx, cy, radius + 4);
-      glowGrad.addColorStop(0, 'rgba(200,169,81,0.5)');
-      glowGrad.addColorStop(1, 'rgba(200,169,81,0)');
-      ctx.beginPath();
-      ctx.arc(cx, cy, radius + 2, 0, 2 * Math.PI);
-      ctx.strokeStyle = glowGrad;
-      ctx.lineWidth = 6;
-      ctx.stroke();
-
-      for (let i = 0; i < N; i++) {
-        const startA = rotation + i * sliceAngle;
-        const endA   = startA + sliceAngle;
-        const midA   = startA + sliceAngle / 2;
-        const [c1, c2] = SLICE_COLORS[i % SLICE_COLORS.length];
-
-        const grad = ctx.createLinearGradient(
-          cx + Math.cos(startA) * radius * 0.3, cy + Math.sin(startA) * radius * 0.3,
-          cx + Math.cos(endA)   * radius * 0.9, cy + Math.sin(endA)   * radius * 0.9
-        );
-        grad.addColorStop(0, c1);
-        grad.addColorStop(1, c2);
-
-        ctx.beginPath();
-        ctx.moveTo(cx, cy);
-        ctx.arc(cx, cy, radius, startA, endA);
-        ctx.closePath();
-        ctx.fillStyle = grad;
-        ctx.fill();
-
-        ctx.beginPath();
-        ctx.moveTo(cx, cy);
-        ctx.lineTo(cx + Math.cos(startA) * radius, cy + Math.sin(startA) * radius);
-        ctx.strokeStyle = 'rgba(200,169,81,0.25)';
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-
-        ctx.save();
-        ctx.translate(cx, cy);
-        ctx.rotate(midA);
-        ctx.textAlign = 'right';
-        ctx.fillStyle = TEXT_COLORS[i % TEXT_COLORS.length];
-        const fs = canvas.width < 350 ? 9 : 11;
-        ctx.font = `700 ${fs}px 'Oswald', sans-serif`;
-        const label = WHEEL_TEAMS[i].length > 12 ? WHEEL_TEAMS[i].slice(0, 11) + '…' : WHEEL_TEAMS[i];
-        ctx.fillText(label, radius - 14, 4);
-        ctx.restore();
-      }
-
-      // hub
-      const hubGrad = ctx.createRadialGradient(cx, cy, 0, cx, cy, 28);
-      hubGrad.addColorStop(0, '#c8a951');
-      hubGrad.addColorStop(1, '#8b6a20');
-      ctx.beginPath();
-      ctx.arc(cx, cy, 28, 0, 2 * Math.PI);
-      ctx.fillStyle = hubGrad;
-      ctx.fill();
-      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
-      ctx.lineWidth = 2;
-      ctx.stroke();
-      ctx.fillStyle = '#1b2a3b';
-      ctx.font = "bold 13px 'Bebas Neue', sans-serif";
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.fillText('PPR', cx, cy);
-    }
-
-    function getWinnerIdx(rotation) {
-      const norm = ((-rotation - Math.PI / 2) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
-      return Math.floor(norm / sliceAngle) % N;
-    }
-
-    function showResult(teamIdx, player) {
-      const team     = WHEEL_TEAMS[teamIdx];
-      const oneliner = ONE_LINERS[Math.floor(Math.random() * ONE_LINERS.length)];
-      document.getElementById('result-placeholder').style.display = 'none';
-      const card = document.getElementById('result-card');
-      card.style.display = 'block';
-      card.style.animation = 'none';
-      void card.offsetWidth;
-      card.style.animation = '';
-      document.getElementById('rc-team').textContent   = team;
-      document.getElementById('rc-player').textContent = player;
-      document.getElementById('rc-oneliner').textContent = '\u201c' + oneliner + '\u201d';
-    }
-
-    function spin() {
-      if (isSpinning) return;
-      isSpinning = true;
-      document.getElementById('spinBtn').disabled = true;
-      document.getElementById('spinBtnText').textContent = 'SPINNING\u2026';
-      document.getElementById('result-card').style.display = 'none';
-      document.getElementById('result-placeholder').style.display = 'block';
-
-      const targetIdx  = Math.floor(Math.random() * N);
-      const player     = AFL_PLAYERS[Math.floor(Math.random() * AFL_PLAYERS.length)];
-      const extraSpins = (5 + Math.random() * 3) * 2 * Math.PI;
-      const targetMid  = targetIdx * sliceAngle + sliceAngle / 2;
-      const stopAngle  = -Math.PI / 2 - targetMid;
-      const endAngle   = currentAngle - ((currentAngle - stopAngle) % (2 * Math.PI)) - extraSpins;
-      const startAngle = currentAngle;
-      const duration   = 4500 + Math.random() * 1000;
-      const startTime  = performance.now();
-
-      function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
-
-      function frame(now) {
-        const t = Math.min((now - startTime) / duration, 1);
-        currentAngle = startAngle + (endAngle - startAngle) * easeOut(t);
-        drawWheel(currentAngle);
-        if (t < 1) {
-          requestAnimationFrame(frame);
-        } else {
-          currentAngle = endAngle;
-          drawWheel(currentAngle);
-          isSpinning = false;
-          document.getElementById('spinBtn').disabled = false;
-          document.getElementById('spinBtnText').textContent = 'SPIN';
-          showResult(getWinnerIdx(currentAngle), player);
-        }
-      }
-      requestAnimationFrame(frame);
-    }
-
-    drawWheel(currentAngle);
-    document.getElementById('spinBtn').addEventListener('click', spin);
-    document.getElementById('spinAgainBtn').addEventListener('click', spin);
-  })();
-  </script>
-
-  <footer>Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</footer>
-
-  <!-- ═══════════ FIREBASE VOTING ═══════════ -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, doc, onSnapshot, runTransaction, setDoc, getDoc }
-      from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyD_vPHSuGEOST39l-aMuy7rhw4dUGb2qvc",
-      authDomain: "ligma-league.firebaseapp.com",
-      projectId: "ligma-league",
-      storageBucket: "ligma-league.firebasestorage.app",
-      messagingSenderId: "869683799608",
-      appId: "1:869683799608:web:26e62dc39dd627f86e68cd"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db  = getFirestore(app);
-
-    const TEAMS = [
-      "Foopys", "Van Twists", "Dark Magicians", "Cripps Nipps",
-      "Phillipou", "Flagdons", "Nethers men", "Shavas",
-      "Better Holmes and Gardens", "Izaks", "Broncic", "DC & Tax Payers"
-    ];
-    const MAX = 999999;
-
-    // Initialise docs if they don't exist yet
-    async function ensureDoc(poll) {
-      const ref = doc(db, "votes", poll);
-      const snap = await getDoc(ref);
-      if (!snap.exists()) {
-        const init = {};
-        TEAMS.forEach(t => init[t] = 0);
-        await setDoc(ref, init);
-      }
-    }
-    await ensureDoc("spoon");
-    await ensureDoc("champ");
-
-    // Build 6-digit odometer HTML
-    function odoHTML(count) {
-      const clamped = Math.min(count, MAX);
-      const s = String(clamped).padStart(6, '0');
-      const litFrom = 6 - String(clamped).length;
-      return Array.from(s).map((d, i) =>
-        `<div class="odo-digit${i >= litFrom ? ' lit' : ''}" data-v="${d}">${d}</div>`
-      ).join('');
-    }
-
-    // Full render of a poll
-    function renderPoll(poll, data) {
-      const container = document.getElementById(`rows-${poll}`);
-      const totalEl   = document.getElementById(`total-${poll}`);
-      const vals  = TEAMS.map(t => data[t] ?? 0);
-      const maxV  = Math.max(...vals, 1);
-      const total = vals.reduce((a, b) => a + b, 0);
-
-      container.innerHTML = TEAMS.map((team, i) => {
-        const count = data[team] ?? 0;
-        const pct   = (count / maxV) * 100;
-        return `
-          <div class="team-row">
-            <div class="team-row-bar" style="width:${pct}%"></div>
-            <span class="team-num">${i + 1}</span>
-            <span class="team-name">${team}</span>
-            <div class="odo" id="odo-${poll}-${i}">${odoHTML(count)}</div>
-            <button class="vote-btn" data-poll="${poll}" data-team="${team}" data-idx="${i}">Vote</button>
-          </div>`;
-      }).join('');
-
-      // attach click handlers
-      container.querySelectorAll('.vote-btn').forEach(btn => {
-        btn.addEventListener('click', () => castVote(btn.dataset.poll, btn.dataset.team, +btn.dataset.idx));
-      });
-
-      if (totalEl) totalEl.textContent = total.toLocaleString() + ' vote' + (total !== 1 ? 's' : '');
-    }
-
-    // Patch-update changed odo digits + bars (no full re-render)
-    function patchPoll(poll, data) {
-      const vals  = TEAMS.map(t => data[t] ?? 0);
-      const maxV  = Math.max(...vals, 1);
-      const total = vals.reduce((a, b) => a + b, 0);
-
-      TEAMS.forEach((team, i) => {
-        const count  = data[team] ?? 0;
-        const odoEl  = document.getElementById(`odo-${poll}-${i}`);
-        if (odoEl) {
-          const newStr  = String(Math.min(count, MAX)).padStart(6, '0');
-          const litFrom = 6 - String(Math.min(count, MAX)).length;
-          odoEl.querySelectorAll('.odo-digit').forEach((el, j) => {
-            const newVal = newStr[j];
-            if (el.dataset.v !== newVal) {
-              el.dataset.v = newVal;
-              el.textContent = newVal;
-              el.classList.toggle('lit', j >= litFrom);
-              el.classList.remove('pop');
-              void el.offsetWidth;
-              el.classList.add('pop');
-            }
-          });
-        }
-        // update bar
-        const rows = document.querySelectorAll(`#rows-${poll} .team-row`);
-        if (rows[i]) {
-          const bar = rows[i].querySelector('.team-row-bar');
-          if (bar) bar.style.width = ((count / maxV) * 100) + '%';
-        }
-      });
-
-      const totalEl = document.getElementById(`total-${poll}`);
-      if (totalEl) totalEl.textContent = total.toLocaleString() + ' vote' + (total !== 1 ? 's' : '');
-    }
-
-    // Real-time listeners
-    const prevData = { spoon: null, champ: null };
-
-    function listenPoll(poll) {
-      onSnapshot(doc(db, "votes", poll), snap => {
-        if (!snap.exists()) return;
-        const data = snap.data();
-        if (!prevData[poll]) {
-          renderPoll(poll, data);   // first load
-        } else {
-          patchPoll(poll, data);    // live update
-        }
-        prevData[poll] = { ...data };
-      });
-    }
-
-    listenPoll("spoon");
-    listenPoll("champ");
-
-    // Atomic vote increment
-    async function castVote(poll, team) {
-      const ref = doc(db, "votes", poll);
-      try {
-        await runTransaction(db, async tx => {
-          const snap = await tx.get(ref);
-          const curr = snap.exists() ? (snap.data()[team] ?? 0) : 0;
-          if (curr >= MAX) return;
-          tx.update(ref, { [team]: curr + 1 });
-        });
-      } catch(e) {
-        console.error("Vote failed:", e);
-      }
-    }
-  </script>
-
+  <script src="ppr.js"></script>
   <script src="nav.js"></script>
 </body>
 </html>

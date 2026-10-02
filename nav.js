@@ -1,49 +1,91 @@
 /**
- * PPR Shared Navigation — nav.js v4
- * ===================================
- * Single source of truth for every page on the site.
+ * PPR Shared Navigation (nav.js v5, season edition)
+ * ==================================================
+ * Single source of truth for the header on every page of the site.
  *
- * TO ADD A NEW ROUND:
- *   Uncomment (or add) an entry in PPR_NAV.rounds below.
- *   Every page updates automatically — no other files need touching.
+ * The header has two tiers:
+ *   1. The main bar:   PPR | Home | 2026 | 2027
+ *   2. The season bar: shown on any page that belongs to a season
+ *                      (Overview, Draft Night, Rounds, Grand Final, extras)
  *
- * TO UPDATE THE "LATEST ROUND" badge on index.html:
- *   Change PPR_NAV.latestRound to the new round's href.
+ * A page belongs to a season if its filename appears anywhere in that
+ * season's config below (including the `hidden` list). Nothing needs to
+ * change inside the individual round pages.
+ *
+ * ── ADDING A 2027 PAGE ────────────────────────────────────────────────
+ *   1. Create the page (copy PAGE_TEMPLATE.html), e.g. 2027-round-1.html
+ *   2. Add it to the 2027 `rounds` array below:
+ *        { label: 'Round 1', href: '2027-round-1.html' },
+ *   3. For Draft Night / Grand Final, replace `href: null` with the file.
+ *      Items with `href: null` show as "Soon" and are not clickable.
+ *
+ * ── ADDING A WHOLE NEW SEASON (e.g. 2028) ─────────────────────────────
+ *   Copy the 2027 block, change the year, overview file and status.
+ *   The new year tab appears in the main bar automatically.
  */
 
 const PPR_NAV = {
 
-  // ── LATEST ROUND (reference only — used for documentation) ──────────────
-  latestRound: 'round-11.html',
+  home: { label: 'Home', href: 'index.html' },
 
-  // ── ROUNDS DROPDOWN ──────────────────────────────────────────────────────
-  rounds: [
-    { label: 'Opening Round', href: 'opening-round.html' },
-    { label: 'Round 1',       href: 'round-1.html'       },
-    { label: 'Round 2',       href: 'round-2.html'       },
-    { label: 'Round 3',       href: 'round-3.html'       },
-    { label: 'Round 4',       href: 'round-4.html'       },
-    { label: 'Round 5',       href: 'round-5.html'       },
-    { label: 'Round 6',       href: 'round-6.html'       },
-    { label: 'Round 7',       href: 'round-7.html'       },
-    { label: 'Round 8',       href: 'round-8.html'       },
-    { label: 'Round 9',       href: 'round-9.html'       },
-    { label: 'Round 10',      href: 'round-10.html'      },
-    { label: 'Round 11',      href: 'round-11.html'      },
-  ],
-
-  // ── STATIC NAV ITEMS ─────────────────────────────────────────────────────
-  before: [
-    { label: 'Home',        href: 'index.html'    },
-    { label: 'Draft Night', href: 'rankings.html' },
-  ],
-
-  after: [
-    { label: '🏆 Grand Final',          href: 'grand-final.html', cls: 'ppr-gf' },
-    { label: '⚔️ Rivalry Round',       href: 'rivalry-round.html'      },
-    { label: '📸 Best Moments',         href: 'best-moments.html'       },
-    { label: '🎵 PPR Tunes',            href: 'ppr-tunes.html'          },
-    { label: '🐍 Snakes &amp; Ladders', href: 'snakes-and-ladders.html' },
+  seasons: [
+    {
+      year: '2026',
+      overview: '2026.html',
+      status: 'Complete',
+      accent: 'gold',
+      latestRound: 'round-11.html',
+      before: [
+        { label: 'Overview',    href: '2026.html'     },
+        { label: 'Draft Night', href: 'rankings.html' },
+      ],
+      rounds: [
+        { label: 'Opening Round', href: 'opening-round.html' },
+        { label: 'Round 1',       href: 'round-1.html'       },
+        { label: 'Round 2',       href: 'round-2.html'       },
+        { label: 'Round 3',       href: 'round-3.html'       },
+        { label: 'Round 4',       href: 'round-4.html'       },
+        { label: 'Round 5',       href: 'round-5.html'       },
+        { label: 'Round 6',       href: 'round-6.html'       },
+        { label: 'Round 7',       href: 'round-7.html'       },
+        { label: 'Round 8',       href: 'round-8.html'       },
+        { label: 'Round 9',       href: 'round-9.html'       },
+        { label: 'Round 10',      href: 'round-10.html'      },
+        { label: 'Round 11',      href: 'round-11.html'      },
+      ],
+      after: [
+        { label: '🏆 Grand Final',          href: 'grand-final.html', cls: 'ppr-gf' },
+        { label: '⚔️ Rivalry Round',       href: 'rivalry-round.html'      },
+        { label: '📸 Best Moments',         href: 'best-moments.html'       },
+        { label: '🎵 PPR Tunes',            href: 'ppr-tunes.html'          },
+        { label: '🐍 Snakes &amp; Ladders', href: 'snakes-and-ladders.html' },
+      ],
+      // Pages that belong to 2026 but are not listed in the bar
+      hidden: [
+        'dark-magicians-secret.html',
+        'dc-taxpayers-secret.html',
+        'holmes-gardens-secret.html',
+      ],
+    },
+    {
+      year: '2027',
+      overview: '2027.html',
+      status: 'Coming soon',
+      accent: 'ice',
+      latestRound: null,
+      before: [
+        { label: 'Overview',    href: '2027.html' },
+        { label: 'Draft Night', href: null        },
+      ],
+      rounds: [
+        // { label: 'Opening Round', href: '2027-opening-round.html' },
+        // { label: 'Round 1',       href: '2027-round-1.html'       },
+      ],
+      after: [
+        { label: '🏆 Grand Final', href: null, cls: 'ppr-gf' },
+      ],
+      hidden: [],
+    },
   ],
 
 };
@@ -56,378 +98,508 @@ const PPR_NAV = {
   const style = document.createElement('style');
   style.id = 'ppr-nav-styles';
   style.textContent = `
-    #ppr-nav *, #ppr-nav *::before, #ppr-nav *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    #ppr-header, #ppr-header *, #ppr-header *::before, #ppr-header *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    #ppr-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0 2.5rem;
-      background: rgba(13,17,23,0.97);
-      border-bottom: 2px solid #8b1a1a;
+    #ppr-header {
+      --ppr-top-h: 58px;
+      --ppr-sub-h: 44px;
+      --ppr-gold: #c8a951;
+      --ppr-ice: #7ecfff;
       position: sticky;
       top: 0;
       z-index: 500;
+      transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+      font-family: 'Oswald', sans-serif;
+    }
+    #ppr-header.ppr-compact { transform: translateY(calc(-1 * var(--ppr-top-h))); }
+
+    /* ── Tier 1: main bar ── */
+    #ppr-nav {
+      height: var(--ppr-top-h);
+      display: flex;
+      align-items: stretch;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0 2.5rem;
+      background: rgba(13,17,23,0.97);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      height: 58px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
     }
+    #ppr-header:not(.ppr-has-sub) #ppr-nav { border-bottom: 2px solid #8b1a1a; }
 
+    #ppr-nav .ppr-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
     #ppr-nav .ppr-logo {
       font-family: 'Bebas Neue', sans-serif;
       font-size: 1.8rem;
-      color: #c8a951;
-      text-decoration: none;
-      letter-spacing: 3px;
-      flex-shrink: 0;
       line-height: 1;
-      /* Guard against page-level .ppr-logo image rules (e.g. index.html hero logo) */
-      width: auto;
-      height: auto;
-      border-radius: 0;
-      display: inline-block;
+      letter-spacing: 3px;
+      color: var(--ppr-gold);
     }
-
-    #ppr-nav .ppr-links {
-      display: flex;
-      list-style: none;
-      align-items: stretch;
-      height: 58px;
+    #ppr-nav .ppr-brand-sub {
+      font-size: 0.68rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #3a5a7a;
+      padding-left: 0.8rem;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      line-height: 1.25;
+      transition: color 0.2s;
     }
+    #ppr-nav .ppr-brand:hover .ppr-brand-sub { color: #7a9ab5; }
 
-    #ppr-nav .ppr-links > li {
+    #ppr-nav .ppr-tabs { display: flex; align-items: stretch; list-style: none; }
+    #ppr-nav .ppr-tabs > li { display: flex; }
+
+    #ppr-nav .ppr-tab {
       position: relative;
       display: flex;
-      align-items: stretch;
-    }
-
-    #ppr-nav .ppr-links a,
-    #ppr-nav .ppr-dropdown-btn {
-      color: #7a9ab5;
-      text-decoration: none;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 400;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 0 1rem;
-      height: 58px;
-      display: flex;
-      align-items: center;
-      border-top: none; border-left: none; border-right: none;
-      border-bottom: 2px solid transparent;
-      background: none;
-      cursor: pointer;
-      transition: color 0.2s, border-color 0.2s;
-      white-space: nowrap;
-      line-height: 1;
-    }
-
-    #ppr-nav .ppr-links a:hover,
-    #ppr-nav .ppr-dropdown-btn:hover { color: #fff; }
-
-    #ppr-nav .ppr-links a.active { color: #c8a951; border-bottom-color: #c8a951; }
-
-    #ppr-nav .ppr-dropdown-btn { gap: 0.35rem; }
-    #ppr-nav .ppr-dropdown-btn.active-parent { color: #c8a951; border-bottom-color: #c8a951; }
-
-    #ppr-nav .ppr-chevron {
-      font-size: 0.5rem;
-      display: inline-block;
-      transition: transform 0.2s;
-      margin-top: 1px;
-    }
-    #ppr-nav .ppr-dropdown-btn[aria-expanded="true"] .ppr-chevron { transform: rotate(180deg); }
-
-    #ppr-nav .ppr-dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 58px;
-      left: 0;
-      background: rgba(13,17,23,0.98);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-top: 2px solid #c8a951;
-      border-radius: 0 0 10px 10px;
-      min-width: 160px;
-      z-index: 600;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-      padding: 0.4rem 0;
-      max-height: 80vh;
-      overflow-y: auto;
-    }
-    #ppr-nav .ppr-dropdown-menu.open { display: block; }
-
-    #ppr-nav .ppr-dropdown-menu a {
-      height: auto !important;
-      padding: 0.65rem 1.2rem !important;
-      display: block !important;
-      border-bottom: none !important;
-      font-size: 0.78rem !important;
-      color: #7a9ab5;
-    }
-    #ppr-nav .ppr-dropdown-menu a:hover { color: #fff; background: rgba(255,255,255,0.04); }
-    #ppr-nav .ppr-dropdown-menu a.active { color: #c8a951; border-bottom: none !important; }
-
-    /* ── Grand Final highlight ── */
-    #ppr-nav .ppr-links a.ppr-gf {
-      color: #c8a951;
-      font-weight: 600;
-      text-shadow: 0 0 12px rgba(200,169,81,0.45);
-      animation: pprGfGlow 2.4s ease-in-out infinite;
-    }
-    #ppr-nav .ppr-links a.ppr-gf:hover { color: #fff; text-shadow: 0 0 14px rgba(200,169,81,0.8); }
-    #ppr-mobile-menu a.ppr-gf { color: #c8a951; text-shadow: 0 0 12px rgba(200,169,81,0.45); }
-    @keyframes pprGfGlow { 0%,100% { opacity: 1; } 50% { opacity: 0.68; } }
-    @media (prefers-reduced-motion: reduce) {
-      #ppr-nav .ppr-links a.ppr-gf { animation: none; }
-    }
-
-    #ppr-nav-divider {
-      height: 3px;
-      background: linear-gradient(90deg, #8b1a1a 0%, #c8a951 50%, #8b1a1a 100%);
-    }
-
-    /* ── Hamburger ── */
-    #ppr-hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 6px 4px;
-      z-index: 600;
-      flex-shrink: 0;
-    }
-    #ppr-hamburger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: #c8a951;
-      border-radius: 2px;
-      transition: transform 0.25s ease, opacity 0.25s ease;
-    }
-    #ppr-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    #ppr-hamburger.open span:nth-child(2) { opacity: 0; }
-    #ppr-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* ── Mobile overlay ── */
-    #ppr-mobile-menu {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(8,12,18,0.98);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      z-index: 490;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      overflow-y: auto;
-      padding: 5rem 2rem 3rem;
-    }
-    #ppr-mobile-menu.open { display: flex; }
-
-    #ppr-mobile-menu a {
-      font-family: 'Oswald', sans-serif;
-      text-transform: uppercase;
-      text-decoration: none;
-      letter-spacing: 2.5px;
+      padding: 0 1.15rem;
       color: #7a9ab5;
-      transition: color 0.2s;
-      text-align: center;
-      display: block;
-      width: 100%;
-      max-width: 320px;
-      padding: 0.9rem 1rem;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+      white-space: nowrap;
     }
-    #ppr-mobile-menu a:hover  { color: #fff; }
-    #ppr-mobile-menu a.active { color: #c8a951; }
-
-    #ppr-mobile-menu a.ppr-mob-primary { font-size: 1.1rem; letter-spacing: 3px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-    #ppr-mobile-menu a.ppr-mob-round   { font-size: 0.85rem; color: #4a6a8a; padding: 0.5rem 1rem; }
-    #ppr-mobile-menu a.ppr-mob-round:hover { color: #c8a951; }
-    #ppr-mobile-menu a.ppr-mob-round.active { color: #c8a951; }
-
-    #ppr-mobile-menu .ppr-mob-section-label {
-      font-family: 'Oswald', sans-serif;
+    #ppr-nav .ppr-tab:hover { color: #fff; background: rgba(255,255,255,0.025); }
+    #ppr-nav .ppr-tab-text {
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      font-size: 0.6rem;
-      letter-spacing: 3px;
-      color: #2a4a6a;
-      padding: 1rem 1rem 0.4rem;
-      pointer-events: none;
-      text-align: center;
-      width: 100%;
-      max-width: 320px;
+      line-height: 1;
     }
-    #ppr-mobile-menu .ppr-mob-divider {
-      width: 100%;
-      max-width: 320px;
-      height: 1px;
-      background: rgba(255,255,255,0.05);
-      margin: 0.5rem 0;
+    #ppr-nav .ppr-tab-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 2px;
+      line-height: 0.95;
     }
+    #ppr-nav .ppr-tab-meta {
+      font-size: 0.54rem;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: #3a5a7a;
+      margin-top: 3px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s;
+    }
+    #ppr-nav .ppr-tab:hover .ppr-tab-meta { color: #7a9ab5; }
+    #ppr-nav .ppr-tab-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--ppr-ice);
+      box-shadow: 0 0 8px rgba(126,207,255,0.7);
+    }
+    #ppr-nav .ppr-tab.active { color: var(--ppr-gold); border-bottom-color: var(--ppr-gold); }
+    #ppr-nav .ppr-tab.active .ppr-tab-meta { color: rgba(200,169,81,0.7); }
+    #ppr-nav .ppr-tab[data-accent="ice"].active { color: var(--ppr-ice); border-bottom-color: var(--ppr-ice); }
+    #ppr-nav .ppr-tab[data-accent="ice"].active .ppr-tab-meta { color: rgba(126,207,255,0.7); }
+
+    /* ── Tier 2: season bar ── */
+    #ppr-subnav {
+      position: relative;
+      height: var(--ppr-sub-h);
+      display: flex;
+      align-items: stretch;
+      background: rgba(18,26,36,0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    #ppr-subnav .ppr-sub-season {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0 1.2rem 0 2.5rem;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      text-decoration: none;
+    }
+    #ppr-subnav .ppr-sub-year {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 2px;
+      line-height: 1;
+      color: var(--ppr-gold);
+    }
+    #ppr-subnav[data-accent="ice"] .ppr-sub-year { color: var(--ppr-ice); }
+    #ppr-subnav .ppr-sub-status {
+      font-size: 0.58rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 0.22rem 0.55rem;
+      border-radius: 100px;
+      color: var(--ppr-gold);
+      background: rgba(200,169,81,0.1);
+      border: 1px solid rgba(200,169,81,0.28);
+      white-space: nowrap;
+      line-height: 1;
+    }
+    #ppr-subnav[data-accent="ice"] .ppr-sub-status {
+      color: var(--ppr-ice);
+      background: rgba(126,207,255,0.08);
+      border-color: rgba(126,207,255,0.28);
+    }
+
+    #ppr-subnav .ppr-sub-scroll {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: stretch;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-left: 0.4rem;
+    }
+    #ppr-subnav .ppr-sub-scroll::-webkit-scrollbar { display: none; }
+    #ppr-subnav .ppr-sub-scroll.fade-right { -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent); mask-image: linear-gradient(90deg, #000 85%, transparent); }
+    #ppr-subnav .ppr-sub-scroll.fade-left  { -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%); mask-image: linear-gradient(90deg, transparent, #000 15%); }
+    #ppr-subnav .ppr-sub-scroll.fade-left.fade-right { -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+
+    #ppr-subnav .ppr-sub-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      flex-shrink: 0;
+      padding: 0 0.8rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #7a9ab5;
+      text-decoration: none;
+      white-space: nowrap;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      line-height: 1;
+    }
+    #ppr-subnav a.ppr-sub-item:hover,
+    #ppr-subnav button.ppr-sub-item:hover { color: #fff; }
+    #ppr-subnav .ppr-sub-item.active { color: var(--ppr-gold); border-bottom-color: var(--ppr-gold); }
+    #ppr-subnav[data-accent="ice"] .ppr-sub-item.active { color: var(--ppr-ice); border-bottom-color: var(--ppr-ice); }
+    #ppr-subnav .ppr-sub-item.ppr-gf { color: var(--ppr-gold); font-weight: 500; text-shadow: 0 0 12px rgba(200,169,81,0.35); }
+    #ppr-subnav .ppr-sub-item.ppr-gf:hover { color: #fff; }
+
+    #ppr-subnav .ppr-sub-item.is-soon { color: #2f4a63; cursor: default; text-shadow: none; }
+    #ppr-subnav .ppr-soon-tag {
+      font-size: 0.52rem;
+      letter-spacing: 1.2px;
+      padding: 0.15rem 0.38rem;
+      border-radius: 3px;
+      border: 1px solid rgba(126,207,255,0.2);
+      color: rgba(126,207,255,0.6);
+    }
+
+    #ppr-subnav .ppr-chevron { font-size: 0.5rem; display: inline-block; transition: transform 0.2s; }
+    #ppr-subnav .ppr-sub-item[aria-expanded="true"] { color: #fff; }
+    #ppr-subnav .ppr-sub-item[aria-expanded="true"] .ppr-chevron { transform: rotate(180deg); }
+
+    #ppr-subnav .ppr-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: var(--ppr-sub-h);
+      left: 0;
+      min-width: 190px;
+      max-height: min(70vh, 520px);
+      overflow-y: auto;
+      padding: 0.4rem 0;
+      background: rgba(13,17,23,0.98);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-top: 2px solid var(--ppr-gold);
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.6);
+      z-index: 600;
+    }
+    #ppr-subnav[data-accent="ice"] .ppr-dropdown-menu { border-top-color: var(--ppr-ice); }
+    #ppr-subnav .ppr-dropdown-menu.open { display: block; animation: pprMenuIn 0.16s ease-out; }
+    @keyframes pprMenuIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+    #ppr-subnav .ppr-dropdown-menu a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.62rem 1.2rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #7a9ab5;
+      text-decoration: none;
+      transition: color 0.15s, background 0.15s;
+    }
+    #ppr-subnav .ppr-dropdown-menu a:hover,
+    #ppr-subnav .ppr-dropdown-menu a:focus-visible { color: #fff; background: rgba(255,255,255,0.04); }
+    #ppr-subnav .ppr-dropdown-menu a.active { color: var(--ppr-gold); }
+    #ppr-subnav .ppr-latest-tag {
+      font-size: 0.55rem;
+      letter-spacing: 1.2px;
+      color: #f08080;
+      border: 1px solid rgba(139,26,26,0.55);
+      background: rgba(139,26,26,0.25);
+      border-radius: 100px;
+      padding: 0.12rem 0.45rem;
+    }
+
+    #ppr-nav-divider { height: 3px; background: linear-gradient(90deg, #8b1a1a 0%, #c8a951 50%, #8b1a1a 100%); }
+    #ppr-header[data-accent="ice"] #ppr-nav-divider { background: linear-gradient(90deg, #1b2a3b 0%, #7ecfff 50%, #1b2a3b 100%); }
+
+    /* ── Focus ── */
+    #ppr-header a:focus-visible,
+    #ppr-header button:focus-visible { outline: 2px solid var(--ppr-gold); outline-offset: -2px; }
 
     /* ── Breakpoints ── */
-    @media (max-width: 1340px) {
-      #ppr-nav { padding: 0 1.6rem; }
-      #ppr-nav .ppr-links a,
-      #ppr-nav .ppr-dropdown-btn { font-size: 0.74rem; padding: 0 0.7rem; letter-spacing: 1px; }
+    @media (max-width: 1100px) {
+      #ppr-nav { padding: 0 1.4rem; }
+      #ppr-subnav .ppr-sub-season { padding-left: 1.4rem; }
     }
-    @media (max-width: 1150px) {
-      #ppr-nav { padding: 0 1rem; }
-      #ppr-nav .ppr-logo { font-size: 1.5rem; letter-spacing: 2px; }
-      #ppr-nav .ppr-links a,
-      #ppr-nav .ppr-dropdown-btn { font-size: 0.68rem; padding: 0 0.45rem; letter-spacing: 0.5px; }
+    @media (max-width: 760px) {
+      #ppr-header { --ppr-top-h: 52px; --ppr-sub-h: 42px; }
+      #ppr-nav { padding: 0 0.6rem 0 1rem; gap: 0.5rem; }
+      #ppr-nav .ppr-logo { font-size: 1.6rem; letter-spacing: 2px; }
+      #ppr-nav .ppr-brand-sub { display: none; }
+      #ppr-nav .ppr-tab { padding: 0 0.7rem; }
+      #ppr-nav .ppr-tab-text { font-size: 0.72rem; letter-spacing: 1px; }
+      #ppr-nav .ppr-tab-year { font-size: 1.45rem; letter-spacing: 1.5px; }
+      #ppr-nav .ppr-tab-meta { display: none; }
+      #ppr-nav .ppr-tab-year::after {
+        content: '';
+        display: none;
+      }
+      #ppr-nav .ppr-tab[data-soon="true"] .ppr-tab-year::after {
+        display: inline-block;
+        width: 5px; height: 5px; border-radius: 50%;
+        background: var(--ppr-ice);
+        margin-left: 3px;
+        vertical-align: top;
+      }
+      #ppr-subnav .ppr-sub-season { padding: 0 0.8rem 0 1rem; }
+      #ppr-subnav .ppr-sub-status { display: none; }
+      #ppr-subnav .ppr-sub-item { padding: 0 0.7rem; font-size: 0.7rem; letter-spacing: 1px; }
     }
-    @media (max-width: 1000px) {
-      #ppr-nav { padding: 0 1.2rem; }
-      #ppr-nav .ppr-logo { font-size: 1.8rem; letter-spacing: 3px; }
-      #ppr-nav .ppr-links { display: none; }
-      #ppr-hamburger { display: flex; }
+    @media (max-width: 360px) {
+      #ppr-nav .ppr-tab { padding: 0 0.5rem; }
+      #ppr-nav .ppr-tab-year { font-size: 1.3rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      #ppr-header { transition: none; }
+      #ppr-subnav .ppr-dropdown-menu.open { animation: none; }
     }
   `;
   document.head.appendChild(style);
 })();
 
 // ═════════════════════════════════════════════════════════════════════════
-// BUILD NAV
+// BUILD HEADER
 // ═════════════════════════════════════════════════════════════════════════
 (function buildNav() {
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-  const roundHrefs  = PPR_NAV.rounds.map(r => r.href);
-  const onRoundPage = roundHrefs.includes(currentPage);
+  // Normalise the current filename (handles "/", extensionless URLs and %20)
+  let currentPage = decodeURIComponent(window.location.pathname.split('/').pop() || '');
+  if (!currentPage) currentPage = 'index.html';
+  if (!/\.[a-z0-9]+$/i.test(currentPage)) currentPage += '.html';
 
-  function ac(href, extra) {
-    const cls = [extra, href === currentPage ? 'active' : ''].filter(Boolean).join(' ');
-    return cls ? ` class="${cls}"` : '';
+  const pagesOf = s => [
+    s.overview,
+    ...s.before.map(i => i.href),
+    ...s.rounds.map(i => i.href),
+    ...s.after.map(i => i.href),
+    ...(s.hidden || []),
+  ].filter(Boolean);
+
+  const season = PPR_NAV.seasons.find(s => pagesOf(s).includes(currentPage)) || null;
+  const isActive = href => href && href === currentPage;
+  const cls = (...c) => { const v = c.filter(Boolean).join(' '); return v ? ` class="${v}"` : ''; };
+  const aria = href => isActive(href) ? ' aria-current="page"' : '';
+
+  // ── Tier 1 ──
+  const homeActive = currentPage === PPR_NAV.home.href;
+  const tabs = [
+    `<li><a href="${PPR_NAV.home.href}"${cls('ppr-tab', homeActive && 'active')}${homeActive ? ' aria-current="page"' : ''}><span class="ppr-tab-text">${PPR_NAV.home.label}</span></a></li>`,
+    ...PPR_NAV.seasons.map(s => {
+      const on = season && season.year === s.year;
+      const soon = s.accent === 'ice';
+      return `<li><a href="${s.overview}"${cls('ppr-tab', on && 'active')} data-accent="${s.accent}" data-soon="${soon}"${on ? ' aria-current="true"' : ''} aria-label="${s.year} season, ${s.status}">
+        <span class="ppr-tab-year">${s.year}</span>
+        <span class="ppr-tab-meta">${soon ? '<span class="ppr-tab-dot"></span>' : ''}${s.status}</span>
+      </a></li>`;
+    }),
+  ].join('');
+
+  // ── Tier 2 ──
+  let subHTML = '';
+  if (season) {
+    const item = i => i.href
+      ? `<a href="${i.href}"${cls('ppr-sub-item', i.cls, isActive(i.href) && 'active')}${aria(i.href)}>${i.label}</a>`
+      : `<span class="ppr-sub-item is-soon${i.cls ? ' ' + i.cls : ''}" aria-disabled="true">${i.label} <span class="ppr-soon-tag">Soon</span></span>`;
+
+    const onRound = season.rounds.some(r => isActive(r.href));
+    const roundsHTML = season.rounds.length
+      ? `<button type="button"${cls('ppr-sub-item', onRound && 'active')} id="ppr-rounds-btn" aria-expanded="false" aria-haspopup="true" aria-controls="ppr-rounds-menu">
+           Rounds <span class="ppr-chevron" aria-hidden="true">&#9660;</span>
+         </button>`
+      : `<span class="ppr-sub-item is-soon" aria-disabled="true">Rounds <span class="ppr-soon-tag">Soon</span></span>`;
+
+    const menuHTML = season.rounds.length
+      ? `<div class="ppr-dropdown-menu" id="ppr-rounds-menu" role="menu" aria-label="${season.year} rounds">
+           ${season.rounds.map(r => `<a role="menuitem" href="${r.href}"${cls(isActive(r.href) && 'active')}${aria(r.href)}>${r.label}${r.href === season.latestRound ? '<span class="ppr-latest-tag">Latest</span>' : ''}</a>`).join('')}
+         </div>`
+      : '';
+
+    subHTML = `
+      <div id="ppr-subnav" data-accent="${season.accent}" role="navigation" aria-label="${season.year} season">
+        <a class="ppr-sub-season" href="${season.overview}" aria-label="${season.year} season overview">
+          <span class="ppr-sub-year">${season.year}</span>
+          <span class="ppr-sub-status">${season.status}</span>
+        </a>
+        <div class="ppr-sub-scroll" id="ppr-sub-scroll">
+          ${season.before.map(item).join('')}
+          ${roundsHTML}
+          ${season.after.map(item).join('')}
+        </div>
+        ${menuHTML}
+      </div>`;
   }
 
-  // Desktop
-  const beforeHTML = PPR_NAV.before.map(i => `<li><a href="${i.href}"${ac(i.href, i.cls)}>${i.label}</a></li>`).join('');
-  const afterHTML  = PPR_NAV.after.map(i  => `<li><a href="${i.href}"${ac(i.href, i.cls)}>${i.label}</a></li>`).join('');
-
-  const dropdownItems = PPR_NAV.rounds.map(r =>
-    `<a href="${r.href}"${ac(r.href)}>${r.label}</a>`
-  ).join('');
-
-  const dropdownHTML = `
-    <li>
-      <button class="ppr-dropdown-btn${onRoundPage ? ' active-parent' : ''}"
-              id="ppr-rounds-btn" aria-expanded="false" aria-haspopup="true">
-        Rounds <span class="ppr-chevron">&#9660;</span>
-      </button>
-      <div class="ppr-dropdown-menu" id="ppr-rounds-menu" role="menu">
-        ${dropdownItems}
-      </div>
-    </li>`;
-
-  // Mobile
-  const mobBefore = PPR_NAV.before.map(i => `<a href="${i.href}"${ac(i.href,['ppr-mob-primary',i.cls].filter(Boolean).join(' '))}>${i.label}</a>`).join('');
-  const mobRounds = PPR_NAV.rounds.map(r => `<a href="${r.href}"${ac(r.href,'ppr-mob-round')}>${r.label}</a>`).join('');
-  const mobAfter  = PPR_NAV.after.map(i  => `<a href="${i.href}"${ac(i.href,['ppr-mob-primary',i.cls].filter(Boolean).join(' '))}>${i.label}</a>`).join('');
-
-  // Remove any existing PPR nav elements first (idempotent injection)
-  ['ppr-nav','ppr-mobile-menu','ppr-nav-divider'].forEach(id => {
+  // Remove any previously injected header (idempotent) and legacy navs
+  ['ppr-header', 'ppr-nav', 'ppr-mobile-menu', 'ppr-nav-divider'].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.remove();
   });
-  // Remove any legacy hardcoded navs
-  document.querySelectorAll('nav:not(#ppr-nav)').forEach(el => el.remove());
+  document.querySelectorAll('nav').forEach(el => el.remove());
   document.querySelectorAll('.divider').forEach(el => el.remove());
 
-  const nav = document.createElement('nav');
-  nav.id = 'ppr-nav';
-  nav.setAttribute('role', 'navigation');
-  nav.setAttribute('aria-label', 'Main');
-  nav.innerHTML = `
-    <a class="ppr-logo" href="index.html">PPR</a>
-    <ul class="ppr-links">${beforeHTML}${dropdownHTML}${afterHTML}</ul>
-    <button id="ppr-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="ppr-mobile-menu">
-      <span></span><span></span><span></span>
-    </button>`;
+  const header = document.createElement('header');
+  header.id = 'ppr-header';
+  if (season) { header.classList.add('ppr-has-sub'); header.dataset.accent = season.accent; }
+  header.innerHTML = `
+    <div id="ppr-nav" role="navigation" aria-label="Main">
+      <a class="ppr-brand" href="${PPR_NAV.home.href}" aria-label="Paz's Power Rankings home">
+        <span class="ppr-logo">PPR</span>
+        <span class="ppr-brand-sub">Ligma League<br>Power Rankings</span>
+      </a>
+      <ul class="ppr-tabs">${tabs}</ul>
+    </div>
+    ${subHTML}
+    <div id="ppr-nav-divider"></div>`;
 
-  const mob = document.createElement('div');
-  mob.id = 'ppr-mobile-menu';
-  mob.setAttribute('role', 'dialog');
-  mob.setAttribute('aria-modal', 'true');
-  mob.innerHTML = `
-    ${mobBefore}
-    <div class="ppr-mob-divider"></div>
-    <div class="ppr-mob-section-label">Rounds</div>
-    ${mobRounds}
-    <div class="ppr-mob-divider"></div>
-    ${mobAfter}`;
-
-  const divider = document.createElement('div');
-  divider.id = 'ppr-nav-divider';
-
-  // Insert order in DOM: mobileMenu, nav, divider
-  const first = document.body.firstChild;
-  document.body.insertBefore(divider, first);
-  document.body.insertBefore(nav, divider);
-  document.body.insertBefore(mob, nav);
+  document.body.insertBefore(header, document.body.firstChild);
 })();
 
 // ═════════════════════════════════════════════════════════════════════════
-// DROPDOWN TOGGLE
+// BEHAVIOUR: dropdown, scroll fades, compact-on-scroll, anchor offsets
 // ═════════════════════════════════════════════════════════════════════════
 (function () {
-  function close() {
-    const btn  = document.getElementById('ppr-rounds-btn');
-    const menu = document.getElementById('ppr-rounds-menu');
-    if (menu) menu.classList.remove('open');
-    if (btn)  btn.setAttribute('aria-expanded', 'false');
-  }
-  function toggle() {
-    const btn  = document.getElementById('ppr-rounds-btn');
-    const menu = document.getElementById('ppr-rounds-menu');
-    if (!btn || !menu) return;
-    const open = !menu.classList.contains('open');
-    menu.classList.toggle('open', open);
-    btn.setAttribute('aria-expanded', String(open));
-  }
-  document.addEventListener('click', e => {
-    const btn  = document.getElementById('ppr-rounds-btn');
-    const menu = document.getElementById('ppr-rounds-menu');
-    if (!btn || !menu) return;
-    if (btn.contains(e.target)) { toggle(); return; }
-    if (!menu.contains(e.target)) close();
-  });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-})();
+  const header = document.getElementById('ppr-header');
+  const sub    = document.getElementById('ppr-subnav');
+  const strip  = document.getElementById('ppr-sub-scroll');
+  const btn    = document.getElementById('ppr-rounds-btn');
+  const menu   = document.getElementById('ppr-rounds-menu');
+  if (!header) return;
 
-// ═════════════════════════════════════════════════════════════════════════
-// HAMBURGER / MOBILE MENU
-// ═════════════════════════════════════════════════════════════════════════
-(function () {
-  function close() {
-    const btn = document.getElementById('ppr-hamburger');
-    const mob = document.getElementById('ppr-mobile-menu');
-    if (mob) mob.classList.remove('open');
-    if (btn) { btn.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Open menu'); }
-    document.body.style.overflow = '';
+  // ── Anchor offset so in-page links clear the sticky header ──
+  function syncHeight() {
+    const h = header.offsetHeight;
+    document.documentElement.style.setProperty('--ppr-header-h', h + 'px');
+    document.documentElement.style.scrollPaddingTop = (h + 8) + 'px';
   }
-  function toggle() {
-    const btn = document.getElementById('ppr-hamburger');
-    const mob = document.getElementById('ppr-mobile-menu');
-    if (!btn || !mob) return;
-    const open = !mob.classList.contains('open');
-    mob.classList.toggle('open', open);
-    btn.classList.toggle('open', open);
-    btn.setAttribute('aria-expanded', String(open));
-    btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    document.body.style.overflow = open ? 'hidden' : '';
+  syncHeight();
+  window.addEventListener('resize', syncHeight);
+
+  // ── Rounds dropdown ──
+  function placeMenu() {
+    if (!btn || !menu || !sub) return;
+    const subBox = sub.getBoundingClientRect();
+    const b = btn.getBoundingClientRect();
+    const w = menu.offsetWidth || 200;
+    let left = b.left - subBox.left;
+    left = Math.max(8, Math.min(left, subBox.width - w - 8));
+    menu.style.left = left + 'px';
   }
-  document.addEventListener('click', e => {
-    const btn = document.getElementById('ppr-hamburger');
-    const mob = document.getElementById('ppr-mobile-menu');
-    if (!btn || !mob) return;
-    if (btn.contains(e.target)) { toggle(); return; }
-    if (mob.contains(e.target) && e.target.tagName === 'A') { close(); return; }
-  });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+  function openMenu() {
+    if (!btn || !menu) return;
+    menu.classList.add('open');
+    btn.setAttribute('aria-expanded', 'true');
+    placeMenu();
+  }
+  function closeMenu(returnFocus) {
+    if (!btn || !menu || !menu.classList.contains('open')) return;
+    menu.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    if (returnFocus) btn.focus();
+  }
+  if (btn && menu) {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      menu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    btn.addEventListener('keydown', e => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        openMenu();
+        const first = menu.querySelector('a.active') || menu.querySelector('a');
+        if (first) first.focus();
+      }
+    });
+    menu.addEventListener('keydown', e => {
+      const links = [...menu.querySelectorAll('a')];
+      const i = links.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') { e.preventDefault(); (links[i + 1] || links[0]).focus(); }
+      if (e.key === 'ArrowUp')   { e.preventDefault(); (links[i - 1] || links[links.length - 1]).focus(); }
+    });
+    document.addEventListener('click', e => { if (!menu.contains(e.target)) closeMenu(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(true); });
+    sub.addEventListener('focusout', e => {
+      if (!e.relatedTarget || (!menu.contains(e.relatedTarget) && e.relatedTarget !== btn)) closeMenu();
+    });
+    window.addEventListener('resize', () => closeMenu());
+  }
+
+  // ── Horizontal strip: edge fades + keep the active item in view ──
+  if (strip) {
+    const updateFade = () => {
+      const max = strip.scrollWidth - strip.clientWidth;
+      strip.classList.toggle('fade-left', strip.scrollLeft > 4);
+      strip.classList.toggle('fade-right', strip.scrollLeft < max - 4);
+    };
+    strip.addEventListener('scroll', () => { updateFade(); closeMenu(); }, { passive: true });
+    window.addEventListener('resize', updateFade);
+    const active = strip.querySelector('.active');
+    if (active) {
+      const target = active.offsetLeft - (strip.clientWidth - active.offsetWidth) / 2;
+      strip.scrollLeft = Math.max(0, target);
+    }
+    updateFade();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(updateFade);
+  }
+
+  // ── Compact header: hide the top tier while scrolling down a season page ──
+  if (sub) {
+    let lastY = window.scrollY;
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        if (y > 160 && y > lastY + 6) { header.classList.add('ppr-compact'); closeMenu(); }
+        else if (y < lastY - 6 || y <= 160) header.classList.remove('ppr-compact');
+        lastY = y;
+        ticking = false;
+      });
+    }, { passive: true });
+  }
 })();

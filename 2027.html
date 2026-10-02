@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2027 Season — Paz's Power Rankings</title>
+  <meta name="description" content="The 4th edition of the Ligma League is coming. The Van Twists defend the cup after winning from 7th. Who bounces back in 2027?">
+  <meta property="og:title" content="2027 Season · Paz's Power Rankings">
+  <meta property="og:description" content="The Van Twists won from 7th. Eleven clubs want revenge. Who bounces back in 2027?">
+  <meta property="og:image" content="1v1.jpg">
+  <meta name="theme-color" content="#0d1117">
+  <link rel="icon" href="PPR.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="ppr.css">
+  <style>
+    /* ═══════════ RECAP: FROM 7TH TO THE CUP ═══════════ */
+    .recap {
+      position: relative; overflow: hidden;
+      background: linear-gradient(115deg, #0d1117 0%, #120d0a 45%, #2c1408 100%);
+      border-top: 1px solid rgba(255,122,47,0.3); border-bottom: 1px solid rgba(255,122,47,0.3);
+    }
+    .recap::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 85% 50%, rgba(255,122,47,0.18), transparent 55%); }
+    .recap .wrap { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+    .recap .section-label { color: var(--twists); }
+    .recap-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.6rem, 6.5vw, 4.6rem); line-height: 0.9; letter-spacing: 2px; color: #fff; margin-bottom: 1.3rem; }
+    .recap-title span { display: block; color: var(--twists); }
+    .recap-text p { color: #a89a8e; line-height: 1.85; font-size: 0.95rem; margin-bottom: 1rem; }
+    .recap-text p strong { color: #f3e3d3; font-weight: 600; }
+    .recap-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-top: 1.6rem; list-style: none; }
+    .recap-chip { padding: 1rem 0.9rem; border-radius: 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,122,47,0.22); }
+    .recap-chip b { display: block; font-family: 'Bebas Neue', sans-serif; font-weight: 400; font-size: 2.2rem; line-height: 1; color: var(--twists); letter-spacing: 1px; }
+    .recap-chip span { display: block; margin-top: 0.3rem; font-family: 'Oswald', sans-serif; font-size: 0.64rem; letter-spacing: 1.5px; text-transform: uppercase; color: #8a7a6e; line-height: 1.4; }
+    .recap-media { position: relative; }
+    .recap-shot {
+      display: block; width: 100%; padding: 0; border: 1px solid rgba(255,122,47,0.35); border-radius: 12px; overflow: hidden;
+      background: #000; cursor: zoom-in; box-shadow: 0 24px 60px rgba(0,0,0,0.7);
+    }
+    .recap-shot img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; transition: transform 0.5s ease; }
+    .recap-shot:hover img { transform: scale(1.03); }
+    .recap-shot-small {
+      position: absolute; width: 42%; left: -1.4rem; bottom: -1.6rem; transform: rotate(-4deg);
+      border-color: rgba(200,169,81,0.5); box-shadow: 0 18px 40px rgba(0,0,0,0.75);
+      transition: transform 0.3s ease;
+    }
+    .recap-shot-small:hover { transform: rotate(-2deg) scale(1.03); }
+    .recap-shot-small img { aspect-ratio: 3 / 2; }
+    .recap-link { display: inline-block; margin-top: 1.5rem; font-family: 'Oswald', sans-serif; font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(200,169,81,0.4); padding-bottom: 2px; }
+    .recap-link:hover { color: #fff; border-color: #fff; }
+
+    /* ═══════════ BOUNCE-BACK WATCH ═══════════ */
+    .bounce-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; list-style: none; }
+    .bounce-card {
+      display: flex; flex-direction: column; height: 100%;
+      background: var(--mid); border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .bounce-card:hover { border-color: rgba(126,207,255,0.35); transform: translateY(-3px); box-shadow: 0 16px 38px rgba(0,0,0,0.5); }
+    .bounce-img { position: relative; display: block; width: 100%; padding: 0; border: none; background: #000; cursor: zoom-in; overflow: hidden; }
+    .bounce-img img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: center 30%; transition: transform 0.5s ease; }
+    .bounce-card:hover .bounce-img img { transform: scale(1.05); }
+    .bounce-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(20,29,39,0.95)); pointer-events: none; }
+    .bounce-stat {
+      position: absolute; left: 1rem; bottom: 0.8rem; z-index: 1;
+      font-family: 'Oswald', sans-serif; font-size: 0.64rem; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--ice); background: rgba(8,13,19,0.8); border: 1px solid rgba(126,207,255,0.3);
+      padding: 0.25rem 0.6rem; border-radius: 100px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
+    .bounce-body { padding: 1.1rem 1.3rem 1.4rem; display: flex; flex-direction: column; gap: 0.5rem; flex: 1; }
+    .bounce-name { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 1px; line-height: 1; color: #fff; }
+    .bounce-owner { font-family: 'Oswald', sans-serif; font-size: 0.66rem; letter-spacing: 1.8px; text-transform: uppercase; color: #4a6a8a; }
+    .bounce-copy { color: var(--text-muted); font-size: 0.86rem; line-height: 1.7; }
+    .bounce-motive {
+      margin-top: auto; padding-top: 0.8rem; border-top: 1px solid var(--border);
+      font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 1.2px; text-transform: uppercase; color: var(--cream);
+    }
+    .bounce-motive em { font-style: normal; color: var(--ice); }
+
+    /* ═══════════ ROAD TO 2027 ═══════════ */
+    .road { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; list-style: none; counter-reset: road; position: relative; }
+    .road::before { content: ''; position: absolute; top: 1.4rem; left: 1.4rem; right: calc(25% - 2.3rem); height: 1px; background: repeating-linear-gradient(90deg, rgba(126,207,255,0.45) 0 6px, transparent 6px 12px); }
+    .road-step { position: relative; counter-increment: road; padding-top: 3.6rem; }
+    .road-step::before {
+      content: counter(road); position: absolute; top: 0; left: 0;
+      width: 2.8rem; height: 2.8rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--ice);
+      background: #0f1d2b; border: 1px solid rgba(126,207,255,0.45);
+    }
+    .road-step:last-child::before { background: var(--ice); color: #08202f; box-shadow: 0 0 22px rgba(126,207,255,0.45); }
+    .road-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; letter-spacing: 1px; color: #fff; line-height: 1; }
+    .road-desc { color: var(--text-muted); font-size: 0.86rem; line-height: 1.65; margin-top: 0.5rem; }
+    .road-date { display: inline-block; margin-top: 0.8rem; font-family: 'Oswald', sans-serif; font-size: 0.62rem; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(126,207,255,0.7); border: 1px dashed rgba(126,207,255,0.3); border-radius: 4px; padding: 0.2rem 0.5rem; }
+
+    @media (max-width: 960px) {
+      .recap .wrap { grid-template-columns: 1fr; gap: 3.5rem; }
+      .recap-media { max-width: 560px; margin-left: 1.4rem; }
+      .bounce-grid { grid-template-columns: 1fr 1fr; }
+      .road { grid-template-columns: 1fr 1fr; row-gap: 2rem; }
+      .road::before { display: none; }
+    }
+    @media (max-width: 600px) {
+      .bounce-grid { grid-template-columns: 1fr; }
+      .road { grid-template-columns: 1fr; }
+      .recap-chips { grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; }
+      .recap-chip { padding: 0.8rem 0.6rem; }
+      .recap-chip b { font-size: 1.8rem; }
+      .recap-media { margin-left: 0.8rem; }
+      .recap-shot-small { left: -0.8rem; width: 46%; }
+    }
+  </style>
+</head>
+<body class="season-2027">
+
+  <!-- header injected by nav.js -->
+
+  <main>
+
+  <!-- ═══════════ SEASON HERO ═══════════ -->
+  <section class="season-hero" aria-labelledby="season-title">
+    <div class="hero-grain"></div>
+    <div class="season-hero-inner">
+      <div>
+        <div class="season-crumb"><a href="index.html">Ligma League</a> <span aria-hidden="true">/</span> 4th edition</div>
+        <h1 id="season-title" class="season-year" aria-label="2027 season">2027</h1>
+        <div class="season-status"><span class="season-status-dot"></span>Coming soon</div>
+        <p class="season-lede">
+          The fourth edition of the Ligma League is on its way, and it starts with a target on one back.
+          The <strong>Van Twists</strong> went from 7th to the cup in 2026, knocking off the best team all year in one of the
+          biggest boilovers the league has ever seen.
+        </p>
+        <p class="season-lede">
+          Better Holmes and Gardens want revenge. Broncic want their crown back. Somebody else wants to stop
+          being the punchline. Everyone gets a fresh start on Draft Night, and the first Power Rankings of 2027 land the moment the last pick is in.
+        </p>
+        <div class="season-ctas">
+          <a href="#bounce" class="btn btn-ice-solid">Who bounces back?</a>
+          <a href="#vote" class="btn btn-ice">🗳 Call it early</a>
+          <a href="2026.html" class="btn btn-secondary">Relive 2026</a>
+        </div>
+      </div>
+
+      <figure class="hero-frame">
+        <button type="button" class="hero-frame-img" data-lightbox="Van%20Twists.jpg" data-alt="The Van Twists" data-caption="Van Twists · Defending champions" aria-label="View the Van Twists image full size">
+          <span class="hero-ribbon">Defending champs</span>
+          <img src="Van%20Twists.jpg" alt="The Van Twists" width="1536" height="1024">
+        </button>
+        <figcaption>
+          <span class="hero-frame-team">Van Twists</span>
+          <span class="hero-frame-note">The team to beat<br>in 2027</span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ═══════════ RECAP ═══════════ -->
+  <section class="recap" aria-labelledby="recap-title">
+    <div class="wrap">
+      <div class="recap-text">
+        <div class="section-label">How we got here</div>
+        <h2 class="recap-title" id="recap-title">From 7th <span>to the cup</span></h2>
+        <p>
+          Nobody had the Twists down for anything in 2026. They were <strong>4 and 7 after Round 11</strong>, they spent the
+          year dragging the Max Hall waiver controversy behind them and they squeezed into the finals in 7th.
+        </p>
+        <p>
+          Then the run started. Higher seeds fell one after another, and on Grand Final day they took down
+          <strong>Better Holmes and Gardens</strong>, a side that had sat on top of the Power Rankings for almost the entire season.
+          The favourite fell, the minority shareholder won, and the league will never hear the end of it.
+        </p>
+        <ul class="recap-chips">
+          <li class="recap-chip"><b>7th</b><span>Where they entered the finals</span></li>
+          <li class="recap-chip"><b>4–7</b><span>Record after Round 11</span></li>
+          <li class="recap-chip"><b>25%</b><span>Stake they held in the team they beat</span></li>
+        </ul>
+        <a class="recap-link" href="grand-final.html">Read the Grand Final edition</a>
+      </div>
+      <div class="recap-media">
+        <button type="button" class="recap-shot" data-lightbox="1v1.jpg" data-alt="Grand Final 1v1 poster" data-caption="Grand Final · Van Twists vs Better Holmes and Gardens" aria-label="View the Grand Final poster full size">
+          <img src="1v1.jpg" alt="Grand Final 1v1 poster: Van Twists vs Better Holmes and Gardens" loading="lazy" width="1536" height="1024">
+        </button>
+        <button type="button" class="recap-shot recap-shot-small" data-lightbox="Twists_vs_Holmes.png" data-alt="Grand Final magazine cover" data-caption="The Grand Final edition cover" aria-label="View the Grand Final cover full size">
+          <img src="Twists_vs_Holmes.png" alt="Grand Final magazine cover" loading="lazy" width="1264" height="843">
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ BOUNCE-BACK WATCH ═══════════ -->
+  <section id="bounce" class="band band-dark" aria-labelledby="bounce-title">
+    <div class="wrap">
+      <div class="section-label">Bounce-back watch</div>
+      <h2 class="section-title" id="bounce-title">Who Bounces Back?</h2>
+      <p class="section-intro">Six clubs with something to prove in 2027. Some fell at the final hurdle, some never got off the ground. Tap a poster to see it full size.</p>
+      <ul class="bounce-grid">
+        <li><article class="bounce-card">
+          <button type="button" class="bounce-img" data-lightbox="Better%20Holmes%20and%20Gardens.jpg" data-alt="Better Holmes and Gardens poster" data-caption="Better Holmes and Gardens · Matthew" aria-label="View the Better Holmes and Gardens poster">
+            <img src="Better%20Holmes%20and%20Gardens.jpg" alt="" loading="lazy" width="1024" height="1536">
+            <span class="bounce-stat">#1 PPR · 11.44 peak</span>
+          </button>
+          <div class="bounce-body">
+            <h3 class="bounce-name">Better Holmes and Gardens</h3>
+            <span class="bounce-owner">Matthew</span>
+            <p class="bounce-copy">Led the Power Rankings for most of the year and lost the one game that mattered, to their own minority shareholder. Nobody has more reason to come back angry.</p>
+            <div class="bounce-motive">Unfinished business: <em>the Grand Final</em></div>
+          </div>
+        </article></li>
+
+        <li><article class="bounce-card">
+          <button type="button" class="bounce-img" data-lightbox="Broncic.jpg" data-alt="Broncic poster" data-caption="Broncic · William" aria-label="View the Broncic poster">
+            <img src="Broncic.jpg" alt="" loading="lazy" width="1536" height="1024">
+            <span class="bounce-stat">2024 + 2025 champions</span>
+          </button>
+          <div class="bounce-body">
+            <h3 class="bounce-name">Broncic</h3>
+            <span class="bounce-owner">William</span>
+            <p class="bounce-copy">The back-to-back kings had to watch somebody else lift the cup. Three titles in four years is the only acceptable outcome at Broncic HQ.</p>
+            <div class="bounce-motive">Unfinished business: <em>the crown</em></div>
+          </div>
+        </article></li>
+
+        <li><article class="bounce-card">
+          <button type="button" class="bounce-img" data-lightbox="Flagdons.jpg" data-alt="Flagdons poster" data-caption="Flagdons · Rick" aria-label="View the Flagdons poster">
+            <img src="Flagdons.jpg" alt="" loading="lazy" width="1024" height="1536">
+            <span class="bounce-stat">11.06 peak · Round 9</span>
+          </button>
+          <div class="bounce-body">
+            <h3 class="bounce-name">Flagdons</h3>
+            <span class="bounce-owner">Rick</span>
+            <p class="bounce-copy">Climbed to 3rd on the Power Rankings by Round 9, then slid two spots in two weeks. The poster says it all. Rick needs a full season, not half of one.</p>
+            <div class="bounce-motive">Unfinished business: <em>the back half</em></div>
+          </div>
+        </article></li>
+
+        <li><article class="bounce-card">
+          <button type="button" class="bounce-img" data-lightbox="Foopys.jpg" data-alt="Foopys poster" data-caption="Foopys · Miller" aria-label="View the Foopys poster">
+            <img src="Foopys.jpg" alt="" loading="lazy" width="1024" height="1536">
+            <span class="bounce-stat">#1 on Draft Night</span>
+          </button>
+          <div class="bounce-body">
+            <h3 class="bounce-name">Foopys</h3>
+            <span class="bounce-owner">Miller</span>
+            <p class="bounce-copy">Topped the Draft Night rankings, then spent the winter on Wooden Spoon Watch. Back-to-back wins to close out Round 11 suggest there is still life in this squad.</p>
+            <div class="bounce-motive">Unfinished business: <em>living up to the draft</em></div>
+          </div>
+        </article></li>
+
+        <li><article class="bounce-card">
+          <button type="button" class="bounce-img" data-lightbox="Phillipou.jpg" data-alt="Phillipou poster" data-caption="Phillipou · Cam" aria-label="View the Phillipou poster">
+            <img src="Phillipou.jpg" alt="" loading="lazy" width="1536" height="1024">
+            <span class="bounce-stat">11th after Round 11</span>
+          </button>
+          <div class="bounce-body">
+            <h3 class="bounce-name">Phillipou</h3>
+            <span class="bounce-owner">Cam</span>
+            <p class="bounce-copy">A mid-season revival had people talking, then back-to-back losses dropped Cam's side to 11th. The flashes were real. Now they need to last longer than a fortnight.</p>
+            <div class="bounce-motive">Unfinished business: <em>consistency</em></div>
+          </div>
+        </article></li>
+
+        <li><article class="bounce-card">
+          <button type="button" class="bounce-img" data-lightbox="Shavas.jpg" data-alt="Shavas poster" data-caption="Shavas · Patrick" aria-label="View the Shavas poster">
+            <img src="Shavas.jpg" alt="" loading="lazy" width="1024" height="687">
+            <span class="bounce-stat">12th · 8.94 PPR</span>
+          </button>
+          <div class="bounce-body">
+            <h3 class="bounce-name">Shavas</h3>
+            <span class="bounce-owner">Patrick</span>
+            <p class="bounce-copy">Finished the Power Rankings year at the very bottom of the table. When you start 2027 from the floor, there is only one direction left to go.</p>
+            <div class="bounce-motive">Unfinished business: <em>getting off the bottom</em></div>
+          </div>
+        </article></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ ROAD TO 2027 ═══════════ -->
+  <section class="band band-navy" aria-labelledby="road-title" style="background:#102133">
+    <div class="wrap">
+      <div class="section-label">The off-season</div>
+      <h2 class="section-title" id="road-title">The Road to Draft Night</h2>
+      <p class="section-intro">Four stops between the Grand Final and the first ranking of 2027. Dates get locked in by the group chat, so they are still to be confirmed.</p>
+      <ol class="road">
+        <li class="road-step">
+          <div class="road-title">The Forfeit</div>
+          <p class="road-desc">Somebody pays for 2026. The group chat, which is also the governing body, decides how.</p>
+          <span class="road-date">Date TBC</span>
+        </li>
+        <li class="road-step">
+          <div class="road-title">The Chinese Meal</div>
+          <p class="road-desc">The annual feed. Attendance is compulsory and the lazy Susan is contested.</p>
+          <span class="road-date">Date TBC</span>
+        </li>
+        <li class="road-step">
+          <div class="road-title">The AGM</div>
+          <p class="road-desc">The closest thing this league has to governance. Expect the waiver rules to come up.</p>
+          <span class="road-date">Date TBC</span>
+        </li>
+        <li class="road-step">
+          <div class="road-title">Draft Night</div>
+          <p class="road-desc">See you on the peninsula. The first Power Rankings of 2027 drop the moment the last pick is in.</p>
+          <span class="road-date">Date TBC</span>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ═══════════ STATS ═══════════ -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item"><span class="stat-number" data-stat="teams">12</span><span class="stat-label">Teams</span></div>
+      <div class="stat-item"><span class="stat-number" data-stat="rounds">00</span><span class="stat-label">Rankings published</span></div>
+      <div class="stat-item"><span class="stat-number" data-stat="top">—</span><span class="stat-label">Top PPR score</span></div>
+      <div class="stat-item"><span class="stat-number is-text">Van Twists</span><span class="stat-label">Defending champions</span></div>
+    </div>
+  </div>
+
+  <!-- ═══════════ CUMULATIVE POWER RANKINGS ═══════════ -->
+  <section id="cumulative" class="band band-dark">
+    <div class="wrap">
+      <div class="section-label">Season overview</div>
+      <h2 class="section-title">Cumulative Power Rankings</h2>
+      <p class="cum-note">
+        Total PPR across every ranking of the season, starting from Draft Night.
+        <span class="gold">Gold will mark the best score of each round.</span>
+        The trend line follows the last five scored rounds once the season gets going.
+      </p>
+      <div class="table-tools">
+        <div class="seg" id="cumSort" role="group" aria-label="Sort the table">
+          <button type="button" data-sort="total" aria-pressed="true">Total</button>
+          <button type="button" data-sort="avg" aria-pressed="false">Average</button>
+          <button type="button" data-sort="latest" aria-pressed="false">Latest round</button>
+        </div>
+      </div>
+      <div class="table-shell">
+        <div class="cum-scroll"><table class="cum-table" id="cumTable"></table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ HEAD-TO-HEAD ═══════════ -->
+  <section id="h2h" class="band band-dark">
+    <div class="wrap">
+      <div class="section-label">Season results</div>
+      <h2 class="section-title">Head-to-Head Matrix</h2>
+      <p class="section-intro">Every result of the 2027 regular season, sorted by wins and then points for.</p>
+      <div class="h2h-legend">
+        <div class="leg-item"><div class="leg-swatch leg-w"></div>Win (row beat column)</div>
+        <div class="leg-item"><div class="leg-swatch leg-l"></div>Loss (row lost to column)</div>
+        <div class="leg-item"><div class="leg-swatch leg-no"></div>Not yet played</div>
+        <div class="leg-item leg-note">Point margin shown in each cell</div>
+      </div>
+      <div class="table-shell">
+        <div class="h2h-scroll"><table class="h2h-table" id="h2hTable"></table></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ POLLS ═══════════ -->
+  <section id="vote" class="band band-dark">
+    <div class="wrap">
+      <div class="section-label">Community poll</div>
+      <h2 class="section-title">Call It Early</h2>
+      <p class="section-intro">Pre-season voting is open. Get your prediction on the record now so you can say you called it.</p>
+      <div class="vote-grid">
+        <div class="poll-card spoon">
+          <div class="poll-card-top">
+            <div class="poll-card-icon">🥄</div>
+            <div class="poll-card-title">Wooden Spoon 2027</div>
+            <div class="poll-card-sub">Who finishes last place?</div>
+            <div class="live-pill"><span class="live-pill-dot"></span>Live · Updates in real time</div>
+          </div>
+          <div class="poll-body" id="rows-spoon">
+            <div style="padding:1.5rem 1.4rem">
+              <div class="skeleton" style="width:80%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:60%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:72%"></div>
+            </div>
+          </div>
+          <div class="poll-footer" id="total-spoon">Loading…</div>
+        </div>
+        <div class="poll-card champ">
+          <div class="poll-card-top">
+            <div class="poll-card-icon">🏆</div>
+            <div class="poll-card-title">Championship 2027</div>
+            <div class="poll-card-sub">Who wins the Ligma League?</div>
+            <div class="live-pill"><span class="live-pill-dot"></span>Live · Updates in real time</div>
+          </div>
+          <div class="poll-body" id="rows-champ">
+            <div style="padding:1.5rem 1.4rem">
+              <div class="skeleton" style="width:80%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:60%;margin-bottom:10px"></div>
+              <div class="skeleton" style="width:72%"></div>
+            </div>
+          </div>
+          <div class="poll-footer" id="total-champ">Loading…</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ARCHIVE ═══════════ -->
+  <section id="archive" class="band band-dark">
+    <div class="wrap">
+      <div class="section-label">Rankings archive</div>
+      <h2 class="section-title">Every Round of 2027</h2>
+      <p class="section-intro">Each round unlocks here the moment Paz publishes it.</p>
+      <div class="weeks-grid" id="archiveGrid"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════ WHEEL ═══════════ -->
+  <section id="wheel-section" class="band band-dark">
+    <div class="wrap">
+      <div class="section-label">For a laugh</div>
+      <h2 class="section-title">Mystery Matchup Wheel 🎡</h2>
+      <p class="wheel-intro">Spin the wheel, get a random Ligma League team paired with an AFL player. Consider it pre-season scouting.</p>
+      <div class="wheel-layout">
+        <div class="wheel-container">
+          <div class="wheel-pointer" aria-hidden="true">▼</div>
+          <canvas id="wheelCanvas" width="440" height="440" role="img" aria-label="Spinning wheel of Ligma League teams"></canvas>
+          <button id="spinBtn" type="button"><span id="spinBtnText">SPIN</span></button>
+        </div>
+        <div class="wheel-result-area" aria-live="polite">
+          <div id="result-placeholder">
+            <div class="rph-icon">🎡</div>
+            <div class="rph-text">Spin the wheel to reveal your mystery matchup</div>
+          </div>
+          <div id="result-card" style="display:none">
+            <div class="rc-header"><span class="rc-badge">MYSTERY MATCHUP</span></div>
+            <div class="rc-block"><div class="rc-label">Ligma League team</div><div class="rc-team" id="rc-team"></div></div>
+            <div class="rc-divider"><span class="rc-x">✕</span></div>
+            <div class="rc-block"><div class="rc-label">AFL player</div><div class="rc-player" id="rc-player"></div></div>
+            <div class="rc-oneliner-wrap"><div class="rc-oneliner" id="rc-oneliner"></div></div>
+            <button id="spinAgainBtn" type="button">🔄 Spin again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <a class="footer-brand" href="index.html">PPR</a>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="2026.html">2026 season</a></li>
+        <li><a href="2027.html">2027 season</a></li>
+        <li><a href="#bounce">Bounce-back watch</a></li>
+      </ul>
+      <div class="footer-copy">Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</div>
+    </div>
+  </footer>
+
+  <script src="ppr.js"></script>
+  <script>
+  /* ══════════════════════════════════════════════════════════════════
+     2027 SEASON DATA
+     ------------------------------------------------------------------
+     As the season goes, fill this in exactly like the 2026 page:
+       • ppr:     add each team's score to its array, in roundLabels order
+                  e.g. 'Foopys': [9.50, 10.25],  (Draft Night, Opening Rd)
+       • matches: add { w: 'Winner', l: 'Loser', ws: 1100, ls: 1000 }
+       • archive: change status 'soon' to 'done' (or 'latest') when a round
+                  page goes live, and add more rounds as needed
+     The tables, stats and archive leaders all update automatically, and
+     the "coming soon" overlays disappear once there is data.
+     ══════════════════════════════════════════════════════════════════ */
+  PPR.season({
+    year: 2027,
+    hideEmptyRounds: false,
+    roundLabels: ['Draft Night', 'Opening Rd', 'Round 1', 'Round 2', 'Round 3', 'Round 4', 'Round 5', 'Round 6', 'Round 7', 'Round 8', 'Round 9', 'Round 10', 'Round 11'],
+
+    ppr: {
+      'Broncic':            [],
+      'Cripps Nipps':       [],
+      'Dark Magicians':     [],
+      'DC & Tax Payers':    [],
+      'Flagdons':           [],
+      'Foopys':             [],
+      'Holmes and Gardens': [],
+      'Izaks':              [],
+      'Nethers men':        [],
+      'Phillipou':          [],
+      'Shavas':             [],
+      'Van Twists':         [],
+    },
+
+    matches: [
+      // { w: 'Van Twists', l: 'Holmes and Gardens', ws: 1200, ls: 1100 },
+    ],
+
+    abbr: {
+      'Holmes and Gardens': 'H&G',  'DC & Tax Payers': 'DC',   'Dark Magicians': 'Mag.',
+      'Cripps Nipps': 'C.Nipps',    'Van Twists': 'VanTwi',    'Nethers men': 'Nethers',
+      'Phillipou': 'Phillipou',     'Flagdons': 'Flagdons',    'Foopys': 'Foopys',
+      'Broncic': 'Broncic',         'Izaks': 'Izaks',          'Shavas': 'Shavas',
+    },
+
+    emptyCumulative: { icon: '⏳', title: 'Rankings start on Draft Night', text: 'Every club gets its first PPR score the moment the draft wraps up.' },
+    emptyH2H:        { icon: '⚔️', title: 'No results yet', text: 'The matrix fills in from Round 1. Every win, every loss, every margin.' },
+
+    polls: {
+      open: true,
+      docs: { spoon: 'spoon-2027', champ: 'champ-2027' },
+      unavailableText: 'Voting opens closer to Draft Night.',
+      teams: ['Van Twists', 'Better Holmes and Gardens', 'Broncic', 'Cripps Nipps', 'Dark Magicians', 'DC & Tax Payers', 'Flagdons', 'Foopys', 'Izaks', 'Nethers men', 'Phillipou', 'Shavas'],
+    },
+
+    archive: [
+      { kicker: 'Pre-season',    title: 'Draft Night',   href: null, status: 'soon' },
+      { kicker: 'Round 0',       title: 'Opening Round', href: null, status: 'soon' },
+      { kicker: 'Round 1',       title: 'Round 1',       href: null, status: 'soon' },
+      { kicker: 'Round 2',       title: 'Round 2',       href: null, status: 'soon' },
+      { kicker: 'Round 3',       title: 'Round 3',       href: null, status: 'soon' },
+      { kicker: 'The decider',   title: '🏆 Grand Final', href: null, status: 'soon' },
+    ],
+
+    wheelTeams: ['Foopys', 'Van Twists', 'Dark Magicians', 'Cripps Nipps', 'Phillipou', 'Flagdons', 'Nethers men', 'Shavas', 'Holmes & Gardens', 'Izaks', 'Broncic', 'DC & Tax Payers'],
+  });
+  </script>
+
+  <script src="nav.js"></script>
+</body>
+</html>
