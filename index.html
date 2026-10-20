@@ -195,6 +195,21 @@
     .club-tag.spoon { border-color: rgba(126,207,255,0.55); color: var(--ice); }
     .club-tag.runner { border-color: rgba(143,214,174,0.55); color: var(--holmes); }
 
+    /* ═══════════ VIDEO ═══════════ */
+    .video-frame {
+      position: relative; width: 100%; max-width: 960px; margin: 0 auto;
+      aspect-ratio: 16 / 9; border-radius: 14px; overflow: hidden;
+      background: #000; border: 1px solid rgba(200,169,81,0.35);
+      box-shadow: 0 22px 50px rgba(0,0,0,0.55);
+    }
+    .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-fallback {
+      display: block; text-align: center; margin-top: 1rem;
+      font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
+      color: #4a6a8a; text-decoration: none;
+    }
+    .video-fallback:hover { color: var(--gold); }
+
     /* ═══════════ RESPONSIVE ═══════════ */
     @media (max-width: 960px) {
       .doors-grid { grid-template-columns: 1fr; }
@@ -451,6 +466,24 @@
           <span class="club-info"><span class="club-name">Van Twists</span><span class="club-owner">Tim</span></span>
         </button></li>
       </ul>
+    </div>
+  </section>
+
+  <!-- ═══════════ VIDEO ═══════════ -->
+  <section class="band band-navy" aria-labelledby="video-title">
+    <div class="wrap">
+      <div class="section-label">Watch</div>
+      <h2 class="section-title" id="video-title">Roll the Tape</h2>
+      <p class="section-intro">Hit play and it runs right here on the page.</p>
+      <div class="video-frame">
+        <iframe
+          src="https://drive.google.com/file/d/1Go-c7uskedSu4zviqd6bsSklijxvGmCw/preview"
+          title="Ligma League video"
+          allow="autoplay; fullscreen"
+          allowfullscreen
+          loading="lazy"></iframe>
+      </div>
+      <a class="video-fallback" href="https://drive.google.com/file/d/1Go-c7uskedSu4zviqd6bsSklijxvGmCw/view" target="_blank" rel="noopener">Not loading? Watch it on Google Drive ↗</a>
     </div>
   </section>
 
