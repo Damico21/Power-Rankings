@@ -1,6 +1,6 @@
 /**
- * PPR Shared Navigation (nav.js v5, season edition)
- * ==================================================
+ * PPR Shared Navigation (nav.js v6)
+ * =================================
  * Single source of truth for the header on every page of the site.
  *
  * The header has two tiers:
@@ -11,6 +11,13 @@
  * A page belongs to a season if its filename appears anywhere in that
  * season's config below (including the `hidden` list). Nothing needs to
  * change inside the individual round pages.
+ *
+ * It also adds Previous / Next buttons above the footer of every season
+ * page, following the same order as the season bar, and styles the shared
+ * <footer class="site-footer">.
+ *
+ * After editing this file, bump the ?v= number in the <script src="nav.js?v=…">
+ * tags so browsers pick up the new version straight away.
  *
  * ── ADDING A 2027 PAGE ────────────────────────────────────────────────
  *   1. Create the page (copy PAGE_TEMPLATE.html), e.g. 2027-round-1.html
@@ -402,6 +409,49 @@ const PPR_NAV = {
       #ppr-header { transition: none; }
       #ppr-subnav .ppr-dropdown-menu.open { animation: none; }
     }
+
+    /* ── Previous / next pager (bottom of every season page) ── */
+    #ppr-pager {
+      max-width: 900px;
+      margin: 3.5rem auto 0;
+      padding: 0 1.5rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      font-family: 'Oswald', sans-serif;
+    }
+    #ppr-pager a {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding: 1.1rem 1.3rem;
+      background: #141d27;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      text-decoration: none;
+      transition: border-color 0.2s, transform 0.2s, background 0.2s;
+    }
+    #ppr-pager a:hover, #ppr-pager a:focus-visible { border-color: rgba(200,169,81,0.55); background: #18222e; transform: translateY(-2px); }
+    #ppr-pager a:focus-visible { outline: 2px solid #c8a951; outline-offset: 2px; }
+    #ppr-pager .ppr-pager-next { grid-column: 2; text-align: right; align-items: flex-end; }
+    #ppr-pager .ppr-pager-dir { font-size: 0.66rem; letter-spacing: 2px; text-transform: uppercase; color: #3a5a7a; }
+    #ppr-pager .ppr-pager-label { font-size: 1.05rem; letter-spacing: 1px; text-transform: uppercase; color: #e8dcc8; }
+    #ppr-pager a:hover .ppr-pager-label { color: #c8a951; }
+    @media (max-width: 520px) {
+      #ppr-pager { gap: 0.6rem; padding: 0 1rem 2.5rem; margin-top: 2.5rem; }
+      #ppr-pager a { padding: 0.9rem 1rem; }
+      #ppr-pager .ppr-pager-label { font-size: 0.9rem; }
+    }
+
+    /* ── Shared site footer (also defined in ppr.css for the overview pages) ── */
+    footer.site-footer { margin: 0; padding: 0; text-align: left; border-top: 1px solid rgba(255,255,255,0.06); background: #0a0e14; color: #253545; font-size: 1rem; }
+    footer.site-footer .site-footer-inner { max-width: 1200px; margin: 0 auto; padding: 2.4rem 2.5rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.2rem; }
+    footer.site-footer .footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 3px; color: #c8a951; text-decoration: none; }
+    footer.site-footer .footer-links { display: flex; flex-wrap: wrap; gap: 1.4rem; list-style: none; margin: 0; padding: 0; }
+    footer.site-footer .footer-links a { font-family: 'Oswald', sans-serif; font-size: 0.74rem; letter-spacing: 1.5px; text-transform: uppercase; color: #3a5a7a; text-decoration: none; transition: color 0.15s; }
+    footer.site-footer .footer-links a:hover { color: #fff; }
+    footer.site-footer .footer-copy { width: 100%; margin: 0; font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 1px; color: #253545; }
+    @media (max-width: 760px) { footer.site-footer .site-footer-inner { padding: 2rem 1.2rem; } }
   `;
   document.head.appendChild(style);
 })();
@@ -500,6 +550,29 @@ const PPR_NAV = {
     <div id="ppr-nav-divider"></div>`;
 
   document.body.insertBefore(header, document.body.firstChild);
+
+  // ── Previous / next pager ──
+  // Follows the season bar order: Overview → Draft Night → rounds → Grand Final → extras.
+  // Shown on every season page except the overview and hidden (secret) pages.
+  const old = document.getElementById('ppr-pager');
+  if (old) old.remove();
+  if (season && currentPage !== season.overview) {
+    const seq = [...season.before, ...season.rounds, ...season.after].filter(i => i.href);
+    const i = seq.findIndex(p => p.href === currentPage);
+    if (i !== -1) {
+      const prev = seq[i - 1], next = seq[i + 1];
+      const link = (p, dir, c) => `<a class="${c}" href="${p.href}"><span class="ppr-pager-dir">${dir}</span><span class="ppr-pager-label">${p.label}</span></a>`;
+      const pager = document.createElement('div');
+      pager.id = 'ppr-pager';
+      pager.setAttribute('role', 'navigation');
+      pager.setAttribute('aria-label', 'Previous and next page');
+      pager.innerHTML = (prev ? link(prev, '&larr; Previous', 'ppr-pager-prev') : '') +
+                        (next ? link(next, 'Next &rarr;', 'ppr-pager-next') : '');
+      const footer = document.querySelector('footer.site-footer') || document.querySelector('footer');
+      if (footer) footer.parentNode.insertBefore(pager, footer);
+      else document.body.appendChild(pager);
+    }
+  }
 })();
 
 // ═════════════════════════════════════════════════════════════════════════

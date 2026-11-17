@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <!--
-  ╔══════════════════════════════════════════════════════════════╗
-  ║  PPR PAGE TEMPLATE — Copy this for every new/existing page  ║
-  ║  Nav is 100% automatic — just include nav.js at the bottom. ║
-  ╚══════════════════════════════════════════════════════════════╝
-
-  CHECKLIST FOR EACH PAGE:
-  ✅  Change <title> to match the page
-  ✅  nav.js path stays as "nav.js" (same folder) — no other nav code needed
-  ✅  Delete <nav>, hamburger buttons, and nav CSS from the page — nav.js handles all of it
-  ✅  Active page highlighting is automatic (matched by filename)
-  ✅  To add Round 8: open nav.js → uncomment the Round 8 line. Done.
+  PPR PAGE TEMPLATE
+  Copy this file for every new page, then:
+    1. Rename the copy (lowercase, hyphens, e.g. 2027-round-1.html)
+    2. Change the <title>, description and og: tags below
+    3. Add the page to the right season in nav.js (see README.md)
+  The header, the Previous / Next buttons and the active-page highlight
+  all come from nav.js automatically. Don't add your own <nav>.
 -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Round X — Paz's Power Rankings</title><!-- ← CHANGE THIS -->
+  <title>Round X Rankings — Paz's Power Rankings</title><!-- CHANGE THIS -->
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="images/brand/apple-touch-icon.png">
+  <meta name="theme-color" content="#0d1117">
 
-  <!-- Fonts (same as every other PPR page) -->
+  <!-- What shows up when the link is shared in a group chat -->
+  <meta name="description" content="Round X power rankings for the 2027 Ligma League AFL Fantasy season."><!-- CHANGE THIS -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Paz's Power Rankings">
+  <meta property="og:title" content="Round X Rankings · Paz's Power Rankings"><!-- CHANGE THIS -->
+  <meta property="og:description" content="Round X power rankings for the 2027 Ligma League AFL Fantasy season."><!-- CHANGE THIS -->
+  <meta property="og:image" content="https://damico21.github.io/Power-Rankings/images/brand/ppr-logo.jpg"><!-- must be a full https:// address -->
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    /* ── PPR Design tokens ── */
+    /* PPR design tokens */
     :root {
       --navy:  #1b2a3b;
       --red:   #8b1a1a;
@@ -43,33 +52,33 @@
       overflow-x: hidden;
     }
 
-    /* ── All your page-specific styles go here ── */
+    /* Page-specific styles go here */
 
   </style>
 </head>
 <body>
 
-  <!--
-    ╔══════════════════════════════════════════════════════════╗
-    ║  DO NOT add any <nav> or hamburger HTML here.           ║
-    ║  nav.js injects the full nav + mobile menu automatically.║
-    ╚══════════════════════════════════════════════════════════╝
-  -->
+  <!-- Page content goes here.
+       Images: use the files in images/ and add loading="lazy" decoding="async".
+       Team avatars:  images/teams/thumbs/<team>.jpg  (small, fast)
+       Team popups:   images/teams/<team>.jpg         (full size)              -->
 
-  <!-- ═══ YOUR PAGE CONTENT GOES HERE ═══ -->
-
-  <footer style="text-align:center;padding:2rem;color:#253545;font-size:0.78rem;font-family:'Oswald',sans-serif;letter-spacing:1px;border-top:1px solid var(--border);">
-    Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy
+  <footer class="site-footer">
+    <div class="site-footer-inner">
+      <a class="footer-brand" href="index.html">PPR</a>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="2026.html">2026 season</a></li>
+        <li><a href="2027.html">2027 season</a></li>
+        <li><a href="grand-final.html">Grand Final</a></li>
+      </ul>
+      <div class="footer-copy">Paz's Power Rankings &copy; 2026 · Ligma League AFL Fantasy</div>
+    </div>
   </footer>
 
-  <!--
-    nav.js MUST be the very last script before </body>.
-    It auto-detects the current filename and highlights the active link.
-    It removes any legacy <nav> or .divider elements automatically.
-  -->
-  <script src="nav.js"></script>
+  <!-- Your own page scripts go here, above nav.js -->
 
-  <!-- Your other page scripts go above nav.js -->
-
+  <!-- nav.js must be the last script before </body> -->
+  <script src="nav.js?v=6"></script>
 </body>
 </html>
