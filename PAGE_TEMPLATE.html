@@ -4,9 +4,11 @@
   Copy this file for every new page, then:
     1. Rename the copy (lowercase, hyphens, e.g. 2027-round-1.html)
     2. Change the <title>, description and og: tags below
-    3. Add the page to the right season in nav.js (see README.md)
+    3. Fill in the hero (title, tag, headline, No. 1 team and score)
+    4. Add the page to the right season in nav.js (see README.md)
   The header, the Previous / Next buttons and the active-page highlight
   all come from nav.js automatically. Don't add your own <nav>.
+  ppr-pages.css gives the page the shared hero, headings, cards and tables.
 -->
 <html lang="en">
 <head>
@@ -14,7 +16,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Round X Rankings — Paz's Power Rankings</title><!-- CHANGE THIS -->
   <link rel="icon" href="favicon.ico" sizes="any">
-  <link rel="apple-touch-icon" href="images/brand/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="theme-color" content="#0d1117">
 
   <!-- What shows up when the link is shared in a group chat -->
@@ -23,7 +25,7 @@
   <meta property="og:site_name" content="Paz's Power Rankings">
   <meta property="og:title" content="Round X Rankings · Paz's Power Rankings"><!-- CHANGE THIS -->
   <meta property="og:description" content="Round X power rankings for the 2027 Ligma League AFL Fantasy season."><!-- CHANGE THIS -->
-  <meta property="og:image" content="https://damico21.github.io/Power-Rankings/images/brand/ppr-logo.jpg"><!-- must be a full https:// address -->
+  <meta property="og:image" content="https://damico21.github.io/Power-Rankings/ppr-logo.jpg"><!-- must be a full https:// address -->
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +33,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
-    /* PPR design tokens */
     :root {
       --navy:  #1b2a3b;
       --red:   #8b1a1a;
@@ -44,24 +45,46 @@
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--dark);
-      color: #fff;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+    body { font-family: 'Inter', sans-serif; background: var(--dark); color: #fff; min-height: 100vh; overflow-x: hidden; }
 
     /* Page-specific styles go here */
 
   </style>
+  <link rel="stylesheet" href="ppr-pages.css?v=1">
 </head>
-<body>
+<body class="ppr-page">
 
-  <!-- Page content goes here.
-       Images: use the files in images/ and add loading="lazy" decoding="async".
-       Team avatars:  images/teams/thumbs/<team>.jpg  (small, fast)
-       Team popups:   images/teams/<team>.jpg         (full size)              -->
+  <header class="ppr-hero">
+    <div class="ppr-hero-grain"></div>
+    <div class="ppr-hero-inner">
+      <div class="ppr-hero-text">
+        <div class="ppr-crumb"><a href="index.html">Ligma League</a> <span aria-hidden="true">/</span> <a href="2027.html">2027 season</a></div>
+        <h1 class="ppr-hero-title">Round X</h1>                               <!-- CHANGE THIS -->
+        <div class="ppr-hero-tag">Power rankings</div>
+        <p class="ppr-hero-lede">One-line headline for the round.</p>        <!-- CHANGE THIS -->
+      </div>
+      <!-- No. 1 team this round. Delete the whole <figure> and add class="no-figure"
+           to .ppr-hero-inner above if you don't want a picture. -->
+      <figure class="ppr-hero-figure">
+        <div class="ppr-hero-frame">
+          <span class="ppr-hero-ribbon">No. 1</span>
+          <img src="van-twists-card.jpg" alt="Van Twists" width="720" height="900" fetchpriority="high"><!-- CHANGE THIS -->
+        </div>
+        <figcaption><span class="ppr-hero-team">Van Twists</span><span class="ppr-hero-score">10.00<small>PPR</small></span></figcaption>
+      </figure>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="section-label">Round X · Power rankings</div>
+    <div class="section-title">Rankings</div>
+
+    <!-- Page content goes here.
+         Images sit next to the pages (no folders). Add loading="lazy" decoding="async" to each <img>.
+         Team avatars:  <team>-thumb.jpg   (small, fast)
+         Team popups:   <team>.jpg         (full size)
+         Team cards:    <team>-card.jpg    (medium)                        -->
+  </div>
 
   <footer class="site-footer">
     <div class="site-footer-inner">

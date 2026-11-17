@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Round 10 Rankings — Paz's Power Rankings</title>
   <link rel="icon" href="favicon.ico" sizes="any">
-  <link rel="apple-touch-icon" href="images/brand/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="theme-color" content="#0d1117">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Paz's Power Rankings">
   <meta property="og:title" content="Round 10 Rankings · Paz's Power Rankings">
   <meta property="og:description" content="Round 10 power rankings for the 2026 Ligma League AFL Fantasy season.">
-  <meta property="og:image" content="https://damico21.github.io/Power-Rankings/images/brand/ppr-logo.jpg">
+  <meta property="og:image" content="https://damico21.github.io/Power-Rankings/ppr-logo.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="description" content="Round 10 power rankings for the 2026 Ligma League AFL Fantasy season.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -248,14 +248,28 @@
       .takeaways-card{padding:1.4rem 1.2rem;}
     }
   </style>
+  <link rel="stylesheet" href="ppr-pages.css?v=1">
 </head>
-<body>
+<body class="ppr-page">
 
-  <div class="page-header">
-    <div class="eyebrow">Paz's Power Rankings · Ligma League 2026</div>
-    <h1>⚡ Round 10 Rankings</h1>
-    <div class="subtitle">Round 10 · The Ladder Reshuffles</div>
-  </div>
+  <header class="ppr-hero">
+    <div class="ppr-hero-grain"></div>
+    <div class="ppr-hero-inner">
+      <div class="ppr-hero-text">
+        <div class="ppr-crumb"><a href="index.html">Ligma League</a> <span aria-hidden="true">/</span> <a href="2026.html">2026 season</a></div>
+        <h1 class="ppr-hero-title">Round 10</h1>
+        <div class="ppr-hero-tag">Power rankings</div>
+        <p class="ppr-hero-lede">Holmes demolish. DC surge. Broncic stumble.</p>
+      </div>
+      <figure class="ppr-hero-figure">
+        <div class="ppr-hero-frame">
+          <span class="ppr-hero-ribbon">No. 1</span>
+          <img src="better-holmes-and-gardens-card.jpg" alt="Holmes and Gardens" width="720" height="900" fetchpriority="high">
+        </div>
+        <figcaption><span class="ppr-hero-team">Holmes and Gardens</span><span class="ppr-hero-score">11.36<small>PPR</small></span></figcaption>
+      </figure>
+    </div>
+  </header>
   <div class="divider"></div>
 
   <div class="main">
@@ -297,73 +311,73 @@
             <tr>
               <td class="td-rank p1">1</td>
               <td class="td-move"><span class="move-nc">— 0</span></td>
-              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/better-holmes-and-gardens.jpg" alt="Holmes and Gardens" onclick="openPhoto('images/teams/better-holmes-and-gardens.jpg','Holmes and Gardens')"><div class="team-info"><div class="team-name">Holmes &amp; Gardens 🔐</div><div class="team-owner">Matthew</div></div></div></td>
+              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="better-holmes-and-gardens-thumb.jpg" alt="Holmes and Gardens" onclick="openPhoto('better-holmes-and-gardens.jpg','Holmes and Gardens')"><div class="team-info"><div class="team-name">Holmes &amp; Gardens 🔐</div><div class="team-owner">Matthew</div></div></div></td>
               <td class="td-score best">11.36</td>
             </tr>
             <tr>
               <td class="td-rank p2">2</td>
               <td class="td-move"><span class="move-up">▲ 2</span></td>
-              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/dc-tax-payers.jpg" alt="DC & Tax Payers" onclick="openPhoto('images/teams/dc-tax-payers.jpg','DC & Tax Payers')"><div class="team-info"><div class="team-name">DC &amp; Tax Payers</div><div class="team-owner">Rupe</div></div></div></td>
+              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="dc-tax-payers-thumb.jpg" alt="DC & Tax Payers" onclick="openPhoto('dc-tax-payers.jpg','DC & Tax Payers')"><div class="team-info"><div class="team-name">DC &amp; Tax Payers</div><div class="team-owner">Rupe</div></div></div></td>
               <td class="td-score">11.10</td>
             </tr>
             <tr>
               <td class="td-rank p3">3</td>
               <td class="td-move"><span class="move-dn">▼ 1</span></td>
-              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/broncic.jpg" alt="Broncic" onclick="openPhoto('images/teams/broncic.jpg','Broncic')"><div class="team-info"><div class="team-name">Broncic</div><div class="team-owner">William</div></div></div></td>
+              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="broncic-thumb.jpg" alt="Broncic" onclick="openPhoto('broncic.jpg','Broncic')"><div class="team-info"><div class="team-name">Broncic</div><div class="team-owner">William</div></div></div></td>
               <td class="td-score">11.06</td>
             </tr>
             <tr>
               <td class="td-rank">4</td>
               <td class="td-move"><span class="move-dn">▼ 1</span></td>
-              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/flagdons.jpg" alt="Flagdons" onclick="openPhoto('images/teams/flagdons.jpg','Flagdons')"><div class="team-info"><div class="team-name">Flagdons</div><div class="team-owner">Rick</div></div></div></td>
+              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="flagdons-thumb.jpg" alt="Flagdons" onclick="openPhoto('flagdons.jpg','Flagdons')"><div class="team-info"><div class="team-name">Flagdons</div><div class="team-owner">Rick</div></div></div></td>
               <td class="td-score">11.00</td>
             </tr>
             <tr>
               <td class="td-rank">5</td>
               <td class="td-move"><span class="move-nc">— 0</span></td>
-              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/dark-magicians.jpg" alt="Dark Magicians" onclick="openPhoto('images/teams/dark-magicians.jpg','Dark Magicians')"><div class="team-info"><div class="team-name">Dark Magicians</div><div class="team-owner">Osei</div></div></div></td>
+              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="dark-magicians-thumb.jpg" alt="Dark Magicians" onclick="openPhoto('dark-magicians.jpg','Dark Magicians')"><div class="team-info"><div class="team-name">Dark Magicians</div><div class="team-owner">Osei</div></div></div></td>
               <td class="td-score">10.75</td>
             </tr>
             <tr>
               <td class="td-rank">6</td>
               <td class="td-move"><span class="move-dn">▼ 0</span></td>
-              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/van-twists.jpg" alt="Van Twists" onclick="openPhoto('images/teams/van-twists.jpg','Van Twists')"><div class="team-info"><div class="team-name">Van Twists</div><div class="team-owner">Tim</div></div></div></td>
+              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="van-twists-thumb.jpg" alt="Van Twists" onclick="openPhoto('van-twists.jpg','Van Twists')"><div class="team-info"><div class="team-name">Van Twists</div><div class="team-owner">Tim</div></div></div></td>
               <td class="td-score">9.80</td>
             </tr>
             <tr>
               <td class="td-rank">7</td>
               <td class="td-move"><span class="move-nc">— 0</span></td>
-              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/nethers-men.jpg" alt="Nethers men" onclick="openPhoto('images/teams/nethers-men.jpg','Nethers men')"><div class="team-info"><div class="team-name">Nethers men</div><div class="team-owner">Max</div></div></div></td>
+              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="nethers-men-thumb.jpg" alt="Nethers men" onclick="openPhoto('nethers-men.jpg','Nethers men')"><div class="team-info"><div class="team-name">Nethers men</div><div class="team-owner">Max</div></div></div></td>
               <td class="td-score">10.00</td>
             </tr>
             <tr>
               <td class="td-rank">8</td>
               <td class="td-move"><span class="move-up">▲ 1</span></td>
-              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/phillipou.jpg" alt="Phillipou" onclick="openPhoto('images/teams/phillipou.jpg','Phillipou')"><div class="team-info"><div class="team-name">Phillipou</div><div class="team-owner">Cam</div></div></div></td>
+              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="phillipou-thumb.jpg" alt="Phillipou" onclick="openPhoto('phillipou.jpg','Phillipou')"><div class="team-info"><div class="team-name">Phillipou</div><div class="team-owner">Cam</div></div></div></td>
               <td class="td-score">9.75</td>
             </tr>
             <tr>
               <td class="td-rank">9</td>
               <td class="td-move"><span class="move-up">▲ 1</span></td>
-              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/cripps-nipps.jpg" alt="Cripps Nipps" onclick="openPhoto('images/teams/cripps-nipps.jpg','Cripps Nipps')"><div class="team-info"><div class="team-name">Cripps Nipps</div><div class="team-owner">Hayden</div></div></div></td>
+              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="cripps-nipps-thumb.jpg" alt="Cripps Nipps" onclick="openPhoto('cripps-nipps.jpg','Cripps Nipps')"><div class="team-info"><div class="team-name">Cripps Nipps</div><div class="team-owner">Hayden</div></div></div></td>
               <td class="td-score">9.38</td>
             </tr>
             <tr>
               <td class="td-rank">10</td>
               <td class="td-move"><span class="move-up">▲ 1</span></td>
-              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/izaks.jpg" alt="Izaks" onclick="openPhoto('images/teams/izaks.jpg','Izaks')"><div class="team-info"><div class="team-name">Izaks</div><div class="team-owner">Zak</div></div></div></td>
+              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="izaks-thumb.jpg" alt="Izaks" onclick="openPhoto('izaks.jpg','Izaks')"><div class="team-info"><div class="team-name">Izaks</div><div class="team-owner">Zak</div></div></div></td>
               <td class="td-score">9.25</td>
             </tr>
             <tr>
               <td class="td-rank">11</td>
               <td class="td-move"><span class="move-up">▲ 1</span></td>
-              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/foopys.jpg" alt="Foopys" onclick="openPhoto('images/teams/foopys.jpg','Foopys')"><div class="team-info"><div class="team-name">Foopys</div><div class="team-owner">Miller</div></div></div></td>
+              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="foopys-thumb.jpg" alt="Foopys" onclick="openPhoto('foopys.jpg','Foopys')"><div class="team-info"><div class="team-name">Foopys</div><div class="team-owner">Miller</div></div></div></td>
               <td class="td-score">9.21</td>
             </tr>
             <tr>
               <td class="td-rank">12</td>
               <td class="td-move"><span class="move-dn">▼ 4</span></td>
-              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/shavas.jpg" alt="Shavas" onclick="openPhoto('images/teams/shavas.jpg','Shavas')"><div class="team-info"><div class="team-name">Shavas</div><div class="team-owner">Patrick</div></div></div></td>
+              <td><div class="td-team"><img loading="lazy" decoding="async" class="team-photo" src="shavas-thumb.jpg" alt="Shavas" onclick="openPhoto('shavas.jpg','Shavas')"><div class="team-info"><div class="team-name">Shavas</div><div class="team-owner">Patrick</div></div></div></td>
               <td class="td-score">9.00</td>
             </tr>
           </tbody>
@@ -380,7 +394,7 @@
       <div class="verdict-card pos-1">
         <div class="verdict-rank-col">
           <div class="verdict-rank p1">1</div>
-          <img loading="lazy" decoding="async" class="verdict-photo" src="images/teams/thumbs/better-holmes-and-gardens.jpg" alt="Holmes and Gardens" onclick="openPhoto('images/teams/better-holmes-and-gardens.jpg','Holmes and Gardens')">
+          <img loading="lazy" decoding="async" class="verdict-photo" src="better-holmes-and-gardens-thumb.jpg" alt="Holmes and Gardens" onclick="openPhoto('better-holmes-and-gardens.jpg','Holmes and Gardens')">
         </div>
         <div class="verdict-body">
           <div class="verdict-header">
@@ -396,7 +410,7 @@
       <div class="verdict-card pos-2">
         <div class="verdict-rank-col">
           <div class="verdict-rank p2">2</div>
-          <img loading="lazy" decoding="async" class="verdict-photo" src="images/teams/thumbs/dc-tax-payers.jpg" alt="DC & Tax Payers" onclick="openPhoto('images/teams/dc-tax-payers.jpg','DC & Tax Payers')">
+          <img loading="lazy" decoding="async" class="verdict-photo" src="dc-tax-payers-thumb.jpg" alt="DC & Tax Payers" onclick="openPhoto('dc-tax-payers.jpg','DC & Tax Payers')">
         </div>
         <div class="verdict-body">
           <div class="verdict-header">
@@ -412,7 +426,7 @@
       <div class="verdict-card pos-3">
         <div class="verdict-rank-col">
           <div class="verdict-rank p3">3</div>
-          <img loading="lazy" decoding="async" class="verdict-photo" src="images/teams/thumbs/broncic.jpg" alt="Broncic" onclick="openPhoto('images/teams/broncic.jpg','Broncic')">
+          <img loading="lazy" decoding="async" class="verdict-photo" src="broncic-thumb.jpg" alt="Broncic" onclick="openPhoto('broncic.jpg','Broncic')">
         </div>
         <div class="verdict-body">
           <div class="verdict-header">
@@ -428,7 +442,7 @@
       <div class="verdict-card pos-mid">
         <div class="verdict-rank-col">
           <div class="verdict-rank">4</div>
-          <img loading="lazy" decoding="async" class="verdict-photo" src="images/teams/thumbs/flagdons.jpg" alt="Flagdons" onclick="openPhoto('images/teams/flagdons.jpg','Flagdons')">
+          <img loading="lazy" decoding="async" class="verdict-photo" src="flagdons-thumb.jpg" alt="Flagdons" onclick="openPhoto('flagdons.jpg','Flagdons')">
         </div>
         <div class="verdict-body">
           <div class="verdict-header">
@@ -444,7 +458,7 @@
       <div class="verdict-card pos-mid">
         <div class="verdict-rank-col">
           <div class="verdict-rank">5</div>
-          <img loading="lazy" decoding="async" class="verdict-photo" src="images/teams/thumbs/dark-magicians.jpg" alt="Dark Magicians" onclick="openPhoto('images/teams/dark-magicians.jpg','Dark Magicians')">
+          <img loading="lazy" decoding="async" class="verdict-photo" src="dark-magicians-thumb.jpg" alt="Dark Magicians" onclick="openPhoto('dark-magicians.jpg','Dark Magicians')">
         </div>
         <div class="verdict-body">
           <div class="verdict-header">
@@ -460,7 +474,7 @@
       <div class="verdict-card pos-mid">
         <div class="verdict-rank-col">
           <div class="verdict-rank">6</div>
-          <img loading="lazy" decoding="async" class="verdict-photo" src="images/teams/thumbs/van-twists.jpg" alt="Van Twists" onclick="openPhoto('images/teams/van-twists.jpg','Van Twists')">
+          <img loading="lazy" decoding="async" class="verdict-photo" src="van-twists-thumb.jpg" alt="Van Twists" onclick="openPhoto('van-twists.jpg','Van Twists')">
         </div>
         <div class="verdict-body">
           <div class="verdict-header">
@@ -476,7 +490,7 @@
       <div class="verdict-card pos-mid">
         <div class="verdict-rank-col">
           <div class="verdict-rank">7</div>
-          <img loading="lazy" decoding="async" class="verdict-photo" src="images/teams/thumbs/nethers-men.jpg" alt="Nethers men" onclick="openPhoto('images/teams/nethers-men.jpg','Nethers men')">
+          <img loading="lazy" decoding="async" class="verdict-photo" src="nethers-men-thumb.jpg" alt="Nethers men" onclick="openPhoto('nethers-men.jpg','Nethers men')">
         </div>
         <div class="verdict-body">
           <div class="verdict-header">
@@ -492,7 +506,7 @@
       <div class="verdict-card pos-mid">
         <div class="verdict-rank-col">
           <div class="verdict-rank">8</div>
-          <img loading="lazy" decoding="async" class="verdict-photo" src="images/teams/thumbs/phillipou.jpg" alt="Phillipou" onclick="openPhoto('images/teams/phillipou.jpg','Phillipou')">
+          <img loading="lazy" decoding="async" class="verdict-photo" src="phillipou-thumb.jpg" alt="Phillipou" onclick="openPhoto('phillipou.jpg','Phillipou')">
         </div>
         <div class="verdict-body">
           <div class="verdict-header">
@@ -508,7 +522,7 @@
       <div class="verdict-card pos-mid">
         <div class="verdict-rank-col">
           <div class="verdict-rank">9</div>
-          <img loading="lazy" decoding="async" class="verdict-photo" src="images/teams/thumbs/cripps-nipps.jpg" alt="Cripps Nipps" onclick="openPhoto('images/teams/cripps-nipps.jpg','Cripps Nipps')">
+          <img loading="lazy" decoding="async" class="verdict-photo" src="cripps-nipps-thumb.jpg" alt="Cripps Nipps" onclick="openPhoto('cripps-nipps.jpg','Cripps Nipps')">
         </div>
         <div class="verdict-body">
           <div class="verdict-header">
@@ -524,7 +538,7 @@
       <div class="verdict-card pos-bot">
         <div class="verdict-rank-col">
           <div class="verdict-rank">10</div>
-          <img loading="lazy" decoding="async" class="verdict-photo" src="images/teams/thumbs/izaks.jpg" alt="Izaks" onclick="openPhoto('images/teams/izaks.jpg','Izaks')">
+          <img loading="lazy" decoding="async" class="verdict-photo" src="izaks-thumb.jpg" alt="Izaks" onclick="openPhoto('izaks.jpg','Izaks')">
         </div>
         <div class="verdict-body">
           <div class="verdict-header">
@@ -540,7 +554,7 @@
       <div class="verdict-card pos-bot">
         <div class="verdict-rank-col">
           <div class="verdict-rank">11</div>
-          <img loading="lazy" decoding="async" class="verdict-photo" src="images/teams/thumbs/foopys.jpg" alt="Foopys" onclick="openPhoto('images/teams/foopys.jpg','Foopys')">
+          <img loading="lazy" decoding="async" class="verdict-photo" src="foopys-thumb.jpg" alt="Foopys" onclick="openPhoto('foopys.jpg','Foopys')">
         </div>
         <div class="verdict-body">
           <div class="verdict-header">
@@ -556,7 +570,7 @@
       <div class="verdict-card pos-bot">
         <div class="verdict-rank-col">
           <div class="verdict-rank">12</div>
-          <img loading="lazy" decoding="async" class="verdict-photo" src="images/teams/thumbs/shavas.jpg" alt="Shavas" onclick="openPhoto('images/teams/shavas.jpg','Shavas')">
+          <img loading="lazy" decoding="async" class="verdict-photo" src="shavas-thumb.jpg" alt="Shavas" onclick="openPhoto('shavas.jpg','Shavas')">
         </div>
         <div class="verdict-body">
           <div class="verdict-header">

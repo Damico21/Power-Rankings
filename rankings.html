@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Draft Night — Paz's Power Rankings</title>
   <link rel="icon" href="favicon.ico" sizes="any">
-  <link rel="apple-touch-icon" href="images/brand/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="theme-color" content="#0d1117">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Paz's Power Rankings">
   <meta property="og:title" content="Draft Night · Paz's Power Rankings">
   <meta property="og:description" content="The first power rankings of the 2026 Ligma League season, published on Draft Night.">
-  <meta property="og:image" content="https://damico21.github.io/Power-Rankings/images/brand/ppr-logo.jpg">
+  <meta property="og:image" content="https://damico21.github.io/Power-Rankings/ppr-logo.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="description" content="The first power rankings of the 2026 Ligma League season, published on Draft Night.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -85,16 +85,32 @@
       .score-cell { font-size:1.2rem; }
     }
   </style>
+  <link rel="stylesheet" href="ppr-pages.css?v=1">
 </head>
-<body>
+<body class="ppr-page">
 
-  <div class="page-header">
-    <div class="eyebrow">Week 0 · Power Rankings</div>
-    <h1>Draft Night Rankings</h1>
-    <div class="subtitle">Paz's Power Rankings · Ligma League 2026</div>
-  </div>
+  <header class="ppr-hero">
+    <div class="ppr-hero-grain"></div>
+    <div class="ppr-hero-inner">
+      <div class="ppr-hero-text">
+        <div class="ppr-crumb"><a href="index.html">Ligma League</a> <span aria-hidden="true">/</span> <a href="2026.html">2026 season</a></div>
+        <h1 class="ppr-hero-title">Draft Night</h1>
+        <div class="ppr-hero-tag">Power rankings · Week 0</div>
+        <p class="ppr-hero-lede">The first table of the season.</p>
+      </div>
+      <figure class="ppr-hero-figure">
+        <div class="ppr-hero-frame">
+          <span class="ppr-hero-ribbon">No. 1</span>
+          <img src="foopys-card.jpg" alt="Foopys" width="720" height="900" fetchpriority="high">
+        </div>
+        <figcaption><span class="ppr-hero-team">Foopys</span><span class="ppr-hero-score">9.67<small>PPR</small></span></figcaption>
+      </figure>
+    </div>
+  </header>
 
   <div class="rankings-wrap">
+    <div class="section-label">Draft Night · Power rankings</div>
+    <div class="section-title">Rankings</div>
     <table class="rankings-table">
       <thead>
         <tr>
@@ -104,64 +120,64 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="rank-1" onclick="openPhoto('images/teams/foopys.jpg','Foopys')">
+        <tr class="rank-1" onclick="openPhoto('foopys.jpg','Foopys')">
           <td class="rank-cell">01</td>
-          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/foopys.jpg" alt="Foopys"><span class="team-name">Foopys <span class="team-icons">🥇 🥄</span></span></div></td>
+          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="foopys-thumb.jpg" alt="Foopys"><span class="team-name">Foopys <span class="team-icons">🥇 🥄</span></span></div></td>
           <td class="score-cell">9.67</td>
         </tr>
-        <tr class="rank-2" onclick="openPhoto('images/teams/van-twists.jpg','Van Twists')">
+        <tr class="rank-2" onclick="openPhoto('van-twists.jpg','Van Twists')">
           <td class="rank-cell">02</td>
-          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/van-twists.jpg" alt="Van Twists"><span class="team-name">Van Twists <span class="team-icons">🥈</span></span></div></td>
+          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="van-twists-thumb.jpg" alt="Van Twists"><span class="team-name">Van Twists <span class="team-icons">🥈</span></span></div></td>
           <td class="score-cell">9.58</td>
         </tr>
-        <tr class="rank-3" onclick="openPhoto('images/teams/dark-magicians.jpg','Dark Magicians')">
+        <tr class="rank-3" onclick="openPhoto('dark-magicians.jpg','Dark Magicians')">
           <td class="rank-cell">03</td>
-          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/dark-magicians.jpg" alt="Dark Magicians"><span class="team-name">Dark Magicians <span class="team-icons">🥉</span></span></div></td>
+          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="dark-magicians-thumb.jpg" alt="Dark Magicians"><span class="team-name">Dark Magicians <span class="team-icons">🥉</span></span></div></td>
           <td class="score-cell">9.50</td>
         </tr>
-        <tr onclick="openPhoto('images/teams/cripps-nipps.jpg','Cripps Nipps')">
+        <tr onclick="openPhoto('cripps-nipps.jpg','Cripps Nipps')">
           <td class="rank-cell">04</td>
-          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/cripps-nipps.jpg" alt="Cripps Nipps"><span class="team-name">Cripps Nipps</span></div></td>
+          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="cripps-nipps-thumb.jpg" alt="Cripps Nipps"><span class="team-name">Cripps Nipps</span></div></td>
           <td class="score-cell">9.42</td>
         </tr>
-        <tr onclick="openPhoto('images/teams/phillipou.jpg','Phillipou')">
+        <tr onclick="openPhoto('phillipou.jpg','Phillipou')">
           <td class="rank-cell">05</td>
-          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/phillipou.jpg" alt="Phillipou"><span class="team-name">Phillipou</span></div></td>
+          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="phillipou-thumb.jpg" alt="Phillipou"><span class="team-name">Phillipou</span></div></td>
           <td class="score-cell">9.25</td>
         </tr>
-        <tr onclick="openPhoto('images/teams/flagdons.jpg','Flagdons')">
+        <tr onclick="openPhoto('flagdons.jpg','Flagdons')">
           <td class="rank-cell">06</td>
-          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/flagdons.jpg" alt="Flagdons"><span class="team-name">Flagdons</span></div></td>
+          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="flagdons-thumb.jpg" alt="Flagdons"><span class="team-name">Flagdons</span></div></td>
           <td class="score-cell">9.17</td>
         </tr>
-        <tr onclick="openPhoto('images/teams/nethers-men.jpg','Nethers men')">
+        <tr onclick="openPhoto('nethers-men.jpg','Nethers men')">
           <td class="rank-cell">07</td>
-          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/nethers-men.jpg" alt="Nethers men"><span class="team-name">Nethers men <span class="team-icons">🥄 💍</span></span></div></td>
+          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="nethers-men-thumb.jpg" alt="Nethers men"><span class="team-name">Nethers men <span class="team-icons">🥄 💍</span></span></div></td>
           <td class="score-cell">9.00</td>
         </tr>
-        <tr onclick="openPhoto('images/teams/shavas.jpg','Shavas')">
+        <tr onclick="openPhoto('shavas.jpg','Shavas')">
           <td class="rank-cell">08</td>
-          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/shavas.jpg" alt="Shavas"><span class="team-name">Shavas</span></div></td>
+          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="shavas-thumb.jpg" alt="Shavas"><span class="team-name">Shavas</span></div></td>
           <td class="score-cell">8.92</td>
         </tr>
-        <tr onclick="openPhoto('images/teams/better-holmes-and-gardens.jpg','Better Holmes and Gardens')">
+        <tr onclick="openPhoto('better-holmes-and-gardens.jpg','Better Holmes and Gardens')">
           <td class="rank-cell">09</td>
-          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/better-holmes-and-gardens.jpg" alt="Better Holmes and Gardens"><span class="team-name">Better Holmes and Gardens</span></div></td>
+          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="better-holmes-and-gardens-thumb.jpg" alt="Better Holmes and Gardens"><span class="team-name">Better Holmes and Gardens</span></div></td>
           <td class="score-cell">8.67</td>
         </tr>
-        <tr onclick="openPhoto('images/teams/izaks.jpg','Izaks')">
+        <tr onclick="openPhoto('izaks.jpg','Izaks')">
           <td class="rank-cell">10</td>
-          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/izaks.jpg" alt="Izaks"><span class="team-name">Izaks</span></div></td>
+          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="izaks-thumb.jpg" alt="Izaks"><span class="team-name">Izaks</span></div></td>
           <td class="score-cell">8.42</td>
         </tr>
-        <tr onclick="openPhoto('images/teams/broncic.jpg','Broncic')">
+        <tr onclick="openPhoto('broncic.jpg','Broncic')">
           <td class="rank-cell">11</td>
-          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/broncic.jpg" alt="Broncic"><span class="team-name">Broncic <span class="team-icons">💍</span></span></div></td>
+          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="broncic-thumb.jpg" alt="Broncic"><span class="team-name">Broncic <span class="team-icons">💍</span></span></div></td>
           <td class="score-cell">8.25</td>
         </tr>
-        <tr onclick="openPhoto('images/teams/dc-tax-payers.jpg','DC &amp; Tax Payers')">
+        <tr onclick="openPhoto('dc-tax-payers.jpg','DC &amp; Tax Payers')">
           <td class="rank-cell">12</td>
-          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="images/teams/thumbs/dc-tax-payers.jpg" alt="DC &amp; Tax Payers"><span class="team-name">DC &amp; Tax Payers</span></div></td>
+          <td class="team-cell"><div class="team-inner"><img loading="lazy" decoding="async" class="team-photo" src="dc-tax-payers-thumb.jpg" alt="DC &amp; Tax Payers"><span class="team-name">DC &amp; Tax Payers</span></div></td>
           <td class="score-cell">8.25</td>
         </tr>
       </tbody>

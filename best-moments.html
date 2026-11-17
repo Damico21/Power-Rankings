@@ -5,32 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>2026 Best Moments — Paz's Power Rankings</title>
   <link rel="icon" href="favicon.ico" sizes="any">
-  <link rel="apple-touch-icon" href="images/brand/apple-touch-icon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <meta name="theme-color" content="#0d1117">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Paz's Power Rankings">
   <meta property="og:title" content="2026 Best Moments · Paz's Power Rankings">
   <meta property="og:description" content="The trades, the chat drama and the memories worth keeping from the 2026 Ligma League season.">
-  <meta property="og:image" content="https://damico21.github.io/Power-Rankings/images/moments/thats-the-wrong-house.jpg">
+  <meta property="og:image" content="https://damico21.github.io/Power-Rankings/thats-the-wrong-house.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="description" content="The trades, the chat drama and the memories worth keeping from the 2026 Ligma League season.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&family=Inter:wght@400;500;600&family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg:        #0a0e0a;
-      --surface:   #111711;
-      --card:      #161e16;
-      --border:    #1f2e1f;
-      --green:     #1db954;
-      --green-dim: #155e30;
-      --green-glow:#1db95433;
-      --gold:      #f5c842;
-      --text:      #e8f0e8;
-      --muted:     #6b7f6b;
-      --label-bg:  #0d1a0d;
+      --bg:        #0d1117;
+      --surface:   #111823;
+      --card:      #141d27;
+      --border:    rgba(255,255,255,0.07);
+      --green:     #c8a951;
+      --green-dim: #6f5a1f;
+      --green-glow:rgba(200,169,81,0.2);
+      --gold:      #c8a951;
+      --text:      #e8edf2;
+      --muted:     #6a8aaa;
+      --label-bg:  rgba(200,169,81,0.08);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -39,7 +39,7 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Inter', sans-serif;
       min-height: 100vh;
       overflow-x: hidden;
     }
@@ -125,7 +125,7 @@
       border-radius: 999px;
       padding: 0.3rem 1rem;
       font-size: 0.75rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'Oswald', sans-serif;
       color: var(--green);
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -153,7 +153,7 @@
     }
 
     .hero-meta {
-      font-family: 'Space Mono', monospace;
+      font-family: 'Oswald', sans-serif;
       font-size: 0.7rem;
       color: var(--green-dim);
       letter-spacing: 1px;
@@ -189,7 +189,7 @@
     }
 
     .divider-badge {
-      font-family: 'Space Mono', monospace;
+      font-family: 'Oswald', sans-serif;
       font-size: 0.65rem;
       color: var(--muted);
       text-transform: uppercase;
@@ -259,7 +259,7 @@
       border: 1px solid var(--green-dim);
       border-radius: 6px;
       padding: 0.2rem 0.6rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'Oswald', sans-serif;
       font-size: 0.65rem;
       color: var(--green);
       text-transform: uppercase;
@@ -334,7 +334,7 @@
       padding: 3rem 2rem;
       color: var(--muted);
       font-size: 0.78rem;
-      font-family: 'Space Mono', monospace;
+      font-family: 'Oswald', sans-serif;
       letter-spacing: 0.5px;
       border-top: 1px solid var(--border);
       margin-top: 4rem;
@@ -356,18 +356,25 @@
       .nav-links li:not(:last-child):not(:first-child) { display: none; }
     }
   </style>
+  <link rel="stylesheet" href="ppr-pages.css?v=1">
 </head>
-<body>
+<body class="ppr-page ppr-wide">
 
   <!-- NAV -->
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-eyebrow">📸 Season Highlights · Ligma League</div>
-    <h1>2026 Best <span>Moments</span></h1>
-    <p class="hero-sub">The memories that made the season. Good times, big plays, and moments worth keeping forever.</p>
-    <p class="hero-meta">Ligma League · AFL Fantasy · Est. 2024</p>
-  </section>
+  <header class="ppr-hero">
+    <div class="ppr-hero-grain"></div>
+    <div class="ppr-hero-inner no-figure">
+      <div class="ppr-hero-text">
+        <div class="ppr-crumb"><a href="index.html">Ligma League</a> <span aria-hidden="true">/</span> <a href="2026.html">2026 season</a></div>
+        <h1 class="ppr-hero-title">Best Moments</h1>
+        <div class="ppr-hero-tag">Season special</div>
+        <p class="ppr-hero-lede">The memories that made the season.</p>
+        <p class="ppr-hero-note">Good times, big plays, and moments worth keeping forever.</p>
+      </div>
+    </div>
+  </header>
 
   <!-- SECTION: Season Highlights -->
   <div class="divider">
@@ -379,9 +386,9 @@
   <div class="photo-grid">
 
     <!-- 1st Trade of the Season -->
-    <div class="moment-card" onclick="openLightbox('images/moments/first-trade-fleece.jpg')">
+    <div class="moment-card" onclick="openLightbox('first-trade-fleece.jpg')">
       <div class="img-wrap">
-        <img decoding="async" src="images/moments/first-trade-fleece.jpg" alt="1st Trade of the Season" loading="lazy" />
+        <img decoding="async" src="first-trade-fleece.jpg" alt="1st Trade of the Season" loading="lazy" />
       </div>
       <div class="moment-info">
         <div class="moment-tag">Opening Round · Trade</div>
@@ -391,9 +398,9 @@
     </div>
 
     <!-- That's the Wrong House -->
-    <div class="moment-card" onclick="openLightbox('images/moments/thats-the-wrong-house.jpg')">
+    <div class="moment-card" onclick="openLightbox('thats-the-wrong-house.jpg')">
       <div class="img-wrap">
-        <img decoding="async" src="images/moments/thats-the-wrong-house.jpg" alt="That's the Wrong House!" loading="lazy" />
+        <img decoding="async" src="thats-the-wrong-house.jpg" alt="That's the Wrong House!" loading="lazy" />
       </div>
       <div class="moment-info">
         <div class="moment-tag">March 2026 · Moment</div>
@@ -403,9 +410,9 @@
     </div>
 
     <!-- Fiorini Can't Get Near It -->
-    <div class="moment-card" onclick="openLightbox('images/moments/fiorini-cant-get-near-it.jpg')">
+    <div class="moment-card" onclick="openLightbox('fiorini-cant-get-near-it.jpg')">
       <div class="img-wrap">
-        <img decoding="async" src="images/moments/fiorini-cant-get-near-it.jpg" alt="Fiorini Can't Get Near It" loading="lazy" />
+        <img decoding="async" src="fiorini-cant-get-near-it.jpg" alt="Fiorini Can't Get Near It" loading="lazy" />
       </div>
       <div class="moment-info">
         <div class="moment-tag">Round 2 · Chat Drama</div>
@@ -415,9 +422,9 @@
     </div>
 
     <!-- Parker vs Xerri Scores -->
-    <div class="moment-card" onclick="openLightbox('images/moments/parker-vs-xerri.jpg')">
+    <div class="moment-card" onclick="openLightbox('parker-vs-xerri.jpg')">
       <div class="img-wrap">
-        <img decoding="async" src="images/moments/parker-vs-xerri.jpg" alt="Parker vs Xerri" loading="lazy" />
+        <img decoding="async" src="parker-vs-xerri.jpg" alt="Parker vs Xerri" loading="lazy" />
       </div>
       <div class="moment-info">
         <div class="moment-tag">Round 2 · Scores</div>
@@ -427,9 +434,9 @@
     </div>
 
     <!-- Xerri Pt 2 -->
-    <div class="moment-card" onclick="openLightbox('images/moments/xerri-pt-2.jpg')">
+    <div class="moment-card" onclick="openLightbox('xerri-pt-2.jpg')">
       <div class="img-wrap">
-        <img decoding="async" src="images/moments/xerri-pt-2.jpg" alt="Xerri Pt. 2" loading="lazy" />
+        <img decoding="async" src="xerri-pt-2.jpg" alt="Xerri Pt. 2" loading="lazy" />
       </div>
       <div class="moment-info">
         <div class="moment-tag">Round 2 · On-Field</div>
@@ -439,9 +446,9 @@
     </div>
 
     <!-- One of Our Own Gets Engaged -->
-    <div class="moment-card" id="engagement" onclick="openLightbox('images/moments/one-of-our-own-gets-engaged.jpg')">
+    <div class="moment-card" id="engagement" onclick="openLightbox('one-of-our-own-gets-engaged.jpg')">
       <div class="img-wrap">
-        <img decoding="async" src="images/moments/one-of-our-own-gets-engaged.jpg" alt="One of Our Own Gets Engaged" loading="lazy" />
+        <img decoding="async" src="one-of-our-own-gets-engaged.jpg" alt="One of Our Own Gets Engaged" loading="lazy" />
       </div>
       <div class="moment-info">
         <div class="moment-tag">2026 · Off-Field</div>
@@ -451,9 +458,9 @@
     </div>
 
     <!-- The Izaks Strike Back -->
-    <div class="moment-card" onclick="openLightbox('images/moments/izaks-strike-back.jpg')">
+    <div class="moment-card" onclick="openLightbox('izaks-strike-back.jpg')">
       <div class="img-wrap">
-        <img decoding="async" src="images/moments/izaks-strike-back.jpg" alt="The Izaks Strike Back" loading="lazy" />
+        <img decoding="async" src="izaks-strike-back.jpg" alt="The Izaks Strike Back" loading="lazy" />
       </div>
       <div class="moment-info">
         <div class="moment-tag">Round 3 · Meme</div>
@@ -507,7 +514,7 @@
         if (card) {
           setTimeout(function() {
             card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            openLightbox('images/moments/one-of-our-own-gets-engaged.jpg');
+            openLightbox('one-of-our-own-gets-engaged.jpg');
           }, 400);
         }
       }

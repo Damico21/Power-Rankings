@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════════════
    PPR shared styles (home + season hubs)
-   Used by index.html, 2026.html and 2027.html.
-   The round pages keep their own inline styles and are untouched.
+   Used by index.html, 2026.html, 2027.html and 404.html.
+   The rankings and special pages use ppr-pages.css, which matches this look.
    ═══════════════════════════════════════════════════════════════════ */
 
 :root {

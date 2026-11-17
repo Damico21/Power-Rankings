@@ -24,22 +24,22 @@ snakes-and-ladders.html
 
 nav.js                    Header, season bar, Previous/Next buttons (every page)
 ppr.css / ppr.js          Shared styles and scripts for home + season pages
+ppr-pages.css             Shared look for every rankings and special page
+                          (hero, headings, column width, cards, tables)
 PAGE_TEMPLATE.html        Starting point for any new page
 favicon.ico
 
-images/
-  brand/                  PPR and Ligma League logos, home screen icon
-  teams/                  Full-size team posters (used in photo popups)
-  teams/cards/            Medium posters (home and season page grids)
-  teams/thumbs/           Small avatars (ranking tables)
-  features/               Weekly wraps, Grand Final art, Snakes & Ladders etc.
-  moments/                Best Moments screenshots and photos
+*.jpg / *.png             Every image sits next to the pages (no folders),
+                          so one "select all and upload" always works.
+  <team>.jpg              Full-size team posters (used in photo popups)
+  <team>-card.jpg         Medium posters (hero cards and season page grids)
+  <team>-thumb.jpg        Small avatars (ranking tables)
 ```
 
 ## Adding a new round
 
 1. Copy `PAGE_TEMPLATE.html` (or the previous round's page) and rename it, e.g. `2027-round-1.html`.
-2. Update the `<title>`, description and `og:` tags at the top.
+2. Update the `<title>`, description and `og:` tags at the top, then the hero: round name, headline, and the No. 1 team's picture, name and score.
 3. Open `nav.js`, find the season's `rounds` list and add the page:
    ```js
    { label: 'Round 1', href: '2027-round-1.html' },
@@ -51,11 +51,11 @@ The new round now appears in the Rounds dropdown and in the Previous/Next button
 
 ## Adding images
 
-- Put them in the matching folder under `images/`.
-- Use lowercase file names with hyphens and no spaces, e.g. `images/moments/round-3-trade.jpg`.
+- Put them in the main folder next to the pages.
+- Use lowercase file names with hyphens and no spaces, e.g. `round-3-trade.jpg`.
 - Keep them small. Resize to about 1500px on the longest side and save as JPG (around 80% quality). https://squoosh.app does this for free in the browser. A phone screenshot straight off the camera roll is often 2 to 4MB; after resizing it's usually under 250KB.
 - On a page, add `loading="lazy" decoding="async"` to each `<img>` so it only downloads when someone scrolls to it.
-- For a new team, add three versions: `images/teams/<team>.jpg` (full), `images/teams/cards/<team>.jpg` (about 720px) and `images/teams/thumbs/<team>.jpg` (about 128px on the short side).
+- For a new team, add three versions: `<team>.jpg` (full), `<team>-card.jpg` (about 720px) and `<team>-thumb.jpg` (about 128px on the short side).
 
 ## Starting a new season
 

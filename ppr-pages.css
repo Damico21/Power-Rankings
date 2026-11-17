@@ -1,0 +1,240 @@
+/* ═══════════════════════════════════════════════════════════════════
+   PPR page styles
+   Loaded by every rankings and season-special page (after the page's own
+   <style> block) so they share one look with the home and season pages:
+   the same hero, column width, section headings, cards and tables.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  --ppr-col: 960px;
+  --ppr-gold: #c8a951;
+  --ppr-red: #8b1a1a;
+  --ppr-red-bright: #d14b4b;
+  --ppr-cream: #e8dcc8;
+  --ppr-dark: #0d1117;
+  --ppr-mid: #141d27;
+  --ppr-navy: #1b2a3b;
+  --ppr-body: #9cb1c4;
+  --ppr-muted: #6a8aaa;
+  --ppr-dim: #3a5a7a;
+  --ppr-line: rgba(255,255,255,0.07);
+  --ppr-accent: var(--ppr-gold);
+}
+body.ppr-wide { --ppr-col: 1100px; }
+body.ppr-tunes { --ppr-accent: #1db954; }
+
+body.ppr-page {
+  background: var(--ppr-dark);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+body.ppr-page img { max-width: 100%; }
+
+@keyframes pprFadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+/* ═══════════ HERO ═══════════ */
+.ppr-hero {
+  position: relative; overflow: hidden;
+  border-bottom: 1px solid var(--ppr-line);
+  background:
+    radial-gradient(ellipse at 82% 30%, rgba(200,169,81,0.13) 0%, transparent 55%),
+    radial-gradient(ellipse at 6% 100%, rgba(139,26,26,0.24) 0%, transparent 52%),
+    linear-gradient(140deg, #0d1117 0%, var(--ppr-navy) 64%, #0d1117 100%);
+}
+body.ppr-tunes .ppr-hero {
+  background:
+    radial-gradient(ellipse at 82% 30%, rgba(29,185,84,0.14) 0%, transparent 55%),
+    radial-gradient(ellipse at 6% 100%, rgba(139,26,26,0.2) 0%, transparent 52%),
+    linear-gradient(140deg, #0d1117 0%, var(--ppr-navy) 64%, #0d1117 100%);
+}
+.ppr-hero-grain {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.35;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+}
+.ppr-hero-inner {
+  position: relative; z-index: 1;
+  max-width: var(--ppr-col); margin: 0 auto; padding: 3.6rem 1.5rem 3.2rem;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3rem; align-items: center;
+}
+.ppr-hero-inner.no-figure { grid-template-columns: minmax(0, 1fr); }
+
+.ppr-crumb {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.55rem;
+  font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ppr-cream); opacity: 0.7; margin-bottom: 0.7rem;
+  animation: pprFadeUp 0.55s ease both;
+}
+.ppr-crumb a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(232,220,200,0.25); }
+.ppr-crumb a:hover { color: #fff; border-color: #fff; }
+
+.ppr-hero-title {
+  font-family: 'Bebas Neue', sans-serif; font-weight: 400;
+  font-size: clamp(3.6rem, 10vw, 7.4rem); line-height: 0.86; letter-spacing: 3px;
+  background: linear-gradient(180deg, #fff 0%, var(--ppr-gold) 62%, #7a5f18 100%);
+  -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: var(--ppr-gold);
+  padding-top: 0.05em;
+  animation: pprFadeUp 0.65s 0.05s ease both;
+}
+.ppr-hero-tag {
+  display: inline-flex; align-items: center; gap: 0.5rem; margin: 1.1rem 0 1.2rem;
+  padding: 0.35rem 0.95rem; border-radius: 100px;
+  font-family: 'Oswald', sans-serif; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
+  background: rgba(200,169,81,0.1); border: 1px solid rgba(200,169,81,0.38); color: var(--ppr-gold);
+  animation: pprFadeUp 0.55s 0.1s ease both;
+}
+body.ppr-tunes .ppr-hero-tag { background: rgba(29,185,84,0.1); border-color: rgba(29,185,84,0.4); color: #1db954; }
+.ppr-hero-lede {
+  font-family: 'Oswald', sans-serif; font-weight: 500;
+  font-size: clamp(1.15rem, 2.4vw, 1.5rem); line-height: 1.3; letter-spacing: 0.5px; text-transform: uppercase;
+  color: var(--ppr-cream); max-width: 560px;
+  animation: pprFadeUp 0.55s 0.15s ease both;
+}
+.ppr-hero-note {
+  margin-top: 0.8rem; max-width: 540px;
+  font-size: 0.95rem; line-height: 1.75; color: var(--ppr-body);
+  animation: pprFadeUp 0.55s 0.2s ease both;
+}
+
+/* No. 1 / feature card on the right */
+.ppr-hero-figure {
+  position: relative; margin: 0; width: 260px;
+  animation: pprFadeUp 0.7s 0.12s ease both;
+}
+.ppr-hero-frame {
+  position: relative; display: block; border-radius: 12px; overflow: hidden;
+  border: 1px solid rgba(200,169,81,0.4);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.6), 0 0 0 6px rgba(200,169,81,0.05);
+  background: var(--ppr-mid);
+}
+.ppr-hero-frame img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; }
+.ppr-hero-figure.is-wide { width: 360px; }
+.ppr-hero-figure.is-wide .ppr-hero-frame img { aspect-ratio: 3 / 2; object-position: center; }
+.ppr-hero-ribbon {
+  position: absolute; top: 0.9rem; left: -0.55rem; z-index: 2;
+  font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: 3px; line-height: 1;
+  padding: 0.4rem 0.9rem 0.32rem; color: #1a1305;
+  background: linear-gradient(135deg, #f0d98c, var(--ppr-gold));
+  box-shadow: 0 6px 18px rgba(0,0,0,0.5);
+}
+.ppr-hero-ribbon::after { content: ''; position: absolute; left: 0; bottom: -0.55rem; border-top: 0.55rem solid #6f5a1f; border-left: 0.55rem solid transparent; }
+.ppr-hero-figure figcaption {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 0.8rem;
+  margin-top: 0.85rem; padding: 0 0.15rem;
+}
+.ppr-hero-team { font-family: 'Bebas Neue', sans-serif; font-size: 1.55rem; letter-spacing: 1.5px; line-height: 1; color: #fff; }
+.ppr-hero-score { font-family: 'Bebas Neue', sans-serif; font-size: 1.55rem; letter-spacing: 1px; line-height: 1; color: var(--ppr-gold); white-space: nowrap; }
+.ppr-hero-score small { font-family: 'Oswald', sans-serif; font-size: 0.6rem; letter-spacing: 1.5px; color: var(--ppr-dim); margin-left: 0.2rem; }
+
+/* ═══════════ COLUMN WIDTH ═══════════ */
+body.ppr-page :is(.main, .main-wrap, .rankings-wrap, .weekly-wrap-section, .playlist-wrap, .grid, .photo-grid) {
+  max-width: var(--ppr-col);
+  margin-left: auto; margin-right: auto;
+  padding-left: 1.5rem; padding-right: 1.5rem;
+}
+body.ppr-page :is(.main, .main-wrap, .rankings-wrap) { padding-top: 3.2rem; }
+body.ppr-page .weekly-wrap-section { padding-top: 3.2rem; padding-bottom: 0; }
+body.ppr-page .weekly-wrap-section + .main-wrap { padding-top: 1rem; }
+
+/* ═══════════ SECTION HEADINGS ═══════════
+   One style everywhere: small red label above a big white title. */
+body.ppr-page .section-label:not(.section-header .section-label) {
+  font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--ppr-red-bright); margin-bottom: 0.45rem;
+}
+body.ppr-page .section-title {
+  font-family: 'Bebas Neue', sans-serif; font-weight: 400;
+  font-size: clamp(2rem, 4.4vw, 2.8rem); line-height: 1; letter-spacing: 1px; color: #fff;
+  margin-bottom: 1.4rem;
+}
+
+body.ppr-page :is(.rankings-header, .wagers-header, .weekly-wrap-heading, .analysis-header, .section-header) {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem;
+  margin: 0 0 1.4rem; padding: 0; border: 0;
+}
+body.ppr-page :is(.rankings-icon, .wagers-icon, .weekly-wrap-heading-icon, .analysis-icon, .section-icon) { display: none; }
+body.ppr-page :is(.rankings-header, .wagers-header, .weekly-wrap-heading, .analysis-header, .section-header) > div:not([class]) {
+  display: flex; flex-direction: column-reverse; min-width: 0;
+}
+body.ppr-page :is(.rankings-title, .wagers-title, .weekly-wrap-heading-title, .analysis-title, .section-header .section-label) {
+  font-family: 'Bebas Neue', sans-serif; font-weight: 400;
+  font-size: clamp(2rem, 4.4vw, 2.8rem); line-height: 1; letter-spacing: 1px; color: #fff;
+  text-transform: none;
+}
+body.ppr-page :is(.rankings-sub, .wagers-sub, .weekly-wrap-heading-sub, .analysis-sub, .section-sub) {
+  font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--ppr-red-bright); margin-bottom: 0.45rem;
+}
+body.ppr-page .rankings-updated { flex-shrink: 0; margin-bottom: 0.3rem; }
+
+/* Divider rows between sections */
+body.ppr-page .section-divider { margin: 3.2rem 0 1.6rem; }
+
+/* ═══════════ CARDS ═══════════ */
+body.ppr-page :is(.recap-card, .weekly-wrap-card, .wagers-wrap, .team-card, .match-card, .intro-card, .takeaways-card, .sali-card, .rankings-section, .tune-card, .playlist-card, .moment-card) {
+  background-color: var(--ppr-mid);
+  border-color: var(--ppr-line);
+  border-radius: 14px;
+}
+body.ppr-page :is(.recap-card, .weekly-wrap-card, .wagers-wrap, .intro-card, .takeaways-card, .rankings-section) {
+  box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+}
+
+/* Readable body copy in every card */
+body.ppr-page :is(.recap-card p, .wrap-text, .intro-card, .intro-blurb, .sali-analysis, .tc-body, .team-card p, .match-card p, .wager-body, .takeaways-list li) {
+  color: var(--ppr-body);
+  line-height: 1.8;
+}
+body.ppr-page :is(.recap-card p, .wrap-text, .intro-card, .intro-blurb, .sali-analysis, .tc-body, .team-card p, .match-card p, .wager-body, .takeaways-list li) strong {
+  color: var(--ppr-cream);
+}
+
+/* ═══════════ RANKINGS TABLES ═══════════ */
+body.ppr-page .rankings-table {
+  background: var(--ppr-mid);
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+}
+body.ppr-page .rankings-section .rankings-table { box-shadow: none; }
+body.ppr-page .rankings-table th {
+  font-family: 'Oswald', sans-serif; font-weight: 500;
+  font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--ppr-dim);
+  background: rgba(255,255,255,0.02);
+  border-bottom: 1px solid var(--ppr-line);
+}
+body.ppr-page .rankings-table tbody tr { transition: background 0.15s; }
+body.ppr-page .rankings-table tbody tr:hover { background: rgba(255,255,255,0.025); }
+
+/* ═══════════ SNAKES & LADDERS ═══════════ */
+body.ppr-page .hero-banner { display: none; }
+
+/* ═══════════ BEST MOMENTS / PPR TUNES ═══════════ */
+body.ppr-page .photo-grid { padding-top: 3rem; }
+body.ppr-page .playlist-wrap { padding-top: 3rem; }
+
+/* ═══════════ MOBILE ═══════════ */
+@media (max-width: 760px) {
+  .ppr-hero-inner { grid-template-columns: minmax(0, 1fr); gap: 2rem; padding: 2.6rem 1.2rem 2.4rem; }
+  .ppr-hero-figure.is-wide { width: 100%; }
+  .ppr-hero-figure.is-wide .ppr-hero-frame img { aspect-ratio: 3 / 2; }
+  /* No. 1 card becomes a compact strip on phones */
+  .ppr-hero-figure:not(.is-wide) {
+    width: 100%; display: grid; grid-template-columns: 84px minmax(0, 1fr); align-items: center; gap: 1rem;
+    padding: 0.7rem; border-radius: 12px; background: rgba(13,17,23,0.55); border: 1px solid rgba(200,169,81,0.25);
+  }
+  .ppr-hero-figure:not(.is-wide) .ppr-hero-frame { border-radius: 8px; box-shadow: none; }
+  .ppr-hero-figure:not(.is-wide) .ppr-hero-frame img { aspect-ratio: 1 / 1; }
+  .ppr-hero-figure:not(.is-wide) .ppr-hero-ribbon { display: none; }
+  .ppr-hero-figure:not(.is-wide) figcaption { flex-direction: column; align-items: flex-start; gap: 0.35rem; margin: 0; padding: 0; }
+  .ppr-hero-figure:not(.is-wide) figcaption::before {
+    content: 'No. 1 this round'; font-family: 'Oswald', sans-serif; font-size: 0.62rem; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--ppr-gold);
+  }
+  .ppr-hero-team { font-size: 1.4rem; }
+  body.ppr-page :is(.main, .main-wrap, .rankings-wrap, .weekly-wrap-section, .playlist-wrap, .grid, .photo-grid) { padding-left: 1rem; padding-right: 1rem; }
+  body.ppr-page :is(.main, .main-wrap, .rankings-wrap, .weekly-wrap-section) { padding-top: 2.2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ppr-crumb, .ppr-hero-title, .ppr-hero-tag, .ppr-hero-lede, .ppr-hero-note, .ppr-hero-figure { animation: none; }
+}
